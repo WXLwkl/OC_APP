@@ -20,9 +20,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     MainTabBarController *mainTabBar = [MainTabBarController new];
-    StartTime;
+
     UIViewController *vc = [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
-    EndTime;
+
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 }

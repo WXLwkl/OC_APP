@@ -8,13 +8,14 @@
 
 #import "HomeViewController.h"
 
-#import "TestWebVC.h"
+#import "ViewController.h"
 
 
 #define TITLES @[@"修改", @"删除", @"扫一扫",@"付款",@"加好友",@"查找好友"]
 #define ICONS  @[@"motify",@"delete",@"saoyisao",@"pay",@"delete",@"delete"]
 
 @interface HomeViewController ()<PopoverMenuDelegate>
+
 
 @end
 
@@ -42,11 +43,35 @@
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
-}
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    NSLog(@"viewWillAppear");
+    
+    
+    
+    
+    
+    
+    
+    //条形码
+    UIImage *barImage = [UIImage xl_barCodeImageWithContent:@"123456"
+                                             codeImageSize:CGSizeMake(300, 90)
+                                                       red:0
+                                                     green:0.4
+                                                      blue:0.6];
+    CGRect barImageView_Frame = CGRectMake(self.view.bounds.size.width/2-300/2, 100, 300, 90);
+    UIImageView *barImageView = [[UIImageView alloc] initWithFrame:barImageView_Frame];
+    barImageView.image = barImage;
+    barImageView.backgroundColor = [UIColor clearColor];
+    //阴影
+    barImageView.layer.shadowOffset = CGSizeMake(-0.5, 0.5);
+    barImageView.layer.shadowRadius = 0.5;
+    barImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    barImageView.layer.shadowOpacity = 0.2;
+    
+    [self.view addSubview:barImageView];
+    
+    
+    
+    
 }
 
 - (void)add:(UIButton *)button {
@@ -54,8 +79,7 @@
 }
 
 - (void)btnClick {
-    TestWebVC *vc = [[TestWebVC alloc] init];
-//    self.navigationController.navigationBarHidden = YES;
+    ViewController *vc = [[ViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - YBPopupMenuDelegate

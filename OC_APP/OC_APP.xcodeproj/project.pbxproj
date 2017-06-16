@@ -30,7 +30,7 @@
 		91AC0CC21EF37312004FDD9E /* TestWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CC01EF37312004FDD9E /* TestWebVC.m */; };
 		91AC0CD81EF393CA004FDD9E /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CCC1EF393CA004FDD9E /* UIColor+Common.m */; };
 		91AC0CD91EF393CA004FDD9E /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CCE1EF393CA004FDD9E /* UIImage+Common.m */; };
-		91AC0CDA1EF393CA004FDD9E /* UIImage+QR.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CD01EF393CA004FDD9E /* UIImage+QR.m */; };
+		91AC0CDA1EF393CA004FDD9E /* UIImage+QRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CD01EF393CA004FDD9E /* UIImage+QRBar.m */; };
 		91AC0CDB1EF393CA004FDD9E /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CD21EF393CA004FDD9E /* UITextView+Placeholder.m */; };
 		91AC0CDC1EF393CA004FDD9E /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CD51EF393CA004FDD9E /* NSString+Common.m */; };
 		91AC0CDD1EF393CA004FDD9E /* NSString+Rex.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0CD71EF393CA004FDD9E /* NSString+Rex.m */; };
@@ -116,8 +116,8 @@
 		91AC0CCC1EF393CA004FDD9E /* UIColor+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Common.m"; sourceTree = "<group>"; };
 		91AC0CCD1EF393CA004FDD9E /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
 		91AC0CCE1EF393CA004FDD9E /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
-		91AC0CCF1EF393CA004FDD9E /* UIImage+QR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+QR.h"; sourceTree = "<group>"; };
-		91AC0CD01EF393CA004FDD9E /* UIImage+QR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QR.m"; sourceTree = "<group>"; };
+		91AC0CCF1EF393CA004FDD9E /* UIImage+QRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+QRBar.h"; sourceTree = "<group>"; };
+		91AC0CD01EF393CA004FDD9E /* UIImage+QRBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QRBar.m"; sourceTree = "<group>"; };
 		91AC0CD11EF393CA004FDD9E /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		91AC0CD21EF393CA004FDD9E /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		91AC0CD41EF393CA004FDD9E /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 				91AC0CCC1EF393CA004FDD9E /* UIColor+Common.m */,
 				91AC0CCD1EF393CA004FDD9E /* UIImage+Common.h */,
 				91AC0CCE1EF393CA004FDD9E /* UIImage+Common.m */,
-				91AC0CCF1EF393CA004FDD9E /* UIImage+QR.h */,
-				91AC0CD01EF393CA004FDD9E /* UIImage+QR.m */,
+				91AC0CCF1EF393CA004FDD9E /* UIImage+QRBar.h */,
+				91AC0CD01EF393CA004FDD9E /* UIImage+QRBar.m */,
 				91AC0CD11EF393CA004FDD9E /* UITextView+Placeholder.h */,
 				91AC0CD21EF393CA004FDD9E /* UITextView+Placeholder.m */,
 				91AC0CDE1EF39438004FDD9E /* UIView+Frame.h */,
@@ -741,7 +741,7 @@
 				91D97B811EEF81FE000E6CE6 /* StarRateView.m in Sources */,
 				91AC0CD91EF393CA004FDD9E /* UIImage+Common.m in Sources */,
 				916804FE1EE7EBE200902075 /* WriteViewController.m in Sources */,
-				91AC0CDA1EF393CA004FDD9E /* UIImage+QR.m in Sources */,
+				91AC0CDA1EF393CA004FDD9E /* UIImage+QRBar.m in Sources */,
 				910CBE9C1EE92077003C111B /* AppManager.m in Sources */,
 				91AC0CDC1EF393CA004FDD9E /* NSString+Common.m in Sources */,
 				916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */,

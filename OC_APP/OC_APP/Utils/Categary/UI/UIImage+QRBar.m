@@ -1,32 +1,38 @@
 //
-//  UIImage+QR.m
+//  UIImage+QRBar.m
 //  OC_APP
 //
 //  Created by xingl on 2017/6/6.
 //  Copyright © 2017年 兴林. All rights reserved.
 //
 
-#import "UIImage+QR.h"
+#import "UIImage+QRBar.h"
 
-@implementation UIImage (QR)
+@implementation UIImage (QRBar)
 
-#pragma mark - 生成黑白二维码
+#pragma mark - 黑白二维码
 + (UIImage *)xl_qrCodeImageWithContent:(NSString *)content
                     codeImageLenght:(CGFloat)lenght {
-    
-    UIImage *image = [self qrCodeImageWithContent:content codeImageSize:lenght];
+
+    //最原始的图片
+    CIImage *ciImage = [self qrCodeImageWithContent:content];
+    //改变二维码尺寸大小
+    UIImage *image = [self codeImageWithCIImage:ciImage codeImageSize:CGSizeMake(lenght, lenght)];
     return image;
+    
 }
-#pragma mark - 生成黑白带logo的二维码
+#pragma mark 黑白带logo的二维码
 + (UIImage *)xl_qrCodeImageWithContent:(NSString *)content
                     codeImageLenght:(CGFloat)lenght
                                logo:(UIImage *)logo
                              radius:(CGFloat)radius {
     
-    UIImage *image = [self qrCodeImageWithContent:content codeImageSize:lenght];
+    //改变大小后的黑白的二维码
+    UIImage *image = [self xl_qrCodeImageWithContent:content codeImageLenght:lenght];
+//    插入logo后的二维码图片
     return [self imageInsertedImage:image insertImage:logo radius:radius];
 }
-#pragma mark - 生成多彩带logo的二维码
+#pragma mark 多彩带logo的二维码
 + (UIImage *)xl_qrCodeImageWithContent:(NSString *)content
                       codeImageLenght:(CGFloat)lenght
                                logo:(UIImage *)logo
@@ -34,31 +40,56 @@
                                 red:(CGFloat)red
                               green:(CGFloat)green
                                blue:(CGFloat)blue {
-    
-    UIImage *image = [self qrCodeImageWithContent:content codeImageSize:lenght red:red green:green blue:blue];
+    //改变大小后的黑白的二维码
+    UIImage *image = [self xl_qrCodeImageWithContent:content codeImageLenght:lenght];
+    //改变颜色
+    image = [self codeImageWithImage:image red:red green:green blue:blue];
     return [self imageInsertedImage:image insertImage:logo radius:radius];
 }
-
-// 生成条形码图片
-+ (UIImage *)xl_generateBarCode:(NSString *)code width:(CGFloat)width height:(CGFloat)height {
-    
-    CIImage *barcodeImage;
-    NSData *data = [code dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:false];
-    CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
-    
-    [filter setValue:data forKey:@"inputMessage"];
-    barcodeImage = [filter outputImage];
-    
-    // 消除模糊
-    CGFloat scaleX = width / barcodeImage.extent.size.width; // extent 返回图片的frame
-    CGFloat scaleY = height / barcodeImage.extent.size.height;
-    CIImage *transformedImage = [barcodeImage imageByApplyingTransform:CGAffineTransformScale(CGAffineTransformIdentity, scaleX, scaleY)];
-    
-    return [UIImage imageWithCIImage:transformedImage];
+//生成最原始的二维码
++ (CIImage *)qrCodeImageWithContent:(NSString *)content{
+    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
+    [qrFilter setValue:contentData forKey:@"inputMessage"];
+    [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
+    CIImage *image = qrFilter.outputImage;
+    return image;
 }
-//改变二维码颜色
-+ (UIImage *)qrCodeImageWithContent:(NSString *)content codeImageSize:(CGFloat)size red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue {
-    UIImage *image = [self qrCodeImageWithContent:content codeImageSize:size];
+#pragma mark - 黑白条形码
++ (UIImage *)xl_barCodeImageWithContent:(NSString *)content
+                          codeImageSize:(CGSize)size {
+    CIImage *image = [self barcodeImageWithContent:content];
+    UIImage *resultImage = [self codeImageWithCIImage:image codeImageSize:size];
+    return resultImage;
+}
+
+#pragma mark 多彩条形码
++ (UIImage *)xl_barCodeImageWithContent:(NSString *)content
+                          codeImageSize:(CGSize)size
+                                    red:(CGFloat)red
+                                  green:(CGFloat)green
+                                   blue:(CGFloat)blue {
+    
+    UIImage *image = [self xl_barCodeImageWithContent:content
+                                        codeImageSize:size];
+    
+    return [self codeImageWithImage:image red:red green:green blue:blue];
+}
+//生成最原始的条形码
++ (CIImage *)barcodeImageWithContent:(NSString *)content {
+    CIFilter *qrFilter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
+    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
+    [qrFilter setValue:contentData forKey:@"inputMessage"];
+    [qrFilter setValue:@(0.00) forKey:@"inputQuietSpace"];
+    CIImage *image = qrFilter.outputImage;
+    return image;
+}
+
+
+
+#pragma mark -
+//改变图片颜色
++ (UIImage *)codeImageWithImage:(UIImage *)image red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue {
     
     int imageWidth = image.size.width;
     int imageHeight = image.size.height;
@@ -95,11 +126,11 @@
     return resultImage;
 }
 
-//改变二维码尺寸大小
-+ (UIImage *)qrCodeImageWithContent:(NSString *)content codeImageSize:(CGFloat)size{
-    CIImage *image = [self qrCodeImageWithContent:content];
+//改变图片尺寸大小
++ (UIImage *)codeImageWithCIImage:(CIImage *)image codeImageSize:(CGSize)size {
+
     CGRect integralRect = CGRectIntegral(image.extent);
-    CGFloat scale = MIN(size/CGRectGetWidth(integralRect), size/CGRectGetHeight(integralRect));
+    CGFloat scale = MIN(size.width/CGRectGetWidth(integralRect), size.height/CGRectGetHeight(integralRect));
     
     size_t width = CGRectGetWidth(integralRect)*scale;
     size_t height = CGRectGetHeight(integralRect)*scale;
@@ -118,15 +149,7 @@
     return [UIImage imageWithCGImage:scaledImage];
 }
 
-//生成最原始的二维码
-+ (CIImage *)qrCodeImageWithContent:(NSString *)content{
-    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
-    [qrFilter setValue:contentData forKey:@"inputMessage"];
-    [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
-    CIImage *image = qrFilter.outputImage;
-    return image;
-}
+
 void ProviderReleaseData (void *info, const void *data, size_t size) {
     free((void*)data);
 }
@@ -228,6 +251,5 @@ void addRoundRectToPath(CGContextRef context, CGRect rect, float radius, CGImage
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), image);
     CGContextRestoreGState(context);
 }
-
 
 @end

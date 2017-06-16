@@ -192,7 +192,7 @@ NSInteger  const adTime = 4;
     [[NSRunLoop mainRunLoop] addTimer:self.countTimer forMode:NSRunLoopCommonModes];
 }
 #pragma mark - 点击广告
-- (void)tapGesHandle:(UITapGestureRecognizer*)recognizer{
+- (void)tapGesHandle:(UITapGestureRecognizer*)recognizer {
     
     _isAD = YES;
 
@@ -214,7 +214,7 @@ NSInteger  const adTime = 4;
     [self presentViewController:nav animated:NO completion:nil];
     
 
-    [self startcloseAnimation];
+
 }
 #pragma mark - 点击跳过
 - (void)skipBtnClick{

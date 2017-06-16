@@ -1,5 +1,5 @@
 //
-//  UIImage+QR.h
+//  UIImage+QRBar.h
 //  OC_APP
 //
 //  Created by xingl on 2017/6/6.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (QR)
+@interface UIImage (QRBar)
 
 
 //Avilable in iOS 7.0 and later
@@ -65,22 +65,33 @@
                               green:(CGFloat)green
                                blue:(CGFloat)blue;
 
+//Avilable in iOS 8.0 and later
 
-/*!
- *  @author 逍遥郎happy, 16-08-24 15:08:47
- *
- *  @brief 生成条形码图片
- *
- *  @param code   条形码内容
- *  @param width  width
- *  @param height height
- *
- *  @return 条形码图片
+/**
+ 彩色的条形码
+
+ @param content 条形码信息
+ @param size 条形码大小
+ @param red red
+ @param green gree
+ @param blue blue
+ @return 彩色的条形码
  */
-+ (UIImage *)xl_generateBarCode:(NSString *)code
-                       width:(CGFloat)width
-                      height:(CGFloat)height;
++ (UIImage *)xl_barCodeImageWithContent:(NSString *)content
+                       codeImageSize:(CGSize)size
+                                 red:(CGFloat)red
+                               green:(CGFloat)green
+                                blue:(CGFloat)blue;
 
+/**
+ 黑白的条形码
+
+ @param content 条形码内容
+ @param size 条形码大小
+ @return 黑白条形码
+ */
++ (UIImage *)xl_barCodeImageWithContent:(NSString *)content
+                        codeImageSize:(CGSize)size;
 
 
 @end

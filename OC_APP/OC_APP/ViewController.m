@@ -18,12 +18,6 @@
 #import <Toast/UIView+Toast.h>
 #import "SAMKeychain.h"
 
-#import "UIImage+Common.h"
-#import "UIImage+QR.h"
-
-
-#import "UITextView+Placeholder.h"
-
 
 
 #import "WriteViewController.h"
@@ -49,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     
     

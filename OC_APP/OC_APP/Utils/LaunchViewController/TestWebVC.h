@@ -16,7 +16,7 @@
 @end
 
 
-@interface UIViewController (Public)
-///该vc的navigationController
-- (UINavigationController*)xl_navigationController;
-@end
+//@interface UIViewController (Public)
+/////该vc的navigationController
+//- (UINavigationController*)xl_navigationController;
+//@end
