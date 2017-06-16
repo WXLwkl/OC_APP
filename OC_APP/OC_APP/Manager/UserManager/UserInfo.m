@@ -43,4 +43,42 @@ static UserInfo *info = nil;
     [NSKeyedArchiver archiveRootObject:self toFile:UserFile];
 }
 
+- (NSString *)description {
+    
+    return [self debugDescription];
+}
+
+- (NSString *)debugDescription {
+    
+    
+    return [self debugDescription];
+}
+
+
+- (NSString *)descriptionString {
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    unsigned int count;
+    
+    objc_property_t *properties = class_copyPropertyList([self class], &count);
+    
+    for (int i = 0; i < count; i++) {
+        
+        objc_property_t property = properties[i];
+        
+        NSString *proName = @(property_getName(property));
+        
+        id value = [self valueForKey:proName]?:@"nil";
+        
+        [dictionary setObject:value forKey:proName];
+        
+    }
+    
+    free(properties);
+    
+    return [ NSString stringWithFormat:@"<%@: %p> -- %@",[self class], self,dictionary];
+}
+
+
 @end

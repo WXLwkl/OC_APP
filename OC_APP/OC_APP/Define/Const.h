@@ -17,7 +17,7 @@
 
 
 
-UIKIT_EXTERN NSString * const FAN_TOKEN;
+
 
 UIKIT_EXTERN NSString * const FAN_DATA;
 

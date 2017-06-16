@@ -24,15 +24,16 @@
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
 //DEBUG  模式下打印日志,当前行
 #ifdef DEBUG
-#define Log(FORMAT, ...) NSLog((@"%s [CurrentLine %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define XLLog(fmt, ...) NSLog((@"%s [CurrentLine %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
-#   define Log(...) nil
+#define XLLog(...) nil
 #endif
+
 
 /*******************  重写NSLog, Debug模式下打印日志和当前行数  ***************************/
 
 #ifdef DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define NSLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
 #define NSLog(...) nil
 #endif
@@ -95,7 +96,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 //-----一些缩写--------
 #define kApplication        [UIApplication sharedApplication]
 #define kKeyWindow          [UIApplication sharedApplication].keyWindow
-#define kAppDelegate        [UIApplication sharedApplication].delegate
+#define kAppDelegate        [AppDelegate shareAppDelegate]
 #define kUserDefaults       [NSUserDefaults standardUserDefaults]
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 
@@ -108,8 +109,8 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 //获取当前语言
 #define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
 
-#pragma mark - 判断当前的iPhone设备/系统版本
 
+#pragma mark - 判断当前的iPhone设备/系统版本
 // 判断是否为iPhone
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 // 判断是否为iPad
@@ -178,13 +179,13 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 
 #pragma mark - 弱引用 or 强引用
 //弱引用/强引用
-#define WeakSelf(type)   __weak typeof(type) weak##type = type;
-#define StrongSelf(type) __strong typeof(type) type = weak##type;
+#define WeakSelf(type)   __weak typeof(type) weak##type = type
+#define StrongSelf(type) __strong typeof(type) type = weak##type
 
 
-#pragma mark - 获取一段时间间隔
+#pragma mark - 可判断一个方法的耗时
 //获取一段时间间隔
-#define StartTime CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+#define StartTime CFAbsoluteTime start = CFAbsoluteTimeGetCurrent()
 #define EndTime   NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
 
 
@@ -266,11 +267,7 @@ static classname *instance_ = nil;\
 
 
 
-//方正黑体简体字体定义
-#define FONT(F) [UIFont fontWithName:@"FZHTJW--GB1-0" size:F]
 
-//定义一个API
-#define APIURL                @"http://xxxxx/"
-//登陆API
-#define APILogin              [APIURL stringByAppendingString:@"Login"]
+
+
 

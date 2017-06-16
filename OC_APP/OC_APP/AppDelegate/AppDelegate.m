@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+AppService.h"
+
+#import "MainNavigationController.h"
+#import "HomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,8 +21,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //初始化window
+    [self initWindowWithGuideOrAD];
+    
+    //广告页
+//    [AppManager appStart];
+    
+    
+    
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
+    
     return YES;
 }
+
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
