@@ -24,18 +24,18 @@
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
 //DEBUG  模式下打印日志,当前行
 #ifdef DEBUG
-#define XLLog(fmt, ...) NSLog((@"%s [CurrentLine %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
-#define XLLog(...) nil
+#define NSLog(...) nil
 #endif
 
 
 /*******************  重写NSLog, Debug模式下打印日志和当前行数  ***************************/
 
 #ifdef DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#define XLLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
-#define NSLog(...) nil
+#define XLLog(...) nil
 #endif
 
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
@@ -61,7 +61,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 
 // 获取RGB颜色
 #define RGBAColor(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
-#define RGBColor(r,g,b) RGBA(r,g,b,1.0f)
+#define RGBColor(r,g,b) RGBAColor(r,g,b,1.0f)
 #define RandomColor  KRGBColor(arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0)
 
 //背景色

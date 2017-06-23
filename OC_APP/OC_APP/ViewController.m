@@ -19,20 +19,52 @@
 #import "SAMKeychain.h"
 
 
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+
 
 #import "WriteViewController.h"
 
 #import "ClickTextView.h"
 #import "StarRateView.h"
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate> {
 
-        UILabel*label;
+
+#import "StepProgressView.h"
+#import "UIView+Common.h"
+
+#import "CircleProgressView.h"
+#import "AmountLabel.h"
+
+#import "ClipImageView.h"
+#import "GradientView.h"
+
+#import "XLAutoRunLabel.h"
+#import "TextFlowView.h"
+
+#import "MyscrollView.h"
+#import "BannerScrollView.h"
+
+#import "XLAuthcodeView.h"
+
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate> {
+
+        UILabel*label_;
 }
 
 @property (nonatomic, copy) NSArray<NSString *> *weathers;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
 @property (nonatomic, strong) AVCaptureSession *session;
+
+@property (nonatomic, strong) CircleProgressView *progressView;
+@property (nonatomic, strong) AmountLabel *label;
+
+
+@property(nonatomic,strong)UIImage *rollImage;//滚动图片
+@property(nonatomic,strong)UIImageView *rollImageView;//滚动图片View
+@property(nonatomic,strong)NSTimer *rollTimer;//滚动视图计时器
+
+
 @end
 
 @implementation ViewController
@@ -43,9 +75,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
+    
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
-    
+//    [self loadRollImageView];
     
     
     //倒计时
@@ -64,16 +98,467 @@
     
     
     
+//    [self circleProgressView];
+//    [self StepProgressView];
+    
+    
+    NSArray *arr = @[@1,@2,@4,@3,@5];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog(@"对象==%@",obj);
+        NSLog(@"下标==%ld",(unsigned long)idx);
+        if ([obj integerValue] == 4) {
+            // 遍历到3时结束
+            NSLog(@"结束");
+            *stop = YES;
+        }
+    }];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(20, 400, 150, 50);
+    btn.backgroundColor = [UIColor redColor];
+    [btn setTitle:@"开始" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
 
     
-
+    
+//    [self changeAttributedPlaceholder];
+//    [self starView];
+    
+    NSString *str = [self deviceIPAdress];
+    NSLog(@"--%@",str);
+    
+    //图片撕裂
+//    [ClipImageView addToCurrentView:self.view clipImage:[UIImage imageNamed:@"01"] backgroundImage:@"Default_image" animationComplete:^{
+//        
+//    }];
     
     
-    [self starView];
+    
+    GradientView *waveView = [[GradientView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 225)];
+    
+    [self.view addSubview:waveView];
     
     
- 
+    UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"C-AvatarIcon"]];
+    imgV.frame = CGRectMake(15, 20, 50, 50);
+    [waveView addSubview:imgV];
+    
+    
+    
+    
+//    [self gradientLayerView];
+//    [self createAutoRunLabel];
+    
+//    [self loadGuide];
+//    [self labelScrollView];
+//    [self loadBanner];
+    
+    [self loadAuthcodeView];
 }
+
+- (void)loadAuthcodeView {
+    XLAuthcodeView *autoCodeView = [[XLAuthcodeView alloc] init];
+    autoCodeView.frame = CGRectMake(0, 300, 100, 30);
+    [self.view addSubview:autoCodeView];
+    NSLog(@"%@",autoCodeView.authCodeStr);
+}
+
+#pragma mark - 轮播图
+- (void)loadBanner {
+    BannerScrollView *v = [[BannerScrollView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 150)];
+    v.PageControlShowStyle = UIPageControlShowStyleCenter;
+    v.openURLBlock = ^(NSString *key){
+        NSLog(@"%@",key);
+    };
+    [self.view addSubview:v];
+}
+
+#pragma mark - 文字轮播
+- (void)labelScrollView {
+    MyscrollView *ccpView = [[MyscrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+    
+    ccpView.titleArray = [NSArray arrayWithObjects:@"iPhone6s上线32G内存手机你怎么看？",@"亲爱的朋友们2016年还有100天就要过去了,2017年您准备好了吗?",@"今年双11您预算了几个月的工资？",@"高德与百度互掐，你更看好哪方？", nil];
+    
+    ccpView.titleFont = 18;
+    
+    ccpView.titleColor = [UIColor blackColor];
+    
+    ccpView.BGColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
+    
+    [ccpView clickTitleLabel:^(NSInteger index,NSString *titleString) {
+        
+        NSLog(@"%ld-----%@",(long)index,titleString);
+        
+    }];
+    
+    [self.view addSubview:ccpView];
+}
+
+#pragma mark - 旋转的引导页
+
+#define k_Base_Tag  10000
+#define k_Rotate_Rate 1
+#define K_SCREEN_WIDHT [UIScreen mainScreen].bounds.size.width  //屏幕宽度
+#define K_SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height    //屏幕高
+- (void)loadGuide {
+    
+    NSArray *imageArr = @[@"0.jpg",@"1.jpg",@"2.jpg",@"3.jpg"];
+    NSArray *textImageArr = @[@"0.jpg",@"1.jpg",@"2.jpg",@"3.jpg"];
+    
+    UIScrollView *mainScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT)];
+    mainScrollView.pagingEnabled = YES;
+    mainScrollView.bounces = YES;
+    mainScrollView.contentSize = CGSizeMake(K_SCREEN_WIDHT*imageArr.count, K_SCREEN_HEIGHT);
+    mainScrollView.showsHorizontalScrollIndicator = NO;
+    mainScrollView.delegate = self;
+    [self.view addSubview:mainScrollView];
+    
+    //添加云彩图片
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 330, K_SCREEN_WIDHT, 170*K_SCREEN_WIDHT/1242.0)];
+    imageView.image = [UIImage imageNamed:@"yun.png"];
+    [self.view addSubview:imageView];
+    
+    
+    for (int i=0; i<imageArr.count; i++) {
+        UIView *rotateView = [[UIView alloc]initWithFrame:CGRectMake(K_SCREEN_WIDHT*i, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT*2)];
+        [rotateView setTag:k_Base_Tag+i];
+        [mainScrollView addSubview:rotateView];
+        if (i!=0) {
+            rotateView.alpha = 0;
+        }
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT)];
+        imageView.image = [UIImage imageNamed:imageArr[i]];
+        [rotateView addSubview:imageView];
+        
+        UIImageView *textImageView = [[UIImageView alloc]initWithFrame:CGRectMake(K_SCREEN_WIDHT*i, 50, K_SCREEN_WIDHT, K_SCREEN_WIDHT *260.0/1242.0)];
+        [textImageView setTag:k_Base_Tag*2+i];
+        textImageView.image = [UIImage imageNamed:textImageArr[i]];
+        [mainScrollView addSubview:textImageView];
+        
+        //最后页面添加按钮
+        if (i == imageArr.count-1) {
+            UIControl *control = [[UIControl alloc]initWithFrame:CGRectMake(0, K_SCREEN_HEIGHT-80, K_SCREEN_WIDHT, 50)];
+            [control addTarget:self action:@selector(ClickToRemove) forControlEvents:UIControlEventTouchUpInside];
+            [rotateView addSubview:control];
+        }
+    }
+    
+    UIView *firstView = [mainScrollView viewWithTag:k_Base_Tag];
+    [mainScrollView bringSubviewToFront:firstView];
+    
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    UIView * view1 = [scrollView viewWithTag:k_Base_Tag];
+    UIView * view2 = [scrollView viewWithTag:k_Base_Tag+1];
+    UIView * view3 = [scrollView viewWithTag:k_Base_Tag+2];
+    UIView * view4 = [scrollView viewWithTag:k_Base_Tag+3];
+    
+    UIImageView * imageView1 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2];
+    UIImageView * imageView2 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+1];
+    UIImageView * imageView3 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+2];
+    UIImageView * imageView4 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+3];
+    
+    CGFloat xOffset = scrollView.contentOffset.x;
+    
+    //根据偏移量旋转
+    CGFloat rotateAngle = -1 * 1.0/K_SCREEN_WIDHT * xOffset * M_PI_2 * k_Rotate_Rate;
+    view1.layer.transform = CATransform3DMakeRotation(rotateAngle, 0, 0, 1);
+    view2.layer.transform = CATransform3DMakeRotation(M_PI_2*1+rotateAngle, 0, 0, 1);
+    view3.layer.transform = CATransform3DMakeRotation(M_PI_2*2+rotateAngle, 0, 0, 1);
+    view4.layer.transform = CATransform3DMakeRotation(M_PI_2*3+rotateAngle, 0, 0, 1);
+    
+    //根据偏移量位移（保证中心点始终都在屏幕下方中间）
+    view1.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
+    view2.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
+    view3.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
+    view4.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
+    
+    //当前哪个视图放在最上面
+    if (xOffset<K_SCREEN_WIDHT*0.5) {
+        [scrollView bringSubviewToFront:view1];
+        
+    }else if (xOffset>=K_SCREEN_WIDHT*0.5 && xOffset < K_SCREEN_WIDHT*1.5){
+        [scrollView bringSubviewToFront:view2];
+        
+        
+    }else if (xOffset >=K_SCREEN_WIDHT*1.5 && xOffset < K_SCREEN_WIDHT*2.5){
+        [scrollView bringSubviewToFront:view3];
+        
+    }else if (xOffset >=K_SCREEN_WIDHT*2.5)
+    {
+        [scrollView bringSubviewToFront:view4];
+        
+    }
+    
+    //调节其透明度
+    CGFloat xoffset_More = xOffset*1.5>K_SCREEN_WIDHT?K_SCREEN_WIDHT:xOffset*1.5;
+    if (xOffset < K_SCREEN_WIDHT) {
+        view1.alpha = (K_SCREEN_WIDHT - xoffset_More)/K_SCREEN_WIDHT;
+        imageView1.alpha = (K_SCREEN_WIDHT - xOffset)/K_SCREEN_WIDHT;;
+        
+    }
+    if (xOffset <= K_SCREEN_WIDHT) {
+        view2.alpha = xoffset_More / K_SCREEN_WIDHT;
+        imageView2.alpha = xOffset / K_SCREEN_WIDHT;
+    }
+    if (xOffset >K_SCREEN_WIDHT && xOffset <= K_SCREEN_WIDHT*2) {
+        view2.alpha = (K_SCREEN_WIDHT*2 - xOffset)/K_SCREEN_WIDHT;
+        view3.alpha = (xOffset - K_SCREEN_WIDHT)/ K_SCREEN_WIDHT;
+        
+        imageView2.alpha = (K_SCREEN_WIDHT*2 - xOffset)/K_SCREEN_WIDHT;
+        imageView3.alpha = (xOffset - K_SCREEN_WIDHT)/ K_SCREEN_WIDHT;
+    }
+    if (xOffset >K_SCREEN_WIDHT*2 ) {
+        view3.alpha = (K_SCREEN_WIDHT*3 - xOffset)/K_SCREEN_WIDHT;
+        view4.alpha = (xOffset - K_SCREEN_WIDHT*2)/ K_SCREEN_WIDHT;
+        
+        imageView3.alpha = (K_SCREEN_WIDHT*3 - xOffset)/K_SCREEN_WIDHT;
+        imageView4.alpha = (xOffset - K_SCREEN_WIDHT*2)/ K_SCREEN_WIDHT;
+    }
+    
+    //调节背景色
+    if (xOffset <K_SCREEN_WIDHT && xOffset>0) {
+        self.view.backgroundColor = [UIColor colorWithRed:(140-40.0/K_SCREEN_WIDHT*xOffset)/255.0 green:(255-25.0/K_SCREEN_WIDHT*xOffset)/255.0 blue:(255-100.0/K_SCREEN_WIDHT*xOffset)/255.0 alpha:1];
+        
+    }else if (xOffset>=K_SCREEN_WIDHT &&xOffset<K_SCREEN_WIDHT*2){
+        
+        self.view.backgroundColor = [UIColor colorWithRed:(100+30.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT))/255.0 green:(230-40.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT))/255.0 blue:(155-5.0/320*(xOffset-K_SCREEN_WIDHT))/255.0 alpha:1];
+        
+    }else if (xOffset>=K_SCREEN_WIDHT*2 &&xOffset<K_SCREEN_WIDHT*3){
+        
+        self.view.backgroundColor = [UIColor colorWithRed:(130-50.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 green:(190-40.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 blue:(150+50.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 alpha:1];
+        
+    }else if (xOffset>=K_SCREEN_WIDHT*3 &&xOffset<K_SCREEN_WIDHT*4){
+        
+        self.view.backgroundColor = [UIColor colorWithRed:(80-10.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 green:(150-25.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 blue:(200-90.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 alpha:1];
+    }
+    
+}
+
+-(void)ClickToRemove
+{
+    NSLog(@"点击事件");
+    [self.view removeFromSuperview];
+    
+}
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
+
+
+
+#pragma mark - 跑马灯
+- (void)createAutoRunLabel {
+    XLAutoRunLabel *runLabel = [[XLAutoRunLabel alloc] initWithFrame:CGRectMake(0, 100, 400, 50)];
+    runLabel.tag = 100;
+    runLabel.backgroundColor = [UIColor redColor];
+    runLabel.delegate = self;
+    runLabel.directionType = RightType;
+    [self.view addSubview:runLabel];
+    [runLabel addContentView:[self createLabelWithText:@"繁华声 遁入空门 折煞了梦偏冷等" textColor:[self randomColor] labelFont:[UIFont systemFontOfSize:14]]];
+    [runLabel startAnimation];
+    
+    
+    TextFlowView *AA = [[TextFlowView alloc] initWithFrame:CGRectMake(0, 200, 460, 50) Text:@"繁华声 遁入空门 折煞了梦偏冷 辗转一生 情债又几 如你默认 生死枯等 枯等一圈 又一圈的 浮图塔 断了几层 断了谁的痛直奔 一盏残灯 倾塌的山门 容我再等 历史转身 等酒香醇 等你弹 一曲古筝"];
+    
+    [self.view addSubview:AA];
+    
+    
+}
+- (void)operateLabel: (XLAutoRunLabel *)autoLabel animationDidStopFinished: (BOOL)finished {
+    
+    //    XLAutoRunLabel *runLabel = [self.view viewWithTag:100];
+    //    [runLabel stopAnimation];
+    NSLog(@"-----");
+}
+- (UILabel *)createLabelWithText: (NSString *)text textColor:(UIColor *)textColor labelFont:(UIFont *)font {
+    NSString *string = [NSString stringWithFormat:@"%@", text];
+    CGFloat width = [self getWidthByTitle:string font:font];
+    UILabel *labelx = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 50)];
+    labelx.font = font;
+    labelx.text = string;
+    labelx.textColor = textColor;
+    return labelx;
+}
+- (CGFloat)getWidthByTitle:(NSString *)string font:(UIFont *)font {
+    
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 500) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil];
+    return rect.size.width;
+    
+}
+
+- (UIColor *)randomColor {
+    return [UIColor colorWithRed:[self randomValue] green:[self randomValue] blue:[self randomValue] alpha:1];
+}
+
+- (CGFloat)randomValue {
+    return arc4random()%255 / 255.0f;
+}
+
+
+#pragma mark - 环形进度条和label
+- (void)circleProgressView {
+    _progressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(50, 30, 100, 100)];
+    //    progressView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_progressView];
+    _progressView.progress = 0.7;
+    
+    _label = [[AmountLabel alloc] initWithFrame:CGRectMake(160, 50, 100, 50)];
+    [self.view addSubview:_label];
+    _label.amount = 204;
+}
+
+#pragma mark - 步骤进度条
+- (void)StepProgressView {
+    NSArray *stepArr=@[@"区宝时尚",@"区宝时尚",@"时尚",@"区宝时尚",@"时尚"];
+    StepProgressView *stepView=[StepProgressView progressViewFrame:CGRectMake(0, self.view.bounds.size.height - 100, self.view.bounds.size.width, 60) withTitleArray:stepArr];
+    stepView.stepIndex=2;
+    [self.view addSubview:stepView];
+}
+#pragma mark - 渐变
+- (void)gradientLayerView {
+    UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    [self.view addSubview:theView];
+    [self.view setGradientLayer:RGBColor(0, 226, 154) endColor:RGBColor(0, 137, 108)];
+}
+
+
+
+#pragma mark - 改变输入框占位符
+- (void)changeAttributedPlaceholder {
+    UITextField *textF = [[UITextField alloc] initWithFrame:CGRectMake(200, 300, 130, 50)];
+    //    textF.font = [UIFont systemFontOfSize:25];
+    textF.borderStyle = UITextBorderStyleRoundedRect;
+    
+    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
+    
+    textF.attributedPlaceholder = attributeText;
+    [self.view addSubview:textF];
+}
+
+#pragma mark - IP地址
+- (NSString *)deviceIPAdress {
+    NSString *address = @"an error occurred when obtaining ip address";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    
+    if (success == 0) { // 0 表示获取成功
+        
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            if( temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    
+    freeifaddrs(interfaces);
+    NSLog(@"手机设备的IP是：%@", address);
+    return address;
+}
+
+
+
+#pragma mark - 计算label的行数
+- (void)numberOfline {
+    UILabel *label2 = [[UILabel alloc]initWithFrame:CGRectMake(290, 290, 80, 100)];
+    
+    label2.text = @"33431dfadfdafadsfasfsdf";
+    label2.numberOfLines = 0;
+    label2.font = [UIFont systemFontOfSize:13];
+    label2.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:label2];
+    NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:13]};
+    // 总高度
+    CGFloat totalHeight = [label2.text  boundingRectWithSize:label2.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.height;
+    // 每行文字的高度
+    CGFloat lineHeight = label2.font.lineHeight;
+    // 行数 = 总高度除以每行高度
+    NSInteger lineCount = totalHeight / lineHeight;
+    NSLog(@"lineCount:%ld",(long)lineCount);
+}
+#pragma mark - 从一个UIViewController跳转到一个UINavigationController
+- (void)gotoMainVC {
+    
+    
+    float value = arc4random()%100/100.0;
+    
+    _label.amount = value*100*100;
+    [_progressView setProgress:value animated:YES];
+    return;
+    
+    WriteViewController *mainVC = [[WriteViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:mainVC];
+    [self presentViewController:mainNavi animated:YES completion:^{
+        [UIApplication sharedApplication].keyWindow.rootViewController = mainNavi;
+    }];
+}
+#pragma mark - 图片滚动
+- (void)loadRollImageView {
+    
+    _rollImage = [UIImage imageNamed:@"滚动图片.jpeg"];
+    [self addRollImageAndTimer];
+    
+}
+- (void)addRollImageAndTimer {
+    if (_rollImage != nil && _rollImage.size.height > _rollImage.size.width) {
+        NSLog(@"Error:滚动图片的高度比宽度高,不能进行横向滚动!");
+    } else {
+        _rollImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.height * _rollImage.size.width / _rollImage.size.height, self.view.bounds.size.height)];
+        _rollImageView.image = _rollImage;
+        
+        self.rollTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(rollImageAction) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop]addTimer:self.rollTimer forMode:NSRunLoopCommonModes];
+        [self.view addSubview:_rollImageView];
+        
+        [self.rollTimer fire];
+    }
+}
+
+int rollX = 0;
+bool isReverse = NO;//是否反向翻转
+
+- (void)rollImageAction {
+    if (rollX-1 > (self.view.bounds.size.width-self.view.bounds.size.height*_rollImage.size.width/_rollImage.size.height) && !isReverse) {
+        rollX -= 1;
+        _rollImageView.frame = CGRectMake(rollX, 0, self.view.bounds.size.height * _rollImage.size.width / _rollImage.size.height, self.view.bounds.size.height);
+    } else {
+        isReverse = YES;
+    }
+    if (rollX+1 < 0 && isReverse) {
+        rollX += 1;
+        _rollImageView.frame = CGRectMake(rollX, 0, self.view.bounds.size.height * _rollImage.size.width / _rollImage.size.height, self.view.bounds.size.height);
+    } else {
+        isReverse = NO;
+    }
+}
+
 #pragma mark - 星级评分
 - (void)starView {
     StarRateView *starRateView = [[StarRateView alloc] initWithFrame:CGRectMake(20, 60, 200, 30)];
@@ -234,11 +719,11 @@
 #pragma mark - 倒计时
 - (void)countdown {
     
-    label=[[UILabel alloc]initWithFrame:CGRectMake(50, 70, self.view.frame.size.width-100, 50)];
-    label.backgroundColor=[UIColor greenColor];
-    label.font=[UIFont systemFontOfSize:20];
-    label.textAlignment=NSTextAlignmentCenter;
-    [self.view addSubview:label];
+    label_=[[UILabel alloc]initWithFrame:CGRectMake(50, 70, self.view.frame.size.width-100, 50)];
+    label_.backgroundColor=[UIColor greenColor];
+    label_.font=[UIFont systemFontOfSize:20];
+    label_.textAlignment=NSTextAlignmentCenter;
+    [self.view addSubview:label_];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 }
@@ -272,7 +757,7 @@
     unsigned int unitFlags1 = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     
     NSDateComponents *d = [calendar1 components:unitFlags1 fromDate:today1 toDate:fireDate options:0];//计算时间差
-    label.text = [NSString stringWithFormat:@"%zi天%zi小时%zi分%zi秒", [d day], [d hour], [d minute], [d second]];//倒计时显示
+    label_.text = [NSString stringWithFormat:@"%zi天%zi小时%zi分%zi秒", [d day], [d hour], [d minute], [d second]];//倒计时显示
 }
 #pragma mark - 更换icon图标
 - (void)changeIcon {

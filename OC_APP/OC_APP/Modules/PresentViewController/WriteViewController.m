@@ -14,7 +14,7 @@
 
 @implementation WriteViewController
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 //    self.title = @"写文章";

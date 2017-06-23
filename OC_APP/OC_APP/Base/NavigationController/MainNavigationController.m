@@ -37,8 +37,36 @@
         UIBarButtonItem *popToPreButton = [self barButtonItemWithImage:@"nav_back" highImage:nil target:self action:@selector(popToPre)];
         viewController.navigationItem.leftBarButtonItem = popToPreButton;
     }
-    [super pushViewController:viewController animated:animated];
+    if (animated) {
+        CATransition *animation = [CATransition animation];
+        //动画时间
+        animation.duration = 1.0f;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        //过渡效果
+        animation.type = @"cube";
+        //过渡方向
+        animation.subtype = kCATransitionFromRight;
+        [self.view.layer addAnimation:animation forKey:nil];
+    }
     
+    [super pushViewController:viewController animated:NO];
+    
+}
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    
+    if (animated) {
+        CATransition *animation = [CATransition animation];
+        //动画时间
+        animation.duration = 1.0f;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        //过渡效果
+        animation.type = @"cube";
+        //过渡方向
+        animation.subtype = kCATransitionFromLeft;
+        [self.view.layer addAnimation:animation forKey:nil];
+    }
+    
+    return [super popViewControllerAnimated:NO];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
