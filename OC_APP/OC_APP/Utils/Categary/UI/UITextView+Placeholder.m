@@ -93,7 +93,7 @@ static const void *placeHolderKey;
     return placeholderLabel;
 }
 
-- (UIFont *)cacutDefaultFont{
+- (UIFont *)cacutDefaultFont {
     static UIFont *font = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -103,47 +103,4 @@ static const void *placeHolderKey;
     });
     return font;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end

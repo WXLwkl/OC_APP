@@ -6,8 +6,8 @@
 //  Copyright © 2017年 兴林. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
-@interface WriteViewController : UIViewController
+@interface WriteViewController : RootViewController
 
 @end

@@ -93,6 +93,18 @@
     [self.mainTabBar addTabBarButtonWithTabBarItem:childVC.tabBarItem];
     [self addChildViewController:nav];
 }
+
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.selectedViewController;
+}
+
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    return self.selectedViewController;
+}
+
+
+
 #pragma mark - MainTabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectedButtonFrom:(long)fromBtnTag to:(long)toBtnTag {
     

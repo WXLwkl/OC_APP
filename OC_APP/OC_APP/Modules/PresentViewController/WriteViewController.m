@@ -23,7 +23,9 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBatButton)];
     self.navigationItem.leftBarButtonItem = backButton;
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
 - (void)clickLeftBatButton{
     [self dismissViewControllerAnimated:YES completion:nil];
 }

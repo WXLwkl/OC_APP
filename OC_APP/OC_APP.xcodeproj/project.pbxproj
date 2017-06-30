@@ -30,6 +30,7 @@
 		9122DC1A1EFD16A7002A0D7A /* XLAuthcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9122DC191EFD16A7002A0D7A /* XLAuthcodeView.m */; };
 		912950081EF915E7006AB9AA /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 912950071EF915E7006AB9AA /* CircleProgressView.m */; };
 		9129500C1EF91660006AB9AA /* AmountLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9129500B1EF91660006AB9AA /* AmountLabel.m */; };
+		9132A6BB1F04CBA600431270 /* UIButton+Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 9132A6BA1F04CBA600431270 /* UIButton+Button.m */; };
 		914C3F551ED7C66B00AF279D /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F541ED7C66B00AF279D /* Const.m */; };
 		914C3F5C1ED7EDD600AF279D /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F5B1ED7EDD600AF279D /* UserInfo.m */; };
 		914C3F601ED7FCDC00AF279D /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F5F1ED7FCDC00AF279D /* Foundation+Log.m */; };
@@ -80,6 +81,9 @@
 		91AC0D141EF395E7004FDD9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AC0D111EF395E7004FDD9E /* main.m */; };
 		91AC0D161EF39666004FDD9E /* Steve.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 91AC0D151EF39666004FDD9E /* Steve.pdf */; };
 		91AC0D3D1EF3D1EA004FDD9E /* 滚动图片.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 91AC0D3C1EF3D1EA004FDD9E /* 滚动图片.jpeg */; };
+		91AF88F71F022B1E00587EF9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AF88F61F022B1E00587EF9 /* RootViewController.m */; };
+		91AF891E1F02350100587EF9 /* SlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91AF891D1F02350100587EF9 /* SlideView.m */; };
+		91B0B94A1F0394B700267C9A /* UIDevice+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B0B9491F0394B700267C9A /* UIDevice+Common.m */; };
 		91BF33C01EFA0E9800334AF0 /* ClipImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BF33BF1EFA0E9800334AF0 /* ClipImageView.m */; };
 		91BF33C21EFA17DE00334AF0 /* Default_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 91BF33C11EFA17DE00334AF0 /* Default_image.png */; };
 		91BF33C41EFA180200334AF0 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 91BF33C31EFA180200334AF0 /* 01.png */; };
@@ -88,6 +92,7 @@
 		91D97B811EEF81FE000E6CE6 /* StarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97B7D1EEF81FE000E6CE6 /* StarRateView.m */; };
 		91D97B821EEF81FE000E6CE6 /* ClickTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97B801EEF81FE000E6CE6 /* ClickTextView.m */; };
 		91D97C031EEFB11E000E6CE6 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97C021EEFB11E000E6CE6 /* MainNavigationController.m */; };
+		91F3530A1F025572005D045B /* UITextField+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F353091F025572005D045B /* UITextField+Placeholder.m */; };
 		C20784051DADF12700BB05D4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20784041DADF12700BB05D4 /* ViewController.m */; };
 		C20784081DADF12700BB05D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C20784061DADF12700BB05D4 /* Main.storyboard */; };
 		C207840A1DADF12700BB05D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C20784091DADF12700BB05D4 /* Assets.xcassets */; };
@@ -131,6 +136,8 @@
 		912950071EF915E7006AB9AA /* CircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressView.m; sourceTree = "<group>"; };
 		9129500A1EF91660006AB9AA /* AmountLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmountLabel.h; sourceTree = "<group>"; };
 		9129500B1EF91660006AB9AA /* AmountLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmountLabel.m; sourceTree = "<group>"; };
+		9132A6B91F04CBA600431270 /* UIButton+Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Button.h"; sourceTree = "<group>"; };
+		9132A6BA1F04CBA600431270 /* UIButton+Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Button.m"; sourceTree = "<group>"; };
 		914C3F531ED7C66B00AF279D /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		914C3F541ED7C66B00AF279D /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
 		914C3F5A1ED7EDD600AF279D /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -207,6 +214,12 @@
 		91AC0D121EF395E7004FDD9E /* OC_APP.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OC_APP.pch; sourceTree = "<group>"; };
 		91AC0D151EF39666004FDD9E /* Steve.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Steve.pdf; sourceTree = "<group>"; };
 		91AC0D3C1EF3D1EA004FDD9E /* 滚动图片.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "滚动图片.jpeg"; sourceTree = "<group>"; };
+		91AF88F51F022B1E00587EF9 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		91AF88F61F022B1E00587EF9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		91AF891C1F02350100587EF9 /* SlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideView.h; sourceTree = "<group>"; };
+		91AF891D1F02350100587EF9 /* SlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideView.m; sourceTree = "<group>"; };
+		91B0B9481F0394B700267C9A /* UIDevice+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Common.h"; sourceTree = "<group>"; };
+		91B0B9491F0394B700267C9A /* UIDevice+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Common.m"; sourceTree = "<group>"; };
 		91BF33BE1EFA0E9800334AF0 /* ClipImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageView.h; sourceTree = "<group>"; };
 		91BF33BF1EFA0E9800334AF0 /* ClipImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageView.m; sourceTree = "<group>"; };
 		91BF33C11EFA17DE00334AF0 /* Default_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_image.png; sourceTree = "<group>"; };
@@ -221,6 +234,8 @@
 		91D97B7F1EEF81FE000E6CE6 /* ClickTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickTextView.h; sourceTree = "<group>"; };
 		91D97B801EEF81FE000E6CE6 /* ClickTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickTextView.m; sourceTree = "<group>"; };
 		91D97C021EEFB11E000E6CE6 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		91F353081F025572005D045B /* UITextField+Placeholder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Placeholder.h"; sourceTree = "<group>"; };
+		91F353091F025572005D045B /* UITextField+Placeholder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Placeholder.m"; sourceTree = "<group>"; };
 		C20783FA1DADF12700BB05D4 /* OC_APP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OC_APP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20784031DADF12700BB05D4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C20784041DADF12700BB05D4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -495,10 +510,16 @@
 				91AC0D0D1EF39579004FDD9E /* UIViewController+Present.m */,
 				91AC0CCB1EF393CA004FDD9E /* UIColor+Common.h */,
 				91AC0CCC1EF393CA004FDD9E /* UIColor+Common.m */,
+				91B0B9481F0394B700267C9A /* UIDevice+Common.h */,
+				91B0B9491F0394B700267C9A /* UIDevice+Common.m */,
 				91AC0CCD1EF393CA004FDD9E /* UIImage+Common.h */,
 				91AC0CCE1EF393CA004FDD9E /* UIImage+Common.m */,
 				91AC0CCF1EF393CA004FDD9E /* UIImage+QRBar.h */,
 				91AC0CD01EF393CA004FDD9E /* UIImage+QRBar.m */,
+				9132A6B91F04CBA600431270 /* UIButton+Button.h */,
+				9132A6BA1F04CBA600431270 /* UIButton+Button.m */,
+				91F353081F025572005D045B /* UITextField+Placeholder.h */,
+				91F353091F025572005D045B /* UITextField+Placeholder.m */,
 				91AC0CD11EF393CA004FDD9E /* UITextView+Placeholder.h */,
 				91AC0CD21EF393CA004FDD9E /* UITextView+Placeholder.m */,
 				91AC0CDE1EF39438004FDD9E /* UIView+Frame.h */,
@@ -573,6 +594,25 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		91AF88F41F022B0E00587EF9 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				91AF88F51F022B1E00587EF9 /* RootViewController.h */,
+				91AF88F61F022B1E00587EF9 /* RootViewController.m */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		91AF891B1F0234A500587EF9 /* SlideView(多个按钮节点) */ = {
+			isa = PBXGroup;
+			children = (
+				91AF891C1F02350100587EF9 /* SlideView.h */,
+				91AF891D1F02350100587EF9 /* SlideView.m */,
+			);
+			name = "SlideView(多个按钮节点)";
+			path = SlideView;
+			sourceTree = "<group>";
+		};
 		91BF33BD1EFA0E7200334AF0 /* ClipImageView(撕裂图片) */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +671,7 @@
 		91C270BF1ED6C7010064AEBC /* Utils(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				91AF891B1F0234A500587EF9 /* SlideView(多个按钮节点) */,
 				9122DC171EFD1687002A0D7A /* XLAuthcodeView(本地验证码) */,
 				9122DC0B1EFD1322002A0D7A /* BannerScrollView(banner) */,
 				9122DC071EFD121C002A0D7A /* MyscrollView(文字轮播) */,
@@ -654,6 +695,7 @@
 		91C270C01ED6C7100064AEBC /* Base(基类) */ = {
 			isa = PBXGroup;
 			children = (
+				91AF88F41F022B0E00587EF9 /* RootViewController */,
 				916804E71EE7E88300902075 /* NavigationController */,
 				916804DB1EE7DE2D00902075 /* TabBarController */,
 			);
@@ -935,6 +977,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9132A6BB1F04CBA600431270 /* UIButton+Button.m in Sources */,
 				C20784051DADF12700BB05D4 /* ViewController.m in Sources */,
 				914C3F551ED7C66B00AF279D /* Const.m in Sources */,
 				9150C9B11EE6A84F00B978D9 /* SAMKeychainQuery.m in Sources */,
@@ -949,6 +992,8 @@
 				916804E61EE7DEF300902075 /* TabBarItem.m in Sources */,
 				916804F41EE7EB1400902075 /* MessageViewController.m in Sources */,
 				91AC0D0E1EF39579004FDD9E /* UIViewController+Present.m in Sources */,
+				91B0B94A1F0394B700267C9A /* UIDevice+Common.m in Sources */,
+				91AF88F71F022B1E00587EF9 /* RootViewController.m in Sources */,
 				91AC0CDB1EF393CA004FDD9E /* UITextView+Placeholder.m in Sources */,
 				91D97C031EEFB11E000E6CE6 /* MainNavigationController.m in Sources */,
 				91D97B821EEF81FE000E6CE6 /* ClickTextView.m in Sources */,
@@ -965,7 +1010,9 @@
 				916804EE1EE7EA5E00902075 /* MeViewController.m in Sources */,
 				91BF33C81EFA360000334AF0 /* GradientView.m in Sources */,
 				9191F79D1EEE600100F9A691 /* UserManager.m in Sources */,
+				91F3530A1F025572005D045B /* UITextField+Placeholder.m in Sources */,
 				9122DBEF1EFD058F002A0D7A /* XLAutoRunLabel.m in Sources */,
+				91AF891E1F02350100587EF9 /* SlideView.m in Sources */,
 				9122DC0E1EFD1322002A0D7A /* BannerScrollView.m in Sources */,
 				916804E31EE7DEC300902075 /* MainTabBar.m in Sources */,
 				91AC0CDD1EF393CA004FDD9E /* NSString+Rex.m in Sources */,
@@ -1036,7 +1083,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/OC_APP.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1085,7 +1132,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/OC_APP.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1107,7 +1154,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 8X9B8PWC45;
-				GCC_PREFIX_HEADER = "/Users/xingl/Desktop/XLTest/OC_APP/OC_APP/OC_APP/Supporting Files/OC_APP.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1125,7 +1172,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 8X9B8PWC45;
-				GCC_PREFIX_HEADER = "/Users/xingl/Desktop/XLTest/OC_APP/OC_APP/OC_APP/Supporting Files/OC_APP.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -19,10 +19,6 @@
 #import "SAMKeychain.h"
 
 
-#import <ifaddrs.h>
-#import <arpa/inet.h>
-
-
 #import "WriteViewController.h"
 
 #import "ClickTextView.h"
@@ -46,9 +42,24 @@
 
 #import "XLAuthcodeView.h"
 
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate> {
+#import "SlideView.h"
+
+#import "UITextField+Placeholder.h"
+
+#import "UIDevice+Common.h"
+#import "UIButton+Button.h"
+
+#import "MainNavigationController.h"
+#import "UIView+Frame.h"
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate> {
 
         UILabel*label_;
+    
+        XLAuthcodeView *autoCodeView;
+    
+        UIView *_holeShapeView;
+        UILabel *_qiShuLabel;
+    
 }
 
 @property (nonatomic, copy) NSArray<NSString *> *weathers;
@@ -74,8 +85,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
-    
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -94,12 +103,28 @@
 //        
 //        NSLog(@"-------");
 //    }
+    CGFloat all = 0;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attributes = [fileManager attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
+    NSNumber *num = attributes[NSFileSystemSize];
     
+    all = [num doubleValue] / (powf(1024, 3));
+    NSLog(@"容量%.2fG",all);
     
-    
+    NSLog(@"mac地址：%@", [UIDevice macAddress]);
+    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice cpuNumber]);
+    NSLog(@"系统版本：%@",[UIDevice systemVersion]);
+    NSLog(@"摄像头：%d",[UIDevice hasCamera]);
+    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice totalMemoryBytes],(unsigned long)[UIDevice totalMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice freeMemoryBytes] ,(unsigned long)[UIDevice freeMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice totalDiskSpaceMBytes],(unsigned long)[UIDevice totalDiskSpaceMBytes] / (powf(1024, 1)));
+    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice freeDiskSpaceMBytes],(unsigned long)[UIDevice freeDiskSpaceMBytes] / (powf(1024, 1)));
     
 //    [self circleProgressView];
-//    [self StepProgressView];
+    [self StepProgressView];
+    
+    
+    NSLog(@"设备为：%@",[UIDevice getDeviceName]);
     
     
     NSArray *arr = @[@1,@2,@4,@3,@5];
@@ -117,18 +142,33 @@
     btn.frame = CGRectMake(20, 400, 150, 50);
     btn.backgroundColor = [UIColor redColor];
     [btn setTitle:@"开始" forState:UIControlStateNormal];
+    btn.badgeValue = @"3";
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
+//    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
+    
+    WeakSelf(btn);
+    
+    
+    [btn xl_addActionHandler:^{
+        StrongSelf(btn);
+        
+        btn.badgeValue = @"1223";
+        return;
+        NSLog(@"xxxx");
+        
+        WriteViewController *writeVc = [[WriteViewController alloc] init];
+        MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];
+        [self presentViewController:nav animated:YES completion:^{
+            writeVc.title = @"写文章";
+        }];
+    }];
     [self.view addSubview:btn];
 
     
     
-//    [self changeAttributedPlaceholder];
+    [self changeAttributedPlaceholder];
 //    [self starView];
-    
-    NSString *str = [self deviceIPAdress];
-    NSLog(@"--%@",str);
-    
+
     //图片撕裂
 //    [ClipImageView addToCurrentView:self.view clipImage:[UIImage imageNamed:@"01"] backgroundImage:@"Default_image" animationComplete:^{
 //        
@@ -147,6 +187,36 @@
     
     
     
+    [self.view xl_addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+        NSLog(@"---");
+    }];
+    
+    
+    
+    [self.view xl_addLongPressActionWithBlock:^(UILongPressGestureRecognizer *gestureRecoginzer) {
+        
+        NSLog(@"---111");
+    }];
+    
+    
+    
+    
+    [self.view xl_removeAllSubviews];
+    
+    
+    UIImage *image = [UIImage imageNamed:@"image0"];
+    image = [image xl_imageWithTitle:@"你好啊！" fontSize:25 color:[UIColor orangeColor]];
+    
+    UIImageView *imgVv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 80, 300, 100)];
+    imgVv.image = image;
+    
+    [self.view addSubview:imgVv];
+    
+    
+    
+    
+    
+//    [self StepProgressView];
     
 //    [self gradientLayerView];
 //    [self createAutoRunLabel];
@@ -155,14 +225,83 @@
 //    [self labelScrollView];
 //    [self loadBanner];
     
-    [self loadAuthcodeView];
+//    [self loadAuthcodeView];
+//    [self slideView];
 }
 
+- (void)slideView {
+    SlideView *shapeView = [[SlideView alloc] initWithFrame:CGRectMake(10, 60, self.view.frame.size.width -20, 30) withLayerColor:[UIColor colorWithRed:0/255.0 green:210/255.0 blue:87/255.0 alpha:1]];
+    
+    // 2.
+    shapeView.delegate = self;
+    
+    //3.
+    [self.view addSubview:shapeView];
+    
+    
+    _qiShuLabel = [[UILabel alloc]init];
+    
+    _qiShuLabel.center = CGPointMake(self.view.frame.size.width/2-30, 160);
+    
+    _qiShuLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
+    
+    _qiShuLabel.font = [UIFont systemFontOfSize:14];
+    
+    _qiShuLabel.text = @"1期" ;
+    [_qiShuLabel sizeToFit];
+    
+    [self.view addSubview:_qiShuLabel];
+}
+- (void)selectedSlideViewWithString:(NSString *)string {
+    _qiShuLabel.text = string;
+    [_qiShuLabel sizeToFit];
+    
+}
+
+#pragma mark - 本地验证码
 - (void)loadAuthcodeView {
-    XLAuthcodeView *autoCodeView = [[XLAuthcodeView alloc] init];
+    autoCodeView = [[XLAuthcodeView alloc] init];
     autoCodeView.frame = CGRectMake(0, 300, 100, 30);
     [self.view addSubview:autoCodeView];
+    
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(50, 230, [UIScreen mainScreen].bounds.size.width-100, 50)];
+    textField.layer.borderWidth = 2.0;
+    textField.layer.cornerRadius = 5.0;
+    textField.font = [UIFont systemFontOfSize:21];
+    textField.placeholder = @"请输入验证码!";
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    textField.backgroundColor = [UIColor clearColor];
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = self;
+    [self.view addSubview:textField];
+    
     NSLog(@"%@",autoCodeView.authCodeStr);
+}
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+#pragma mark 输入框代理，点击return 按钮
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //判断输入的是否为验证图片中显示的验证码
+    if ([textField.text isEqualToString:autoCodeView.authCodeStr])
+    {
+        //正确弹出警告款提示正确
+        UIAlertView *alview = [[UIAlertView alloc] initWithTitle:@"恭喜您 ^o^" message:@"验证成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alview show];
+    }
+    else
+    {
+        //验证不匹配，验证码和输入框抖动
+        CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
+        anim.repeatCount = 1;
+        anim.values = @[@-20,@20,@-20];
+        //        [authCodeView.layer addAnimation:anim forKey:nil];
+        [textField.layer addAnimation:anim forKey:nil];
+    }
+    
+    return YES;
 }
 
 #pragma mark - 轮播图
@@ -346,23 +485,29 @@
     [self.view removeFromSuperview];
     
 }
+/** 是否支持自动转屏 */
 -(BOOL)shouldAutorotate
 {
     return YES;
 }
 
--(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
+/** 支持哪些屏幕方向 */
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
+//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 
 
+/** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
 
+    return UIInterfaceOrientationPortrait;
+}
 
 
 #pragma mark - 跑马灯
@@ -447,41 +592,16 @@
     UITextField *textF = [[UITextField alloc] initWithFrame:CGRectMake(200, 300, 130, 50)];
     //    textF.font = [UIFont systemFontOfSize:25];
     textF.borderStyle = UITextBorderStyleRoundedRect;
+    textF.placeholder = @"name";
+    textF.placeholderColor = [UIColor redColor];
     
-    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
-    
-    textF.attributedPlaceholder = attributeText;
+//    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
+//
+//    textF.attributedPlaceholder = attributeText;
     [self.view addSubview:textF];
 }
 
-#pragma mark - IP地址
-- (NSString *)deviceIPAdress {
-    NSString *address = @"an error occurred when obtaining ip address";
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *temp_addr = NULL;
-    int success = 0;
-    
-    success = getifaddrs(&interfaces);
-    
-    if (success == 0) { // 0 表示获取成功
-        
-        temp_addr = interfaces;
-        while (temp_addr != NULL) {
-            if( temp_addr->ifa_addr->sa_family == AF_INET) {
-                // Check if interface is en0 which is the wifi connection on the iPhone
-                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-                    // Get NSString from C String
-                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
-                }
-            }
-            temp_addr = temp_addr->ifa_next;
-        }
-    }
-    
-    freeifaddrs(interfaces);
-    NSLog(@"手机设备的IP是：%@", address);
-    return address;
-}
+
 
 
 
@@ -993,8 +1113,4 @@ bool isReverse = NO;//是否反向翻转
     NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
     NSLog(@"当前应用版本号码：%@",appCurVersionNum);
 }
-
-
-
-
 @end

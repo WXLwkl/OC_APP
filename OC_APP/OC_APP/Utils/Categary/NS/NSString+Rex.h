@@ -41,6 +41,9 @@
 - (BOOL)xl_isIpString;
 //手机号
 - (BOOL)xl_isPhoneNumberString;
-
+//mac地址
+- (BOOL)xl_isMacAddress;
+//url
+- (BOOL)xl_isValidUrl;
 
 @end

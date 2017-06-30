@@ -42,6 +42,11 @@
     NSString *rex = @".*[\\u4e00-\\u9fa5]+.*";
     return [self evaluate:rex];
 }
+//- (BOOL)isValidChinese;
+//{
+//    NSString *chineseRegex = @"^[\u4e00-\u9fa5]+$";
+//    return [self evaluate:chineseRegex];
+//}
 //银行卡号
 - (BOOL)xl_isBankCardNumber {
     NSString *rex = @"^([0-9]{16}|[0-9]{19})$";
@@ -235,7 +240,13 @@
         return NO;
     }
 }
-
-
+- (BOOL)xl_isMacAddress {
+    NSString * macAddRegex = @"([A-Fa-f\\d]{2}:){5}[A-Fa-f\\d]{2}";
+    return  [self evaluate:macAddRegex];
+}
+- (BOOL)xl_isValidUrl {
+    NSString *regex = @"^((http)|(https))+:[^\\s]+\\.[^\\s]*$";
+    return [self evaluate:regex];
+}
 
 @end

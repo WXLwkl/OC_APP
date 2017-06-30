@@ -1,29 +1,34 @@
 //
-//  SubscriptionViewController.m
+//  RootViewController.m
 //  OC_APP
 //
-//  Created by xingl on 2017/6/7.
+//  Created by xingl on 2017/6/27.
 //  Copyright © 2017年 兴林. All rights reserved.
 //
 
-#import "SubscriptionViewController.h"
+#import "RootViewController.h"
 
-@interface SubscriptionViewController ()
+@interface RootViewController ()
 
 @end
 
-@implementation SubscriptionViewController
+@implementation RootViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"关注";
     
-    
-//    kApplication
-    
-    NSLog(@"%@",AppVersion);
+    self.view.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
     
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

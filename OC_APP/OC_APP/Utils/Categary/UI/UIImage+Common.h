@@ -75,6 +75,16 @@
                                    font:(UIFont *)font;
 
 
+
+- (UIImage *)xl_imageWithTitle:(NSString *)title fontSize:(CGFloat)fontSize color:(UIColor *)color;
+
+
+
+/** base64编码 */
+- (NSString *)xl_base64EncodedString;
+
+
+
 @end
 
 

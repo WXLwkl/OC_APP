@@ -27,7 +27,7 @@
     // Override point for customization after application launch.
     
     //初始化window
-//    [self initWindowWithGuideOrAD];
+    [self initWindowWithGuideOrAD];
     
     
     

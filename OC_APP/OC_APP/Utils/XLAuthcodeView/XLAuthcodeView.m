@@ -13,7 +13,6 @@
 #define XLLineCount 4
 #define XLLineWidth 1.3
 #define XLFontSize [UIFont systemFontOfSize:arc4random()%5 + 20]
-#define XLCharCount 4
 
 @implementation XLAuthcodeView
 

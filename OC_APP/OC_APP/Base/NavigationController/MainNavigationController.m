@@ -74,6 +74,14 @@
     self.delegate = self;
 }
 
+- (UIViewController *)childViewControllerForStatusBarStyle{
+    return self.topViewController;
+}
+
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    return self.topViewController;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

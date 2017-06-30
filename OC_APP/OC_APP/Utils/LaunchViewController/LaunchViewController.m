@@ -354,6 +354,8 @@ NSInteger  const adTime = 4;
 //异步下载广告图片
 - (void) downloadADImageWithUrl:(NSString *)imageUrl imageName:(NSString *)imageName
 {
+    
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //TODO 异步操作

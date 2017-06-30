@@ -13,4 +13,8 @@
 + (UIColor *)xl_colorWithHexString:(NSString *)hexString;
 + (UIColor *)xl_colorWithHexNumber:(NSUInteger)hexColor;
 
+
+/** 随机颜色 */
++ (UIColor *)xl_randomColor;
+
 @end
