@@ -316,10 +316,34 @@ static char kActionHandlerLongPressGestureKey;
 }
 
 
+//抖动动画
+- (void)shake {
+    CALayer *viewLayer = self.layer;
+    CGPoint position = viewLayer.position;
+    CGPoint left = CGPointMake(position.x - 10, position.y);
+    CGPoint right = CGPointMake(position.x + 10, position.y);
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [animation setFromValue:[NSValue valueWithCGPoint:left]];
+    [animation setToValue:[NSValue valueWithCGPoint:right]];
+    [animation setAutoreverses:YES]; // 平滑结束
+    [animation setDuration:0.08];
+    [animation setRepeatCount:3];
+    [viewLayer addAnimation:animation forKey:nil];
+}
 
-
-
-
+- (void)makeCornerWithRoundingCorners:(UIRectCorner)corners
+                          cornerRadii:(CGSize)cornerRadii {
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:cornerRadii];
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    
+    shapeLayer.frame = self.bounds;
+    shapeLayer.path = bezierPath.CGPath;
+    
+    self.layer.mask = shapeLayer;
+}
 
 
 

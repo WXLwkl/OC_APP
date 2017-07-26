@@ -7,7 +7,6 @@
 //
 
 #import "PopoverMenu.h"
-#import "UIView+Frame.h"
 
 #define kMainWindow  [UIApplication sharedApplication].keyWindow
 

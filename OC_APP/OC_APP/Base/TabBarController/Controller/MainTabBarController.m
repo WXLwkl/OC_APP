@@ -33,7 +33,7 @@
     
     [self SetupMainTabBar];
     [self SetupAllControllers];
-    self.selectedIndex = 1;
+//    self.selectedIndex = 1;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

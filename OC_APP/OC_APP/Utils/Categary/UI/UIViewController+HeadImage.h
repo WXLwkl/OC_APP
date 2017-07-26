@@ -1,0 +1,16 @@
+//
+//  UIViewController+HeadImage.h
+//  OC_APP
+//
+//  Created by xingl on 2017/7/13.
+//  Copyright © 2017年 yjpal. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIViewController (HeadImage)<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+
+- (void)changeHeadImageWithHeadImageView:(UIImageView *)imgV;
+
+@end

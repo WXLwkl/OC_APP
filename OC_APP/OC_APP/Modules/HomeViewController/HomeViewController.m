@@ -8,11 +8,21 @@
 
 #import "HomeViewController.h"
 
+
 #import "ViewController.h"
 
+#import "FirstView.h"
 
-#define TITLES @[@"修改", @"删除", @"扫一扫",@"付款",@"加好友",@"查找好友"]
-#define ICONS  @[@"motify",@"delete",@"saoyisao",@"pay",@"delete",@"delete"]
+
+#import <LocalAuthentication/LocalAuthentication.h>
+
+//popup
+#import "QRMainViewController.h"
+#import "CalendarViewController.h"
+
+
+#define TITLES @[@"日历", @"扫一扫", @"删除",@"付款",@"加好友",@"查找好友"]
+#define ICONS  @[@"calendar",@"saoyisao",@"delete",@"pay",@"delete",@"delete"]
 
 @interface HomeViewController ()<PopoverMenuDelegate>
 
@@ -43,10 +53,6 @@
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
-
-    
-    
-    
     
     
     
@@ -54,14 +60,16 @@
     //条形码
     UIImage *barImage = [UIImage xl_barCodeImageWithContent:@"123456"
                                              codeImageSize:CGSizeMake(300, 90)
-                                                       red:0
+                                                       red:0.4
                                                      green:0.4
                                                       blue:0.6];
+    
+    
     CGRect barImageView_Frame = CGRectMake(self.view.bounds.size.width/2-300/2, 100, 300, 90);
     UIImageView *barImageView = [[UIImageView alloc] initWithFrame:barImageView_Frame];
     barImageView.image = barImage;
     barImageView.backgroundColor = [UIColor clearColor];
-    //阴影
+//    阴影
     barImageView.layer.shadowOffset = CGSizeMake(-0.5, 0.5);
     barImageView.layer.shadowRadius = 0.5;
     barImageView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -71,6 +79,11 @@
     
     
     
+    FirstView *firstView = [[FirstView alloc] initWithFrame:CGRectMake(0, 300, 100, 100)];
+    firstView.backgroundColor = [UIColor redColor];
+    firstView.center = self.view.center;
+    [self.view addSubview:firstView];
+    
     
 }
 
@@ -79,13 +92,26 @@
 }
 
 - (void)btnClick {
-    ViewController *vc = [[ViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    ViewController *vc = [[ViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    [MBProgressHUD showAutoMessage:@"nihao hoaho " ToView:self.view];
 }
 #pragma mark - YBPopupMenuDelegate
-- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(PopoverMenu *)ybPopupMenu
-{
+- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(PopoverMenu *)ybPopupMenu {
+    
     NSLog(@"点击了 %@ 选项",TITLES[index]);
+    if (index == 0) {
+        CalendarViewController *vc = [[CalendarViewController alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (index == 1) {
+        QRMainViewController *vc = [[QRMainViewController alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

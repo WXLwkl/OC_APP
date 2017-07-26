@@ -26,7 +26,6 @@
 
 
 #import "StepProgressView.h"
-#import "UIView+Common.h"
 
 #import "CircleProgressView.h"
 #import "AmountLabel.h"
@@ -44,23 +43,31 @@
 
 #import "SlideView.h"
 
-#import "UITextField+Placeholder.h"
-
-#import "UIDevice+Common.h"
-#import "UIButton+Button.h"
 
 #import "MainNavigationController.h"
-#import "UIView+Frame.h"
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate> {
 
-        UILabel*label_;
+#import "AppManager.h"
+
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate> {
     
-        XLAuthcodeView *autoCodeView;
+    UILabel*label_;
     
-        UIView *_holeShapeView;
-        UILabel *_qiShuLabel;
+    XLAuthcodeView *autoCodeView;
+    
+    UIView *_holeShapeView;
+    UILabel *_qiShuLabel;
     
 }
+
+
+
+
+
+
+
+
+
+
 
 @property (nonatomic, copy) NSArray<NSString *> *weathers;
 
@@ -76,55 +83,53 @@
 @property(nonatomic,strong)NSTimer *rollTimer;//滚动视图计时器
 
 
+@property (nonatomic, strong) NSDictionary *dic;
+
 @end
 
 @implementation ViewController
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.dic = self.navigationController.navigationBar.titleTextAttributes;
+    
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage xl_imageWithColor:[THEME_CLOLR colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
+    
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
+    
+    
+}
 
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    
+    self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    [self loadRollImageView];
-    
-    
     //倒计时
-//    [self countdown];
-//    //更换Icon图标
-//    [self changeIcon];
-//    [self regularExpressionClass];
-//    
-//    [self getAppMessage];
-
-//    if (IOS_Foundation_Before_8) {
-//        
-//        NSLog(@"-------");
-//    }
-    CGFloat all = 0;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSDictionary *attributes = [fileManager attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    NSNumber *num = attributes[NSFileSystemSize];
+    //    [self countdown];
+    //    //更换Icon图标
+    //    [self changeIcon];
+    //    [self regularExpressionClass];
+    //
+//        [self getAppMessage];
     
-    all = [num doubleValue] / (powf(1024, 3));
-    NSLog(@"容量%.2fG",all);
+    //    if (IOS_Foundation_Before_8) {
+    //
+    //        NSLog(@"-------");
+    //    }
     
-    NSLog(@"mac地址：%@", [UIDevice macAddress]);
-    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice cpuNumber]);
-    NSLog(@"系统版本：%@",[UIDevice systemVersion]);
-    NSLog(@"摄像头：%d",[UIDevice hasCamera]);
-    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice totalMemoryBytes],(unsigned long)[UIDevice totalMemoryBytes] / (powf(1024, 2)));
-    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice freeMemoryBytes] ,(unsigned long)[UIDevice freeMemoryBytes] / (powf(1024, 2)));
-    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice totalDiskSpaceMBytes],(unsigned long)[UIDevice totalDiskSpaceMBytes] / (powf(1024, 1)));
-    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice freeDiskSpaceMBytes],(unsigned long)[UIDevice freeDiskSpaceMBytes] / (powf(1024, 1)));
-    
-//    [self circleProgressView];
+//    [self loadRollImageView];
+    //    [self circleProgressView];
     [self StepProgressView];
-    
-    
-    NSLog(@"设备为：%@",[UIDevice getDeviceName]);
     
     
     NSArray *arr = @[@1,@2,@4,@3,@5];
@@ -144,7 +149,7 @@
     [btn setTitle:@"开始" forState:UIControlStateNormal];
     btn.badgeValue = @"3";
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
+    //    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
     
     WeakSelf(btn);
     
@@ -163,16 +168,16 @@
         }];
     }];
     [self.view addSubview:btn];
-
+    
     
     
     [self changeAttributedPlaceholder];
-//    [self starView];
-
+    //    [self starView];
+    
     //图片撕裂
-//    [ClipImageView addToCurrentView:self.view clipImage:[UIImage imageNamed:@"01"] backgroundImage:@"Default_image" animationComplete:^{
-//        
-//    }];
+    //    [ClipImageView addToCurrentView:self.view clipImage:[UIImage imageNamed:@"01"] backgroundImage:@"Default_image" animationComplete:^{
+    //
+    //    }];
     
     
     
@@ -201,7 +206,7 @@
     
     
     
-    [self.view xl_removeAllSubviews];
+    
     
     
     UIImage *image = [UIImage imageNamed:@"image0"];
@@ -214,21 +219,68 @@
     
     
     
+//    [self.view xl_removeAllSubviews];
     
     
-//    [self StepProgressView];
     
-//    [self gradientLayerView];
-//    [self createAutoRunLabel];
+    //    [self StepProgressView];
     
-//    [self loadGuide];
-//    [self labelScrollView];
-//    [self loadBanner];
+    //    [self gradientLayerView];
+    //    [self createAutoRunLabel];
     
-//    [self loadAuthcodeView];
-//    [self slideView];
+    //    [self loadGuide];
+    //    [self labelScrollView];
+    //    [self loadBanner];
+    
+    //    [self loadAuthcodeView];
+    //    [self slideView];
+    [self getDeviceMessage];
+    
+    
+    
+    
+    
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setTitleTextAttributes:self.dic];
+}
+
+
+/** 获取设备信息 */
+- (void)getDeviceMessage {
+    CGFloat all = 0;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attributes = [fileManager attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
+    NSNumber *num = attributes[NSFileSystemSize];
+    
+    all = [num doubleValue] / (powf(1024, 3));
+    NSLog(@"容量%.2fG",all);
+    
+    NSLog(@"mac地址：%@", [UIDevice macAddress]);
+    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice cpuNumber]);
+    NSLog(@"系统版本：%@",[UIDevice systemVersion]);
+    NSLog(@"摄像头：%d",[UIDevice hasCamera]);
+    
+    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice totalDiskSpaceMBytes],(unsigned long)[UIDevice totalDiskSpaceMBytes] / (powf(1024, 1)));
+    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice freeDiskSpaceMBytes],(unsigned long)[UIDevice freeDiskSpaceMBytes] / (powf(1024, 1)));
+    
+    
+    NSLog(@"设备为：%@",[UIDevice getDeviceName]);
+    NSLog(@"是否越狱：%d", [UIDevice isJailbroken]);
+    
+    
+    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice totalMemoryBytes],(unsigned long)[UIDevice totalMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice freeMemoryBytes] ,(unsigned long)[UIDevice freeMemoryBytes] / (powf(1024, 2)));
+    
+    NSLog(@"活跃内存：%f",[UIDevice getActiveMemory] / (powf(1024, 2)));
+    NSLog(@"不活跃内存：%f",[UIDevice getInActiveMemory] / (powf(1024, 2)));
+    
+    NSLog(@"其他：%f",[UIDevice getWiredMemory] / (powf(1024, 2)));
+}
+
+/** 多按钮节点 */
 - (void)slideView {
     SlideView *shapeView = [[SlideView alloc] initWithFrame:CGRectMake(10, 60, self.view.frame.size.width -20, 30) withLayerColor:[UIColor colorWithRed:0/255.0 green:210/255.0 blue:87/255.0 alpha:1]];
     
@@ -499,13 +551,13 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
-//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    //    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 
 
 /** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-
+    
     return UIInterfaceOrientationPortrait;
 }
 
@@ -595,9 +647,9 @@
     textF.placeholder = @"name";
     textF.placeholderColor = [UIColor redColor];
     
-//    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
-//
-//    textF.attributedPlaceholder = attributeText;
+    //    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
+    //
+    //    textF.attributedPlaceholder = attributeText;
     [self.view addSubview:textF];
 }
 
@@ -688,7 +740,7 @@ bool isReverse = NO;//是否反向翻转
     starRateView.delegate = self;
     [self.view addSubview:starRateView];
     
-     StarRateView *starRateView2 = [[StarRateView alloc] initWithFrame:CGRectMake(20, 100, 200, 30) numberOfStars:5 rateStyle:RateStyleHalf isAnimation:YES delegate:self];
+    StarRateView *starRateView2 = [[StarRateView alloc] initWithFrame:CGRectMake(20, 100, 200, 30) numberOfStars:5 rateStyle:RateStyleHalf isAnimation:YES delegate:self];
     starRateView2.tag = 2;
     [self.view addSubview:starRateView2];
     
@@ -773,15 +825,15 @@ bool isReverse = NO;//是否反向翻转
         NSLog(@"%@", [searchText substringWithRange:result.range]);
     }
     
-//    NSString *searchText = @"15823456743";
-//    NSString *regexStr = @"1[358][0-9]{9}";
-//    NSError *error;
-//    NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionCaseInsensitive error:&error];
-//    if (error) return;
-//    NSInteger count = [regular numberOfMatchesInString:searchText options:NSMatchingReportCompletion range:NSMakeRange(0, searchText.length)];
-//    
-//    NSLog(@"%ld", count);
-
+    //    NSString *searchText = @"15823456743";
+    //    NSString *regexStr = @"1[358][0-9]{9}";
+    //    NSError *error;
+    //    NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionCaseInsensitive error:&error];
+    //    if (error) return;
+    //    NSInteger count = [regular numberOfMatchesInString:searchText options:NSMatchingReportCompletion range:NSMakeRange(0, searchText.length)];
+    //
+    //    NSLog(@"%ld", count);
+    
 }
 
 #pragma mark - 异步下载图片
@@ -797,28 +849,6 @@ bool isReverse = NO;//是否反向翻转
             self.imageV.image = imagex;
         });
     });
-}
-
-#pragma mark - 读取UUID
-- (void)retrieveUUUID {
-    
-    //从钥匙串读取UUID：
-    NSString *retrieveuuid = [SAMKeychain passwordForService:@"com.yourapp.yourcompany"account:@"user"];
-    NSLog(@"----->%@", retrieveuuid);
-    if (XL_IsEmptyString(retrieveuuid)) {
-        //在钥匙串中写入UUID
-        CFUUIDRef uuid = CFUUIDCreate(NULL);
-        assert(uuid != NULL);
-        CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
-        
-        NSLog(@"%@",[NSString stringWithFormat:@"%@", uuidStr]);
-        
-        [SAMKeychain setPassword: [NSString stringWithFormat:@"%@", uuidStr]
-                      forService:@"com.yourapp.yourcompany"account:@"user"];
-    }
-    
-    
-    
 }
 
 #pragma mark - 字符串中获取金额
@@ -908,7 +938,7 @@ bool isReverse = NO;//是否反向翻转
 
 - (void)setAppIconWithName:(NSString *)iconName {
     
-//    想更换icon图片，必须在info.plist中添加 Icon files (iOS 5) --> CFBundleAlternateIcons ...
+    //    想更换icon图片，必须在info.plist中添加 Icon files (iOS 5) --> CFBundleAlternateIcons ...
     if (![[UIApplication sharedApplication] supportsAlternateIcons]) {
         XLLog(@"不支持更换Icon");
         return;
@@ -935,7 +965,7 @@ bool isReverse = NO;//是否反向翻转
     [action setValue:attMessage forKey:@"attributedMessage"];
     
     UIAlertAction *alert1 = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [self loadCameraMovie];
+        //        [self loadCameraMovie];
         
     }];
     [alert1 setValue:[UIColor greenColor] forKey:@"titleTextColor"];
@@ -997,7 +1027,7 @@ bool isReverse = NO;//是否反向翻转
         //            popover.sourceView = sender;
         //            popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
         //        }
-        //        
+        //
         //        [self presentViewController:activity animated:YES completion:NULL];
     });
 }
@@ -1040,7 +1070,7 @@ bool isReverse = NO;//是否反向翻转
         // 关闭闪光灯
         [device lockForConfiguration:nil];
         [device setTorchMode:AVCaptureTorchModeOff];//关
-        [device unlockForConfiguration];    
+        [device unlockForConfiguration];
     }
 }
 #pragma mark - UIToorbar

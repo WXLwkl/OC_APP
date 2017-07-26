@@ -39,6 +39,7 @@
 }
 
 - (void)xl_presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
+    
     if ([viewControllerToPresent isKindOfClass:[UIAlertController class]]) {
         NSLog(@"title: %@, message: %@",((UIAlertController *)viewControllerToPresent).title, ((UIAlertController *)viewControllerToPresent).message);
         

@@ -67,11 +67,7 @@
 #import "PopoverMenu.h"
 
 #pragma mark - Categary
-#import "UIImage+Common.h"
-#import "UIImage+QRBar.h"
-#import "UITextView+Placeholder.h"
-#import "UIColor+Common.h"
-#import "NSString+Common.h"
-#import "NSString+Rex.h"
+#import "MyCategary.h"
+
 
 #endif /* OC_APP_pch */

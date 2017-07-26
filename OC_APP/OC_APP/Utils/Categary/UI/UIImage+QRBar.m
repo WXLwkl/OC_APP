@@ -69,7 +69,9 @@
                                     red:(CGFloat)red
                                   green:(CGFloat)green
                                    blue:(CGFloat)blue {
-    
+    if (IOS_Foundation_Before_8) {
+        return nil;
+    }
     UIImage *image = [self xl_barCodeImageWithContent:content
                                         codeImageSize:size];
     
@@ -77,11 +79,13 @@
 }
 //生成最原始的条形码
 + (CIImage *)barcodeImageWithContent:(NSString *)content {
+    
     CIFilter *qrFilter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
     NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
     [qrFilter setValue:contentData forKey:@"inputMessage"];
     [qrFilter setValue:@(0.00) forKey:@"inputQuietSpace"];
     CIImage *image = qrFilter.outputImage;
+    
     return image;
 }
 

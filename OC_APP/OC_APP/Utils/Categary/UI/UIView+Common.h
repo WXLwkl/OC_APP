@@ -60,5 +60,16 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
 /** 添加长按手势 */
 - (void)xl_addLongPressActionWithBlock:(LongPressActionBlock)block;
 
+/** 抖动 */
+- (void)shake;
+
+/**
+ 设置圆角
+
+ @param corners 圆角枚举
+ @param cornerRadii 半径
+ */
+- (void)makeCornerWithRoundingCorners:(UIRectCorner)corners
+                          cornerRadii:(CGSize)cornerRadii;
 
 @end

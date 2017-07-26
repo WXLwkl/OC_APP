@@ -10,6 +10,8 @@
 
 @interface NSString (Common)
 
+
+
 NSString *XL_FilterString(id obj);
 BOOL XL_IsEmptyString(NSObject *obj);
 

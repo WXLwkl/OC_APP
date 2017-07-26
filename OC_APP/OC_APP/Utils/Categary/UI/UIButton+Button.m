@@ -38,11 +38,11 @@ static const char *UIControl_acceptEventTime = "UIControl_acceptEventTime";
 
 
 
-+ (void)load {
-    Method before   = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
-    Method after    = class_getInstanceMethod(self, @selector(xl_sendAction:to:forEvent:));
-    method_exchangeImplementations(before, after);
-}
+//+ (void)load {
+//    Method before   = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
+//    Method after    = class_getInstanceMethod(self, @selector(xl_sendAction:to:forEvent:));
+//    method_exchangeImplementations(before, after);
+//}
 
 - (void)xl_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
     if ([NSDate date].timeIntervalSince1970 - self.xl_acceptEventTime < self.xl_acceptEventInterval) {

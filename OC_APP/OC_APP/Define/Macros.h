@@ -33,11 +33,14 @@
 /*******************  重写NSLog, Debug模式下打印日志和当前行数  ***************************/
 
 #ifdef DEBUG
-#define XLLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+//#define XLLog(FORMAT, ...) fprintf(stderr,"%s %s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#define XLLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",__PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
 #define XLLog(...) nil
 #endif
 
+
+#define LogBool(value) NSLog(@"%@",value == YES ? @"YES" : @"NO");
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
 
 
@@ -47,7 +50,6 @@
 #define LOADIMAGE(file,ext) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:file ofType:ext]]
 //定义UIImage对象
 #define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]
-//建议使用前两种宏定义,性能高于后者
 
 
 
@@ -62,13 +64,14 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 // 获取RGB颜色
 #define RGBAColor(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define RGBColor(r,g,b) RGBAColor(r,g,b,1.0f)
-#define RandomColor  KRGBColor(arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0)
+#define RandomColor  RGBColor(arc4random_uniform(256),arc4random_uniform(256),arc4random_uniform(256))
 
 //背景色
 #define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
 //清除背景色
 #define CLEARCOLOR [UIColor clearColor]
 
+#define THEME_CLOLR [UIColor xl_colorWithHexNumber:0x1FB5EC]
 
 #pragma mark - 由角度获取弧度 有弧度获取角度
 //由角度获取弧度 有弧度获取角度
@@ -149,6 +152,27 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 
 
 
+#ifndef kSystemVersion
+#define kSystemVersion [UIDevice systemVersion]
+#endif
+
+#ifndef kiOS6Later
+#define kiOS6Later (kSystemVersion >= 6)
+#endif
+
+#ifndef kiOS7Later
+#define kiOS7Later (kSystemVersion >= 7)
+#endif
+
+#ifndef kiOS8Later
+#define kiOS8Later (kSystemVersion >= 8)
+#endif
+
+#ifndef kiOS9Later
+#define kiOS9Later (kSystemVersion >= 9)
+#endif
+
+
 
 
 
@@ -181,7 +205,6 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 //弱引用/强引用
 #define WeakSelf(type)   __weak typeof(type) weak##type = type
 #define StrongSelf(type) __strong typeof(type) type = weak##type
-
 
 #pragma mark - 可判断一个方法的耗时
 //获取一段时间间隔
@@ -235,21 +258,21 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define IMPLEMENT_SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \
 static classname *instance_ = nil;\
 + (instancetype)sharedInstance {\
-       static dispatch_once_t onceToken;\
-       dispatch_once(&onceToken, ^{\
-       instance_ = [[self alloc] init];\
-    });\
-   return instance_;\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+instance_ = [[self alloc] init];\
+});\
+return instance_;\
 }\
 + (instancetype)allocWithZone:(struct _NSZone *)zone{\
-       static dispatch_once_t onceToken;\
-       dispatch_once(&onceToken, ^{\
-       instance_ = [super allocWithZone:zone];\
-    });\
-    return instance_;\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+instance_ = [super allocWithZone:zone];\
+});\
+return instance_;\
 }\
 - (id)copyWithZone:(NSZone *)zone{\
-   return instance_;\
+return instance_;\
 }
 
 

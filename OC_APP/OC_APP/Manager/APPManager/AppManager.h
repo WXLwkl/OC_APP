@@ -16,4 +16,36 @@
 #pragma mark - ——————— APP启动接口 ————————
 + (UIViewController *)appStartWithMainViewController:(UIViewController *)mainVC guideImages:(NSArray *)array;
 
+/** 沙盒主路径 */
++ (NSString *)homePath;
+
+/** 用户应用数据路径 */
++ (NSString *)getDocuments;
+
+/** 缓存数据路径 */
++ (NSString *)getCache;
+
+/** 临时文件路径 */
++ (NSString *)getTemp;
+
+/** Library路径 */
++ (NSString *)getLibrary;
+
+
+/** 应用版本号 */
++ (NSString *)appVersion;
+/** 应用名称 */
++ (NSString *)appName;
+
+/** UUID */
++ (NSString *)appUUUID;
+
+
+
+
+
+
+
+
+
 @end

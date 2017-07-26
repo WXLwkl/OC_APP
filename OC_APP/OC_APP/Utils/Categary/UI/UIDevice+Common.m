@@ -26,6 +26,43 @@
 
 @implementation UIDevice (Common)
 
+// 常见越狱文件
+const char *examineBreak_Tool_pathes[] = {
+    "/Applications/Cydia.app",
+    "/Library/MobileSubstrate/MobileSubstrate.dylib",
+    "/bin/bash",
+    "/usr/sbin/sshd",
+    "/etc/apt"
+};
+char *printEnv(void){
+    char *env = getenv("DYLD_INSERT_LIBRARIES");
+    return env;
+    
+}
+
++(BOOL)isJailbroken {
+    // 方式1.判断是否存在越狱文件
+    for (int i = 0; i < 5; i++) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:examineBreak_Tool_pathes[i]]]){
+            return YES;
+        }
+    }
+    // 方式2.判断是否存在cydia应用
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]){
+        return YES;
+    }
+    // 方式3.读取系统所有的应用名称
+    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/User/Applications/"]){
+        return YES;
+    }
+    // 方式4.读取环境变量
+    if(printEnv()){
+        return YES;
+    }
+    return NO;
+}
+
+
 + (NSString *)macAddress {
     int                 mib[6];
     size_t              len;
@@ -221,30 +258,94 @@
     return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 /*
-+ (NSUInteger)getSysInfo:(uint)typeSpecifier {
-    size_t size = sizeof(int);
-    int result;
-    int mib[2] = {CTL_HW, typeSpecifier};
-    sysctl(mib, 2, &result, &size, NULL, 0);
-    return (NSUInteger)result;
-}
-
-+ (NSUInteger)cpuNumber {
-    return [self getSysInfo:HW_NCPU];
-}
-
-+ (long long)totalMemoryBytes {
-    return [self getSysInfo:HW_PHYSMEM];
-}
-*/
+ + (NSUInteger)getSysInfo:(uint)typeSpecifier {
+ size_t size = sizeof(int);
+ int result;
+ int mib[2] = {CTL_HW, typeSpecifier};
+ sysctl(mib, 2, &result, &size, NULL, 0);
+ return (NSUInteger)result;
+ }
+ 
+ + (NSUInteger)cpuNumber {
+ return [self getSysInfo:HW_NCPU];
+ }
+ 
+ + (long long)totalMemoryBytes {
+ return [self getSysInfo:HW_PHYSMEM];
+ }
+ */
 + (NSUInteger)cpuNumber {
     return [NSProcessInfo processInfo].activeProcessorCount;
 }
+
++ (float)getCPUUsage {
+    float cpu = 0;
+    NSArray *cpus = [self getPerCPUUsage];
+    if (cpus.count == 0) return -1;
+    for (NSNumber *n in cpus) {
+        cpu += n.floatValue;
+    }
+    return cpu;
+}
+
++ (NSArray *)getPerCPUUsage {
+    processor_info_array_t _cpuInfo, _prevCPUInfo = nil;
+    mach_msg_type_number_t _numCPUInfo, _numPrevCPUInfo = 0;
+    unsigned _numCPUs;
+    NSLock *_cpuUsageLock;
+    
+    int _mib[2U] = { CTL_HW, HW_NCPU };
+    size_t _sizeOfNumCPUs = sizeof(_numCPUs);
+    int _status = sysctl(_mib, 2U, &_numCPUs, &_sizeOfNumCPUs, NULL, 0U);
+    if (_status)
+        _numCPUs = 1;
+    
+    _cpuUsageLock = [[NSLock alloc] init];
+    
+    natural_t _numCPUsU = 0U;
+    kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &_numCPUsU, &_cpuInfo, &_numCPUInfo);
+    if (err == KERN_SUCCESS) {
+        [_cpuUsageLock lock];
+        
+        NSMutableArray *cpus = [NSMutableArray new];
+        for (unsigned i = 0U; i < _numCPUs; ++i) {
+            Float32 _inUse, _total;
+            if (_prevCPUInfo) {
+                _inUse = (
+                          (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
+                          + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
+                          + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
+                          );
+                _total = _inUse + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
+            } else {
+                _inUse = _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+                _total = _inUse + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+            }
+            [cpus addObject:@(_inUse / _total)];
+        }
+        
+        [_cpuUsageLock unlock];
+        if (_prevCPUInfo) {
+            size_t prevCpuInfoSize = sizeof(integer_t) * _numPrevCPUInfo;
+            vm_deallocate(mach_task_self(), (vm_address_t)_prevCPUInfo, prevCpuInfoSize);
+        }
+        return cpus;
+    } else {
+        return nil;
+    }
+}
+
+
+
+
+
+//总内存
 + (long long)totalMemoryBytes {
     long long totalMemory = [[NSProcessInfo processInfo] physicalMemory];
     if (totalMemory < -1) totalMemory = -1;
     return totalMemory;
 }
+//空闲内存
 + (NSUInteger)freeMemoryBytes
 {
     mach_port_t host_port = mach_host_self();
@@ -254,26 +355,61 @@
     
     host_page_size(host_port, &pagesize);
     if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
-        return 0;
+        return -1;
     }
     unsigned long mem_free = vm_stat.free_count * pagesize;
     return mem_free;
 }
 
-+ (CGFloat)freeDiskSpaceMBytes
-{
-    CGFloat size = 0.0;
-    NSError *error;
-    NSDictionary *dic = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
-    if (error) {
-        NSLog(@"error: %@", error.localizedDescription);
-    }else{
-        NSNumber *number = [dic objectForKey:NSFileSystemFreeSize];
-        size = [number floatValue] / powf(1024, 2);
-    }
-    return size;
+
+
+//活跃的内存(正在使用或者很短时间内被使用)
++ (NSUInteger)getActiveMemory {
+    mach_port_t host_port = mach_host_self();
+    mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    vm_size_t page_size;
+    vm_statistics_data_t vm_stat;
+    kern_return_t kern;
+    
+    kern = host_page_size(host_port, &page_size);
+    if (kern != KERN_SUCCESS) return -1;
+    kern = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size);
+    if (kern != KERN_SUCCESS) return -1;
+    unsigned long mem_active = vm_stat.active_count * page_size;
+    return mem_active;
+}
+//不活跃的内存(最近使用过)
++ (NSUInteger)getInActiveMemory {
+    mach_port_t host_port = mach_host_self();
+    mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    vm_size_t page_size;
+    vm_statistics_data_t vm_stat;
+    kern_return_t kern;
+    
+    kern = host_page_size(host_port, &page_size);
+    if (kern != KERN_SUCCESS) return -1;
+    kern = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size);
+    if (kern != KERN_SUCCESS) return -1;
+    unsigned long mem_inactive = vm_stat.inactive_count * page_size;
+    return mem_inactive;
+}
+//用于存放内核和数据结构的内存(framework,用户级别的应用无法分配)
++ (NSUInteger)getWiredMemory {
+    mach_port_t host_port = mach_host_self();
+    mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    vm_size_t page_size;
+    vm_statistics_data_t vm_stat;
+    kern_return_t kern;
+    
+    kern = host_page_size(host_port, &page_size);
+    if (kern != KERN_SUCCESS) return -1;
+    kern = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size);
+    if (kern != KERN_SUCCESS) return -1;
+    unsigned long mem_wire = vm_stat.wire_count * page_size;
+    return mem_wire;
 }
 
+//磁盘总空间
 + (CGFloat)totalDiskSpaceMBytes
 {
     CGFloat size = 0.0;
@@ -288,52 +424,66 @@
     }
     return size;
 }
+//磁盘空闲空间
++ (CGFloat)freeDiskSpaceMBytes
+{
+    CGFloat size = 0.0;
+    NSError *error;
+    NSDictionary *dic = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
+    if (error) {
+        NSLog(@"error: %@", error.localizedDescription);
+    }else{
+        NSNumber *number = [dic objectForKey:NSFileSystemFreeSize];
+        size = [number floatValue] / powf(1024, 2);
+    }
+    return size;
+}
 /*
-//获取总内存大小
--(long long)getTotalDiskSize
-{
-    struct statfs buf;
-    unsigned long long freeSpace = -1;
-    if (statfs("/var", &buf) >= 0)
-    {
-        freeSpace = (unsigned long long)(buf.f_bsize * buf.f_blocks);
-    }
-    return freeSpace;
-}
-//获取可用磁盘容量
-
--(long long)getAvailableDiskSize
-{
-    struct statfs buf;
-    unsigned long long freeSpace = -1;
-    if (statfs("/var", &buf) >= 0)
-    {
-        freeSpace = (unsigned long long)(buf.f_bsize * buf.f_bavail);
-    }
-    return freeSpace;
-}
--(NSString *)fileSizeToString:(unsigned long long)fileSize
-{
-    NSInteger KB = 1024;
-    NSInteger MB = KB*KB;
-    NSInteger GB = MB*KB;
-    
-    if (fileSize < 10) {
-        return @"0 B";
-        
-    } else if (fileSize < KB) {
-        return @"< 1 KB";
-        
-    } else if (fileSize < MB) {
-        return [NSString stringWithFormat:@"%f KB",((CGFloat)fileSize)/KB];
-        
-    } else if (fileSize < GB) {
-        return [NSString stringWithFormat:@"%.1f MB",((CGFloat)fileSize)/MB];
-        
-    } else {
-        return [NSString stringWithFormat:@"%.2f GB",((CGFloat)fileSize)/GB];
-    }
-}
+ //获取总内存大小
+ -(long long)getTotalDiskSize
+ {
+ struct statfs buf;
+ unsigned long long freeSpace = -1;
+ if (statfs("/var", &buf) >= 0)
+ {
+ freeSpace = (unsigned long long)(buf.f_bsize * buf.f_blocks);
+ }
+ return freeSpace;
+ }
+ //获取可用磁盘容量
+ 
+ -(long long)getAvailableDiskSize
+ {
+ struct statfs buf;
+ unsigned long long freeSpace = -1;
+ if (statfs("/var", &buf) >= 0)
+ {
+ freeSpace = (unsigned long long)(buf.f_bsize * buf.f_bavail);
+ }
+ return freeSpace;
+ }
+ -(NSString *)fileSizeToString:(unsigned long long)fileSize
+ {
+ NSInteger KB = 1024;
+ NSInteger MB = KB*KB;
+ NSInteger GB = MB*KB;
+ 
+ if (fileSize < 10) {
+ return @"0 B";
+ 
+ } else if (fileSize < KB) {
+ return @"< 1 KB";
+ 
+ } else if (fileSize < MB) {
+ return [NSString stringWithFormat:@"%f KB",((CGFloat)fileSize)/KB];
+ 
+ } else if (fileSize < GB) {
+ return [NSString stringWithFormat:@"%.1f MB",((CGFloat)fileSize)/MB];
+ 
+ } else {
+ return [NSString stringWithFormat:@"%.2f GB",((CGFloat)fileSize)/GB];
+ }
+ }
  */
 
 
