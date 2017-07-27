@@ -52,7 +52,7 @@
 		916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916804F91EE7EB3800902075 /* HomeViewController.m */; };
 		916804FE1EE7EBE200902075 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916804FD1EE7EBE200902075 /* WriteViewController.m */; };
 		9187C4FC1F21D86C000DF0D5 /* QRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187C4FB1F21D86C000DF0D5 /* QRMainViewController.m */; };
-		9187C4FF1F21DB79000DF0D5 /* QRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187C4FE1F21DB79000DF0D5 /* QRScanViewController.m */; };
+		9187C4FF1F21DB79000DF0D5 /* MyQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187C4FE1F21DB79000DF0D5 /* MyQRViewController.m */; };
 		9187C5061F21DF10000DF0D5 /* scan_frame@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5021F21DF10000DF0D5 /* scan_frame@3x.png */; };
 		9187C5071F21DF10000DF0D5 /* scan_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5031F21DF10000DF0D5 /* scan_frame@2x.png */; };
 		9187C5081F21DF10000DF0D5 /* scan_net@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5041F21DF10000DF0D5 /* scan_net@2x.png */; };
@@ -218,8 +218,8 @@
 		916804FD1EE7EBE200902075 /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteViewController.m; sourceTree = "<group>"; };
 		9187C4FA1F21D86C000DF0D5 /* QRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRMainViewController.h; sourceTree = "<group>"; };
 		9187C4FB1F21D86C000DF0D5 /* QRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRMainViewController.m; sourceTree = "<group>"; };
-		9187C4FD1F21DB79000DF0D5 /* QRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRScanViewController.h; sourceTree = "<group>"; };
-		9187C4FE1F21DB79000DF0D5 /* QRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRScanViewController.m; sourceTree = "<group>"; };
+		9187C4FD1F21DB79000DF0D5 /* MyQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQRViewController.h; sourceTree = "<group>"; };
+		9187C4FE1F21DB79000DF0D5 /* MyQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQRViewController.m; sourceTree = "<group>"; };
 		9187C5021F21DF10000DF0D5 /* scan_frame@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_frame@3x.png"; sourceTree = "<group>"; };
 		9187C5031F21DF10000DF0D5 /* scan_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_frame@2x.png"; sourceTree = "<group>"; };
 		9187C5041F21DF10000DF0D5 /* scan_net@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_net@2x.png"; sourceTree = "<group>"; };
@@ -610,8 +610,8 @@
 				9187C5031F21DF10000DF0D5 /* scan_frame@2x.png */,
 				9187C5041F21DF10000DF0D5 /* scan_net@2x.png */,
 				9187C5051F21DF10000DF0D5 /* scan_net@3x.png */,
-				9187C4FD1F21DB79000DF0D5 /* QRScanViewController.h */,
-				9187C4FE1F21DB79000DF0D5 /* QRScanViewController.m */,
+				9187C4FD1F21DB79000DF0D5 /* MyQRViewController.h */,
+				9187C4FE1F21DB79000DF0D5 /* MyQRViewController.m */,
 			);
 			name = "QRMainViewController(二维码)";
 			path = QRMainViewController;
@@ -1272,7 +1272,7 @@
 				919842BE1F2074CB00CE773F /* SecureManager.m in Sources */,
 				91AC0CDB1EF393CA004FDD9E /* UITextView+Placeholder.m in Sources */,
 				91D97C031EEFB11E000E6CE6 /* MainNavigationController.m in Sources */,
-				9187C4FF1F21DB79000DF0D5 /* QRScanViewController.m in Sources */,
+				9187C4FF1F21DB79000DF0D5 /* MyQRViewController.m in Sources */,
 				9105D2C01F0F83580057F343 /* UIViewController+AlertViewAndActionSheet.m in Sources */,
 				91A619391F271D6100FCA42C /* XLMonthCollectionView.m in Sources */,
 				919842CF1F20933200CE773F /* GestureMainViewController.m in Sources */,

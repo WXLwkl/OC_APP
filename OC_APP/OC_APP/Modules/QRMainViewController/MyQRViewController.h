@@ -1,5 +1,5 @@
 //
-//  QRScanViewController.h
+//  MyQRViewController.h
 //  OC_APP
 //
 //  Created by xingl on 2017/7/21.
@@ -8,6 +8,6 @@
 
 #import "RootViewController.h"
 
-@interface QRScanViewController : RootViewController
+@interface MyQRViewController : RootViewController
 
 @end
