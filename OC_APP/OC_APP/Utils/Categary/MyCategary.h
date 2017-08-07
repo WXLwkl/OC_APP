@@ -21,6 +21,10 @@
 #import "UIView+Frame.h"
 #import "UIView+Common.h"
 
+#import "UIViewController+Common.h"
+#import "UIBarButtonItem+Common.h"
+
+
 #import "NSObject+ViewController.h"
 #import "NSString+Common.h"
 #import "NSString+Rex.h"

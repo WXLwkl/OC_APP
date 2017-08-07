@@ -148,9 +148,12 @@
     CGContextDrawImage(bitmapRef, integralRect, bitmapImage);
     
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
+    UIImage *resultimage = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    return resultimage;
 }
 
 

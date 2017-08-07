@@ -15,7 +15,7 @@
 #import "UserInfo.h"
 #import <MBProgressHUD.h>
 
-#import <Toast/UIView+Toast.h>
+
 #import "SAMKeychain.h"
 
 
@@ -48,7 +48,11 @@
 
 #import "AppManager.h"
 
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate> {
+#import <IQKeyboardManager.h>
+
+#import <TAPKeyboardPop/UIViewController+TAPKeyboardPop.h>
+
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate> {
     
     UILabel*label_;
     
@@ -58,15 +62,6 @@
     UILabel *_qiShuLabel;
     
 }
-
-
-
-
-
-
-
-
-
 
 
 @property (nonatomic, copy) NSArray<NSString *> *weathers;
@@ -92,6 +87,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     self.dic = self.navigationController.navigationBar.titleTextAttributes;
     
@@ -153,7 +151,7 @@
     
     WeakSelf(btn);
     
-    
+    WeakSelf(self);
     [btn xl_addActionHandler:^{
         StrongSelf(btn);
         
@@ -163,13 +161,11 @@
         
         WriteViewController *writeVc = [[WriteViewController alloc] init];
         MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];
-        [self presentViewController:nav animated:YES completion:^{
+        [weakself presentViewController:nav animated:YES completion:^{
             writeVc.title = @"写文章";
         }];
     }];
     [self.view addSubview:btn];
-    
-    
     
     [self changeAttributedPlaceholder];
     //    [self starView];
@@ -237,6 +233,13 @@
     [self getDeviceMessage];
     
     
+    
+    
+//    [self xl_alertWithTitle:@"xx" message:@"abcdefg" andOthers:@[@"cancel", @"ok"] animated:YES action:^(NSInteger index) {
+//        if (index == 1) {
+//            NSLog(@"ok");
+//        }
+//    }];
     
     
     
@@ -644,13 +647,22 @@
     UITextField *textF = [[UITextField alloc] initWithFrame:CGRectMake(200, 300, 130, 50)];
     //    textF.font = [UIFont systemFontOfSize:25];
     textF.borderStyle = UITextBorderStyleRoundedRect;
-    textF.placeholder = @"name";
+    textF.placeholder = @"账号";
     textF.placeholderColor = [UIColor redColor];
     
     //    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
     //
     //    textF.attributedPlaceholder = attributeText;
     [self.view addSubview:textF];
+    
+    
+    
+    UITextField *textF1 = [[UITextField alloc] initWithFrame:CGRectMake(200, 400, 130, 50)];
+    //    textF.font = [UIFont systemFontOfSize:25];
+    textF1.borderStyle = UITextBorderStyleRoundedRect;
+    textF1.placeholder = @"姓名";
+    textF1.placeholderColor = [UIColor redColor];
+    [self.view addSubview:textF1];
 }
 
 

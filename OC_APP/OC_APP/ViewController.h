@@ -6,9 +6,9 @@
 //  Copyright © 2016年 兴林. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : RootViewController
 
 
 @end

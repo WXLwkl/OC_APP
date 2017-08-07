@@ -34,9 +34,6 @@
     
     if (self.viewControllers.count >= 1) {
         viewController.hidesBottomBarWhenPushed = YES;
-        
-        UIBarButtonItem *popToPreButton = [self barButtonItemWithImage:@"nav_back" target:self action:@selector(popToPre)];
-        viewController.navigationItem.leftBarButtonItem = popToPreButton;
     }
 //    if (animated) {
 //        CATransition *animation = [CATransition animation];
@@ -99,24 +96,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - costom
-//这里可以封装成一个分类
-- (UIBarButtonItem *)barButtonItemWithImage:(NSString *)imageName target:(id)target action:(SEL)action {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.bounds = CGRectMake(0, 0, 50, 30);
-    button.adjustsImageWhenHighlighted = NO;
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-//    [button setImage:[UIImage imageNamed:highImageName] forState:UIControlStateHighlighted];
-    [button sizeToFit];
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
-    return  [[UIBarButtonItem alloc] initWithCustomView:button];
-}
-
-- (void)popToPre {
-    [self popViewControllerAnimated:YES];
-}
-
 
 #pragma mark -------- Navigation delegate
 //该方法可以解决popRootViewController时tabbar的bug

@@ -126,8 +126,8 @@
     _scanNetImageView.frame = CGRectMake(0, -scanNetImageViewH, scanNetImageViewW, scanNetImageViewH);
     CABasicAnimation *scanNetAnimation = [CABasicAnimation animation];
     scanNetAnimation.keyPath =@"transform.translation.y";
-    scanNetAnimation.byValue = @(QRCodeWidth);
-    scanNetAnimation.duration = 1.0;
+    scanNetAnimation.byValue = @(QRCodeWidth+50);
+    scanNetAnimation.duration = 1.5;
     scanNetAnimation.repeatCount = MAXFLOAT;
     [_scanNetImageView.layer addAnimation:scanNetAnimation forKey:nil];
     [scanWindow addSubview:_scanNetImageView];

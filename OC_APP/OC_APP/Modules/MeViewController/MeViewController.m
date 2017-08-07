@@ -16,19 +16,22 @@
 
 #import "SettingViewController.h"
 
-#define kScaleLength(length) (length) * [UIScreen mainScreen].bounds.size.width / 320.0f
 
-#define NAVBAR_COLORCHANGE_POINT (-IMAGE_HEIGHT + NAV_HEIGHT*2)
+#import <MJRefresh.h>
+#import "InfunRefreshHeader.h"
+
+#import "ALinRefreshGifHeader.h"
+
+#define NAVBAR_COLORCHANGE_POINT (IMAGE_HEIGHT - NAV_HEIGHT*2)
 #define NAV_HEIGHT 64
 #define IMAGE_HEIGHT 260
-#define SCROLL_DOWN_LIMIT 100
-#define LIMIT_OFFSET_Y -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
+
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIImageView *imgView;
+@property (nonatomic, strong) UIView *topView;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIButton *button;
@@ -38,60 +41,23 @@
 @implementation MeViewController
 
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor orangeColor];
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    }
-    return _tableView;
-}
 - (void)createButton {
     
     _window = [UIApplication sharedApplication].windows[0];
     
     _button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
     [_button setTitle:@"按钮" forState:UIControlStateNormal];
-    
     _button.frame = CGRectMake(self.view.bounds.size.width - 70, self.view.bounds.size.height - 150, 60, 60);
-    
     _button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
-    
     [_button setBackgroundColor:[UIColor orangeColor]];
-    
     _button.layer.cornerRadius = 30;
-    
     _button.layer.masksToBounds = YES;
-    
     [_button addTarget:self action:@selector(resignButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    //    _window = [[UIWindow alloc]initWithFrame:CGRectMake(kSize_width - 70, kSize_height - 150, 50, 50)];
-    
-    //    _window.windowLevel = UIWindowLevelAlert+1;
-    
-    //    _window.backgroundColor = [UIColor greenColor];
-    
-    //    _window.layer.cornerRadius = 25;
-    
-    //    _window.layer.masksToBounds = YES;
-    
     [_window addSubview:_button];
     
-    //    [_window makeKeyAndVisible];//显示window
-    
     //放一个拖动手势，用来改变控件的位置
-    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(changePostion:)];
-    
     [_button addGestureRecognizer:pan];
-    
-    
-    
-    BOOL isOK = NO;
-    LogBool(isOK);
     
 }
 
@@ -186,20 +152,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"个人中心";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:(UIBarButtonItemStylePlain) target:self action:@selector(settingBtnClick:)];
     
     self.edgesForExtendedLayout = UIRectEdgeLeft|UIRectEdgeRight|UIRectEdgeTop;
     
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT, 0, 0, 0);
-    [self.tableView addSubview:self.imgView];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.topView;
     
-    [self createButton];
+    self.tableView.mj_header = [ALinRefreshGifHeader headerWithRefreshingBlock:^{
+        
+        [self requestCommentsData];
+        
+    }];
+    
+    BOOL isOK = NO;
+    LogBool(isOK);
+    
+//    [self createButton];
+}
+- (void)requestCommentsData {
+    [self performSelector:@selector(aa) withObject:self afterDelay:3];
+}
+- (void)aa {
+    NSLog(@"刷新！！！！！");
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -217,12 +196,10 @@
 }
 
 - (void)settingBtnClick:(UIBarButtonItem *)item {
-    NSLog(@"---- setting ----");
+    
     SettingViewController *set = [[SettingViewController alloc] init];
     [self.navigationController pushViewController:set animated:YES];
-    
 }
-
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -257,97 +234,47 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    
-//    [self navigationBarGradualChangeWithScrollView:scrollView offset:kScaleLength(190.5) color:[UIColor xl_colorWithHexNumber:0x1FB5EC]];
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    [self viewWillLayoutSubviews];
-    
-//    return;
     CGFloat offsetY = scrollView.contentOffset.y;
-    
     if (offsetY > NAVBAR_COLORCHANGE_POINT) {
         CGFloat alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
-//        [self.navigationController.navigationBar lt_setNavigationBarBackgroundAlpha:alpha];
-//        self.navigationController.navigationBar.alpha = alpha;
-        
-//        [self xl_setNavigationBarColorAlpha:alpha];
-        
         [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
-//        [self.navigationController.navigationBar ya_setElementsAlpha:alpha > 0.99 ? 0.99 : alpha];
-        
-        
+//        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
+//        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
+//        [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
+        self.title = @"个人中心";
     } else {
-//        [self.navigationController.navigationBar lt_setNavigationBarBackgroundAlpha:0];
-//        [self xl_setNavigationBarColorAlpha:0];
         [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:0]];
-    }
-    
-    //限制下拉的距离
-    if(offsetY < LIMIT_OFFSET_Y) {
-//        [scrollView setContentOffset:CGPointMake(0, LIMIT_OFFSET_Y)];
-    }
-    
-    // 改变图片框的大小 (上滑的时候不改变)
-    // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
-    CGFloat newOffsetY = scrollView.contentOffset.y;
-    if (newOffsetY < -IMAGE_HEIGHT)
-    {
-        self.imgView.frame = CGRectMake(0, newOffsetY, kScreenWidth, -newOffsetY);
+//        [self wr_setNavBarTintColor:[UIColor whiteColor]];
+//        [self wr_setNavBarTitleColor:[UIColor whiteColor]];
+//        [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.title = @"";
     }
 }
 
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-////    GradientView *waveView = [[GradientView alloc]init];
-////    return waveView;
-//    
-//    UIView *v = [[UIView alloc] init];
-//    v.backgroundColor = [UIColor grayColor];
-//    
-//    UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"C-AvatarIcon"]];
-//    imgV.frame = CGRectMake(15, 20, 50, 50);
-//    [v addSubview:imgV];
-//    
-//    return v;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 100;
-//}
 #pragma mark - get
-- (UIImageView *)imgView {
-    if (_imgView == nil) {
-        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -IMAGE_HEIGHT, kScreenWidth, IMAGE_HEIGHT)];
-        _imgView.contentMode = UIViewContentModeScaleAspectFill;
-        _imgView.clipsToBounds = YES;
-        _imgView.image = [self imageWithImageSimple:[UIImage imageNamed:@"center_bg.jpg"] scaledToSize:CGSizeMake(kScreenWidth, IMAGE_HEIGHT+SCROLL_DOWN_LIMIT)];
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor orangeColor];
+        _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
-    return _imgView;
+    return _tableView;
+}
+- (UIView *)topView {
+    if (_topView == nil) {
+//        _topView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wbBG"]];
+//        _topView.frame = CGRectMake(0, 0, self.view.frame.size.width, IMAGE_HEIGHT);
+        _topView = [[GradientView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 225)];
+    }
+    return _topView;
 }
 
-- (UIImage *)imageWithImageSimple:(UIImage *)image scaledToSize:(CGSize)newSize {
-    UIGraphicsBeginImageContext(CGSizeMake(newSize.width*2, newSize.height*2));
-    [image drawInRect:CGRectMake (0, 0, newSize.width*2, newSize.height*2)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//
+//
+//UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"C-AvatarIcon"]];
+//imgV.frame = CGRectMake(15, 20, 50, 50);
+//[waveView addSubview:imgV];
 @end

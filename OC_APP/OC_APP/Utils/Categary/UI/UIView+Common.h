@@ -14,7 +14,6 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
 @interface UIView (Common)
 
 
-
 //badge
 @property (strong, nonatomic) UILabel *badge;
 

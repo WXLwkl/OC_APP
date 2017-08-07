@@ -22,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"二维码";
     
+    self.navigationItem.title = @"二维码";
     
     
     UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 80, kScreenWidth-60, kScreenWidth-60)];

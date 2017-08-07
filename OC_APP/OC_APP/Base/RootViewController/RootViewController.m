@@ -30,7 +30,10 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
-
+- (void) dealloc {
+    
+    XLLog(@"[🔥%@🔥 will dealloc 💥💥💥]",NSStringFromClass([self class]));
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

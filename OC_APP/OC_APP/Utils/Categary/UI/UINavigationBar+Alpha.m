@@ -30,7 +30,10 @@ static char overlayKey;
     }
     self.overlay.backgroundColor = backgroundColor;
 }
-
+- (void)lt_setTranslationY:(CGFloat)translationY {
+    
+    self.transform = CGAffineTransformMakeTranslation(0, translationY);
+}
 - (void)xl_setElementsAlpha:(CGFloat)alpha {
     [[self valueForKey:@"_leftViews"] enumerateObjectsUsingBlock:^(UIView *view, NSUInteger i, BOOL *stop) {
         view.alpha = alpha;

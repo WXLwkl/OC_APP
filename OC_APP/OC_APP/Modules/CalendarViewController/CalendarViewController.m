@@ -19,8 +19,12 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"日历";
-    
-    
+    [self xl_setNavBackItem];
+//    WeakSelf(self);
+//    [self xl_setLeftBarButtonItemWithTitle:@"BACK" action:^{
+//    
+//        [weakself xl_closeSelfAction];
+//    }];
     
     
     XLCalendar *calendar = [[XLCalendar alloc]initWithFrame:CGRectMake(20, 100, CGRectGetWidth(self.view.bounds)-40, 300)];
@@ -33,6 +37,11 @@
         [MBProgressHUD showAutoMessage:[NSString stringWithFormat:@"%ld年/%ld月/%ld日", (long)year, (long)month, (long)day]];
         
     }];
+}
+
+- (void)dealloc {
+    
+    NSLog(@"要销毁了-------");
 }
 
 - (void)didReceiveMemoryWarning {

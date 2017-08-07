@@ -14,7 +14,8 @@
 
 ///设置导航栏中包含的视图元素的透明度
 - (void)xl_setElementsAlpha:(CGFloat)alpha;
-
+/** 设置导航栏在垂直方向上平移多少距离 */
+- (void)lt_setTranslationY:(CGFloat)translationY;
 ///重置导航栏为默认样式
 - (void)xl_reset;
 

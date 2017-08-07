@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/** 背景类型 */
 typedef NS_ENUM(NSInteger , PopoverMenuType) {
     PopoverMenuTypeDefault = 0,
     PopoverMenuTypeDark
