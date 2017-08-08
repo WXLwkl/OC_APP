@@ -19,4 +19,11 @@
 
 - (void)xl_closeSelfAction;
 
+
+
+/** 获得最前端的视图控制器 */
++ (UIViewController *)xl_currentViewController;
+/** 获取最前端的 UINavigationController */
++ (UINavigationController *)xl_currentNavigatonController;
+
 @end

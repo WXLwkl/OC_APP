@@ -17,7 +17,5 @@ pod 'MJExtension'
 pod 'pop' #做动画效果
 
 
-pod 'IQKeyboardManager'
-pod 'TAPKeyboardPop'
 
 end

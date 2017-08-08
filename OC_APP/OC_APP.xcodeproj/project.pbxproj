@@ -59,6 +59,8 @@
 		916804F71EE7EB2800902075 /* SubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916804F61EE7EB2800902075 /* SubscriptionViewController.m */; };
 		916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916804F91EE7EB3800902075 /* HomeViewController.m */; };
 		916804FE1EE7EBE200902075 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916804FD1EE7EBE200902075 /* WriteViewController.m */; };
+		916C1D811F395F2700A08B49 /* UIViewController+KeyboardPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 916C1D801F395F2700A08B49 /* UIViewController+KeyboardPop.m */; };
+		916C1DBF1F39922300A08B49 /* NSString+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 916C1DBE1F39922300A08B49 /* NSString+Json.m */; };
 		9174BA271F31C7DC003ED0D3 /* QQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9174BA261F31C7DC003ED0D3 /* QQViewController.m */; };
 		9174BA291F31CC6F003ED0D3 /* wbBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9174BA281F31CC6F003ED0D3 /* wbBG.png */; };
 		917617D71F30532C00A84CAF /* ActivityAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 917617D61F30532C00A84CAF /* ActivityAlert.m */; };
@@ -256,6 +258,10 @@
 		916804F91EE7EB3800902075 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		916804FC1EE7EBE200902075 /* WriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteViewController.h; sourceTree = "<group>"; };
 		916804FD1EE7EBE200902075 /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteViewController.m; sourceTree = "<group>"; };
+		916C1D7F1F395F2700A08B49 /* UIViewController+KeyboardPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KeyboardPop.h"; sourceTree = "<group>"; };
+		916C1D801F395F2700A08B49 /* UIViewController+KeyboardPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KeyboardPop.m"; sourceTree = "<group>"; };
+		916C1DBD1F39922300A08B49 /* NSString+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Json.h"; sourceTree = "<group>"; };
+		916C1DBE1F39922300A08B49 /* NSString+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Json.m"; sourceTree = "<group>"; };
 		9174BA251F31C7DC003ED0D3 /* QQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQViewController.h; sourceTree = "<group>"; };
 		9174BA261F31C7DC003ED0D3 /* QQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQViewController.m; sourceTree = "<group>"; };
 		9174BA281F31CC6F003ED0D3 /* wbBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wbBG.png; sourceTree = "<group>"; };
@@ -847,6 +853,8 @@
 			children = (
 				91AC0D0C1EF39579004FDD9E /* UIViewController+Present.h */,
 				91AC0D0D1EF39579004FDD9E /* UIViewController+Present.m */,
+				916C1D7F1F395F2700A08B49 /* UIViewController+KeyboardPop.h */,
+				916C1D801F395F2700A08B49 /* UIViewController+KeyboardPop.m */,
 				9105D2BE1F0F83580057F343 /* UIViewController+AlertViewAndActionSheet.h */,
 				9105D2BF1F0F83580057F343 /* UIViewController+AlertViewAndActionSheet.m */,
 				91D9B5B81F17546B00668093 /* UIViewController+HeadImage.h */,
@@ -887,6 +895,8 @@
 				91089A9A1F0DD87900A05B0C /* NSObject+ViewController.h */,
 				91089A9B1F0DD87900A05B0C /* NSObject+ViewController.m */,
 				91AC0CD41EF393CA004FDD9E /* NSString+Common.h */,
+				916C1DBD1F39922300A08B49 /* NSString+Json.h */,
+				916C1DBE1F39922300A08B49 /* NSString+Json.m */,
 				91AC0CD51EF393CA004FDD9E /* NSString+Common.m */,
 				91AC0CD61EF393CA004FDD9E /* NSString+Rex.h */,
 				91AC0CD71EF393CA004FDD9E /* NSString+Rex.m */,
@@ -1393,6 +1403,7 @@
 				9187C4FC1F21D86C000DF0D5 /* QRMainViewController.m in Sources */,
 				912950081EF915E7006AB9AA /* CircleProgressView.m in Sources */,
 				916804FE1EE7EBE200902075 /* WriteViewController.m in Sources */,
+				916C1D811F395F2700A08B49 /* UIViewController+KeyboardPop.m in Sources */,
 				9101C8DB1F343ED4004B0376 /* CLView.m in Sources */,
 				917F6B271F306FBF0095979D /* UIViewController+Common.m in Sources */,
 				91AC0CDA1EF393CA004FDD9E /* UIImage+QRBar.m in Sources */,
@@ -1400,6 +1411,7 @@
 				91AC0CDC1EF393CA004FDD9E /* NSString+Common.m in Sources */,
 				916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */,
 				91A619361F271D5100FCA42C /* XLCalendar.m in Sources */,
+				916C1DBF1F39922300A08B49 /* NSString+Json.m in Sources */,
 				916804E61EE7DEF300902075 /* TabBarItem.m in Sources */,
 				91089A9C1F0DD87900A05B0C /* NSObject+ViewController.m in Sources */,
 				916804F41EE7EB1400902075 /* MessageViewController.m in Sources */,

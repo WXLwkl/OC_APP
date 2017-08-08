@@ -48,9 +48,7 @@
 
 #import "AppManager.h"
 
-#import <IQKeyboardManager.h>
-
-#import <TAPKeyboardPop/UIViewController+TAPKeyboardPop.h>
+#import "UIViewController+KeyboardPop.h"
 
 @interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate> {
     
@@ -88,8 +86,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     self.dic = self.navigationController.navigationBar.titleTextAttributes;
     
@@ -107,6 +103,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self xl_setNavBackItem];
     
     
     self.navigationItem.title = @"首页";
@@ -242,6 +239,8 @@
 //    }];
     
     
+//    UIViewController *topmostVC = [UIViewController xl_currentViewController];
+    
     
 }
 
@@ -250,8 +249,13 @@
     [self.navigationController.navigationBar setTitleTextAttributes:self.dic];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    
+    [self.view endEditing:YES];
+}
 
-/** 获取设备信息 */
+#pragma mark - 获取设备信息
 - (void)getDeviceMessage {
     CGFloat all = 0;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -283,7 +287,7 @@
     NSLog(@"其他：%f",[UIDevice getWiredMemory] / (powf(1024, 2)));
 }
 
-/** 多按钮节点 */
+#pragma mark - 多按钮节点
 - (void)slideView {
     SlideView *shapeView = [[SlideView alloc] initWithFrame:CGRectMake(10, 60, self.view.frame.size.width -20, 30) withLayerColor:[UIColor colorWithRed:0/255.0 green:210/255.0 blue:87/255.0 alpha:1]];
     

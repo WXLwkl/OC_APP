@@ -39,7 +39,50 @@
 }
 - (void)xl_closeSelfAction {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    NSArray *viewcontrollers=self.navigationController.viewControllers;
+    
+    if (viewcontrollers.count > 1)
+    {
+        if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
+            //push方式
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        //present方式
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
+
+#pragma mark - -----
+
++ (UIViewController *)getVisibleViewControllerFrom:(UIViewController*)vc {
+    
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self getVisibleViewControllerFrom:[((UINavigationController*) vc) visibleViewController]];
+    } else if ([vc isKindOfClass:[UISplitViewController class]]) {
+        return [self getVisibleViewControllerFrom:[((UISplitViewController*) vc) viewControllers].lastObject];
+    } else if ([vc isKindOfClass:[UITabBarController class]]){
+        return [self getVisibleViewControllerFrom:[((UITabBarController*) vc) selectedViewController]];
+    } else if(vc.presentedViewController) {
+        
+        return [self getVisibleViewControllerFrom:vc.presentedViewController];
+    } else {
+        
+        return vc;
+    }
+}
++ (UIViewController *)xl_currentViewController {
+    UIViewController *viewController = [[UIApplication sharedApplication].delegate window].rootViewController;
+    
+    return [UIViewController getVisibleViewControllerFrom:viewController];
+}
++ (UINavigationController *)xl_currentNavigatonController {
+    
+    UIViewController * currentViewController =  [UIViewController xl_currentViewController];
+    
+    return currentViewController.navigationController;
+}
+
+
 
 @end

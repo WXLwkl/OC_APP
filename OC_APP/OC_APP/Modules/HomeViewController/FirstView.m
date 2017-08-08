@@ -26,7 +26,8 @@
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     NSLog(@"FLFirstView---%@",self.xl_viewController);
-    [self.xl_viewController.navigationController pushViewController:vc animated:YES];
+//    [self.xl_viewController.navigationController pushViewController:vc animated:YES];
+    [self.xl_viewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
