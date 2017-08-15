@@ -45,13 +45,13 @@ static UserInfo *info = nil;
 
 - (NSString *)description {
     
-    return [self debugDescription];
+    return [self descriptionString];
 }
 
 - (NSString *)debugDescription {
     
     
-    return [self debugDescription];
+    return [self descriptionString];
 }
 
 

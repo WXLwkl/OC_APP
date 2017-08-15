@@ -12,11 +12,6 @@
 
 
 
-NSString *XL_FilterString(id obj);
-BOOL XL_IsEmptyString(NSObject *obj);
-
-
-
 /**
  获取汉字的拼音
 
@@ -61,3 +56,13 @@ BOOL XL_IsEmptyString(NSObject *obj);
 //base64转image
 - (UIImage *)xl_base64DecodedImage;
 @end
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+    NSString *XL_FilterString(id obj);
+    BOOL XL_IsEmptyString(NSObject *obj);
+#ifdef __cplusplus
+}
+#endif

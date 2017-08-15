@@ -154,7 +154,7 @@
         
         btn.badgeValue = @"1223";
         return;
-        NSLog(@"xxxx");
+        
         
         WriteViewController *writeVc = [[WriteViewController alloc] init];
         MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];

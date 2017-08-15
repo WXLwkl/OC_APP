@@ -30,6 +30,9 @@
 #import "NSString+Json.h"
 #import "NSString+Common.h"
 #import "NSString+Rex.h"
+#import "NSObject+Common.h"
+#import "NSArray+Common.h"
+#import "NSDictionary+Common.h"
 
 
 #import "MBProgressHUD+Common.h"

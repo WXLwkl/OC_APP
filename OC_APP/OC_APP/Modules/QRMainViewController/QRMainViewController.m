@@ -195,7 +195,7 @@
         
         [_session stopRunning];
         //得到二维码上的所有数据
-        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex :0 ];
+        AVMetadataMachineReadableCodeObject * metadataObject = metadataObjects.firstObject;
         NSString *str = metadataObject.stringValue;
         NSLog(@"------>>>> %@",str);
         

@@ -11,56 +11,6 @@
 @implementation NSString (Common)
 
 
-NSString *XL_FilterString(id obj){
-    
-    if (obj == nil) {
-        
-        return @"";
-    }
-    
-    if ([obj isKindOfClass:[NSString class]]) {
-        
-        return [NSString stringWithFormat:@"%@",obj];
-        
-    }else if([obj isKindOfClass:[NSNumber class]]){
-        
-        return [NSString stringWithFormat:@"%@",obj];
-    }
-    return @"";
-    
-}
-
-BOOL XL_IsEmptyString(NSObject *obj){
-    
-    BOOL isEmpty = YES;
-    
-    if (!obj || ![obj isKindOfClass:[NSString class]]) {
-        
-        isEmpty = YES;
-    }
-    else{
-        
-        isEmpty = NO;
-    }
-    
-    if (!isEmpty) {
-        
-        NSString *string = (NSString *)obj;
-        
-        if ([string length] == 0
-            || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
-            
-            isEmpty = YES;
-        }
-        else{
-            
-            isEmpty = NO;
-        }
-    }
-    
-    return isEmpty;
-}
-
 + (NSString *)xl_transform:(NSString *)chinese {
     
     //将NSString转换成NSMutableString
@@ -206,18 +156,54 @@ BOOL XL_IsEmptyString(NSObject *obj){
     return decodedImage;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end
+
+NSString *XL_FilterString(id obj){
+    
+    if (obj == nil) {
+        
+        return @"";
+    }
+    
+    if ([obj isKindOfClass:[NSString class]]) {
+        
+        return [NSString stringWithFormat:@"%@",obj];
+        
+    }else if([obj isKindOfClass:[NSNumber class]]){
+        
+        return [NSString stringWithFormat:@"%@",obj];
+    }
+    return @"";
+    
+}
+
+BOOL XL_IsEmptyString(NSObject *obj){
+    
+    BOOL isEmpty = YES;
+    
+    if (!obj || ![obj isKindOfClass:[NSString class]]) {
+        
+        isEmpty = YES;
+    }
+    else{
+        
+        isEmpty = NO;
+    }
+    
+    if (!isEmpty) {
+        
+        NSString *string = (NSString *)obj;
+        
+        if ([string length] == 0
+            || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
+            
+            isEmpty = YES;
+        }
+        else{
+            
+            isEmpty = NO;
+        }
+    }
+    
+    return isEmpty;
+}

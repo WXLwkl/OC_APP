@@ -1,5 +1,5 @@
 //
-//  MessageViewController.h
+//  ContactsViewController.h
 //  OC_APP
 //
 //  Created by xingl on 2017/6/7.
@@ -8,6 +8,6 @@
 
 #import "RootViewController.h"
 
-@interface MessageViewController : RootViewController
+@interface ContactsViewController : RootViewController
 
 @end

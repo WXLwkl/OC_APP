@@ -13,7 +13,7 @@
 
 #import "HomeViewController.h"
 #import "MeViewController.h"
-#import "MessageViewController.h"
+#import "ContactsViewController.h"
 #import "SubscriptionViewController.h"
 
 #import "WriteViewController.h"
@@ -75,7 +75,7 @@
  
     SubscriptionViewController * subscriptionVC = [[SubscriptionViewController alloc] init];
 
-    MessageViewController * messageVC = [[MessageViewController alloc] init];
+    ContactsViewController * messageVC = [[ContactsViewController alloc] init];
 
     MeViewController * meVC = [[MeViewController alloc] init];
 
@@ -102,7 +102,6 @@
 - (UIViewController *)childViewControllerForStatusBarHidden {
     return self.selectedViewController;
 }
-
 
 
 #pragma mark - MainTabBarDelegate

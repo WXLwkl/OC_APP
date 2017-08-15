@@ -64,13 +64,12 @@ static NSString* animationKey = @"transform.scale";
     theAnimation.removedOnCompletion = FALSE;
     theAnimation.fillMode = kCAFillModeForwards;
     theAnimation.autoreverses = NO;
-    theAnimation.fromValue = [NSNumber numberWithFloat:1];
-    theAnimation.toValue = [NSNumber numberWithFloat:1.2f];
+    theAnimation.fromValue = @1.0f;
+    theAnimation.toValue = @1.2f;
     [self.imageView.layer addAnimation:theAnimation forKey:theAnimation.keyPath];
 }
 
-- (void)scaleToDefault
-{
+- (void)scaleToDefault {
     CABasicAnimation* theAnimation;
     theAnimation = [CABasicAnimation animationWithKeyPath:animationKey];
     theAnimation.delegate = self;
@@ -79,13 +78,12 @@ static NSString* animationKey = @"transform.scale";
     theAnimation.removedOnCompletion = FALSE;
     theAnimation.fillMode = kCAFillModeForwards;
     theAnimation.autoreverses = NO;
-    theAnimation.fromValue = [NSNumber numberWithFloat:1.2f];
-    theAnimation.toValue = [NSNumber numberWithFloat:1];
+    theAnimation.fromValue = @1.2f;
+    theAnimation.toValue = @1.0f;
     [self.imageView.layer addAnimation:theAnimation forKey:theAnimation.keyPath];
 }
 
-- (void)selectdAnimation
-{
+- (void)selectdAnimation {
     if (_model.transitionType == PopMenuTransitionTypeSystemApi) {
         CABasicAnimation* scaleAnimation = [CABasicAnimation animationWithKeyPath:animationKey];
         scaleAnimation.delegate = self;

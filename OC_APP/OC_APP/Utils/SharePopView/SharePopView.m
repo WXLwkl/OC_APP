@@ -8,7 +8,6 @@
 
 
 #import "SharePopView.h"
-#import "CLView.h"
 #import "ShareItem.h"
 
 @interface SharePopView ()

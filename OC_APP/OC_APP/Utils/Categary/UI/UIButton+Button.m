@@ -57,7 +57,14 @@ static const char *UIControl_acceptEventTime = "UIControl_acceptEventTime";
 }
 
 
-+ (instancetype)xl_buttonWithTitle:(NSString *)title backColor:(UIColor *)backColor backImageName:(NSString *)backImageName titleColor:(UIColor *)color fontSize:(int)fontSize frame:(CGRect)frame cornerRadius:(CGFloat)cornerRadius {
++ (instancetype)xl_buttonWithTitle:(NSString *)title
+                         backColor:(UIColor *)backColor
+                     backImageName:(NSString *)backImageName
+                        titleColor:(UIColor *)color
+                          fontSize:(int)fontSize
+                             frame:(CGRect)frame
+                      cornerRadius:(CGFloat)cornerRadius {
+    
     UIButton *button = [UIButton new];
     [button setTitle:title forState:UIControlStateNormal];
     [button setBackgroundColor:backColor];
@@ -77,8 +84,7 @@ static const char *UIControl_acceptEventTime = "UIControl_acceptEventTime";
     [self addTarget:self action:@selector(blockActionTouched:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)blockActionTouched:(UIButton *)btn
-{
+- (void)blockActionTouched:(UIButton *)btn {
     TouchedButtonBlock block = objc_getAssociatedObject(self, @selector(xl_addActionHandler:));
     if (block) {
         block();

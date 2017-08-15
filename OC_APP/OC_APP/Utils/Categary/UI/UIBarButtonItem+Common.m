@@ -28,8 +28,8 @@
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
     
-    [btn setImage:image
-         forState:UIControlStateNormal];
+    [btn setImage:image forState:UIControlStateNormal];
+    [btn setImage:imageH forState:UIControlStateHighlighted];
     
     [btn addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     [btn sizeToFit];

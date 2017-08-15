@@ -48,10 +48,10 @@
     }
 }
 - (void)SetupWriteButton {
-    UIButton *writeBtn = [UIButton new];
-    writeBtn.adjustsImageWhenHighlighted = NO;
-    [writeBtn setBackgroundImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
-    [writeBtn addTarget:self action:@selector(writeButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [writeBtn setBackgroundImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:UIControlStateNormal];
+    [writeBtn setBackgroundImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:UIControlStateSelected];
+    [writeBtn addTarget:self action:@selector(writeButtonClick) forControlEvents:UIControlEventTouchDown];
     writeBtn.bounds = CGRectMake(0, 0, writeBtn.currentBackgroundImage.size.width, writeBtn.currentBackgroundImage.size.height);
     [self addSubview:writeBtn];
     _writeButton = writeBtn;

@@ -32,7 +32,6 @@
     
     [super setImage:image forState:state];
     [self setTitleColor:[UIColor xl_getMainColorFromImage:self.imageView.image] forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor xl_getMainColorFromImage:self.imageView.highlightedImage] forState:UIControlStateHighlighted];
 }
 
 #pragma mark 调整内部ImageView的frame

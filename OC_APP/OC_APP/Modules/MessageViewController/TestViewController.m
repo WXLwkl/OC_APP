@@ -1,23 +1,25 @@
 //
-//  MessageViewController.m
+//  TestViewController.m
 //  OC_APP
 //
-//  Created by xingl on 2017/6/7.
+//  Created by xingl on 2017/8/15.
 //  Copyright © 2017年 兴林. All rights reserved.
 //
 
-#import "MessageViewController.h"
+#import "TestViewController.h"
 
-@interface MessageViewController ()
+@interface TestViewController ()
 
 @end
 
-@implementation MessageViewController
+@implementation TestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"消息";
     
+    self.navigationItem.title = self.model.text;
+    
+    NSLog(@"%@", self.model);
 }
 
 - (void)didReceiveMemoryWarning {

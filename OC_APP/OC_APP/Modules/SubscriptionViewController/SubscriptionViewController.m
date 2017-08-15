@@ -7,7 +7,7 @@
 //
 
 #import "SubscriptionViewController.h"
-
+#import "QQTableViewController.h"
 
 @interface SubscriptionViewController ()
 
@@ -67,7 +67,7 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *dateComps = [cal components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth|NSCalendarUnitWeekOfYear|NSCalendarUnitTimeZone fromDate:date];
     NSLog(@"时间 = %@", date);
-    NSLog(@"年=%ld,月=%ld,日=%ld,时=%ld,分=%ld,秒=%ld,周=%ld,本月第%ld周,本年第%ld周,时区=%@", dateComps.year, dateComps.month, dateComps.day, dateComps.hour, dateComps.minute, dateComps.second, dateComps.weekday, dateComps.weekOfMonth, dateComps.weekOfYear, dateComps.timeZone.name);
+    NSLog(@"年=%ld,月=%ld,日=%ld,时=%ld,分=%ld,秒=%ld,周=%ld,本月第%ld周,本年第%ld周,时区=%@", (long)dateComps.year, (long)dateComps.month, (long)dateComps.day, (long)dateComps.hour, (long)dateComps.minute, (long)dateComps.second, (long)dateComps.weekday, (long)dateComps.weekOfMonth, (long)dateComps.weekOfYear, dateComps.timeZone.name);
     
     
     
@@ -87,10 +87,20 @@
     [self.view addSubview:btn];
     
     
+    
+    
+    
+    
 }
 
 
 - (void)btnClick {
+    
+    
+    QQTableViewController *vc = [[QQTableViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    return;
     
     
 //    [self xl_alertWithTitle:@"AA" message:@"xxx" andOthers:@[@"取消", @"确定"] animated:YES action:^(NSInteger index) {
