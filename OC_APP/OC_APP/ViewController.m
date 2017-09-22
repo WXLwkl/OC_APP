@@ -213,7 +213,7 @@
     
     
 //    [self.view xl_removeAllSubviews];
-    
+//    [self textViewPlaceholder];
     
     
     //    [self StepProgressView];
@@ -240,6 +240,7 @@
     
     
 //    UIViewController *topmostVC = [UIViewController xl_currentViewController];
+
     
     
 }
@@ -652,7 +653,7 @@
     //    textF.font = [UIFont systemFontOfSize:25];
     textF.borderStyle = UITextBorderStyleRoundedRect;
     textF.placeholder = @"账号";
-    textF.placeholderColor = [UIColor redColor];
+    textF.xl_placeholderColor = [UIColor redColor];
     
     //    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
     //
@@ -665,7 +666,7 @@
     //    textF.font = [UIFont systemFontOfSize:25];
     textF1.borderStyle = UITextBorderStyleRoundedRect;
     textF1.placeholder = @"姓名";
-    textF1.placeholderColor = [UIColor redColor];
+    textF1.xl_placeholderColor = [UIColor redColor];
     [self.view addSubview:textF1];
 }
 
@@ -779,7 +780,7 @@ bool isReverse = NO;//是否反向翻转
     textView.font = [UIFont systemFontOfSize:16];
     textView.layer.borderWidth = 1;
     textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    textView.placeholder = @"向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。";
+    textView.xl_placeholder = @"向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。向厂家反馈同业相关活动、产品信息、用于市场分析。";
     [self.view addSubview:textView];
     
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 230, [UIScreen mainScreen].bounds.size.width, 50)];

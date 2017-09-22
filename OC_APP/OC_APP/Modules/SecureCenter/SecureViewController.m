@@ -35,7 +35,11 @@
     self.listArr = @[@"手势", @"指纹"];
     
     [self.view addSubview:self.tableView];
+    
+    
+    
 }
+
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

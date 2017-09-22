@@ -10,7 +10,19 @@
 
 @interface NSString (Common)
 
+/**
+ 表情字符串
+ 
+ @return 表情字符串
+ */
+- (NSString *)emoji;
 
+
+/** 电话号码中间4位****显示 */
++ (NSString *)xl_getSecrectStringWithPhoneNumber:(NSString *)phoneNum;
+
+/** 银行卡号中间8位 **** **** 显示 */
++ (NSString *)xl_getSecrectStringWithAccountNo:(NSString *)accountNo;
 
 /**
  获取汉字的拼音
@@ -27,9 +39,6 @@
  @return 返回的中文数字
  */
 + (NSString *)xl_translation:(NSString *)arebic;
-
-
-
 
 
 
@@ -55,6 +64,8 @@
 
 //base64转image
 - (UIImage *)xl_base64DecodedImage;
+
+
 @end
 
 

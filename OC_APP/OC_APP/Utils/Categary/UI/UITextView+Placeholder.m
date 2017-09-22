@@ -25,7 +25,6 @@ static const void *placeHolderKey;
     Method layoutSwizzlingM = class_getInstanceMethod(self.class, @selector(placeHolder_swizzling_layoutSubviews));
     method_exchangeImplementations(layoutM, layoutSwizzlingM);
     
-    
     method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"dealloc")), class_getInstanceMethod(self.class, @selector(placeHolder_swizzling_dealloc)));
     
 }
@@ -33,8 +32,7 @@ static const void *placeHolderKey;
 
 - (void)placeHolder_swizzling_layoutSubviews {
     
-    
-    if (self.placeholder) {
+    if (self.xl_placeholder) {
         UIEdgeInsets textContainerInset = self.textContainerInset;
         CGFloat lineFragmentPadding = self.textContainer.lineFragmentPadding;
         CGFloat x = lineFragmentPadding + textContainerInset.left + self.layer.borderWidth;
@@ -52,21 +50,22 @@ static const void *placeHolderKey;
     [self placeHolder_swizzling_dealloc];
 }
 #pragma mark - associated
-- (NSString *)placeholder {
+- (NSString *)xl_placeholder {
     
     return objc_getAssociatedObject(self, &placeHolderKey);
 }
-- (void)setPlaceholder:(NSString *)placeholder {
-    objc_setAssociatedObject(self, &placeHolderKey, placeholder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+- (void)setXl_placeholder:(NSString *)xl_placeholder {
+    objc_setAssociatedObject(self, &placeHolderKey, xl_placeholder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self updatePlaceHolder];
 }
 
-- (UIColor *)placeholderColor {
+- (UIColor *)xl_placeholderColor {
     return self.placeholderLabel.textColor;
 }
 
-- (void)setPlaceholderColor:(UIColor *)placeholderColor {
-    self.placeholderLabel.textColor = placeholderColor;
+- (void)setXl_placeholderColor:(UIColor *)xl_placeholderColor {
+    self.placeholderLabel.textColor = xl_placeholderColor;
 }
 #pragma mark - update
 - (void)updatePlaceHolder {
@@ -76,7 +75,7 @@ static const void *placeHolderKey;
     }
     self.placeholderLabel.font = self.font ? self.font : self.cacutDefaultFont;
     self.placeholderLabel.textAlignment = self.textAlignment;
-    self.placeholderLabel.text = self.placeholder;
+    self.placeholderLabel.text = self.xl_placeholder;
     [self insertSubview:self.placeholderLabel atIndex:0];
 }
 

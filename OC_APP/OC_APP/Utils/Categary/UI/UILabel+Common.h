@@ -10,13 +10,13 @@
 
 @interface UILabel (Common)
 
-@property (nonatomic, readonly) CGFloat lineHeight;
-@property (nonatomic, readonly) NSInteger textNumberOfLines;
-@property (nonatomic, readonly) CGFloat textHeight;
-@property (nonatomic, readonly) CGFloat textWidth;
+@property (nonatomic, readonly) CGFloat   xl_lineHeight;
+@property (nonatomic, readonly) NSInteger xl_textNumberOfLines;
+@property (nonatomic, readonly) CGFloat   xl_textHeight;
+@property (nonatomic, readonly) CGFloat   xl_textWidth;
 
-- (CGSize)textSizeForLimitedSize:(CGSize)size;
+- (CGSize)xl_textSizeForLimitedSize:(CGSize)size;
 
-- (NSMutableAttributedString *)attributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace limitWidth:(CGFloat)limitWidth;
+- (NSMutableAttributedString *)xl_attributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace limitWidth:(CGFloat)limitWidth;
 
 @end

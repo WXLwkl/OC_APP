@@ -11,41 +11,41 @@
 @implementation UILabel (Common)
 
 
-- (CGFloat)lineHeight {
+- (CGFloat)xl_lineHeight {
     CGSize rowSize = [@"" sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.font, NSFontAttributeName, nil]];
     return rowSize.height;
 }
 
-- (NSInteger)textNumberOfLines {
+- (NSInteger)xl_textNumberOfLines {
     CGSize contentSize = [self.text boundingRectWithSize:CGSizeMake(self.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.font} context:nil].size;
-    return contentSize.height / self.lineHeight;
+    return contentSize.height / self.xl_lineHeight;
 }
 
-- (CGFloat)textHeight {
+- (CGFloat)xl_textHeight {
     CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
     return size.height;
 }
 
-- (CGFloat)textWidth {
+- (CGFloat)xl_textWidth {
     CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
     return size.width;
 }
 
 
-- (CGSize)textSizeForLimitedSize:(CGSize)size {
+- (CGSize)xl_textSizeForLimitedSize:(CGSize)size {
     CGRect rect = CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height);
     self.frame = rect;
-    CGFloat height = self.textHeight > size.height ? size.height : self.textHeight;
-    return CGSizeMake(self.textWidth, height);
+    CGFloat height = self.xl_textHeight > size.height ? size.height : self.xl_textHeight;
+    return CGSizeMake(self.xl_textWidth, height);
 }
 
-- (NSMutableAttributedString *)attributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace limitWidth:(CGFloat)limitWidth {
+- (NSMutableAttributedString *)xl_attributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace limitWidth:(CGFloat)limitWidth {
     if (string == nil) {
         string = @"";
     }
     self.width = limitWidth;
     self.text = string;
-    lineSpace = self.textNumberOfLines > 1 ? lineSpace : 0;
+    lineSpace = self.xl_textNumberOfLines > 1 ? lineSpace : 0;
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

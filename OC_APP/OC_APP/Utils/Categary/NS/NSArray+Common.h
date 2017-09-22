@@ -10,7 +10,8 @@
 
 @interface NSArray (Common)
 
-
+//array转json字符串
+- (NSString *)xl_getJSONStringForArray;
 @end
 
 #ifdef __cplusplus

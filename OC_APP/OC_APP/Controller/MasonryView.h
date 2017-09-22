@@ -1,0 +1,18 @@
+//
+//  MasonryView.h
+//  OC_APP
+//
+//  Created by xingl on 2017/8/18.
+//  Copyright © 2017年 兴林. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MasonryView : UIView
+
+
+@property(nonatomic)CGFloat leftWidth;
+
+@property(nonatomic)CGFloat rightWidth;
+
+@end

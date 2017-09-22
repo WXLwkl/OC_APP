@@ -6,11 +6,46 @@
 //  Copyright © 2017年 兴林. All rights reserved.
 //
 
+#define EmojiCodeToSymbol(c) ((((0x808080F0 | (c & 0x3F000) >> 4) | (c & 0xFC0) << 10) | (c & 0x1C0000) << 18) | (c & 0x3F) << 24)
+
 #import "NSString+Common.h"
 #import <CommonCrypto/CommonDigest.h>
 @implementation NSString (Common)
 
+- (NSString *)emoji {
+    return [NSString emojiWithStringCode:self];
+}
 
++ (NSString *)emojiWithStringCode:(NSString *)stringCode {
+    char *charCode = (char *)stringCode.UTF8String;
+    long intCode = strtol(charCode, NULL, 16);
+    return [self emojiWithIntCode:intCode];
+}
++ (NSString *)emojiWithIntCode:(int)intCode {
+    int symbol = EmojiCodeToSymbol(intCode);
+    NSString *string = [[NSString alloc] initWithBytes:&symbol length:sizeof(symbol) encoding:NSUTF8StringEncoding];
+    if (string == nil) {
+        string = [NSString stringWithFormat:@"%C", (unichar)intCode];
+    }
+    return string;
+}
+
+
++ (NSString *)xl_getSecrectStringWithPhoneNumber:(NSString *)phoneNum {
+    NSMutableString *newStr = [NSMutableString stringWithString:phoneNum];
+    NSRange range = NSMakeRange(3, 4);
+    [newStr replaceCharactersInRange:range withString:@"****"];
+    return newStr;
+}
++ (NSString *)xl_getSecrectStringWithAccountNo:(NSString *)accountNo {
+    NSMutableString *newStr = [NSMutableString stringWithString:accountNo];
+    NSRange range = NSMakeRange(4, 8);
+    if (newStr.length>12) {
+        [newStr replaceCharactersInRange:range withString:@" **** **** "];
+    }
+    return newStr;
+    
+}
 + (NSString *)xl_transform:(NSString *)chinese {
     
     //将NSString转换成NSMutableString

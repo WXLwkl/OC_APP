@@ -22,6 +22,16 @@
 
 #import "ALinRefreshGifHeader.h"
 
+
+
+#import "AddressPickViewController.h"
+#import "MasonryViewController.h"
+#import "ReduceTimeViewController.h"
+#import "FormViewController.h"
+#import "SDWebImageTableViewController.h"
+#import "ChatViewController.h"
+
+
 #define NAVBAR_COLORCHANGE_POINT (IMAGE_HEIGHT - NAV_HEIGHT*2)
 #define NAV_HEIGHT 64
 #define IMAGE_HEIGHT 260
@@ -35,6 +45,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIButton *button;
+
+@property (nonatomic,strong) NSArray *dataArray;
 
 @end
 
@@ -64,9 +76,7 @@
 - (void)resignButton{
     NSLog(@"我是悬浮按钮");
 }
-
 //手势事件 －－ 改变位置
-
 -(void)changePostion:(UIPanGestureRecognizer *)pan {
     
     CGPoint point = [pan translationInView:_button];
@@ -157,6 +167,8 @@
     
     self.edgesForExtendedLayout = UIRectEdgeLeft|UIRectEdgeRight|UIRectEdgeTop;
     
+    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     [self.view addSubview:self.tableView];
@@ -172,6 +184,28 @@
     LogBool(isOK);
     
 //    [self createButton];
+
+    
+    if (!self.dataArray) {
+        self.dataArray=@[@"省市区三级联动(OK)",
+                         @"Masonry布局实例(OK)",
+                         @"照片上传",
+                         @"照片上传附带进度",
+                         @"列表倒计时(OK)",
+                         @"H5交互WebViewJavascriptBridge",
+                         @"列表空白页展现",
+                         @"自定义弹出窗",
+                         @"常见表单行类型(OK)",
+                         @"JavaScriptCore运用",
+                         @"聊天(待完善)",
+                         @"只加载显示Cell的Image图(OK)",
+                         @"列表滑动不加载图片",
+                         @"长按列表行拖动效果",
+                         @"音视频功能集合"];
+    }
+    
+    
+    
 }
 - (void)requestCommentsData {
     [self performSelector:@selector(aa) withObject:self afterDelay:3];
@@ -181,12 +215,20 @@
     [self.tableView.mj_header endRefreshing];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:YES];
+//    
+//    [self scrollViewDidScroll:self.tableView];
+//    [self.tableView reloadData];
+//}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     [self scrollViewDidScroll:self.tableView];
     [self.tableView reloadData];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
@@ -207,7 +249,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -217,14 +260,103 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     // cell ...
-    cell.textLabel.text = [@(indexPath.row) stringValue];
+//    cell.textLabel.text = [@(indexPath.row) stringValue];
+    cell.textLabel.text = self.dataArray[indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ViewController *vc = [ViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            AddressPickViewController *vc = [AddressPickViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            MasonryViewController *vc = [[MasonryViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            //上传照片
+        }
+            break;
+        case 3:
+        {
+            //上传照片带进度
+        }
+            break;
+        case 4:
+        {
+            //列表倒计时
+            ReduceTimeViewController *vc = [[ReduceTimeViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 5:
+        {
+            //H5交互WebViewJavascriptBridge
+        }
+            break;
+        case 6:
+        {
+            //列表空白页展现
+        }
+            break;
+        case 7:
+        {
+            //自定义弹出窗
+        }
+            break;
+        case 8:
+        {
+            //常见表单行类型
+            FormViewController *vc = [FormViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 9:
+        {
+            //JavaScriptCore运用
+        }
+            break;
+        case 10:
+        {
+            // QQ/微信 聊天
+            ChatViewController *vc = [ChatViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 11:
+        {
+            //只加载显示Cell的Image图(OK)
+            SDWebImageTableViewController *vc = [SDWebImageTableViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 12:
+        {
+            //长按列表行拖动效果
+        }
+            break;
+        case 13:
+        {
+            //音视频功能集合
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -257,8 +389,8 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor orangeColor];
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _tableView;
 }

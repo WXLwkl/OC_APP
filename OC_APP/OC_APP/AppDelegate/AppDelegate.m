@@ -53,7 +53,7 @@
     
     if (!_mTimer) {
         _mTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countAction) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_mTimer forMode:NSRunLoopCommonModes];
+        [[NSRunLoop currentRunLoop] addTimer:_mTimer forMode:NSDefaultRunLoopMode];
     }
     [self beginTask];
 }

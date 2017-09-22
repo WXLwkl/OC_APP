@@ -3,6 +3,12 @@
 //  OC_APP
 //
 
+/** 过期属性或方法名提醒 */
+#define XLDeprecated(instead) __deprecated_msg(instead)
+
+
+
+
 #pragma mark - 当前设备屏幕 宽/高/size
 
 #define kScreenWidth \

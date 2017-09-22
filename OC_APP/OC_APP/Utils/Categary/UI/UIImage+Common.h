@@ -21,6 +21,30 @@
 + (UIImage *)xl_imageWithClipImage:(UIImage *)image borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)color;
 
 
+
+/**
+ 图片增加圆角
+
+ @param radius 圆角半径
+ @return 带圆角的图片
+ */
+- (UIImage *)xl_imageByRoundCornerRadius:(CGFloat)radius;
+
+
+/**
+ 图片增加圆角及边框
+
+ @param radius 圆角半径
+ @param borderWidth 边框宽度
+ @param borderColor 边框颜色
+ @return image
+ */
+- (UIImage *)xl_imageByRoundCornerRadius:(CGFloat)radius
+                           borderWidth:(CGFloat)borderWidth
+                           borderColor:(UIColor *)borderColor;
+
+
+
 /**
  截屏或者截取某个view视图
 
@@ -75,8 +99,24 @@
                                    font:(UIFont *)font;
 
 
+/** 添加文字水印 */
+- (UIImage *)xl_imageWithTitle:(NSString *)title
+                      fontSize:(CGFloat)fontSize
+                         color:(UIColor *)color;
 
-- (UIImage *)xl_imageWithTitle:(NSString *)title fontSize:(CGFloat)fontSize color:(UIColor *)color;
+/** 将图片旋转角度degrees */
+- (UIImage *)xl_imageRotatedByDegrees:(CGFloat)degrees;
+
+/** 将图片旋转弧度radians */
+- (UIImage *)xl_imageRotatedByRadians:(CGFloat)radians;
+
+/**
+ 图片压缩
+
+ @param maxLength 最大字节
+ @return 压缩后的图片
+ */
+- (NSData *)xl_compressWithMaxLength:(NSInteger)maxLength;
 
 
 
@@ -88,4 +128,41 @@
 @end
 
 
+@interface UIImage (Blur)
+
+//玻璃化效果，这里与系统的玻璃化枚举效果一样，但只是一张图
+- (UIImage *)xl_imageByBlurSoft;
+
+- (UIImage *)xl_imageByBlurLight;
+
+- (UIImage *)xl_imageByBlurExtraLight;
+
+- (UIImage *)xl_imageByBlurDark;
+
+- (UIImage *)xl_imageByBlurWithTint:(UIColor *)tintColor;
+
+- (UIImage *)xl_imageByBlurRadius:(CGFloat)blurRadius
+                     tintColor:(UIColor *)tintColor
+                      tintMode:(CGBlendMode)tintBlendMode
+                    saturation:(CGFloat)saturation
+                     maskImage:(UIImage *)maskImage;
+
+@end
+
+
+
+@interface UIImage (ImageEffects)
+
+//图片效果
+
+- (UIImage *)xl_applyLightEffect;
+- (UIImage *)xl_applyExtraLightEffect;
+- (UIImage *)xl_applyDarkEffect;
+- (UIImage *)xl_applyBlurEffect;
+- (UIImage *)xl_applyTintEffectWithColor:(UIColor *)tintColor;
+- (UIImage *)xl_applyBlurWithRadius:(CGFloat)blurRadius
+                       tintColor:(UIColor *)tintColor
+           saturationDeltaFactor:(CGFloat)saturationDeltaFactor
+                       maskImage:(UIImage *)maskImage;
+@end
 

@@ -10,6 +10,9 @@
 
 @interface NSDictionary (Common)
 
+//dictionary转json字符串
+- (NSString *)xl_getJSONStringForDictionary;
+
 @end
 
 #ifdef __cplusplus

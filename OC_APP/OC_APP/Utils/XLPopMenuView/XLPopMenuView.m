@@ -719,9 +719,7 @@ NSString* const XLPopMenuViewDidHideNotification = @"XLPopMenuViewDidHideNotific
     _topView = topView;
 }
 
-- (void)dealloc
-{
-    
+- (void)dealloc {
 }
 
 - (void)_obj {}

@@ -10,8 +10,8 @@
 
 @interface UITextView (Placeholder)
 
-@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, copy) NSString *xl_placeholder;
 
-@property (nonatomic, strong) UIColor *placeholderColor;
+@property (nonatomic, strong) UIColor *xl_placeholderColor;
 
 @end

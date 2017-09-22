@@ -9,13 +9,15 @@ target 'OC_APP' do
 
 pod 'MBProgressHUD'
 pod 'SDWebImage'
+
 pod 'AFNetworking'
+pod 'YYCache' #缓存
 
 pod 'MJRefresh'
 pod 'MJExtension'
 
 pod 'pop' #做动画效果
 
-
+pod 'Masonry' #布局
 
 end
