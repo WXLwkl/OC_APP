@@ -22,10 +22,11 @@
     // 设置导航条的按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBatButton)];
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    self.statusBarStyle = UIStatusBarStyleDefault;
+    
 }
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
-}
+
 - (void)clickLeftBatButton{
     [self dismissViewControllerAnimated:YES completion:nil];
 }

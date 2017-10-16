@@ -194,6 +194,13 @@ char *printEnv(void){
     if ([deviceString isEqualToString:@"iPhone8,2"])    return @"iPhone 6s Plus";
     if ([deviceString isEqualToString:@"iPhone8,4"])    return @"iPhone SE";
     
+    if ([deviceString isEqualToString:@"iPhone10,1"])   return @"iPhone 8";
+    if ([deviceString isEqualToString:@"iPhone10,4"])   return @"iPhone 8";
+    if ([deviceString isEqualToString:@"iPhone10,2"])   return @"iPhone 8 Plus";
+    if ([deviceString isEqualToString:@"iPhone10,5"])   return @"iPhone 8 Plus";
+    if ([deviceString isEqualToString:@"iPhone10,3"])   return @"iPhone X";
+    if ([deviceString isEqualToString:@"iPhone10,6"])   return @"iPhone X";
+    
     // 日行两款手机型号均为日本独占，可能使用索尼FeliCa支付方案而不是苹果支付
     if ([deviceString isEqualToString:@"iPhone9,1"])    return @"国行、日版、港行iPhone 7";
     if ([deviceString isEqualToString:@"iPhone9,2"])    return @"港行、国行iPhone 7 Plus";

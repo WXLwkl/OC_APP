@@ -86,8 +86,13 @@
 - (void)refreshLessTime {
     NSInteger time;
     for (int i = 0; i < self.totalLastTime.count; i++) {
-        time = [[[self.totalLastTime objectAtIndex:i] objectForKey:@"lastTime"]integerValue];
+        
+        
+        
+        time = [[[self.totalLastTime objectAtIndex:i] objectForKey:@"lastTime"] integerValue];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[[[self.totalLastTime objectAtIndex:i] objectForKey:@"indexPath"] integerValue] inSection:0];
+        
+        
         ReduceTimeCell *cell = (ReduceTimeCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         if (time == 0) {
             --time;

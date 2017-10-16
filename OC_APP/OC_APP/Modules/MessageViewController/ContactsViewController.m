@@ -12,13 +12,43 @@
 
 #import "TreeViewController.h"
 
-@interface ContactsViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+#import "SearchResultsTableViewController.h"
+
+@interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *sectionData;
+@property (nonatomic, strong) UISearchController *searchController;
+
+@property (nonatomic, strong) SearchResultsTableViewController *searchVC;
+
 @end
 
 @implementation ContactsViewController
+
+
+
+- (SearchResultsTableViewController *)searchVC {
+    if (_searchVC == nil) {
+        _searchVC = [[SearchResultsTableViewController alloc] init];
+    }
+    return _searchVC;
+}
+- (UISearchController *) searchController {
+    if (_searchController == nil) {
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchVC];
+        [_searchController setSearchResultsUpdater:self.searchVC];
+        [_searchController.searchBar setPlaceholder:@"请输入关键字"];
+//        (239.0, 239.0, 244.0, 1.0)
+        [_searchController.searchBar setBarTintColor:RGBColor(239, 239, 244)];
+        [_searchController.searchBar sizeToFit];
+        [_searchController.searchBar setDelegate:self];
+        [_searchController.searchBar.layer setBorderWidth:0.5f];
+        [_searchController.searchBar.layer setBorderColor:RGBColor(220, 220, 220).CGColor];
+    }
+    return _searchController;
+}
 
 #pragma mark - get
 - (UITableView *)tableView {
@@ -42,11 +72,23 @@
     
 }
 - (void)initSubViews {
-    
+    self.navigationController.navigationBar.translucent = YES;
+
     self.navigationItem.title = @"仿QQ联系人";
     [self.view addSubview:self.tableView];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"多级cell" style:(UIBarButtonItemStylePlain) target:self action:@selector(treeAction)];
+    
+    [self.tableView setTableHeaderView:self.searchController.searchBar];
+    
+}
+
+- (void)viewDidLayoutSubviews{
+    if (self.searchController.active) {
+        [self.tableView setFrame:CGRectMake(0, 20, self.view.width, self.view.height - 20)];
+    }else{
+        self.tableView.frame = self.view.bounds;
+    }
 }
 - (void)treeAction {
     
@@ -352,6 +394,18 @@
 //    CGFLOAT_MIN
     return section == 1 ? 20 : 0;
 }
+
+#pragma mark - UISearchBarDelegate
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    _searchVC.dataArray = self.sectionData;
+    [self.tabBarController.tabBar setHidden:YES];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
 
 
 #pragma mark Action

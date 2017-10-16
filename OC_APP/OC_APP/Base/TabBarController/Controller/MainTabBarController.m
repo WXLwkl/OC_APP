@@ -66,7 +66,7 @@
 }
 
 - (void)SetupAllControllers {
-    NSArray *title = @[@"发现", @"关注", @"消息", @"我的"];
+    NSArray *title = @[@"发现", @"关注", @"联系人", @"我的"];
     NSArray *images = @[@"icon_tabbar_home~iphone", @"icon_tabbar_subscription~iphone", @"icon_tabbar_notification~iphone", @"icon_tabbar_me~iphone"];
     NSArray *selectedImages = @[@"icon_tabbar_home_active~iphone", @"icon_tabbar_subscription_active~iphone", @"icon_tabbar_notification_active~iphone", @"icon_tabbar_me_active~iphone"];
     

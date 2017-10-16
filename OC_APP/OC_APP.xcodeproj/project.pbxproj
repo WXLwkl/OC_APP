@@ -90,6 +90,7 @@
 		9187C5071F21DF10000DF0D5 /* scan_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5031F21DF10000DF0D5 /* scan_frame@2x.png */; };
 		9187C5081F21DF10000DF0D5 /* scan_net@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5041F21DF10000DF0D5 /* scan_net@2x.png */; };
 		9187C5091F21DF10000DF0D5 /* scan_net@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5051F21DF10000DF0D5 /* scan_net@3x.png */; };
+		918C39431F907F51006C774C /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 918C39421F907F51006C774C /* SearchResultsTableViewController.m */; };
 		9191F79D1EEE600100F9A691 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9191F79C1EEE600100F9A691 /* UserManager.m */; };
 		9196CCE91F5E6E1F003D18E4 /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9196CCC61F5E6E1F003D18E4 /* ChatKeyBoard.m */; };
 		9196CCEA1F5E6E1F003D18E4 /* emotion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9196CCC91F5E6E1F003D18E4 /* emotion.plist */; };
@@ -356,6 +357,8 @@
 		9187C5031F21DF10000DF0D5 /* scan_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_frame@2x.png"; sourceTree = "<group>"; };
 		9187C5041F21DF10000DF0D5 /* scan_net@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_net@2x.png"; sourceTree = "<group>"; };
 		9187C5051F21DF10000DF0D5 /* scan_net@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_net@3x.png"; sourceTree = "<group>"; };
+		918C39411F907F51006C774C /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
+		918C39421F907F51006C774C /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		9191F79B1EEE600100F9A691 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		9191F79C1EEE600100F9A691 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		9196CCC51F5E6E1F003D18E4 /* ChatKeyBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatKeyBoard.h; sourceTree = "<group>"; };
@@ -804,6 +807,8 @@
 			children = (
 				916804F21EE7EB1400902075 /* ContactsViewController.h */,
 				916804F31EE7EB1400902075 /* ContactsViewController.m */,
+				918C39411F907F51006C774C /* SearchResultsTableViewController.h */,
+				918C39421F907F51006C774C /* SearchResultsTableViewController.m */,
 				91B5F5E21F3DA91000A7AE05 /* GroupModel.h */,
 				91B5F5E31F3DA91000A7AE05 /* GroupModel.m */,
 				91B3C6281F42972200E4062B /* TreeViewController.h */,
@@ -1784,6 +1789,7 @@
 				91AC0CDD1EF393CA004FDD9E /* NSString+Rex.m in Sources */,
 				9150CDB41EEA9079002B42E2 /* PopoverMenu.m in Sources */,
 				912A199B1F4AC0BB0014FB05 /* UUInputAccessoryView.m in Sources */,
+				918C39431F907F51006C774C /* SearchResultsTableViewController.m in Sources */,
 				9196CCF31F5E6E1F003D18E4 /* FaceButton.m in Sources */,
 				9196CCF71F5E6E1F003D18E4 /* SmallSizePageFaceViewCell.m in Sources */,
 				9122DBEE1EFD058F002A0D7A /* TextFlowView.m in Sources */,

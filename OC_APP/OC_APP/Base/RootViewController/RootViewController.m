@@ -14,12 +14,26 @@
 
 @implementation RootViewController
 
+#pragma mark - UIStatusBarStyle
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return _statusBarStyle;
+}
+//动态更新状态栏颜色
+-(void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
+    _statusBarStyle = statusBarStyle;
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+
+
+
+
+#pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
-    
-    
+    self.statusBarStyle = UIStatusBarStyleLightContent;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
@@ -27,9 +41,6 @@
     return NO;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 - (void) dealloc {
     
     XLLog(@"[🔥%@🔥 will dealloc 💥💥💥]",NSStringFromClass([self class]));
