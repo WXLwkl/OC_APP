@@ -74,7 +74,7 @@
     NSString *retrieveUUID = [SAMKeychain passwordForService:@"com.yourapp.yourcompany"account:@"user"];
     NSLog(@"----->%@", retrieveUUID);
     if (XL_IsEmptyString(retrieveUUID)) {
-        //在钥匙串中写入UUID
+        
         CFUUIDRef uuid = CFUUIDCreate(NULL);
         assert(uuid != NULL);
         CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
@@ -82,6 +82,7 @@
         retrieveUUID = [NSString stringWithFormat:@"%@", uuidStr];
         
         NSLog(@"%@",retrieveUUID);
+        //在钥匙串中写入UUID
         [SAMKeychain setPassword:retrieveUUID
                       forService:@"com.yourapp.yourcompany"account:@"user"];
     }

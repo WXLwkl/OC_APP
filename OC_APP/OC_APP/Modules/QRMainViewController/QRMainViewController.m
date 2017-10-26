@@ -16,66 +16,219 @@
 #import <AVFoundation/AVFoundation.h>//原生二维码扫描必须导入这个框架
 #import "UIView+Common.h"
 
-@interface QRMainViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 
-@property (nonatomic,strong)AVCaptureSession *session;
-
-@property (nonatomic, strong) UIImageView *scanNetImageView;
+#define kScanningButtonPadding 36
 
 
+#import "ScanningView.h"
+#import "CaptureHelper.h"
+
+@interface QRMainViewController ()
+///<AVCaptureMetadataOutputObjectsDelegate>
+//@property (nonatomic,strong)AVCaptureSession *session;
+//@property (nonatomic, strong) UIImageView *scanNetImageView;
+
+@property (nonatomic, strong) ScanningView *scanningView;
+@property (nonatomic, strong) CaptureHelper *captureHelper;
+
+@property (nonatomic, strong) UIView *preview;
+@property (nonatomic, strong) UIView *buttonContainerView;
+@property (nonatomic, strong) UIButton *scanQRCodeButton;
+@property (nonatomic, strong) UIButton *scanBookButton;
+@property (nonatomic, strong) UIButton *scanStreetButton;
+@property (nonatomic, strong) UIButton *scanWordButton;
 
 @end
 
 @implementation QRMainViewController
 
+
+- (UIButton *)createButton {
+    UIButton *button = [[UIButton alloc] init];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setBackgroundColor:[UIColor redColor]];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
+    [button addTarget:self action:@selector(scanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+#pragma mark - Action
+- (void)scanButtonClicked:(UIButton *)sender {
+    self.scanQRCodeButton.selected = (sender == self.scanQRCodeButton);
+    self.scanBookButton.selected = (sender == self.scanBookButton);
+    self.scanStreetButton.selected = (sender == self.scanStreetButton);
+    self.scanWordButton.selected = (sender == self.scanWordButton);
+    
+    [self.scanningView transformScanningTypeWithStyle:sender.tag];
+}
+
+#pragma mark - Propertys
+- (UIView *)preview {
+    if (!_preview) {
+        _preview = [[UIView alloc] initWithFrame:self.view.bounds];
+    }
+    return _preview;
+}
+- (UIView *)buttonContainerView {
+    if (!_buttonContainerView) {
+        _buttonContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 64 - 62, CGRectGetWidth(self.view.bounds), 62)];
+        _buttonContainerView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];
+        
+        [_buttonContainerView addSubview:self.scanQRCodeButton];
+        [_buttonContainerView addSubview:self.scanBookButton];
+        [_buttonContainerView addSubview:self.scanStreetButton];
+        [_buttonContainerView addSubview:self.scanWordButton];
+    }
+    return _buttonContainerView;
+}
+- (UIButton *)scanQRCodeButton {
+    
+    if (!_scanQRCodeButton) {
+        _scanQRCodeButton = [self createButton];
+        _scanQRCodeButton.frame = CGRectMake(CGRectGetMidX(self.view.bounds) - kScanningButtonPadding * 1.5 - 35 * 2, 8, 35, CGRectGetHeight(self.buttonContainerView.bounds) - 16);
+        _scanQRCodeButton.tag = 0;
+        [_scanQRCodeButton setImage:[UIImage imageNamed:@"ScanQRCode"] forState:UIControlStateNormal];
+        [_scanQRCodeButton setImage:[UIImage imageNamed:@"ScanQRCode_HL"] forState:UIControlStateSelected];
+        _scanQRCodeButton.selected = YES;
+        [_scanQRCodeButton setTitle:@"扫码" forState:UIControlStateNormal];
+//        [_scanQRCodeButton setTitlePositionWithType:XHButtonTitlePostionTypeBottom];
+    }
+    return _scanQRCodeButton;
+}
+- (UIButton *)scanBookButton {
+    if (!_scanBookButton) {
+        _scanBookButton = [self createButton];
+        CGRect scanBookButtonFrame = self.scanQRCodeButton.frame;
+        scanBookButtonFrame.origin.x += kScanningButtonPadding + CGRectGetWidth(self.scanQRCodeButton.bounds);
+        _scanBookButton.frame = scanBookButtonFrame;
+        _scanBookButton.tag = 1;
+        [_scanBookButton setImage:[UIImage imageNamed:@"ScanBook"] forState:UIControlStateNormal];
+        [_scanBookButton setImage:[UIImage imageNamed:@"ScanBook_HL"] forState:UIControlStateSelected];
+        [_scanBookButton setTitle:@"封面" forState:UIControlStateNormal];
+//        [_scanBookButton setTitlePositionWithType:XHButtonTitlePostionTypeBottom];
+    }
+    return _scanBookButton;
+}
+- (UIButton *)scanStreetButton {
+    if (!_scanStreetButton) {
+        _scanStreetButton = [self createButton];
+        CGRect scanBookButtonFrame = self.scanBookButton.frame;
+        scanBookButtonFrame.origin.x += kScanningButtonPadding + CGRectGetWidth(self.scanQRCodeButton.bounds);
+        _scanStreetButton.frame = scanBookButtonFrame;
+        _scanStreetButton.tag = 2;
+        [_scanStreetButton setImage:[UIImage imageNamed:@"ScanStreet"] forState:UIControlStateNormal];
+        [_scanStreetButton setImage:[UIImage imageNamed:@"ScanStreet_HL"] forState:UIControlStateSelected];
+        [_scanStreetButton setTitle:@"街景" forState:UIControlStateNormal];
+//        [_scanStreetButton setTitlePositionWithType:XHButtonTitlePostionTypeBottom];
+    }
+    return _scanStreetButton;
+}
+- (UIButton *)scanWordButton {
+    if (!_scanWordButton) {
+        _scanWordButton = [self createButton];
+        CGRect scanBookButtonFrame = self.scanStreetButton.frame;
+        scanBookButtonFrame.origin.x += kScanningButtonPadding + CGRectGetWidth(self.scanQRCodeButton.bounds);
+        _scanWordButton.frame = scanBookButtonFrame;
+        _scanWordButton.tag = 3;
+        [_scanWordButton setImage:[UIImage imageNamed:@"ScanWord"] forState:UIControlStateNormal];
+        [_scanWordButton setImage:[UIImage imageNamed:@"ScanWord_HL"] forState:UIControlStateSelected];
+        [_scanWordButton setTitle:@"翻译" forState:UIControlStateNormal];
+//        [_scanWordButton setTitlePositionWithType:XHButtonTitlePostionTypeBottom];
+    }
+    return _scanWordButton;
+}
+
+- (ScanningView *)scanningView {
+    if (!_scanningView) {
+        _scanningView = [[ScanningView alloc] initWithFrame:self.view.bounds];
+    }
+    return _scanningView;
+}
+- (CaptureHelper *)captureHelper {
+    if (!_captureHelper) {
+        _captureHelper = [[CaptureHelper alloc] init];
+        [_captureHelper setDidOutputSampleBufferHandle:^(CMSampleBufferRef sampleBuffer) {
+            // 这里可以做子线程的QRCode识别
+//            NSLog(@"image : %@", [VideoOutputSampleBufferFactory imageFromSampleBuffer:sampleBuffer]);
+        }];
+    }
+    return _captureHelper;
+}
+
+
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
     self.navigationItem.title = @"扫描二维码";
     
-    [self beginScanning];//开始扫二维码
-    
+//    [self beginScanning];//开始扫二维码
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"qrItem"] style:UIBarButtonItemStylePlain target:self action:@selector(qrScanAction:)];
     
+    [self.view addSubview:self.preview];
+    
+    [self.view addSubview:self.scanningView];
+    [self.view addSubview:self.buttonContainerView];
     
     
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.captureHelper showCaptureOnView:self.preview];
+}
+
+
+- (void)qrScanAction:(UIBarButtonItem *)sender {
+    MyQRViewController *vc = [[MyQRViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
+
+
+
+
+
+
+
+/*
 - (void)setupMaskView {
     //设置统一的视图颜色和视图的透明度
-    //    UIColor *color = [UIColor blackColor];
-    //    float alpha = 0.7;
-    //
-    //    //设置扫描区域外部上部的视图
-    //    UIView *topView = [[UIView alloc]init];
-    //    topView.frame = CGRectMake(0, 0, SCREENWidth, (SCREENHeight-64-QRCodeWidth)/2.0);
-    //    topView.backgroundColor = color;
-    //    topView.alpha = alpha;
-    //
-    //    //设置扫描区域外部左边的视图
-    //    UIView *leftView = [[UIView alloc]init];
-    //    leftView.frame = CGRectMake(0, 0+topView.frame.size.height, (SCREENWidth-QRCodeWidth)/2.0,QRCodeWidth);
-    //    leftView.backgroundColor = color;
-    //    leftView.alpha = alpha;
-    //
-    //    //设置扫描区域外部右边的视图
-    //    UIView *rightView = [[UIView alloc]init];
-    //    rightView.frame = CGRectMake((SCREENWidth-QRCodeWidth)/2.0+QRCodeWidth,64+topView.frame.size.height, (SCREENWidth-QRCodeWidth)/2.0,QRCodeWidth);
-    //    rightView.backgroundColor = color;
-    //    rightView.alpha = alpha;
-    //
-    //    //设置扫描区域外部底部的视图
-    //    UIView *botView = [[UIView alloc]init];
-    //    botView.frame = CGRectMake(0, 64+QRCodeWidth+topView.frame.size.height,SCREENWidth,SCREENHeight-64-QRCodeWidth-topView.frame.size.height);
-    //    botView.backgroundColor = color;
-    //    botView.alpha = alpha;
-    //
-    //    //将设置好的扫描二维码区域之外的视图添加到视图图层上
-    //    [self.view addSubview:topView];
-    //    [self.view addSubview:leftView];
-    //    [self.view addSubview:rightView];
-    //    [self.view addSubview:botView];
+        UIColor *color = [UIColor blackColor];
+        float alpha = 0.7;
+    
+        //设置扫描区域外部上部的视图
+        UIView *topView = [[UIView alloc]init];
+        topView.frame = CGRectMake(0, 0, SCREENWidth, (SCREENHeight-64-QRCodeWidth)/2.0);
+        topView.backgroundColor = color;
+        topView.alpha = alpha;
+    
+        //设置扫描区域外部左边的视图
+        UIView *leftView = [[UIView alloc]init];
+        leftView.frame = CGRectMake(0, 0+topView.frame.size.height, (SCREENWidth-QRCodeWidth)/2.0,QRCodeWidth);
+        leftView.backgroundColor = color;
+        leftView.alpha = alpha;
+    
+        //设置扫描区域外部右边的视图
+        UIView *rightView = [[UIView alloc]init];
+        rightView.frame = CGRectMake((SCREENWidth-QRCodeWidth)/2.0+QRCodeWidth,64+topView.frame.size.height, (SCREENWidth-QRCodeWidth)/2.0,QRCodeWidth);
+        rightView.backgroundColor = color;
+        rightView.alpha = alpha;
+    
+        //设置扫描区域外部底部的视图
+        UIView *botView = [[UIView alloc]init];
+        botView.frame = CGRectMake(0, 64+QRCodeWidth+topView.frame.size.height,SCREENWidth,SCREENHeight-64-QRCodeWidth-topView.frame.size.height);
+        botView.backgroundColor = color;
+        botView.alpha = alpha;
+    
+        //将设置好的扫描二维码区域之外的视图添加到视图图层上
+        [self.view addSubview:topView];
+        [self.view addSubview:leftView];
+        [self.view addSubview:rightView];
+        [self.view addSubview:botView];
     
     
     UIView *maskView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -87,6 +240,8 @@
     //贝塞尔曲线 画一个带有圆角的矩形
     UIBezierPath *bpath = [UIBezierPath bezierPathWithRect:self.view.bounds];
     
+//    [bpath appendPath:[UIBezierPath bezierPathWithRoundedRect:CGRectMake((SCREENWidth-QRCodeWidth)/2.0, 50,QRCodeWidth,QRCodeWidth) cornerRadius:1]];
+    
     [bpath appendPath:[[UIBezierPath bezierPathWithRoundedRect:CGRectMake((SCREENWidth-QRCodeWidth)/2.0, 50,QRCodeWidth,QRCodeWidth) cornerRadius:1] bezierPathByReversingPath]];
     
     //创建一个CAShapeLayer 图层
@@ -96,11 +251,11 @@
     //添加图层蒙板
     maskView.layer.mask = shapeLayer;
     
-    
-    
 }
+*/
 
-
+/**
+ 
 - (void)setupScanWindowView {
     //设置扫描区域的位置(考虑导航栏和电池条的高度为64)
     UIView *scanWindow = [[UIView alloc]initWithFrame:CGRectMake((SCREENWidth-QRCodeWidth)/2.0,50,QRCodeWidth,QRCodeWidth)];
@@ -132,7 +287,6 @@
     [_scanNetImageView.layer addAnimation:scanNetAnimation forKey:nil];
     [scanWindow addSubview:_scanNetImageView];
 }
-
 - (void)beginScanning {
     
     [MBProgressHUD showLoadToView:self.view];
@@ -202,11 +356,6 @@
         [self.scanNetImageView.layer removeAllAnimations];
     }
 }
-
-- (void)qrScanAction:(UIBarButtonItem *)sender {
-    MyQRViewController *vc = [[MyQRViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
+*/
 
 @end

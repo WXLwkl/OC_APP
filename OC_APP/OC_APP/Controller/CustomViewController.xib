@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomViewController">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="XYa-c9-TEc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okl-pn-KxW" customClass="IDCard">
+                    <rect key="frame" x="0.0" y="150" width="375" height="317"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="okl-pn-KxW" secondAttribute="trailing" id="5yh-Yt-8i3"/>
+                <constraint firstItem="okl-pn-KxW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rbX-iC-VBG"/>
+                <constraint firstItem="okl-pn-KxW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="rkV-sU-Oho"/>
+                <constraint firstAttribute="bottom" secondItem="okl-pn-KxW" secondAttribute="bottom" constant="200" id="uKR-pY-b3v"/>
+            </constraints>
+            <point key="canvasLocation" x="-376" y="-48"/>
+        </view>
+    </objects>
+</document>

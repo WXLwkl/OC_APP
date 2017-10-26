@@ -34,6 +34,15 @@
 #import "UserManager.h"
 
 
+
+
+
+#import "LeftViewController.h"
+#import "RightViewController.h"
+
+
+
+
 #define TITLES @[@"日历", @"扫一扫", @"删除",@"付款",@"加好友",@"查找好友"]
 #define ICONS  @[@"calendar",@"saoyisao",@"delete",@"pay",@"delete",@"delete"]
 
@@ -48,7 +57,70 @@
     [super viewDidLoad];
     
     [self initSubViews];
+    
+    if (IOS_Foundation_Later_8) {
+        [self loadLateralSlide];
+    }
+    
 }
+/****    侧滑  start       ******/
+- (void)loadLateralSlide {
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(leftClick)];
+    
+    // 注册手势驱动
+    __weak typeof(self)weakSelf = self;
+    [self xl_registerShowIntractiveWithEdgeGesture:NO direction:DrawerTransitionDirectionLeft transitionBlock:^{
+        [weakSelf leftClick];
+    }];
+}
+- (void)leftClick {
+    // 自己随心所欲创建的一个控制器
+    LeftViewController *vc = [[LeftViewController alloc] init];
+    // 调用这个方法
+    [self xl_showDrawerViewController:vc animationType:DrawerAnimationTypeDefault configuration:nil];
+}
+- (void)rightClick {
+    
+    RightViewController *vc = [[RightViewController alloc] init];
+    
+    LateralSlideConfiguration *conf = [LateralSlideConfiguration configurationWithDistance:0 maskAlpha:0.4 scaleY:0.8 direction:DrawerTransitionDirectionRight backImage:[UIImage imageNamed:@"0.jpg"]];
+    
+    [self xl_showDrawerViewController:vc animationType:0 configuration:conf];
+    
+}
+
+- (void)drawerDefaultAnimationRight {
+    
+    LeftViewController *vc = [[LeftViewController alloc] init];
+    
+    LateralSlideConfiguration *conf = [LateralSlideConfiguration configurationWithDistance:0 maskAlpha:0.4 scaleY:0 direction:DrawerTransitionDirectionRight backImage:nil];
+    
+    [self xl_showDrawerViewController:vc animationType:DrawerAnimationTypeDefault configuration:conf];
+}
+
+
+- (void)drawerDefaultAnimationleftScaleY {
+    RightViewController *vc = [[RightViewController alloc] init];
+    
+    LateralSlideConfiguration *conf = [LateralSlideConfiguration configurationWithDistance:0 maskAlpha:0.4 scaleY:0.8 direction:DrawerTransitionDirectionLeft backImage:[UIImage imageNamed:@"0.jpg"]];
+    
+    [self xl_showDrawerViewController:vc animationType:0 configuration:conf];
+}
+- (void)drawerMaskAnimationLeft {
+    
+    LeftViewController *vc = [[LeftViewController alloc] init];
+    // 调用这个方法
+    [self xl_showDrawerViewController:vc animationType:DrawerAnimationTypeMask configuration:nil];
+}
+- (void)drawerMaskAnimationRight {
+    LeftViewController *vc = [[LeftViewController alloc] init];
+    
+    LateralSlideConfiguration *conf = [LateralSlideConfiguration configurationWithDistance:0 maskAlpha:0.4 scaleY:0 direction:DrawerTransitionDirectionRight backImage:nil];
+    
+    [self xl_showDrawerViewController:vc animationType:DrawerAnimationTypeMask configuration:conf];
+}
+/****     侧滑  end       ******/
 
 - (void)initSubViews {
     self.navigationItem.title = @"首页";
@@ -508,64 +580,64 @@
 }
 - (void)btnClick {
     
-    XLPopMenuView *menu = [[XLPopMenuView alloc] init];
-    
-    PopMenuModel* model = [PopMenuModel
-                           allocPopMenuModelWithImageNameString:@"tabbar_compose_idea"
-                           AtTitleString:@"文字/头条"
-                           AtTextColor:[UIColor grayColor]
-                           AtTransitionType:PopMenuTransitionTypeCustomizeApi
-                           AtTransitionRenderingColor:nil];
-    
-    PopMenuModel* model1 = [PopMenuModel
-                            allocPopMenuModelWithImageNameString:@"tabbar_compose_photo"
-                            AtTitleString:@"相册/视频"
-                            AtTextColor:[UIColor grayColor]
-                            AtTransitionType:PopMenuTransitionTypeSystemApi
-                            AtTransitionRenderingColor:nil];
-    
-    PopMenuModel* model2 = [PopMenuModel
-                            allocPopMenuModelWithImageNameString:@"tabbar_compose_camera"
-                            AtTitleString:@"拍摄/短视频"
-                            AtTextColor:[UIColor grayColor]
-                            AtTransitionType:PopMenuTransitionTypeCustomizeApi
-                            AtTransitionRenderingColor:nil];
-    
-    PopMenuModel* model3 = [PopMenuModel
-                            allocPopMenuModelWithImageNameString:@"tabbar_compose_lbs"
-                            AtTitleString:@"签到"
-                            AtTextColor:[UIColor grayColor]
-                            AtTransitionType:PopMenuTransitionTypeSystemApi
-                            AtTransitionRenderingColor:nil];
-    
-    PopMenuModel* model4 = [PopMenuModel
-                            allocPopMenuModelWithImageNameString:@"tabbar_compose_review"
-                            AtTitleString:@"点评"
-                            AtTextColor:[UIColor grayColor]
-                            AtTransitionType:PopMenuTransitionTypeCustomizeApi
-                            AtTransitionRenderingColor:nil];
-    
-    PopMenuModel* model5 = [PopMenuModel
-                            allocPopMenuModelWithImageNameString:@"tabbar_compose_more"
-                            AtTitleString:@"更多"
-                            AtTextColor:[UIColor redColor]
-                            AtTransitionType:PopMenuTransitionTypeSystemApi
-                            AtTransitionRenderingColor:nil];
-    
-    menu.items = @[ model, model1, model2, model3, model4, model5 ];
-    menu.delegate = self;
-    menu.popMenuSpeed = 12.0f;
-    menu.automaticIdentificationColor = false;
-    menu.animationType = PopAnimationTypeViscous;
-    
-    popMenvTopView* topView = [popMenvTopView popMenvTopView];
-    topView.frame = CGRectMake(0, 44, CGRectGetWidth(self.view.frame), 92);
-    menu.topView = topView;
-    
-    menu.backgroundType = PopBackgroundTypeLightBlur;
-    [menu openMenu];
-    
-    return;
+//    XLPopMenuView *menu = [[XLPopMenuView alloc] init];
+//    
+//    PopMenuModel* model = [PopMenuModel
+//                           allocPopMenuModelWithImageNameString:@"tabbar_compose_idea"
+//                           AtTitleString:@"文字/头条"
+//                           AtTextColor:[UIColor grayColor]
+//                           AtTransitionType:PopMenuTransitionTypeCustomizeApi
+//                           AtTransitionRenderingColor:nil];
+//    
+//    PopMenuModel* model1 = [PopMenuModel
+//                            allocPopMenuModelWithImageNameString:@"tabbar_compose_photo"
+//                            AtTitleString:@"相册/视频"
+//                            AtTextColor:[UIColor grayColor]
+//                            AtTransitionType:PopMenuTransitionTypeSystemApi
+//                            AtTransitionRenderingColor:nil];
+//    
+//    PopMenuModel* model2 = [PopMenuModel
+//                            allocPopMenuModelWithImageNameString:@"tabbar_compose_camera"
+//                            AtTitleString:@"拍摄/短视频"
+//                            AtTextColor:[UIColor grayColor]
+//                            AtTransitionType:PopMenuTransitionTypeCustomizeApi
+//                            AtTransitionRenderingColor:nil];
+//    
+//    PopMenuModel* model3 = [PopMenuModel
+//                            allocPopMenuModelWithImageNameString:@"tabbar_compose_lbs"
+//                            AtTitleString:@"签到"
+//                            AtTextColor:[UIColor grayColor]
+//                            AtTransitionType:PopMenuTransitionTypeSystemApi
+//                            AtTransitionRenderingColor:nil];
+//    
+//    PopMenuModel* model4 = [PopMenuModel
+//                            allocPopMenuModelWithImageNameString:@"tabbar_compose_review"
+//                            AtTitleString:@"点评"
+//                            AtTextColor:[UIColor grayColor]
+//                            AtTransitionType:PopMenuTransitionTypeCustomizeApi
+//                            AtTransitionRenderingColor:nil];
+//    
+//    PopMenuModel* model5 = [PopMenuModel
+//                            allocPopMenuModelWithImageNameString:@"tabbar_compose_more"
+//                            AtTitleString:@"更多"
+//                            AtTextColor:[UIColor redColor]
+//                            AtTransitionType:PopMenuTransitionTypeSystemApi
+//                            AtTransitionRenderingColor:nil];
+//    
+//    menu.items = @[ model, model1, model2, model3, model4, model5 ];
+//    menu.delegate = self;
+//    menu.popMenuSpeed = 12.0f;
+//    menu.automaticIdentificationColor = false;
+//    menu.animationType = PopAnimationTypeViscous;
+//    
+//    popMenvTopView* topView = [popMenvTopView popMenvTopView];
+//    topView.frame = CGRectMake(0, 44, CGRectGetWidth(self.view.frame), 92);
+//    menu.topView = topView;
+//    
+//    menu.backgroundType = PopBackgroundTypeLightBlur;
+//    [menu openMenu];
+//    
+//    return;
     
     [ActivityAlert showWithView:self.view.window trueAction:^{
         ViewController *vc = [[ViewController alloc] init];

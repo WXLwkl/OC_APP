@@ -23,13 +23,13 @@
 #import "ALinRefreshGifHeader.h"
 
 
-
 #import "AddressPickViewController.h"
 #import "MasonryViewController.h"
 #import "ReduceTimeViewController.h"
 #import "FormViewController.h"
 #import "SDWebImageTableViewController.h"
 #import "ChatViewController.h"
+#import "CustomViewController.h"
 
 
 #define NAVBAR_COLORCHANGE_POINT (IMAGE_HEIGHT - NAV_HEIGHT*2)
@@ -201,7 +201,8 @@
                          @"只加载显示Cell的Image图(OK)",
                          @"列表滑动不加载图片",
                          @"长按列表行拖动效果",
-                         @"音视频功能集合"];
+                         @"音视频功能集合",
+                         @"自定义视图(OK)"];
     }
     
     
@@ -344,12 +345,24 @@
             break;
         case 12:
         {
-            //长按列表行拖动效果
+            //列表滑动不加载图片
         }
             break;
         case 13:
         {
+            //长按列表行拖动效果
+        }
+            break;
+        case 14:
+        {
             //音视频功能集合
+        }
+            break;
+        case 15:
+        {
+            //自定义视图
+            CustomViewController *vc = [[CustomViewController alloc] initWithNibName:NSStringFromClass([CustomViewController class]) bundle:nil];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:
