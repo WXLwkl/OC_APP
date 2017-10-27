@@ -7,6 +7,7 @@
 //
 
 #import "AppManager.h"
+#import <AdSupport/AdSupport.h>
 #import "LaunchViewController.h"
 #import "SAMKeychain.h"
 
@@ -81,6 +82,10 @@
         
         retrieveUUID = [NSString stringWithFormat:@"%@", uuidStr];
         
+        //OC的API
+//        NSString *retrieveUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//        NSLog(@"唯一识别码uuid-->%@", retrieveUUID);
+        
         NSLog(@"%@",retrieveUUID);
         //在钥匙串中写入UUID
         [SAMKeychain setPassword:retrieveUUID
@@ -88,6 +93,10 @@
     }
     
     return retrieveUUID;
-    
 }
+
++ (NSString *)getIDFA {
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+}
+
 @end

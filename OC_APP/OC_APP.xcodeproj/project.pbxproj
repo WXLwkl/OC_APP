@@ -85,6 +85,7 @@
 		917617D91F3056EA00A84CAF /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 917617D81F3056EA00A84CAF /* activity.png */; };
 		917F6B271F306FBF0095979D /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 917F6B261F306FBF0095979D /* UIViewController+Common.m */; };
 		917F6B2A1F3071F50095979D /* UIBarButtonItem+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 917F6B291F3071F50095979D /* UIBarButtonItem+Common.m */; };
+		918543981FA30E4600C776E2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 918543971FA30E4600C776E2 /* LoginViewController.m */; };
 		9187C4FC1F21D86C000DF0D5 /* QRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187C4FB1F21D86C000DF0D5 /* QRMainViewController.m */; };
 		9187C4FF1F21DB79000DF0D5 /* MyQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187C4FE1F21DB79000DF0D5 /* MyQRViewController.m */; };
 		9187C5061F21DF10000DF0D5 /* scan_frame@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9187C5021F21DF10000DF0D5 /* scan_frame@3x.png */; };
@@ -373,6 +374,8 @@
 		917F6B261F306FBF0095979D /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Common.m"; sourceTree = "<group>"; };
 		917F6B281F3071F50095979D /* UIBarButtonItem+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Common.h"; sourceTree = "<group>"; };
 		917F6B291F3071F50095979D /* UIBarButtonItem+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Common.m"; sourceTree = "<group>"; };
+		918543961FA30E4600C776E2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		918543971FA30E4600C776E2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9187C4FA1F21D86C000DF0D5 /* QRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRMainViewController.h; sourceTree = "<group>"; };
 		9187C4FB1F21D86C000DF0D5 /* QRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRMainViewController.m; sourceTree = "<group>"; };
 		9187C4FD1F21DB79000DF0D5 /* MyQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQRViewController.h; sourceTree = "<group>"; };
@@ -971,6 +974,16 @@
 			path = AddressPickerView;
 			sourceTree = "<group>";
 		};
+		918543951FA30E2A00C776E2 /* LoginViewController(登录) */ = {
+			isa = PBXGroup;
+			children = (
+				918543961FA30E4600C776E2 /* LoginViewController.h */,
+				918543971FA30E4600C776E2 /* LoginViewController.m */,
+			);
+			name = "LoginViewController(登录)";
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
 		9187C4F91F21D843000DF0D5 /* QRMainViewController(二维码) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,6 +1396,7 @@
 		91C270BD1ED6C6DD0064AEBC /* Modules(功能模块) */ = {
 			isa = PBXGroup;
 			children = (
+				918543951FA30E2A00C776E2 /* LoginViewController(登录) */,
 				91A6192A1F271B5000FCA42C /* CalendarViewController(日历) */,
 				9187C4F91F21D843000DF0D5 /* QRMainViewController(二维码) */,
 				919842C61F20924C00CE773F /* SecureCenter(安全中心) */,
@@ -1891,6 +1905,7 @@
 				916804DF1EE7DE8900902075 /* MainTabBarController.m in Sources */,
 				91A619451F27265A00FCA42C /* MonthOpeartion.m in Sources */,
 				912A199E1F4ACAC80014FB05 /* MultitextCell.m in Sources */,
+				918543981FA30E4600C776E2 /* LoginViewController.m in Sources */,
 				91BF33C01EFA0E9800334AF0 /* ClipImageView.m in Sources */,
 				91E41ED91F32BD70004BF5BA /* ALinRefreshGifHeader.m in Sources */,
 				91D9B5BA1F17546B00668093 /* UIViewController+HeadImage.m in Sources */,

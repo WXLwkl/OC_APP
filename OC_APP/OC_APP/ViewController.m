@@ -96,6 +96,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
     
     
+    NSLog(@"%@", [AppManager appUUUID]);
+    
 }
 
 #pragma mark - life
@@ -642,7 +644,7 @@
 - (void)gradientLayerView {
     UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     [self.view addSubview:theView];
-    [self.view setGradientLayer:RGBColor(0, 226, 154) endColor:RGBColor(0, 137, 108)];
+    [self.view xl_setGradientLayer:RGBColor(0, 226, 154) endColor:RGBColor(0, 137, 108)];
 }
 
 

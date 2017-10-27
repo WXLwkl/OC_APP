@@ -37,8 +37,18 @@
 
 
 
+
+
 #import "LeftViewController.h"
 #import "RightViewController.h"
+
+
+
+
+
+
+#import "LoginViewController.h"
+
 
 
 
@@ -182,6 +192,11 @@
     [PopoverMenu showRelyOnView:button titles:TITLES icons:ICONS menuWidth:150 delegate:self];
 }
 - (void)share {
+    
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+    
 /*
  
  2017-08-17 16:19:48.647 OC_APP[2170:60b] -[HomeViewController share]_block_invoke [Line 117] ----{

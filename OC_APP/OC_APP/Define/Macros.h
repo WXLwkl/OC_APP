@@ -60,6 +60,15 @@
 
 
 #pragma mark - 颜色类
+
+//背景色
+#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
+//清除背景色
+#define CLEARCOLOR [UIColor clearColor]
+//主题颜色
+#define THEME_CLOLR [UIColor xl_colorWithHexNumber:0x1FB5EC]
+
+
 //-------------------------------------------------
 // rgb颜色转换（16进制->10进制）
 #define ColorWithHex(rgbValue) \
@@ -72,12 +81,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define RGBColor(r,g,b) RGBAColor(r,g,b,1.0f)
 #define RandomColor  RGBColor(arc4random_uniform(256),arc4random_uniform(256),arc4random_uniform(256))
 
-//背景色
-#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
-//清除背景色
-#define CLEARCOLOR [UIColor clearColor]
 
-#define THEME_CLOLR [UIColor xl_colorWithHexNumber:0x1FB5EC]
 
 #pragma mark - 由角度获取弧度 有弧度获取角度
 //由角度获取弧度 有弧度获取角度

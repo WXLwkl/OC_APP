@@ -48,7 +48,7 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
 @property BOOL shouldAnimateBadge;
 
 /** 颜色渐变 */
-- (void)setGradientLayer:(UIColor*)startColor endColor:(UIColor*)endColor;
+- (void)xl_setGradientLayer:(UIColor*)startColor endColor:(UIColor*)endColor;
 
 /** 移除所有子视图 */
 - (void)xl_removeAllSubviews;
@@ -60,15 +60,46 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
 - (void)xl_addLongPressActionWithBlock:(LongPressActionBlock)block;
 
 /** 抖动 */
-- (void)shake;
+- (void)xl_shake;
+
+/**
+ 设置圆角(4个)
+
+ @param radius 半径
+ */
+- (void)xl_setCornerRadius:(CGFloat)radius;
 
 /**
  设置圆角
 
- @param corners 圆角枚举
+ @param corners 圆角方位
+ @param radius 半径
+ */
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
+                                 radius:(CGFloat)radius;
+/**
+ 设置圆角
+
+ @param corners 圆角方位
  @param cornerRadii 半径
  */
-- (void)makeCornerWithRoundingCorners:(UIRectCorner)corners
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
                           cornerRadii:(CGSize)cornerRadii;
+
+/**
+ 设置边框
+
+ @param borderWidth 边框宽度
+ @param color 边框颜色
+ */
+- (void)xl_setBorder:(CGFloat)borderWidth color:(UIColor *)color;
+
+
+/**
+ 用Masonry时上面设置圆角方法有问题
+
+ @param radius 圆角半径
+ */
+- (void)setCornerRadius:(CGFloat)radius;
 
 @end

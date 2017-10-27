@@ -171,7 +171,7 @@ NSString * const promptPasswordErrorMessage =    @"手势密码错误";
             // 点数少于4 或者 前后不一致
             self.messageLabel.text = gestureCode.length < 4 ? promptPointShortMessage : promptSetAgainErrorMessage;
             self.messageLabel.textColor = CircleErrorColor;
-            [self.messageLabel shake];
+            [self.messageLabel xl_shake];
             return NO;
         }
         
@@ -224,7 +224,7 @@ NSString * const promptPasswordErrorMessage =    @"手势密码错误";
 //        self.messageLabel.text =  promptPasswordErrorMessage;
         self.messageLabel.text = [NSString stringWithFormat:@"密码错误，还可以再输入%ld次", (long)--errorCount];
         self.messageLabel.textColor = CircleErrorColor;
-        [self.messageLabel shake];
+        [self.messageLabel xl_shake];
         
         
         

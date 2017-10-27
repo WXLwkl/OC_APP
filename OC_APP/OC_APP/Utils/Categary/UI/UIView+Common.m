@@ -237,8 +237,7 @@ static char kActionHandlerLongPressGestureKey;
 
 #pragma mark -
 
-
-- (void)setGradientLayer:(UIColor *)startColor endColor:(UIColor *)endColor {
+- (void)xl_setGradientLayer:(UIColor *)startColor endColor:(UIColor *)endColor {
     //初始化CAGradientlayer对象，使它的大小为UIView的大小
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.bounds;
@@ -317,7 +316,7 @@ static char kActionHandlerLongPressGestureKey;
 
 
 //抖动动画
-- (void)shake {
+- (void)xl_shake {
     CALayer *viewLayer = self.layer;
     CGPoint position = viewLayer.position;
     CGPoint left = CGPointMake(position.x - 10, position.y);
@@ -333,7 +332,15 @@ static char kActionHandlerLongPressGestureKey;
     [viewLayer addAnimation:animation forKey:nil];
 }
 
-- (void)makeCornerWithRoundingCorners:(UIRectCorner)corners
+//设置圆角
+- (void)xl_setCornerRadius:(CGFloat)radius {
+    [self xl_setCornerWithRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
+}
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
+                                 radius:(CGFloat)radius{
+    [self xl_setCornerWithRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
+}
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
                           cornerRadii:(CGSize)cornerRadii {
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:cornerRadii];
     
@@ -345,6 +352,17 @@ static char kActionHandlerLongPressGestureKey;
     self.layer.mask = shapeLayer;
 }
 
+- (void)xl_setBorder:(CGFloat)borderWidth color:(UIColor *)color {
+    
+    self.layer.borderWidth = borderWidth;
+    self.layer.borderColor = color.CGColor;
+}
+
+- (void)setCornerRadius:(CGFloat)radius {
+    
+    self.layer.cornerRadius = radius;
+    self.layer.masksToBounds = YES;
+}
 
 
 @end
