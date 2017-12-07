@@ -40,7 +40,7 @@ char *printEnv(void){
     
 }
 
-+(BOOL)isJailbroken {
++ (BOOL)xl_isJailbroken {
     // 方式1.判断是否存在越狱文件
     for (int i = 0; i < 5; i++) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:examineBreak_Tool_pathes[i]]]){
@@ -63,7 +63,7 @@ char *printEnv(void){
 }
 
 
-+ (NSString *)macAddress {
++ (NSString *)xl_macAddress {
     int                 mib[6];
     size_t              len;
     char                *buf;
@@ -106,7 +106,7 @@ char *printEnv(void){
     
     return outstring;
 }
-+ (NSString *)getIPAddress {
++ (NSString *)xl_getIPAddress {
     NSString *address = @"error";
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *temp_addr = NULL;
@@ -163,16 +163,16 @@ char *printEnv(void){
     return address ? address : @"该设备不存在该ip地址";
 }
 
-+ (NSString *)getIpAddressWIFI {
++ (NSString *)xl_getIpAddressWIFI {
     return [self ipAddressWithIfaName:@"en0"];
 }
 
-+ (NSString *)getIpAddressCell {
++ (NSString *)xl_getIpAddressCell {
     return [self ipAddressWithIfaName:@"pdp_ip0"];
 }
 
 // 获取设备型号
-+ (NSString *)getDeviceName {
++ (NSString *)xl_getDeviceName {
     // 需要#import "sys/utsname.h"
     struct utsname systemInfo;
     uname(&systemInfo);
@@ -257,11 +257,11 @@ char *printEnv(void){
     return deviceString;
 }
 
-+ (NSString *)systemVersion {
++ (NSString *)xl_systemVersion {
     return [[UIDevice currentDevice] systemVersion];
 }
 
-+ (BOOL)hasCamera {
++ (BOOL)xl_hasCamera {
     return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 /*
@@ -281,13 +281,13 @@ char *printEnv(void){
  return [self getSysInfo:HW_PHYSMEM];
  }
  */
-+ (NSUInteger)cpuNumber {
++ (NSUInteger)xl_cpuNumber {
     return [NSProcessInfo processInfo].activeProcessorCount;
 }
 
-+ (float)getCPUUsage {
++ (float)xl_getCPUUsage {
     float cpu = 0;
-    NSArray *cpus = [self getPerCPUUsage];
+    NSArray *cpus = [self xl_getPerCPUUsage];
     if (cpus.count == 0) return -1;
     for (NSNumber *n in cpus) {
         cpu += n.floatValue;
@@ -295,7 +295,7 @@ char *printEnv(void){
     return cpu;
 }
 
-+ (NSArray *)getPerCPUUsage {
++ (NSArray *)xl_getPerCPUUsage {
     processor_info_array_t _cpuInfo, _prevCPUInfo = nil;
     mach_msg_type_number_t _numCPUInfo, _numPrevCPUInfo = 0;
     unsigned _numCPUs;
@@ -347,13 +347,13 @@ char *printEnv(void){
 
 
 //总内存
-+ (long long)totalMemoryBytes {
++ (long long)xl_totalMemoryBytes {
     long long totalMemory = [[NSProcessInfo processInfo] physicalMemory];
     if (totalMemory < -1) totalMemory = -1;
     return totalMemory;
 }
 //空闲内存
-+ (NSUInteger)freeMemoryBytes
++ (NSUInteger)xl_freeMemoryBytes
 {
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
@@ -371,7 +371,7 @@ char *printEnv(void){
 
 
 //活跃的内存(正在使用或者很短时间内被使用)
-+ (NSUInteger)getActiveMemory {
++ (NSUInteger)xl_getActiveMemory {
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     vm_size_t page_size;
@@ -386,7 +386,7 @@ char *printEnv(void){
     return mem_active;
 }
 //不活跃的内存(最近使用过)
-+ (NSUInteger)getInActiveMemory {
++ (NSUInteger)xl_getInActiveMemory {
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     vm_size_t page_size;
@@ -401,7 +401,7 @@ char *printEnv(void){
     return mem_inactive;
 }
 //用于存放内核和数据结构的内存(framework,用户级别的应用无法分配)
-+ (NSUInteger)getWiredMemory {
++ (NSUInteger)xl_getWiredMemory {
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     vm_size_t page_size;
@@ -417,7 +417,7 @@ char *printEnv(void){
 }
 
 //磁盘总空间
-+ (CGFloat)totalDiskSpaceMBytes
++ (CGFloat)xl_totalDiskSpaceMBytes
 {
     CGFloat size = 0.0;
     NSError *error;
@@ -432,7 +432,7 @@ char *printEnv(void){
     return size;
 }
 //磁盘空闲空间
-+ (CGFloat)freeDiskSpaceMBytes
++ (CGFloat)xl_freeDiskSpaceMBytes
 {
     CGFloat size = 0.0;
     NSError *error;

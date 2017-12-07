@@ -54,12 +54,12 @@
 #import "AppDelegate+AppService.h"
 #import "AppManager.h"
 #import "UserManager.h"
-#import "UIViewController+LateralSlide.h"
+
 
 //第三方
 
 #import <Masonry/Masonry.h>
-
+#import <MJRefresh.h>
 
 
 

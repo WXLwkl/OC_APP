@@ -7,45 +7,47 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EaseBlankPageView.h"
 
 typedef void (^TapActionBlock)(UITapGestureRecognizer *gestureRecoginzer);
 typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecoginzer);
 
 @interface UIView (Common)
 
-
 //badge
-@property (strong, nonatomic) UILabel *badge;
+@property (strong, nonatomic) UILabel *xl_badge;
 
 /** badge的文字 */
-@property (nonatomic) NSString *badgeValue;
+@property (nonatomic) NSString *xl_badgeValue;
 
 /** 背景颜色 */
-@property (nonatomic) UIColor *badgeBGColor;
+@property (nonatomic) UIColor *xl_badgeBGColor;
 
 /** 文字颜色 */
-@property (nonatomic) UIColor *badgeTextColor;
+@property (nonatomic) UIColor *xl_badgeTextColor;
 
 /** 文字的字体 */
-@property (nonatomic) UIFont *badgeFont;
+@property (nonatomic) UIFont *xl_badgeFont;
 
 /** badge的padding */
-@property (nonatomic) CGFloat badgePadding;
+@property (nonatomic) CGFloat xl_badgePadding;
 
 /** 最小的size */
-@property (nonatomic) CGFloat badgeMinSize;
+@property (nonatomic) CGFloat xl_badgeMinSize;
 
 /** x坐标 */
-@property (nonatomic) CGFloat badgeOriginX;
+@property (nonatomic) CGFloat xl_badgeOriginX;
 
 /** y坐标 */
-@property (nonatomic) CGFloat badgeOriginY;
+@property (nonatomic) CGFloat xl_badgeOriginY;
 
 /** 如果是数字0的话就隐藏不显示 */
-@property BOOL shouldHideBadgeAtZero;
+@property BOOL xl_shouldHideBadgeAtZero;
 
 /** 是否要缩放动画 */
-@property BOOL shouldAnimateBadge;
+@property BOOL xl_shouldAnimateBadge;
+
+
 
 /** 颜色渐变 */
 - (void)xl_setGradientLayer:(UIColor*)startColor endColor:(UIColor*)endColor;
@@ -102,4 +104,7 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
  */
 - (void)setCornerRadius:(CGFloat)radius;
 
+
+@property (strong, nonatomic) EaseBlankPageView *blankPageView;
+- (void)configBlankPage:(EaseBlankPageType)blankPageType hasData:(BOOL)hasData hasError:(BOOL)hasError reloadButtonBlock:(void(^)(id sender))block;
 @end

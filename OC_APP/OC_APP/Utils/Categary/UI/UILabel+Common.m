@@ -17,17 +17,17 @@
 }
 
 - (NSInteger)xl_textNumberOfLines {
-    CGSize contentSize = [self.text boundingRectWithSize:CGSizeMake(self.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.font} context:nil].size;
+    CGSize contentSize = [self.text boundingRectWithSize:CGSizeMake(self.xl_width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.font} context:nil].size;
     return contentSize.height / self.xl_lineHeight;
 }
 
 - (CGFloat)xl_textHeight {
-    CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
+    CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.xl_width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
     return size.height;
 }
 
 - (CGFloat)xl_textWidth {
-    CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
+    CGSize size = [self textRectForBounds:CGRectMake(0, 0, self.xl_width, 10000) limitedToNumberOfLines:self.numberOfLines].size;
     return size.width;
 }
 
@@ -43,7 +43,7 @@
     if (string == nil) {
         string = @"";
     }
-    self.width = limitWidth;
+    self.xl_width = limitWidth;
     self.text = string;
     lineSpace = self.xl_textNumberOfLines > 1 ? lineSpace : 0;
     

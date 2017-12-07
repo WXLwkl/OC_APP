@@ -12,10 +12,8 @@ typedef void(^TouchedButtonBlock)(void);
 
 @interface UIButton (Button)
 
-
-@property (nonatomic, assign)NSTimeInterval xl_acceptEventInterval;//重复点击的时间
-
-@property (nonatomic, assign)NSTimeInterval xl_acceptEventTime;
+//扩大点击区域
+@property(nonatomic, assign) UIEdgeInsets xl_hitTestEdgeInsets;
 
 
 

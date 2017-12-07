@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "SecureViewController.h"
+#import "PasswordViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -20,6 +21,7 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
@@ -73,6 +75,9 @@
         SecureViewController *vc = [SecureViewController new];
         
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        PasswordViewController *vc = [[PasswordViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -87,6 +92,95 @@
     return CGFLOAT_MIN;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        
+        // if (tableView == self.tableView) {
+        
+        CGFloat cornerRadius = 10.f;
+        
+        cell.backgroundColor = UIColor.clearColor;
+        
+        CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+        
+        CGMutablePathRef pathRef = CGPathCreateMutable();
+        
+        CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+        
+        BOOL addLine = NO;
+        
+        if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+            
+            CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+            
+        } else if (indexPath.row == 0) {
+            
+            CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+            
+            CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+            
+            CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+            
+            CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+            
+            addLine = YES;
+            
+        } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+            
+            CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+            
+            CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+            
+            CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+            
+            CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            
+        } else {
+            
+            CGPathAddRect(pathRef, nil, bounds);
+            
+            addLine = YES;
+            
+        }
+        
+        layer.path = pathRef;
+        
+        CFRelease(pathRef);
+        
+        //颜色修改
+        
+        layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.5f].CGColor;
+        
+        layer.strokeColor=[UIColor whiteColor].CGColor;
+        
+        if (addLine == YES) {
+            
+            CALayer *lineLayer = [[CALayer alloc] init];
+            
+            CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+            
+            lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+            
+            lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+            
+            [layer addSublayer:lineLayer];
+            
+        }
+        
+        UIView *testView = [[UIView alloc] initWithFrame:bounds];
+        
+        [testView.layer insertSublayer:layer atIndex:0];
+        
+        testView.backgroundColor = UIColor.clearColor;
+        
+        cell.backgroundView = testView;
+        
+    }
+    
+    // }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

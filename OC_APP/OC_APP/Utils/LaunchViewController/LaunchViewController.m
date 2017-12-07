@@ -29,7 +29,7 @@ NSInteger  const adTime = 4;
 
 @interface LaunchViewController ()<UIScrollViewDelegate>
 
-@property(nonatomic,strong)UIViewController *mainVC;
+@property (nonatomic,strong)UIViewController *mainVC;
 
 @property (nonatomic,strong) UIImageView * adImageView; //广告图片
 @property (nonatomic,strong) UIButton * skipBtn;  //跳过按钮
@@ -105,6 +105,16 @@ NSInteger  const adTime = 4;
     }
     //更新本地广告数据
     [self UpdateAdvertisementDataFromServer];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -196,25 +206,12 @@ NSInteger  const adTime = 4;
     
     _isAD = YES;
 
-
     TestWebVC *vc = [TestWebVC new];
     vc.url = [[NSUserDefaults standardUserDefaults] objectForKey:pushToADUrl];
-    vc.mainViewController = self.mainVC;
+    self.view.window.rootViewController = self.mainVC;
+    UITabBarController *tab = (UITabBarController *)self.mainVC;
+    [tab.selectedViewController pushViewController:vc animated:YES];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromRight];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-  
-    [self.view.window.layer addAnimation:animation forKey:nil];
-    
-    [self presentViewController:nav animated:NO completion:nil];
-    
-
-
 }
 #pragma mark - 点击跳过
 - (void)skipBtnClick{
@@ -223,8 +220,7 @@ NSInteger  const adTime = 4;
 }
 
 #pragma mark - 懒加载
-- (NSTimer *)countTimer
-{
+- (NSTimer *)countTimer {
     if (_countTimer == nil) {
         
         _countTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownEventHandle) userInfo:nil repeats:YES];
@@ -250,7 +246,7 @@ NSInteger  const adTime = 4;
     opacityAnimation.toValue = [NSNumber numberWithFloat:0.0];
     opacityAnimation.removedOnCompletion = NO;
     opacityAnimation.fillMode = kCAFillModeForwards;
-    [self.adImageView.layer addAnimation:opacityAnimation forKey:@"animateOpacity"];
+    [self.view.layer addAnimation:opacityAnimation forKey:@"animateOpacity"];
     
     NSTimeInterval timeInterval;
     
@@ -268,23 +264,21 @@ NSInteger  const adTime = 4;
     
 }
 #pragma mark - 关闭动画完成时处理事件
--(void)closeAdImgAnimation
-{
+- (void)closeAdImgAnimation {
+    
     [_countTimer invalidate];
     _countTimer = nil;
     self.view.window.rootViewController = self.mainVC;
     self.view.hidden = YES;
     self.adImageView.hidden = YES;
     [self.view removeFromSuperview];
-    
 }
 
 
 #pragma mark - *******************************************
 #pragma mark - 要完善的方法   加上网络请求
 
-- (void)UpdateAdvertisementDataFromServer
-{
+- (void)UpdateAdvertisementDataFromServer {
     //TODO 在这里请求广告的数据，包含图片的图片路径和点击图片要跳转的URL
     
     
@@ -312,9 +306,7 @@ NSInteger  const adTime = 4;
 
 
 #pragma mark - 帮助方法
-
-- (NSString *)getFilePathWithImageName:(NSString *)imageName
-{
+- (NSString *)getFilePathWithImageName:(NSString *)imageName {
     if (imageName) {
         
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -336,8 +328,7 @@ NSInteger  const adTime = 4;
     
 }
 
-- (void) deleteOldImage
-{
+- (void)deleteOldImage {
     NSString * imageName = [[NSUserDefaults standardUserDefaults] objectForKey:adImageName];
     if (imageName) {
         
@@ -352,9 +343,7 @@ NSInteger  const adTime = 4;
 
 
 //异步下载广告图片
-- (void) downloadADImageWithUrl:(NSString *)imageUrl imageName:(NSString *)imageName
-{
-    
+- (void)downloadADImageWithUrl:(NSString *)imageUrl imageName:(NSString *)imageName {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         

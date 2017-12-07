@@ -122,6 +122,20 @@
     return image;
 }
 
+- (UIImage *)xl_imageCutSize:(CGRect)rect {
+    
+    CGImageRef subImageref = CGImageCreateWithImageInRect(self.CGImage, rect);
+    CGRect smallRef = CGRectMake(0, 0, CGImageGetWidth(subImageref), CGImageGetHeight(subImageref));
+    
+    UIGraphicsBeginImageContext(smallRef.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, smallRef, subImageref);
+    UIImage *image = [UIImage imageWithCGImage:subImageref];
+    
+    UIGraphicsEndImageContext();
+    return image;
+}
 + (UIImage *)xl_imageWithOriginImage:(UIImage *)image scaleToWidth:(CGFloat)defineWidth {
     CGSize imageSize = image.size;
     CGFloat width = imageSize.width;
@@ -279,7 +293,8 @@
 
 /** 将图片旋转角度degrees */
 - (UIImage *)xl_imageRotatedByDegrees:(CGFloat)degrees {
-    return [self xl_imageRotatedByRadians:DegreesToRadian(degrees)];
+//    return [self xl_imageRotatedByRadians:DegreesToRadian(degrees)];
+    return nil;
 }
 
 - (NSData *)xl_compressWithMaxLength:(NSInteger)maxLength {
@@ -302,6 +317,75 @@
     return encodedImageStr;
 }
 
+//图片加马赛克
+- (UIImage *)xl_mosaicImageWithLevel:(int)level {
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIFilter *filter= [CIFilter filterWithName:@"CIPixellate"];
+    CIImage *inputImage = [CIImage imageWithCGImage:self.CGImage];
+    CIVector *vector = [CIVector vectorWithX:self.size.width /2.0f Y:self.size.height /2.0f];
+    [filter setDefaults];
+    [filter setValue:vector forKey:@"inputCenter"];
+    [filter setValue:[NSNumber numberWithDouble:level] forKey:@"inputScale"];
+    [filter setValue:inputImage forKey:@"inputImage"];
+    
+    CGImageRef cgiimage = [context createCGImage:filter.outputImage fromRect:filter.outputImage.extent];
+    UIImage *newImage = [UIImage imageWithCGImage:cgiimage scale:self.scale orientation:self.imageOrientation];
+    
+    CGImageRelease(cgiimage);
+    
+    return newImage;
+}
+//获取图片某一点的颜色
+- (UIColor *)xl_colorAtPoint:(CGPoint)point {
+    if (point.x < 0 || point.y < 0) return nil;
+    
+    CGImageRef imageRef = self.CGImage;
+    if (!imageRef) return nil;
+    NSUInteger width = CGImageGetWidth(imageRef);
+    NSUInteger height = CGImageGetHeight(imageRef);
+    if (point.x * self.scale >= width || point.y * self.scale >= height) return nil;
+    
+    unsigned char *rawData = malloc(height * width * 4);
+    if (!rawData) return nil;
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * width;
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate(rawData,
+                                                 width,
+                                                 height,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGColorSpaceRelease(colorSpace);
+    if (!context) {
+        free(rawData);
+        return nil;
+    }
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    CGContextRelease(context);
+    
+    long byteIndex = (long)(point.y * self.scale * bytesPerRow) + (long)(point.x * self.scale * bytesPerPixel);
+    CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;
+    CGFloat green = (rawData[byteIndex + 1] * 1.0) / 255.0;
+    CGFloat blue  = (rawData[byteIndex + 2] * 1.0) / 255.0;
+    CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
+    UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    free(rawData);
+    return color;
+}
+
+
+- (BOOL)xl_hasAlphaChannel {
+    if (self.CGImage == NULL) return NO;
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
+    return (alpha == kCGImageAlphaFirst ||
+            alpha == kCGImageAlphaLast ||
+            alpha == kCGImageAlphaPremultipliedFirst ||
+            alpha == kCGImageAlphaPremultipliedLast);
+}
 @end
 
 

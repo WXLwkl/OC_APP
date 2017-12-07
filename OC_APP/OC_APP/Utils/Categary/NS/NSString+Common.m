@@ -12,7 +12,7 @@
 #import <CommonCrypto/CommonDigest.h>
 @implementation NSString (Common)
 
-- (NSString *)emoji {
+- (NSString *)xl_emoji {
     return [NSString emojiWithStringCode:self];
 }
 
@@ -21,8 +21,8 @@
     long intCode = strtol(charCode, NULL, 16);
     return [self emojiWithIntCode:intCode];
 }
-+ (NSString *)emojiWithIntCode:(int)intCode {
-    int symbol = EmojiCodeToSymbol(intCode);
++ (NSString *)emojiWithIntCode:(long)intCode {
+    long symbol = EmojiCodeToSymbol(intCode);
     NSString *string = [[NSString alloc] initWithBytes:&symbol length:sizeof(symbol) encoding:NSUTF8StringEncoding];
     if (string == nil) {
         string = [NSString stringWithFormat:@"%C", (unichar)intCode];
@@ -59,6 +59,34 @@
     
     return pinyin;    
 }
+
++ (NSString *)xl_stringChangeMoneyWithStr:(NSString *)str numberStyle:(NSNumberFormatterStyle)numberStyle {
+    
+    // 判断是否null 若是赋值为0 防止崩溃
+    if (([str isEqual:[NSNull null]] || str == nil)) {
+        str = 0;
+    }
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter.numberStyle = numberStyle;
+    // 注意传入参数的数据长度，可用double
+    NSString *money = [formatter stringFromNumber:[NSNumber numberWithDouble:[str doubleValue]]];
+    
+    return money;
+}
+// 自定义正数格式(金额的格式转化) 94,862.57 前缀可在所需地方随意添加
++ (NSString *)xl_stringChangeMoneyWithDouble:(double)number {
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.positiveFormat = @",###.##"; // 正数格式
+    // 注意传入参数的数据长度，可用double
+    NSString *money = [formatter stringFromNumber:@(number)];
+    //    money = [NSString stringWithFormat:@"￥%@", money];
+    
+    return money;
+}
+
+
 /**
  阿拉伯数字转成中文
  
@@ -189,6 +217,88 @@
                                 initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     return decodedImage;
+}
+
+
+#pragma mark - NSMutableAttributedString
+
+- (NSMutableAttributedString *)xl_setStringBackgroundColor:(UIColor *)color range:(NSRange)range {
+    NSDictionary *attrDic = @{NSBackgroundColorAttributeName:color};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringFont:(UIFont *)font range:(NSRange)range {
+    NSDictionary *attrDic = @{NSFontAttributeName:font};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringColor:(UIColor *)color range:(NSRange)range {
+    NSDictionary *attrDic = @{NSForegroundColorAttributeName:color};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringStrokeColor:(UIColor *)color width:(CGFloat)width range:(NSRange)range {
+    NSDictionary *attrDic = @{NSStrokeColorAttributeName:color,
+                              NSStrokeWidthAttributeName:@(width)};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringSpace:(CGFloat)space range:(NSRange)range {
+    NSDictionary *attrDic = @{NSKernAttributeName:@(space)};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringGradient:(CGFloat)gradient range:(NSRange)range {
+    NSDictionary *attrDic = @{NSObliquenessAttributeName:@(gradient)};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringExpansion:(CGFloat)expansion range:(NSRange)range {
+    NSDictionary *attrDic = @{NSExpansionAttributeName:@(expansion)};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setstringBaselineOffset:(CGFloat)offset range:(NSRange)range {
+    NSDictionary *attrDic = @{NSBaselineOffsetAttributeName:@(offset)};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringShadowOffset:(CGSize)offset shadowRadius:(CGFloat)radius color:(UIColor *)color range:(NSRange)range {
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = offset;
+    shadow.shadowBlurRadius = radius;
+    shadow.shadowColor = color;
+    NSDictionary *attrDic = @{NSShadowAttributeName:shadow};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringUnderLine:(NSUnderlineStyle)style color:(UIColor *)color range:(NSRange)range {
+    NSDictionary *attrDic = @{NSUnderlineStyleAttributeName:@(style),
+                              NSUnderlineColorAttributeName:color};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringDeleteLine:(NSUnderlineStyle)style color:(UIColor *)color range:(NSRange)range {
+    NSDictionary *attrDic = @{NSStrikethroughStyleAttributeName:@(style),
+                              NSStrikethroughColorAttributeName:color};
+    return [self setStringAttributes:attrDic range:range];
+}
+
+- (NSMutableAttributedString *)xl_setStringWithImage:(NSString *)imageName bounds:(CGRect)bounds index:(NSInteger)index {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = [UIImage imageNamed:imageName];
+    attachment.bounds = bounds;
+    NSAttributedString *attachmentStr = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attrString insertAttributedString:attachmentStr atIndex:index];
+    return attrString;
+}
+
+#pragma mark - 私有
+- (NSMutableAttributedString *)setStringAttributes:(NSDictionary<NSString *, id>*)attributeDictionary range:(NSRange)range {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    [attributedString addAttributes:attributeDictionary range:range];
+    return attributedString;
 }
 
 @end

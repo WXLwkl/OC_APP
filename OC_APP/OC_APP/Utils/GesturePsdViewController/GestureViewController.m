@@ -100,7 +100,7 @@ NSString * const promptPasswordErrorMessage =    @"手势密码错误";
         if ([self.shapeView superview]) {
             [self.shapeView removeFromSuperview];
         }
-        self.messageLabel.y = MarginTop + Margin;
+        self.messageLabel.xl_y = MarginTop + Margin;
         self.messageLabel.text = promptChangeGestureMessage;
     }
     [self setupGestureView];
@@ -136,7 +136,7 @@ NSString * const promptPasswordErrorMessage =    @"手势密码错误";
         [self.view addSubview:self.shapeView];
     }
 
-    self.messageLabel.y = MarginTop + ShapeWH + Margin;
+    self.messageLabel.xl_y = MarginTop + ShapeWH + Margin;
     self.messageLabel.text = promptDefaultMessage;
     self.messageLabel.textColor = [UIColor blackColor];
 }

@@ -12,11 +12,9 @@
  */
 @interface RootViewController : UIViewController
 
-
 /**
  *  修改状态栏颜色
  */
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
-
 
 @end

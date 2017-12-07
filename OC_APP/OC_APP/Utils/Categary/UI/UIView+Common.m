@@ -30,30 +30,33 @@ static char kActionHandlerLongPressGestureKey;
 
 @implementation UIView (Common)
 
+//@dynamic xl_badge,xl_badgeValue,xl_badgeBGColor,xl_badgeTextColor,xl_badgeFont,xl_badgePadding,xl_badgeMinSize,xl_badgeOriginX,xl_badgeOriginY,xl_shouldAnimateBadge,xl_shouldHideBadgeAtZero;
 
-- (void)badgeInit {
+
+- (void)xl_badgeInit {
     
-    self.badgeBGColor = [UIColor redColor];
-    self.badgeTextColor = [UIColor whiteColor];
-    self.badgeFont = [UIFont systemFontOfSize:9.0];
-    self.badgePadding = 5;
-    self.badgeMinSize = 4;
-    self.badgeOriginX = self.frame.size.width - self.badge.frame.size.width / 2 - 3;
-    self.badgeOriginY = -6;
-    self.shouldHideBadgeAtZero = YES;
-    self.shouldAnimateBadge = YES;
+    self.xl_badgeBGColor = [UIColor redColor];
+    self.xl_badgeTextColor = [UIColor whiteColor];
+    self.xl_badgeFont = [UIFont systemFontOfSize:9.0];
+    self.xl_badgePadding = 5;
+    self.xl_badgeMinSize = 4;
+    self.xl_badgeOriginX = self.frame.size.width - self.xl_badge.frame.size.width / 2 - 3;
+    self.xl_badgeOriginY = -6;
+    self.xl_shouldHideBadgeAtZero = YES;
+    self.xl_shouldAnimateBadge = YES;
     self.clipsToBounds = NO;
 }
 
 - (void)refreshBadge {
     
-    self.badge.textColor = self.badgeTextColor;
-    self.badge.backgroundColor = self.badgeBGColor;
-    self.badge.font = self.badgeFont;
+    self.xl_badge.textColor = self.xl_badgeTextColor;
+    self.xl_badge.backgroundColor = self.xl_badgeBGColor;
+    self.xl_badge.font = self.xl_badgeFont;
+
 }
 
 - (CGSize)badgeExpectedSize {
-    UILabel *frameLabel = [self duplicateLabel:self.badge];
+    UILabel *frameLabel = [self duplicateLabel:self.xl_badge];
     [frameLabel sizeToFit];
     CGSize expectedLabelSize = frameLabel.frame.size;
     return expectedLabelSize;
@@ -62,26 +65,26 @@ static char kActionHandlerLongPressGestureKey;
     CGSize expectedLabelSize = [self badgeExpectedSize];
     
     CGFloat minHeight = expectedLabelSize.height;
-    minHeight = (minHeight < self.badgeMinSize) ? self.badgeMinSize : minHeight;
+    minHeight = (minHeight < self.xl_badgeMinSize) ? self.xl_badgeMinSize : minHeight;
     
     CGFloat minWidth = expectedLabelSize.width;
-    CGFloat padding = self.badgePadding;
+    CGFloat padding = self.xl_badgePadding;
     minWidth = (minWidth < minHeight) ? minHeight : minWidth;
-    self.badge.frame = CGRectMake(self.badgeOriginX, self.badgeOriginY, minWidth + padding, minHeight + padding);
-    self.badge.layer.cornerRadius = (minHeight + padding) / 2;
-    self.badge.layer.masksToBounds = YES;
+    self.xl_badge.frame = CGRectMake(self.xl_badgeOriginX, self.xl_badgeOriginY, minWidth + padding, minHeight + padding);
+    self.xl_badge.layer.cornerRadius = (minHeight + padding) / 2;
+    self.xl_badge.layer.masksToBounds = YES;
 }
 
 - (void)updateBadgeValueAnimated:(BOOL)animated {
-    if (animated && self.shouldAnimateBadge &&![self.badge.text isEqualToString:self.badgeValue]) {
+    if (animated && self.xl_shouldAnimateBadge &&![self.xl_badge.text isEqualToString:self.xl_badgeValue]) {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         [animation setFromValue:@(1.5)];
         [animation setToValue:@(1)];
         [animation setDuration:0.2];
         [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.4f :1.3f :1.f :1.f]];
-        [self.badge.layer addAnimation:animation forKey:@"bounceAnimation"];
+        [self.xl_badge.layer addAnimation:animation forKey:@"bounceAnimation"];
     }
-    self.badge.text = self.badgeValue;
+    self.xl_badge.text = self.xl_badgeValue;
     NSTimeInterval duration = animated ? 0.2 : 0;
     [UIView animateWithDuration:duration animations:^{
         [self updateBadgeFrame];
@@ -99,137 +102,138 @@ static char kActionHandlerLongPressGestureKey;
 
 - (void)removeBadge {
     [UIView animateWithDuration:0.2 animations:^{
-        self.badge.transform = CGAffineTransformMakeScale(0, 0);
+        self.xl_badge.transform = CGAffineTransformMakeScale(0, 0);
     } completion:^(BOOL finished) {
-        [self.badge removeFromSuperview];
-        self.badge = nil;
+        [self.xl_badge removeFromSuperview];
+        self.xl_badge = nil;
     }];
 }
 
 #pragma mark - getters/setters
 
-- (UILabel *)badge {
+- (UILabel *)xl_badge {
     return objc_getAssociatedObject(self, &UIView_badgeKey);
 }
-- (void)setBadge:(UILabel *)badgeLabel {
+- (void)setXl_badge:(UILabel *)badgeLabel {
     objc_setAssociatedObject(self, &UIView_badgeKey, badgeLabel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSString *)badgeValue {
+- (NSString *)xl_badgeValue {
     return objc_getAssociatedObject(self, &UIView_badgeValueKey);
 }
-- (void)setBadgeValue:(NSString *)badgeValue {
+
+- (void)setXl_badgeValue:(NSString *)badgeValue {
     objc_setAssociatedObject(self, &UIView_badgeValueKey, badgeValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (!badgeValue || [badgeValue isEqualToString:@""] || ([badgeValue isEqualToString:@"0"] && self.shouldHideBadgeAtZero)) {
+    if (!badgeValue || [badgeValue isEqualToString:@""] || ([badgeValue isEqualToString:@"0"] && self.xl_shouldHideBadgeAtZero)) {
         [self removeBadge];
-    } else if (!self.badge) {
-        self.badge = [[UILabel alloc] initWithFrame:CGRectMake(self.badgeOriginX, self.badgeOriginY, 20, 20)];
-        self.badge.textColor = self.badgeTextColor;
-        self.badge.backgroundColor = self.badgeBGColor;
-        self.badge.font = self.badgeFont;
-        self.badge.textAlignment = NSTextAlignmentCenter;
-        [self badgeInit];
-        [self addSubview:self.badge];
+    } else if (!self.xl_badge) {
+        self.xl_badge = [[UILabel alloc] initWithFrame:CGRectMake(self.xl_badgeOriginX, self.xl_badgeOriginY, 20, 20)];
+        self.xl_badge.textColor = self.xl_badgeTextColor;
+        self.xl_badge.backgroundColor = self.xl_badgeBGColor;
+        self.xl_badge.font = self.xl_badgeFont;
+        self.xl_badge.textAlignment = NSTextAlignmentCenter;
+        [self xl_badgeInit];
+        [self addSubview:self.xl_badge];
         [self updateBadgeValueAnimated:NO];
     } else {
         [self updateBadgeValueAnimated:YES];
     }
 }
 
-- (UIColor *)badgeBGColor {
+- (UIColor *)xl_badgeBGColor {
     return objc_getAssociatedObject(self, &UIView_badgeBGColorKey);
 }
-- (void)setBadgeBGColor:(UIColor *)badgeBGColor {
+- (void)setXl_badgeBGColor:(UIColor *)badgeBGColor {
     objc_setAssociatedObject(self, &UIView_badgeBGColorKey, badgeBGColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self refreshBadge];
     }
 }
 
--(UIColor *)badgeTextColor {
+- (UIColor *)xl_badgeTextColor {
     return objc_getAssociatedObject(self, &UIView_badgeTextColorKey);
 }
--(void)setBadgeTextColor:(UIColor *)badgeTextColor
+- (void)setXl_badgeTextColor:(UIColor *)badgeTextColor
 {
     objc_setAssociatedObject(self, &UIView_badgeTextColorKey, badgeTextColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self refreshBadge];
     }
 }
 
--(UIFont *)badgeFont {
+- (UIFont *)xl_badgeFont {
     return objc_getAssociatedObject(self, &UIView_badgeFontKey);
 }
--(void)setBadgeFont:(UIFont *)badgeFont
+- (void)setXl_badgeFont:(UIFont *)badgeFont
 {
     objc_setAssociatedObject(self, &UIView_badgeFontKey, badgeFont, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self refreshBadge];
     }
 }
 
-- (CGFloat)badgePadding {
+- (CGFloat)xl_badgePadding {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_badgePaddingKey);
     return number.floatValue;
 }
-- (void)setBadgePadding:(CGFloat)badgePadding {
+- (void)setXl_badgePadding:(CGFloat)badgePadding {
     NSNumber *number = [NSNumber numberWithDouble:badgePadding];
     objc_setAssociatedObject(self, &UIView_badgePaddingKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self updateBadgeFrame];
     }
 }
 
-- (CGFloat)badgeMinSize {
+- (CGFloat)xl_badgeMinSize {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_badgeMinSizeKey);
     return number.floatValue;
 }
-- (void)setBadgeMinSize:(CGFloat)badgeMinSize {
+- (void)setXl_badgeMinSize:(CGFloat)badgeMinSize {
     NSNumber *number = [NSNumber numberWithDouble:badgeMinSize];
     objc_setAssociatedObject(self, &UIView_badgeMinSizeKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self updateBadgeFrame];
     }
 }
 
-- (CGFloat)badgeOriginX {
+- (CGFloat)xl_badgeOriginX {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_badgeOriginXKey);
     return number.floatValue;
 }
-- (void)setBadgeOriginX:(CGFloat)badgeOriginX {
+- (void)setXl_badgeOriginX:(CGFloat)badgeOriginX {
     NSNumber *number = [NSNumber numberWithDouble:badgeOriginX];
     objc_setAssociatedObject(self, &UIView_badgeOriginXKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self updateBadgeFrame];
     }
 }
 
-- (CGFloat)badgeOriginY {
+- (CGFloat)xl_badgeOriginY {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_badgeOriginYKey);
     return number.floatValue;
 }
-- (void)setBadgeOriginY:(CGFloat)badgeOriginY {
+- (void)setXl_badgeOriginY:(CGFloat)badgeOriginY {
     NSNumber *number = [NSNumber numberWithDouble:badgeOriginY];
     objc_setAssociatedObject(self, &UIView_badgeOriginYKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (self.badge) {
+    if (self.xl_badge) {
         [self updateBadgeFrame];
     }
 }
 
-- (BOOL)shouldHideBadgeAtZero {
+- (BOOL)xl_shouldHideBadgeAtZero {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_shouldHideBadgeAtZeroKey);
     return number.boolValue;
 }
-- (void)setShouldHideBadgeAtZero:(BOOL)shouldHideBadgeAtZero {
+- (void)setXl_shouldHideBadgeAtZero:(BOOL)shouldHideBadgeAtZero {
     NSNumber *number = [NSNumber numberWithBool:shouldHideBadgeAtZero];
     objc_setAssociatedObject(self, &UIView_shouldHideBadgeAtZeroKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)shouldAnimateBadge {
+- (BOOL)xl_shouldAnimateBadge {
     NSNumber *number = objc_getAssociatedObject(self, &UIView_shouldAnimateBadgeKey);
     return number.boolValue;
 }
-- (void)setShouldAnimateBadge:(BOOL)shouldAnimateBadge {
+- (void)setXl_shouldAnimateBadge:(BOOL)shouldAnimateBadge {
     NSNumber *number = [NSNumber numberWithBool:shouldAnimateBadge];
     objc_setAssociatedObject(self, &UIView_shouldAnimateBadgeKey, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -364,5 +368,45 @@ static char kActionHandlerLongPressGestureKey;
     self.layer.masksToBounds = YES;
 }
 
+/** 空白页 */
+static char BlankPageViewKey;
 
+- (void)setBlankPageView:(EaseBlankPageView *)blankPageView{
+    [self willChangeValueForKey:@"BlankPageViewKey"];
+    objc_setAssociatedObject(self, &BlankPageViewKey,
+                             blankPageView,
+                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self didChangeValueForKey:@"BlankPageViewKey"];
+}
+
+- (EaseBlankPageView *)blankPageView{
+    return objc_getAssociatedObject(self, &BlankPageViewKey);
+}
+
+- (void)configBlankPage:(EaseBlankPageType)blankPageType hasData:(BOOL)hasData hasError:(BOOL)hasError reloadButtonBlock:(void (^)(id))block {
+    if (hasData) {
+        if (self.blankPageView) {
+            self.blankPageView.hidden = YES;
+            [self.blankPageView removeFromSuperview];
+        }
+    } else {
+        if (!self.blankPageView) {
+            self.blankPageView = [[EaseBlankPageView alloc] initWithFrame:self.bounds];
+        }
+        self.blankPageView.hidden = NO;
+        [self.blankPageContainer addSubview:self.blankPageView];
+        
+        [self.blankPageView configWithType:blankPageType hasData:hasData hasError:hasError reloadButtonBlock:block];
+    }
+}
+
+- (UIView *)blankPageContainer{
+    UIView *blankPageContainer = self;
+    for (UIView *aView in [self subviews]) {
+        if ([aView isKindOfClass:[UITableView class]]) {
+            blankPageContainer = aView;
+        }
+    }
+    return blankPageContainer;
+}
 @end

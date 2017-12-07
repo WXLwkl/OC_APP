@@ -85,7 +85,7 @@
 
 - (void)viewDidLayoutSubviews{
     if (self.searchController.active) {
-        [self.tableView setFrame:CGRectMake(0, 20, self.view.width, self.view.height - 20)];
+        [self.tableView setFrame:CGRectMake(0, 20, self.view.xl_width, self.view.xl_height - 20)];
     }else{
         self.tableView.frame = self.view.bounds;
     }
@@ -100,7 +100,11 @@
     NSArray *sectionOne = @[
                             @{@"groupName":@"手机通讯录",
                               @"groupCount":@"0",
-                              @"groupArray":@[]
+                              @"groupArray":@[@{@"name":@"我的电脑",
+                                                @"avatarURL":@"",
+                                                @"shuoshuo":@"无需数据线",
+                                                @"status":@"1"}
+                                              ]
                               },
                             @{
                                 @"groupName":@"我的设备",
@@ -285,6 +289,8 @@
         //        [mutableArr addObject:commodity];
     }
     [self.sectionData addObjectsFromArray:arr];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -297,6 +303,8 @@
     
     GroupModel *groupModel = _sectionData[section];
     NSInteger count = groupModel.isOpened ? groupModel.groupFriends.count : 0;
+    
+    
     return count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

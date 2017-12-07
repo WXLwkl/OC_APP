@@ -11,51 +11,36 @@
 
 static NSString *const IndicatorViewKey = @"indicatorView";
 static NSString *const ButtonTextObjectKey = @"buttonTextObject";
-
+static const NSString *HitTestEdgeInsetsKey = @"HitTestEdgeInsets";
 
 @implementation UIButton (Button)
 
+//@dynamic xl_hitTestEdgeInsets;
 
-static const char *UIControl_acceptEventInterval = "UIControl_acceptEventInterval";
-
-- (NSTimeInterval)xl_acceptEventInterval {
-    return [objc_getAssociatedObject(self, UIControl_acceptEventInterval) doubleValue];
+- (void)setXl_hitTestEdgeInsets:(UIEdgeInsets)hitTestEdgeInsets {
+    NSValue *value = [NSValue value:&hitTestEdgeInsets withObjCType:@encode(UIEdgeInsets)];
+    objc_setAssociatedObject(self, &HitTestEdgeInsetsKey, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-- (void)setXl_acceptEventInterval:(NSTimeInterval)cs_acceptEventInterval {
-    objc_setAssociatedObject(self, UIControl_acceptEventInterval,@(cs_acceptEventInterval),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (UIEdgeInsets)xl_hitTestEdgeInsets {
+    NSValue *value = objc_getAssociatedObject(self, &HitTestEdgeInsetsKey);
+    if (value) {
+        UIEdgeInsets edgeInsets;
+        [value getValue:&edgeInsets];
+        return edgeInsets;
+    } else {
+        return UIEdgeInsetsZero;
+    }
 }
-
-static const char *UIControl_acceptEventTime = "UIControl_acceptEventTime";
-
-- (NSTimeInterval)xl_acceptEventTime {
-    return  [objc_getAssociatedObject(self, UIControl_acceptEventTime) doubleValue];
-}
-
-- (void)setXl_acceptEventTime:(NSTimeInterval)cs_acceptEventTime {
-    objc_setAssociatedObject(self, UIControl_acceptEventTime, @(cs_acceptEventTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-
-
-//+ (void)load {
-//    Method before   = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
-//    Method after    = class_getInstanceMethod(self, @selector(xl_sendAction:to:forEvent:));
-//    method_exchangeImplementations(before, after);
-//}
-
-- (void)xl_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
-    if ([NSDate date].timeIntervalSince1970 - self.xl_acceptEventTime < self.xl_acceptEventInterval) {
-        return;
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (UIEdgeInsetsEqualToEdgeInsets(self.xl_hitTestEdgeInsets, UIEdgeInsetsZero) || !self.enabled || self.hidden) {
+        return [super pointInside:point withEvent:event];
     }
     
-    if (self.xl_acceptEventInterval > 0) {
-        self.xl_acceptEventTime = [NSDate date].timeIntervalSince1970;
-    }
+    CGRect relativeFrame = self.bounds;
+    CGRect hitFrame = UIEdgeInsetsInsetRect(relativeFrame, self.xl_hitTestEdgeInsets);
     
-    [self xl_sendAction:action to:target forEvent:event];
+    return CGRectContainsPoint(hitFrame, point);
 }
-
 
 + (instancetype)xl_buttonWithTitle:(NSString *)title
                          backColor:(UIColor *)backColor

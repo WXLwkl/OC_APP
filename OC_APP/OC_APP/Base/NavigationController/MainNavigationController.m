@@ -84,13 +84,6 @@
     //    return YES;
     return self.childViewControllers.count > 1; // 处理后，就不会出现黑边效果的bug了。
 }
-- (UIViewController *)childViewControllerForStatusBarStyle {
-    return self.topViewController;
-}
-
-- (UIViewController *)childViewControllerForStatusBarHidden {
-    return self.topViewController;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,4 +101,25 @@
 //    }
 //}
 
+#pragma mark - StatusBar
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
+}
+
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    return self.topViewController;
+}
+
+#pragma mark -Autorotate
+- (BOOL)shouldAutorotate {
+    return [self.topViewController shouldAutorotate];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [self.topViewController supportedInterfaceOrientations];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return [self.topViewController preferredInterfaceOrientationForPresentation];
+}
 @end

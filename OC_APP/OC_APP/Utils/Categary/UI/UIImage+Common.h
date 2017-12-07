@@ -62,6 +62,8 @@
  */
 + (UIImage *)xl_imageWithColor:(UIColor *)color;
 
+/** 图片的裁剪 */
+- (UIImage *)xl_imageCutSize:(CGRect)rect;
 
 /**
  图片的等比例缩放
@@ -123,6 +125,22 @@
 /** base64编码 */
 - (NSString *)xl_base64EncodedString;
 
+//图片加马赛克
+- (UIImage *)xl_mosaicImageWithLevel:(int)level;
+
+
+/**
+ 获取图片上某一点的颜色
+ 
+ @param point  图片内的一个点。范围是 [0, image.width-1],[0, image.height-1]
+ 超出图片范围则返回nil
+ */
+- (UIColor *)xl_colorAtPoint:(CGPoint)point;
+
+/**
+ 该图片是否有alpha通道
+ */
+- (BOOL)xl_hasAlphaChannel;
 
 
 @end

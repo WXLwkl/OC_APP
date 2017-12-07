@@ -50,6 +50,11 @@
 
 #import "UIViewController+KeyboardPop.h"
 
+#import "WaterWaveView.h"
+#import "PraiseEmitterBtn.h"
+
+#import "LFUIView+Badge.h"
+
 @interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate> {
     
     UILabel*label_;
@@ -83,33 +88,33 @@
 @implementation ViewController
 
 
+#pragma mark - life
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     
     self.dic = self.navigationController.navigationBar.titleTextAttributes;
     
-    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage xl_imageWithColor:[THEME_CLOLR colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
-    
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
     
     
     NSLog(@"%@", [AppManager appUUUID]);
-    
+
 }
 
-#pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     [self xl_setNavBackItem];
     
-    
     self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor whiteColor];
+
+    
     
     //倒计时
     //    [self countdown];
@@ -144,7 +149,8 @@
     btn.frame = CGRectMake(20, 400, 150, 50);
     btn.backgroundColor = [UIColor redColor];
     [btn setTitle:@"开始" forState:UIControlStateNormal];
-    btn.badgeValue = @"3";
+    btn.xl_hitTestEdgeInsets = UIEdgeInsetsMake(-20, -3, -50, -20);
+    btn.xl_badgeValue = @"3";
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
     
@@ -154,7 +160,7 @@
     [btn xl_addActionHandler:^{
         StrongSelf(btn);
         
-        btn.badgeValue = @"1223";
+        btn.xl_badgeValue = @"1223";
         return;
         
         
@@ -187,16 +193,16 @@
     
     
     
-    [self.view xl_addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
-        NSLog(@"---");
-    }];
-    
-    
-    
-    [self.view xl_addLongPressActionWithBlock:^(UILongPressGestureRecognizer *gestureRecoginzer) {
-        
-        NSLog(@"---111");
-    }];
+//    [self.view xl_addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+//        NSLog(@"---");
+//    }];
+//    
+//    
+//    
+//    [self.view xl_addLongPressActionWithBlock:^(UILongPressGestureRecognizer *gestureRecoginzer) {
+//        
+//        NSLog(@"---111");
+//    }];
     
     
     
@@ -205,7 +211,8 @@
     
     
     UIImage *image = [UIImage imageNamed:@"image0"];
-    image = [image xl_imageWithTitle:@"你好啊！" fontSize:25 color:[UIColor orangeColor]];
+//    image = [image xl_imageWithTitle:@"你好啊！" fontSize:25 color:[UIColor orangeColor]];
+    image = [image xl_mosaicImageWithLevel:5];
     
     UIImageView *imgVv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 80, 300, 100)];
     imgVv.image = image;
@@ -214,7 +221,7 @@
     
     
     
-//    [self.view xl_removeAllSubviews];
+    
 //    [self textViewPlaceholder];
     
     
@@ -243,7 +250,91 @@
     
 //    UIViewController *topmostVC = [UIViewController xl_currentViewController];
 
+//    [self useNSDecimalNumber];
     
+    
+//    WaterWaveView *waterWave = [[WaterWaveView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    waterWave.backgroundColor = [UIColor blackColor];
+//    waterWave.waveColor = [UIColor colorWithRed:20 / 255 green:255 / 255 blue:255 / 255 alpha:0.5];
+////    self.waterWave.waveHeight = self.view.frame.size.height - 20;
+////    waterWave.waveSpeed = 1;
+////    waterWave.waveAmplitude = 15;
+//    [self.view addSubview:waterWave];
+    
+    
+//    [self testMoney];
+//    [self.view xl_removeAllSubviews];
+//    
+//    [self testNSMutableAttributedString];
+//    
+//    
+//    [self testPraiseEmitterBtn];
+    
+}
+- (void)testPraiseEmitterBtn {
+    PraiseEmitterBtn *btn = [PraiseEmitterBtn buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(100, 100, 20, 20);
+//    btn.backgroundColor = [UIColor orangeColor];
+    [btn setImage:[UIImage imageNamed:@"praise_default"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"praise_select"] forState:UIControlStateSelected];
+    [btn addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+}
+- (void)clicked:(UIButton *)sender {
+    [sender setSelected:!sender.selected];
+    
+    
+}
+#pragma mark - 测试 NSMutableAttributedString
+- (void)testNSMutableAttributedString {
+    NSString *stringx = @"你好呀，我默认颜色是label的textColor,但是我现在要通过NSForegroundColorAttributeName属性变成一个蓝色了，看好喽！";
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, kScreenWidth-100, 300)];
+    label.numberOfLines = 0;
+    label.backgroundColor = [UIColor grayColor];
+    //背景颜色
+    NSMutableAttributedString *attrStr = [stringx xl_setStringBackgroundColor:[UIColor redColor] range:NSMakeRange(1, 2)];
+    [attrStr xl_setColor:[UIColor redColor] range:NSMakeRange(4, 4)];
+//    [attrStr xl_setStrokeWidth:@(5) range:NSMakeRange(9, 3)];
+    [attrStr xl_setStrikethroughStyle:(NSUnderlineStyleSingle) color:[UIColor redColor] range:NSMakeRange(8, 5)];
+    [attrStr xl_setUnderlineStyle:(NSUnderlineStyleSingle) color:[UIColor redColor] range:NSMakeRange(13, 5)];
+    
+//    [attrStr xl_setExpansion:@(0.8) range:NSMakeRange(18, 5)];
+//    [attrStr xl_setObliqueness:@(-0.5) range:NSMakeRange(18, 5)];
+    [attrStr xl_setBaselineOffset:@(-5) range:NSMakeRange(18, 5)];
+//    [attrStr xl_setKern:@(10) range:NSMakeRange(23, 6)];
+    
+    
+    
+    label.attributedText = attrStr;
+    
+//    label.attributedText = [stringx xl_setStringFont:[UIFont systemFontOfSize:30] range:NSMakeRange(4, 1)];
+//    label.attributedText = [stringx xl_setStringColor:[UIColor redColor] range:NSMakeRange(6, 2)];
+//    label.attributedText = [stringx xl_setStringStrokeColor:[UIColor redColor] width:10 range:NSMakeRange(6, 2)];
+//    label.attributedText = [stringx xl_setStringSpace:5 range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setStringGradient:0.2 range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setStringExpansion:1 range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setstringBaselineOffset:5 range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setStringShadowOffset:CGSizeMake(0,0.5) shadowRadius:1 color:[UIColor purpleColor] range:NSMakeRange(0, 5)];
+//    label.attributedText = [stringx xl_setStringUnderLine:NSUnderlineStyleDouble color:[UIColor redColor] range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setStringDeleteLine:NSUnderlineStyleDouble color:[UIColor redColor] range:NSMakeRange(6, 5)];
+//    label.attributedText = [stringx xl_setStringWithImage:@"01" bounds:CGRectMake(0, 20, 50, 50) index:5];
+    [self.view addSubview:label];
+    [label lf_showNumberBadge:5 sizeType:(LFBadgeSizeTypeNormal)];
+}
+#pragma mark - 测试金额格式化
+- (void)testMoney {
+    // 测试数据:
+    NSString *str = @"12394862.57";
+    
+    
+    NSLog(@"stringChangeMoneyWithDouble== %@", [NSString xl_stringChangeMoneyWithDouble:12394862.57]);
+    NSLog(@"NSNumberFormatterNoStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterNoStyle]);
+    NSLog(@"NSNumberFormatterDecimalStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterDecimalStyle]);
+    NSLog(@"NSNumberFormatterCurrencyStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterCurrencyStyle]);
+    NSLog(@"NSNumberFormatterPercentStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterPercentStyle]);
+    NSLog(@"NSNumberFormatterScientificStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterScientificStyle]);
+    NSLog(@"NSNumberFormatterSpellOutStyle== %@", [NSString xl_stringChangeMoneyWithStr:str numberStyle:NSNumberFormatterSpellOutStyle]);
     
 }
 
@@ -257,6 +348,31 @@
     
     [self.view endEditing:YES];
 }
+//金融产品，对数字是要非常敏感，提高精确度。
+- (void)useNSDecimalNumber {
+    float a = 0.01;
+    int b = 99999999;
+    double c = 0.0;
+    c = a * b;
+    NSLog(@"%f",c);
+    NSLog(@"%.2f",c);
+    
+    c = a*(double)b;
+    NSLog(@"%f",c);
+    NSLog(@"%.2f",c);
+    
+    NSString *aString = [NSString stringWithFormat:@"%.2f", a];
+    NSString *bString = [NSString stringWithFormat:@"%.2f", (double)b];
+    c = [aString doubleValue] * [bString doubleValue];
+    NSLog(@"%.2f",c);
+    
+    
+    NSDecimalNumber *decimalNumber1 = [NSDecimalNumber decimalNumberWithString:aString];
+    NSDecimalNumber *decimalNumber2 = [NSDecimalNumber decimalNumberWithString:bString];
+    NSDecimalNumber *result = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2];
+    NSLog(@"%@",result);
+}
+
 
 #pragma mark - 获取设备信息
 - (void)getDeviceMessage {
@@ -268,26 +384,26 @@
     all = [num doubleValue] / (powf(1024, 3));
     NSLog(@"容量%.2fG",all);
     
-    NSLog(@"mac地址：%@", [UIDevice macAddress]);
-    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice cpuNumber]);
-    NSLog(@"系统版本：%@",[UIDevice systemVersion]);
-    NSLog(@"摄像头：%d",[UIDevice hasCamera]);
+    NSLog(@"mac地址：%@", [UIDevice xl_macAddress]);
+    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice xl_cpuNumber]);
+    NSLog(@"系统版本：%@",[UIDevice xl_systemVersion]);
+    NSLog(@"摄像头：%d",[UIDevice xl_hasCamera]);
     
-    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice totalDiskSpaceMBytes],(unsigned long)[UIDevice totalDiskSpaceMBytes] / (powf(1024, 1)));
-    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice freeDiskSpaceMBytes],(unsigned long)[UIDevice freeDiskSpaceMBytes] / (powf(1024, 1)));
-    
-    
-    NSLog(@"设备为：%@",[UIDevice getDeviceName]);
-    NSLog(@"是否越狱：%d", [UIDevice isJailbroken]);
+    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_totalDiskSpaceMBytes],(unsigned long)[UIDevice xl_totalDiskSpaceMBytes] / (powf(1024, 1)));
+    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_freeDiskSpaceMBytes],(unsigned long)[UIDevice xl_freeDiskSpaceMBytes] / (powf(1024, 1)));
     
     
-    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice totalMemoryBytes],(unsigned long)[UIDevice totalMemoryBytes] / (powf(1024, 2)));
-    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice freeMemoryBytes] ,(unsigned long)[UIDevice freeMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"设备为：%@",[UIDevice xl_getDeviceName]);
+    NSLog(@"是否越狱：%d", [UIDevice xl_isJailbroken]);
     
-    NSLog(@"活跃内存：%f",[UIDevice getActiveMemory] / (powf(1024, 2)));
-    NSLog(@"不活跃内存：%f",[UIDevice getInActiveMemory] / (powf(1024, 2)));
     
-    NSLog(@"其他：%f",[UIDevice getWiredMemory] / (powf(1024, 2)));
+    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice xl_totalMemoryBytes],(unsigned long)[UIDevice xl_totalMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice xl_freeMemoryBytes] ,(unsigned long)[UIDevice xl_freeMemoryBytes] / (powf(1024, 2)));
+    
+    NSLog(@"活跃内存：%f",[UIDevice xl_getActiveMemory] / (powf(1024, 2)));
+    NSLog(@"不活跃内存：%f",[UIDevice xl_getInActiveMemory] / (powf(1024, 2)));
+    
+    NSLog(@"其他：%f",[UIDevice xl_getWiredMemory] / (powf(1024, 2)));
 }
 
 #pragma mark - 多按钮节点
@@ -547,27 +663,31 @@
     [self.view removeFromSuperview];
     
 }
-/** 是否支持自动转屏 */
--(BOOL)shouldAutorotate
-{
-    return YES;
-}
+///** 是否支持自动转屏 */
+//-(BOOL)shouldAutorotate {
+//    return YES;
+//}
+///** 支持哪些屏幕方向 */
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskPortrait;
+////        return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
+//
+///** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//
+//    return UIInterfaceOrientationPortrait;
+//}
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 /** 支持哪些屏幕方向 */
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-    //    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeRight;
 }
-
-
 /** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    
     return UIInterfaceOrientationPortrait;
 }
 
@@ -1022,76 +1142,6 @@ bool isReverse = NO;//是否反向翻转
     [self presentViewController:action animated:YES completion:nil];
 }
 
-#pragma mark - 根据环境判断是否开启闪光灯
-- (IBAction)sss:(id)sender {
-    
-    
-    [self getTorch];
-    
-    
-    DISPATCH_ONCE_BLOCK(^(){
-        
-        NSLog(@"----");
-        //        UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[[[NSBundle mainBundle] URLForResource:@"Steve" withExtension:@"pdf"]] applicationActivities:nil/*@[[[ZSCustomActivity alloc] init]]*/];
-        //
-        //        // hide AirDrop
-        //        //    excludedActivityTypes 这里是要隐藏的类型
-        //        //     activity.excludedActivityTypes = @[UIActivityTypeAirDrop];
-        //        //
-        //        // incorrect usage
-        //        // [self.navigationController pushViewController:activity animated:YES];
-        //
-        //        UIPopoverPresentationController *popover = activity.popoverPresentationController;
-        //        if (popover) {
-        //            popover.sourceView = sender;
-        //            popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
-        //        }
-        //
-        //        [self presentViewController:activity animated:YES completion:NULL];
-    });
-}
-- (void)getTorch {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput *input = [[AVCaptureDeviceInput alloc]initWithDevice:device error:nil];
-    AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
-    [output setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
-    self.session = [[AVCaptureSession alloc]init];
-    [self.session setSessionPreset:AVCaptureSessionPresetHigh];
-    if ([self.session canAddInput:input]) {
-        [self.session addInput:input];
-    }
-    if ([self.session canAddOutput:output]) {
-        [self.session addOutput:output];
-    }
-    [self.session startRunning];
-    
-}
-
-- (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection {
-    CFDictionaryRef metadataDict =CMCopyDictionaryOfAttachments(NULL,sampleBuffer,
-                                                                kCMAttachmentMode_ShouldPropagate);
-    NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:
-                              (__bridge NSDictionary*)metadataDict];
-    
-    CFRelease(metadataDict);
-    NSDictionary *exifMetadata = [[metadata objectForKey:(NSString*)kCGImagePropertyExifDictionary] mutableCopy];
-    float brightnessValue = [[exifMetadata objectForKey:(NSString*)kCGImagePropertyExifBrightnessValue] floatValue];
-    NSLog(@"%f",brightnessValue);
-    // 根据brightnessValue的值来打开和关闭闪光灯
-    AVCaptureDevice*device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    BOOL result = [device hasTorch];// 判断设备是否有闪光灯
-    if((brightnessValue <0) && result) {
-        // 打开闪光灯
-        [device lockForConfiguration:nil];
-        [device setTorchMode:AVCaptureTorchModeOn];//开
-        [device unlockForConfiguration];
-    }else if((brightnessValue >0) && result) {
-        // 关闭闪光灯
-        [device lockForConfiguration:nil];
-        [device setTorchMode:AVCaptureTorchModeOff];//关
-        [device unlockForConfiguration];
-    }
-}
 #pragma mark - UIToorbar
 - (void)createToorbar {
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, kScreenHeight   -44, kScreenWidth, 44)];

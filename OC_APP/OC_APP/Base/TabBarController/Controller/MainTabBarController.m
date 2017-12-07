@@ -94,7 +94,7 @@
     [self addChildViewController:nav];
 }
 
-
+#pragma mark - StatusBar
 - (UIViewController *)childViewControllerForStatusBarStyle {
     return self.selectedViewController;
 }
@@ -102,7 +102,18 @@
 - (UIViewController *)childViewControllerForStatusBarHidden {
     return self.selectedViewController;
 }
+#pragma mark - Autorotate
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.selectedViewController.supportedInterfaceOrientations;
+}
 
+- (BOOL)shouldAutorotate {
+    return [self.selectedViewController shouldAutorotate];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return [self.selectedViewController preferredInterfaceOrientationForPresentation];
+}
 
 #pragma mark - MainTabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectedButtonFrom:(long)fromBtnTag to:(long)toBtnTag {

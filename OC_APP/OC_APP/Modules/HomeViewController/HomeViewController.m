@@ -73,6 +73,7 @@
     }
     
 }
+
 /****    侧滑  start       ******/
 - (void)loadLateralSlide {
     
@@ -673,9 +674,8 @@ didSelectItemAtIndex:(NSUInteger)index {
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - YBPopupMenuDelegate
-- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(PopoverMenu *)ybPopupMenu {
-    
+#pragma mark - PopoverMenuDelegate
+- (void)popupMenuDidSelectedAtIndex:(NSInteger)index popupMenu:(PopoverMenu *)popupMenu {
     NSLog(@"点击了 %@ 选项",TITLES[index]);
     if (index == 0) {
         CalendarViewController *vc = [[CalendarViewController alloc] init];

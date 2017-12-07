@@ -11,64 +11,62 @@
 @interface UIDevice (Common)
 
 /** 获取设备型号 */
-+ (NSString *)getDeviceName;
++ (NSString *)xl_getDeviceName;
 /** 系统的版本号 */
-+ (NSString *)systemVersion;
++ (NSString *)xl_systemVersion;
 
 /** mac地址 */
-+ (NSString *)macAddress;
++ (NSString *)xl_macAddress;
 /** ip地址(局域网) */
-+ (NSString *)getIPAddress;
++ (NSString *)xl_getIPAddress;
 /** WIFIip地址 */
-+ (NSString *)getIpAddressWIFI;
++ (NSString *)xl_getIpAddressWIFI;
 /** 蜂窝地址 */
-+ (NSString *)getIpAddressCell;
++ (NSString *)xl_getIpAddressCell;
 
 
 /** cpu个数 */
-+ (NSUInteger)cpuNumber;
++ (NSUInteger)xl_cpuNumber;
 /** 获取CPU总的使用百分比 */
-+ (float)getCPUUsage;
++ (float)xl_getCPUUsage;
 /** 获取单个CPU使用百分比 */
-+ (NSArray *)getPerCPUUsage;
++ (NSArray *)xl_getPerCPUUsage;
 
 
 
 /** 是否有摄像头 */
-+ (BOOL)hasCamera;
++ (BOOL)xl_hasCamera;
 //是否越狱
-+ (BOOL)isJailbroken;
++ (BOOL)xl_isJailbroken;
 
 
 
 
 /** 获取手机内存总量,返回的是字节数 */
-+ (long long)totalMemoryBytes;
++ (long long)xl_totalMemoryBytes;
 
 /** 获取手机可用内存，返回的是字节数 */
-+ (NSUInteger)freeMemoryBytes;
++ (NSUInteger)xl_freeMemoryBytes;
 
 
 
 
 //活跃的内存(正在使用或者很短时间内被使用)
-+ (NSUInteger)getActiveMemory;
++ (NSUInteger)xl_getActiveMemory;
 //不活跃的内存(最近使用过)
-+ (NSUInteger)getInActiveMemory;
++ (NSUInteger)xl_getInActiveMemory;
 
 /** 用于存放内核和数据结构的内存 */
-+ (NSUInteger)getWiredMemory;
++ (NSUInteger)xl_getWiredMemory;
 
 
 
 
 /** 获取手机硬盘总空间，返回的是 兆 字节数 */
-+ (CGFloat)totalDiskSpaceMBytes;
++ (CGFloat)xl_totalDiskSpaceMBytes;
 
 /** 获取手机硬盘空闲空间，返回的是 兆 字节数 */
-+ (CGFloat)freeDiskSpaceMBytes;
-
-
++ (CGFloat)xl_freeDiskSpaceMBytes;
 
 
 @end

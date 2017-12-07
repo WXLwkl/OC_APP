@@ -31,7 +31,9 @@
 #pragma mark - LifeCycle Menthod
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"列表倒计时";
+    [self xl_setNavBackItem];
     
     if (!self.totalLastTime) {
         self.totalLastTime=[[NSMutableArray alloc]init];

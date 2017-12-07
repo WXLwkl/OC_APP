@@ -11,12 +11,12 @@
 @interface TestWebVC : UIViewController
 
 @property (nonatomic,copy) NSString * url;
-@property (nonatomic ,strong) UIViewController *mainViewController;
 
 @end
 
 
-//@interface UIViewController (Public)
-/////该vc的navigationController
-//- (UINavigationController*)xl_navigationController;
-//@end
+@interface UIViewController (Public)
+///该vc的navigationController
+- (UINavigationController*)xl_navigationController;
+@end
+

@@ -123,9 +123,9 @@
         _separatorColor = [UIColor lightGrayColor];
         
         if (delegate) self.delegate = delegate;
-        self.width = itemWidth;
-        self.height = (titles.count > 5 ? 5 * kButtonHeight : titles.count * kButtonHeight) +2 * kArrowHeight;
-        kArrowPosition = 0.5 * self.width - 0.5 * kArrowWidth;
+        self.xl_width = itemWidth;
+        self.xl_height = (titles.count > 5 ? 5 * kButtonHeight : titles.count * kButtonHeight) +2 * kArrowHeight;
+        kArrowPosition = 0.5 * self.xl_width - 0.5 * kArrowWidth;
         
         self.alpha = 0;
         self.layer.shadowOpacity = 0.5;
@@ -154,8 +154,8 @@
         
         _contentView.tableFooterView = [UIView new];
         _contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _contentView.height -= 2 * kArrowHeight;
-        _contentView.centerY = _mainView.centerY;
+        _contentView.xl_height -= 2 * kArrowHeight;
+        _contentView.xl_centerY = _mainView.xl_centerY;
         
         [_mainView addSubview:_contentView];
         [self addSubview:_mainView];
@@ -191,8 +191,8 @@
     CGRect absoluteRect = [view convertRect:view.bounds toView:kMainWindow];
     CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
     _mainView.layer.mask = [self getMaskLayerWithPoint:relyPoint];
-    if (self.y < _anchorPoint.y) {
-        self.y -= absoluteRect.size.height;
+    if (self.xl_y < _anchorPoint.y) {
+        self.xl_y -= absoluteRect.size.height;
     }
     [self show];
 }
@@ -234,8 +234,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_dismissOnSelected) [self dismiss];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidSelectedAtIndex:ybPopupMenu:)]) {
-        [self.delegate ybPopupMenuDidSelectedAtIndex:indexPath.row ybPopupMenu:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(popupMenuDidSelectedAtIndex:popupMenu:)]) {
+        [self.delegate popupMenuDidSelectedAtIndex:indexPath.row popupMenu:self];
     }
 }
 #pragma mark - scrollViewDelegate
@@ -327,14 +327,14 @@
     if (offset < 0) {
         offset = 0.0;
     }
-    self.y += self.y >= _anchorPoint.y ? offset : -offset;
+    self.xl_y += self.xl_y >= _anchorPoint.y ? offset : -offset;
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius
 {
     kCornerRadius = cornerRadius;
     _mainView.layer.mask = [self drawMaskLayer];
-    if (self.y < _anchorPoint.y) {
+    if (self.xl_y < _anchorPoint.y) {
         _mainView.layer.mask.affineTransform = CGAffineTransformMakeRotation(M_PI);
     }
 }
@@ -361,9 +361,9 @@
 - (void)determineAnchorPoint {
     CGPoint aPoint = CGPointMake(0.5, 0.5);
     if (CGRectGetMaxY(self.frame) > kScreenHeight) {
-        aPoint = CGPointMake(fabs(kArrowPosition) / self.width, 1);
+        aPoint = CGPointMake(fabs(kArrowPosition) / self.xl_width, 1);
     } else {
-        aPoint = CGPointMake(fabs(kArrowPosition) / self.width, 0);
+        aPoint = CGPointMake(fabs(kArrowPosition) / self.xl_width, 0);
     }
     [self setAnimationAnchorPoint:aPoint];
 }
@@ -374,28 +374,28 @@
     [self determineAnchorPoint];
     if (CGRectGetMaxY(self.frame) > kScreenHeight) {
         
-        kArrowPosition = self.width - kArrowPosition - kArrowWidth;
+        kArrowPosition = self.xl_width - kArrowPosition - kArrowWidth;
         layer = [self drawMaskLayer];
         layer.affineTransform = CGAffineTransformMakeRotation(M_PI);
-        self.y = _anchorPoint.y - self.height;
+        self.xl_y = _anchorPoint.y - self.xl_height;
     }
-    self.y += self.y >= _anchorPoint.y ? _offset : -_offset;
+    self.xl_y += self.xl_y >= _anchorPoint.y ? _offset : -_offset;
     return layer;
 }
 
 - (void)setArrowPointingWhere: (CGPoint)anchorPoint {
     _anchorPoint = anchorPoint;
     
-    self.x = anchorPoint.x - kArrowPosition - 0.5*kArrowWidth;
-    self.y = anchorPoint.y;
+    self.xl_x = anchorPoint.x - kArrowPosition - 0.5*kArrowWidth;
+    self.xl_y = anchorPoint.y;
     
     CGFloat maxX = CGRectGetMaxX(self.frame);
     CGFloat minX = CGRectGetMinX(self.frame);
     
     if (maxX > kScreenWidth - 10) {
-        self.x = kScreenWidth - 10 - self.width;
+        self.xl_x = kScreenWidth - 10 - self.xl_width;
     }else if (minX < 10) {
-        self.x = 10;
+        self.xl_x = 10;
     }
     
     maxX = CGRectGetMaxX(self.frame);
@@ -409,7 +409,7 @@
         kArrowPosition = kCornerRadius;
     }else {
         
-        kArrowPosition = self.width - kCornerRadius - kArrowWidth;
+        kArrowPosition = self.xl_width - kCornerRadius - kArrowWidth;
     }
 }
 
@@ -418,19 +418,19 @@
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.frame = _mainView.bounds;
     
-    CGPoint topRightArcCenter = CGPointMake(self.width-kCornerRadius, kArrowHeight+kCornerRadius);
+    CGPoint topRightArcCenter = CGPointMake(self.xl_width-kCornerRadius, kArrowHeight+kCornerRadius);
     CGPoint topLeftArcCenter = CGPointMake(kCornerRadius, kArrowHeight+kCornerRadius);
-    CGPoint bottomRightArcCenter = CGPointMake(self.width-kCornerRadius, self.height - kArrowHeight - kCornerRadius);
-    CGPoint bottomLeftArcCenter = CGPointMake(kCornerRadius, self.height - kArrowHeight - kCornerRadius);
+    CGPoint bottomRightArcCenter = CGPointMake(self.xl_width-kCornerRadius, self.xl_height - kArrowHeight - kCornerRadius);
+    CGPoint bottomLeftArcCenter = CGPointMake(kCornerRadius, self.xl_height - kArrowHeight - kCornerRadius);
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint: CGPointMake(0, kArrowHeight+kCornerRadius)];
     [path addLineToPoint: CGPointMake(0, bottomLeftArcCenter.y)];
     [path addArcWithCenter: bottomLeftArcCenter radius: kCornerRadius startAngle: -M_PI endAngle: -M_PI-M_PI_2 clockwise: NO];
     
-    [path addLineToPoint: CGPointMake(self.width-kCornerRadius, self.height - kArrowHeight)];
+    [path addLineToPoint: CGPointMake(self.xl_width-kCornerRadius, self.xl_height - kArrowHeight)];
     [path addArcWithCenter: bottomRightArcCenter radius: kCornerRadius startAngle: -M_PI-M_PI_2 endAngle: -M_PI*2 clockwise: NO];
-    [path addLineToPoint: CGPointMake(self.width, kArrowHeight+kCornerRadius)];
+    [path addLineToPoint: CGPointMake(self.xl_width, kArrowHeight+kCornerRadius)];
     [path addArcWithCenter: topRightArcCenter radius: kCornerRadius startAngle: 0 endAngle: -M_PI_2 clockwise: NO];
     [path addLineToPoint: CGPointMake(kArrowPosition+kArrowWidth, kArrowHeight)];
     [path addLineToPoint: CGPointMake(kArrowPosition+0.5*kArrowWidth, 0)];
@@ -443,19 +443,4 @@
     
     return maskLayer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end

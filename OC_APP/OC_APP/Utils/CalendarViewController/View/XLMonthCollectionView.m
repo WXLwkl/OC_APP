@@ -125,7 +125,7 @@
     if (!_monthLabel) {
         _monthLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _monthLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:200/2550.f];
-        if ([[UIDevice systemVersion] floatValue] < 8.2) {
+        if ([[UIDevice xl_systemVersion] floatValue] < 8.2) {
             
             _monthLabel.font = [UIFont boldSystemFontOfSize:150.0f];
         } else {

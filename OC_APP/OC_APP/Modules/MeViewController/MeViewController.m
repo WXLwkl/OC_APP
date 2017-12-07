@@ -17,7 +17,6 @@
 #import "SettingViewController.h"
 
 
-#import <MJRefresh.h>
 #import "InfunRefreshHeader.h"
 
 #import "ALinRefreshGifHeader.h"
@@ -30,12 +29,22 @@
 #import "SDWebImageTableViewController.h"
 #import "ChatViewController.h"
 #import "CustomViewController.h"
+#import "BlankPageViewController.h"
+#import "DragTableViewController.h"
+#import "LightSensitiveViewController.h"
+#import "CardViewController.h"
+#import "CellSelectViewController.h"
+#import "TurntableViewController.h"
+//#import "UITableView+Common.h"
 
+#import "NSString+Common.h"
 
 #define NAVBAR_COLORCHANGE_POINT (IMAGE_HEIGHT - NAV_HEIGHT*2)
 #define NAV_HEIGHT 64
 #define IMAGE_HEIGHT 260
 
+
+#import "FPSLabel.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -46,7 +55,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIButton *button;
 
-@property (nonatomic,strong) NSArray *dataArray;
+@property (nonatomic,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -174,6 +183,12 @@
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.topView;
     
+    //模拟刷新操作
+//    __weak typeof(self) weakSelf = self;
+//    [self.tableView setReloadBlock:^{
+//        [weakSelf refresh];
+//    }];
+    
     self.tableView.mj_header = [ALinRefreshGifHeader headerWithRefreshingBlock:^{
         
         [self requestCommentsData];
@@ -187,27 +202,62 @@
 
     
     if (!self.dataArray) {
-        self.dataArray=@[@"省市区三级联动(OK)",
-                         @"Masonry布局实例(OK)",
-                         @"照片上传",
-                         @"照片上传附带进度",
-                         @"列表倒计时(OK)",
-                         @"H5交互WebViewJavascriptBridge",
-                         @"列表空白页展现",
-                         @"自定义弹出窗",
-                         @"常见表单行类型(OK)",
-                         @"JavaScriptCore运用",
-                         @"聊天(待完善)",
-                         @"只加载显示Cell的Image图(OK)",
-                         @"列表滑动不加载图片",
-                         @"长按列表行拖动效果",
-                         @"音视频功能集合",
-                         @"自定义视图(OK)"];
+        self.dataArray = [NSMutableArray arrayWithArray:@[@"省市区三级联动(OK)",
+                                                          @"Masonry布局实例(OK)",
+                                                          @"照片上传",
+                                                          @"照片上传附带进度",
+                                                          @"列表倒计时(OK)",
+                                                          @"H5交互WebViewJavascriptBridge",
+                                                          @"列表空白页展现(OK)",
+                                                          @"自定义弹出窗",
+                                                          @"常见表单行类型(OK)",
+                                                          @"JavaScriptCore运用",
+                                                          @"聊天(待完善)",
+                                                          @"只加载显示Cell的Image图(OK)",
+                                                          @"列表滑动不加载图片",
+                                                          @"长按列表行拖动效果(OK)",
+                                                          @"音视频功能集合",
+                                                          @"自定义视图(OK)",
+                                                          @"获取环境光感(OK)",
+                                                          @"卡片效果(OK)",
+                                                          @"Cell的多选(OK)",
+                                                          @"抽奖(OK)"]];
     }
+//    self.dataArray = [[NSMutableArray alloc]init];
     
     
+    FPSLabel *fpsLabel = [FPSLabel new];
+    fpsLabel.frame=CGRectMake(20, 80, 30, 30);
+    [fpsLabel sizeToFit];
+    fpsLabel.alpha = 0.6;
+//    [self.view addSubview:fpsLabel];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
+
 }
+
+- (void)refresh {
+    //模拟刷新 偶数调用有数据 奇数无数据
+    [self.tableView.mj_header beginRefreshing];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        static NSUInteger i = 0;
+        if (i %2 == 0) {
+            for (NSInteger i = 0; i < arc4random()%10; i++) {
+                [self.dataArray addObject:[NSString stringWithFormat:@"卖报的小画家随机测试数据%ld",(long)i]];
+            }
+        } else {
+            [self.dataArray removeAllObjects];
+        }
+        i++;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+        });
+    });
+}
+
+
 - (void)requestCommentsData {
     [self performSelector:@selector(aa) withObject:self afterDelay:3];
 }
@@ -310,6 +360,8 @@
         case 6:
         {
             //列表空白页展现
+            BlankPageViewController *vc = [[BlankPageViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 7:
@@ -351,6 +403,8 @@
         case 13:
         {
             //长按列表行拖动效果
+            DragTableViewController *vc = [DragTableViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 14:
@@ -362,6 +416,32 @@
         {
             //自定义视图
             CustomViewController *vc = [[CustomViewController alloc] initWithNibName:NSStringFromClass([CustomViewController class]) bundle:nil];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 16:
+        {
+            //iOS利用摄像头获取环境光感参数
+            LightSensitiveViewController *vc = [[LightSensitiveViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 17:
+        {
+            //卡片切换
+            CardViewController *vc = [CardViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 18:
+        {
+            CellSelectViewController *vc = [CellSelectViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 19:
+        {
+            TurntableViewController *vc = [TurntableViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -387,12 +467,14 @@
 //        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
         self.title = @"个人中心";
+        self.statusBarStyle = UIStatusBarStyleLightContent;
     } else {
         [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:0]];
 //        [self wr_setNavBarTintColor:[UIColor whiteColor]];
 //        [self wr_setNavBarTitleColor:[UIColor whiteColor]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
         self.title = @"";
+        self.statusBarStyle = UIStatusBarStyleDefault;
     }
 }
 

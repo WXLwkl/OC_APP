@@ -20,10 +20,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     MainTabBarController *mainTabBar = [MainTabBarController new];
-
     UIViewController *vc = [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
-
-    self.window.rootViewController = vc;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 }
 

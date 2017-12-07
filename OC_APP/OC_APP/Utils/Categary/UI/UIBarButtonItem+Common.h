@@ -11,25 +11,25 @@
 @interface UIBarButtonItem (Common)
 
 
-+ (UIBarButtonItem *)xl_item:(NSString *)imageName
-                  highlight:(NSString *)imageNameH
-                     target:(NSObject *)target
-                        sel:(SEL)sel;
++ (UIBarButtonItem *)xl_itemImage:(NSString *)imageName
+                   highlightImage:(NSString *)imageNameH
+                           target:(NSObject *)target
+                              sel:(SEL)sel;
 
 + (UIBarButtonItem *)xl_itemImage:(UIImage *)image
-                       highlight:(UIImage *)imageH
-                          target:(NSObject *)target
-                             sel:(SEL)sel;
+                        highlight:(UIImage *)imageH
+                           target:(NSObject *)target
+                              sel:(SEL)sel;
 
 + (UIBarButtonItem *)xl_itemTitle:(NSString *)title
-                      color:(UIColor *)titleColor
-                     target:(NSObject *)target
-                        sel:(SEL)sel;
+                            color:(UIColor *)titleColor
+                           target:(NSObject *)target
+                              sel:(SEL)sel;
 
 + (UIBarButtonItem *)xl_itemTitle:(NSString *)title
-                      color:(UIColor *)titleColor
-                       font:(UIFont *)font
-                     target:(NSObject *)target
-                        sel:(SEL)sel;
+                            color:(UIColor *)titleColor
+                             font:(UIFont *)font
+                           target:(NSObject *)target
+                              sel:(SEL)sel;
 
 @end

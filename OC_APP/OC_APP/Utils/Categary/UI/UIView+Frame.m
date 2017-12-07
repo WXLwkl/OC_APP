@@ -10,97 +10,81 @@
 
 @implementation UIView (Frame)
 
-- (CGFloat)x
-{
+- (CGFloat)xl_x {
     return self.frame.origin.x;
 }
 
-- (void)setX:(CGFloat)value
-{
+- (void)setXl_x:(CGFloat)value {
     CGRect frame = self.frame;
     frame.origin.x = value;
     self.frame = frame;
 }
 
-- (CGFloat)y
-{
+- (CGFloat)xl_y {
     return self.frame.origin.y;
 }
 
-- (void)setY:(CGFloat)value
-{
+- (void)setXl_y:(CGFloat)value {
     CGRect frame = self.frame;
     frame.origin.y = value;
     self.frame = frame;
 }
 
-- (CGPoint)origin
-{
+- (CGPoint)xl_origin {
     return self.frame.origin;
 }
 
-- (void)setOrigin:(CGPoint)origin
-{
+- (void)setXl_origin:(CGPoint)origin {
     CGRect frame = self.frame;
     frame.origin = origin;
     self.frame = frame;
 }
 
-- (CGFloat)centerX
-{
+- (CGFloat)xl_centerX {
     return self.center.x;
 }
 
-- (void)setCenterX:(CGFloat)centerX
-{
+- (void)setXl_centerX:(CGFloat)centerX {
     CGPoint center = self.center;
     center.x = centerX;
     self.center = center;
 }
 
-- (CGFloat)centerY
-{
+- (CGFloat)xl_centerY {
     return self.center.y;
 }
 
-- (void)setCenterY:(CGFloat)centerY
-{
+- (void)setXl_centerY:(CGFloat)centerY {
     CGPoint center = self.center;
     center.y = centerY;
     self.center = center;
 }
 
-- (CGFloat)width
-{
+- (CGFloat)xl_width {
     return self.frame.size.width;
 }
 
-- (void)setWidth:(CGFloat)width
-{
+- (void)setXl_width:(CGFloat)width {
     CGRect frame = self.frame;
     frame.size.width = width;
     self.frame = frame;
 }
 
-- (CGFloat)height
-{
+- (CGFloat)xl_height {
     return self.frame.size.height;
 }
 
-- (void)setHeight:(CGFloat)height
-{
+- (void)setXl_height:(CGFloat)height {
     CGRect frame = self.frame;
     frame.size.height = height;
     self.frame = frame;
 }
 
-- (CGSize)size
-{
+- (CGSize)xl_size {
     return self.frame.size;
 }
 
-- (void)setSize:(CGSize)size
-{
+- (void)setXl_size:(CGSize)size {
     CGRect frame = self.frame;
     frame.size = size;
     self.frame = frame;
