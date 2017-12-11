@@ -60,7 +60,7 @@
 
 #import <Masonry/Masonry.h>
 #import <MJRefresh.h>
-
+#import <UIImageView+WebCache.h>
 
 
 

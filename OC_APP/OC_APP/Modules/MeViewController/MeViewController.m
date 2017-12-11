@@ -35,6 +35,9 @@
 #import "CardViewController.h"
 #import "CellSelectViewController.h"
 #import "TurntableViewController.h"
+#import "LoveHeartViewController.h"
+#import "FireworksViewController.h"
+#import "LinkageViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -221,7 +224,10 @@
                                                           @"获取环境光感(OK)",
                                                           @"卡片效果(OK)",
                                                           @"Cell的多选(OK)",
-                                                          @"抽奖(OK)"]];
+                                                          @"抽奖(OK)",
+                                                          @"直播❤️形点赞(OK)",
+                                                          @"烟花(OK)",
+                                                          @"联动(OK)"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -435,13 +441,35 @@
             break;
         case 18:
         {
+            //cell的多选
             CellSelectViewController *vc = [CellSelectViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 19:
         {
+            //转盘抽奖
             TurntableViewController *vc = [TurntableViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 20:
+        {
+            //心形点赞
+            LoveHeartViewController *vc = [LoveHeartViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 21:
+        {
+            //烟花
+            FireworksViewController *vc = [FireworksViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 22:
+        {
+            LinkageViewController *vc = [LinkageViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
