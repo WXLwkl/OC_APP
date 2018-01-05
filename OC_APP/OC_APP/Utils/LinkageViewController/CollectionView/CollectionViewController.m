@@ -95,6 +95,11 @@
         _tableView.tableFooterView = [UIView new];
         _tableView.rowHeight = 55;
         _tableView.showsVerticalScrollIndicator = NO;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         _tableView.separatorColor = [UIColor clearColor];
         [_tableView registerClass:[LeftTableViewCell class] forCellReuseIdentifier:kCellIdentifier_Left];
     }

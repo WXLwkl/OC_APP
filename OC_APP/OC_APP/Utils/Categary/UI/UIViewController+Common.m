@@ -16,11 +16,7 @@
 
 - (void)xl_setNavBackItemWithImage:(NSString *)imageName {
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:imageName]
-                                                                             style:UIBarButtonItemStyleDone
-                                                                            target:self
-                                                                            action:@selector(xl_closeSelfAction)];
-
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:imageName] style:UIBarButtonItemStylePlain target:self action:@selector(xl_closeSelfAction)];
 }
 
 - (void)xl_setLeftBarButtonItemWithTitle:(NSString *)title action:(void(^)())block {
@@ -41,8 +37,7 @@
     
     NSArray *viewcontrollers=self.navigationController.viewControllers;
     
-    if (viewcontrollers.count > 1)
-    {
+    if (viewcontrollers.count > 1) {
         if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
             //push方式
             [self.navigationController popViewControllerAnimated:YES];

@@ -38,6 +38,13 @@
 #import "LoveHeartViewController.h"
 #import "FireworksViewController.h"
 #import "LinkageViewController.h"
+#import "ScrollNumLabelViewController.h"
+#import "PayPasswordViewController.h"
+#import "InfiniteTabelViewController.h"
+#import "ShowSlideViewController.h"
+#import "WebJSBridgeViewController.h"
+#import "DataSourceViewController.h"
+#import "BezierPathViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -212,9 +219,9 @@
                                                           @"列表倒计时(OK)",
                                                           @"H5交互WebViewJavascriptBridge",
                                                           @"列表空白页展现(OK)",
-                                                          @"自定义弹出窗",
+                                                          @"BezierPath练习(OK)",
                                                           @"常见表单行类型(OK)",
-                                                          @"JavaScriptCore运用",
+                                                          @"TableViewDataSource提取(OK)",
                                                           @"聊天(待完善)",
                                                           @"只加载显示Cell的Image图(OK)",
                                                           @"列表滑动不加载图片",
@@ -227,7 +234,11 @@
                                                           @"抽奖(OK)",
                                                           @"直播❤️形点赞(OK)",
                                                           @"烟花(OK)",
-                                                          @"联动(OK)"]];
+                                                          @"联动(OK)",
+                                                          @"滚动的数字(OK)",
+                                                          @"交易密码(OK)",
+                                                          @"无限滚动的tableView(OK)",
+                                                          @"左右滑动视图(OK)"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -239,6 +250,9 @@
 //    [self.view addSubview:fpsLabel];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
+
+    //弹出提示
+    [self showNewStatusesCount:self.dataArray.count];
 
 }
 
@@ -361,6 +375,9 @@
         case 5:
         {
             //H5交互WebViewJavascriptBridge
+            WebJSBridgeViewController *vc = [[WebJSBridgeViewController alloc] init];
+//            WebJSBridgeViewController *vc = [[WebJSBridgeViewController alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"ExampleApp" ofType:@"html"]];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 6:
@@ -372,7 +389,9 @@
             break;
         case 7:
         {
-            //自定义弹出窗
+            // BezierPath
+            BezierPathViewController *vc = [BezierPathViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 8:
@@ -384,7 +403,9 @@
             break;
         case 9:
         {
-            //JavaScriptCore运用
+            //TableViewDataSource提取
+            DataSourceViewController *vc = [DataSourceViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 10:
@@ -469,7 +490,36 @@
             break;
         case 22:
         {
+            //联动
             LinkageViewController *vc = [LinkageViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 23:
+        {
+            //滚动的label
+            ScrollNumLabelViewController *vc = [ScrollNumLabelViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 24:
+        {
+            //支付密码
+            PayPasswordViewController *vc = [PayPasswordViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 25:
+        {
+            //无限的tableview
+            InfiniteTabelViewController *vc = [[InfiniteTabelViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 26:
+        {
+            //左右滑动视图
+            ShowSlideViewController *vc = [ShowSlideViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -490,18 +540,18 @@
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > NAVBAR_COLORCHANGE_POINT) {
         CGFloat alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
+        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
 //        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
 //        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
-        self.title = @"个人中心";
+        self.navigationItem.title = @"个人中心";
         self.statusBarStyle = UIStatusBarStyleLightContent;
     } else {
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:0]];
+        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:0]];
 //        [self wr_setNavBarTintColor:[UIColor whiteColor]];
 //        [self wr_setNavBarTitleColor:[UIColor whiteColor]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
-        self.title = @"";
+        self.navigationItem.title = @"";
         self.statusBarStyle = UIStatusBarStyleDefault;
     }
 }
@@ -512,6 +562,11 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        if (@available(iOS 11.0, *)) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
@@ -527,9 +582,58 @@
 }
 
 
-//
-//
-//UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"C-AvatarIcon"]];
-//imgV.frame = CGRectMake(15, 20, 50, 50);
-//[waveView addSubview:imgV];
+- (void)showNewStatusesCount:(NSInteger)count {
+    // 1.创建一个UILabel
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont systemFontOfSize:12];
+
+    // 2.显示文字
+    if (count) {
+        label.text = [NSString stringWithFormat:@"共有%ld条实例数据", (long)count];
+    } else {
+        label.text = @"没有最新的数据";
+    }
+
+    // 3.设置背景
+    label.backgroundColor = [UIColor colorWithRed:254/255.0  green:129/255.0 blue:0 alpha:1.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+
+    // 4.设置frame
+    label.xl_width = self.view.frame.size.width;
+    label.xl_height = 35;
+    label.xl_x = 0;
+    label.xl_y = CGRectGetMaxY([self.navigationController navigationBar].frame) - label.frame.size.height;
+
+    // 5.添加到导航控制器的view
+    //[self.navigationController.view addSubview:label];
+    [self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
+
+    // 6.动画
+    CGFloat duration = 0.75;
+    //label.alpha = 0.0;
+    [UIView animateWithDuration:duration animations:^{
+        // 往下移动一个label的高度
+        label.transform = CGAffineTransformMakeTranslation(0, label.frame.size.height);
+        //label.alpha = 1.0;
+    } completion:^(BOOL finished) { // 向下移动完毕
+
+        // 延迟delay秒后，再执行动画
+        CGFloat delay = 1.0;
+
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+
+            // 恢复到原来的位置
+            label.transform = CGAffineTransformIdentity;
+            //label.alpha = 0.0;
+
+        } completion:^(BOOL finished) {
+
+            // 删除控件
+            [label removeFromSuperview];
+        }];
+    }];
+}
+
+
 @end

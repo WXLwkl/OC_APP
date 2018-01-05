@@ -46,7 +46,7 @@
         
         [self checkEmpty];
     }
-    self.firstReload = YES;
+    self.firstReload = NO;
     [self xl_reloadSections:sections withRowAnimation:animation];
 }
 

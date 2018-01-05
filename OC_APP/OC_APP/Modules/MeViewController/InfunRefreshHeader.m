@@ -11,7 +11,7 @@
 //    self.badgeBGColor = THEME_CLOLR;
     
     
-    self.backgroundColor = THEME_CLOLR;
+    self.backgroundColor = THEME_color;
     
     // 设置控件的高度
     self.mj_h = 100;

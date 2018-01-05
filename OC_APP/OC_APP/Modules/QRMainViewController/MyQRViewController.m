@@ -41,7 +41,7 @@
     
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityIndicator.frame = imgV.bounds;
-    activityIndicator.color = THEME_CLOLR;
+    activityIndicator.color = THEME_color;
     [imgV addSubview:activityIndicator];
     [activityIndicator startAnimating];
     

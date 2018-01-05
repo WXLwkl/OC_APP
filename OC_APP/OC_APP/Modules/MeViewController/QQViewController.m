@@ -31,6 +31,11 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor orangeColor];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     return _tableView;
@@ -116,14 +121,14 @@
         
         //        [self xl_setNavigationBarColorAlpha:alpha];
         
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
+        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
         //        [self.navigationController.navigationBar ya_setElementsAlpha:alpha > 0.99 ? 0.99 : alpha];
         
         
     } else {
         //        [self.navigationController.navigationBar lt_setNavigationBarBackgroundAlpha:0];
         //        [self xl_setNavigationBarColorAlpha:0];
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_CLOLR colorWithAlphaComponent:0]];
+        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:0]];
     }
     
     //限制下拉的距离

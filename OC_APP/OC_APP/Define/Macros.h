@@ -3,13 +3,14 @@
 //  OC_APP
 //
 
+
+
+
 /** 过期属性或方法名提醒 */
 #define XLDeprecated(instead) __deprecated_msg(instead)
 
 
-
-
-#pragma mark - 当前设备屏幕 宽/高/size
+#pragma mark - 当前设备屏幕 宽/高/size/ 系统控件默认高度
 
 #define kScreenWidth \
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.width)
@@ -20,11 +21,15 @@
 
 
 
-/*! 根据屏幕高度判断真机设备 */
-#define iPhone4s    ([[UIScreen mainScreen] bounds].size.height == 480)
-#define iPhone5     ([[UIScreen mainScreen] bounds].size.height == 568)
-#define iPhone6     ([[UIScreen mainScreen] bounds].size.height == 667)
-#define iPhone6Plus ([[UIScreen mainScreen] bounds].size.height == 736)
+#define kStatusBarHeight        iPhoneX ? 44.f : 20.f
+#define kNavBarHeight           (44.f)
+#define kTabBarHeight           49.f + kBottomHeight
+
+#define kBottomHeight           iPhoneX ? 34.f : 0.f
+
+#define kEnglishKeyboardHeight  (216.f)
+#define kChineseKeyboardHeight  (252.f)
+
 
 #pragma mark - 打印日志
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
@@ -62,11 +67,11 @@
 #pragma mark - 颜色类
 
 //背景色
-#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
+#define BACKGROUND_COLOR ColorWithHex(0xefeff4)
 //清除背景色
 #define CLEARCOLOR [UIColor clearColor]
 //主题颜色
-#define THEME_CLOLR [UIColor xl_colorWithHexNumber:0x1FB5EC]
+#define THEME_color ColorWithHex(0x1FB5EC)
 
 
 //-------------------------------------------------
@@ -130,14 +135,25 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 // 判断是否为ipod
 #define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])
-//判断是否 Retina屏
-#define IS_Retina ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// 判断是否为 iPhone 4
+#define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
 // 判断是否为 iPhone 5/SE
-#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f && [[UIScreen mainScreen] bounds].size.height == 568.0f
+#define iPhone5SE ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
 // 判断是否为iPhone 6/6s
-#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 667.0f
+#define iPhone6_6s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+
 // 判断是否为iPhone 6Plus/6sPlus
-#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f && [[UIScreen mainScreen] bounds].size.height == 736.0f
+#define iPhone6Plus_6sPlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// 判断是否为iPhoneX
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
+
+
 
 
 //6.0
@@ -250,20 +266,21 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 /**
  *  在.h文件中定义的宏，arc
  *
- *  DECLARE_SYNTHESIZE_SINGLETON_FOR_CLASS 这个是宏
- *  + (instancetype)shared##name;这个是被代替的方法， ##代表着shared+name 高度定制化
- * 在外边我们使用 DECLARE_SYNTHESIZE_SINGLETON_FOR_CLASS 那么在.h文件中，定义了一个方法"+ (instancetype)sharedInstance",所以，第一个字母要大写
+ *  SingletonInterface(Class) 这个是宏
+ *  + (instancetype)shared##Class;这个是被代替的方法， ##代表着shared+name 高度定制化
+ * 在外边我们使用 SingletonInterface(Class) 那么在.h文件中，定义了一个方法"+ (instancetype)shared##Class",所以，第一个字母要大写
  *
  *  @return 一个搞定好的方法名
  */
-#define DECLARE_SYNTHESIZE_SINGLETON_FOR_CLASS \
-+ (instancetype)sharedInstance;
+
+#define SingletonInterface(Class) \
++ (instancetype)shared##Class;
 
 /**
  *  在.m文件中处理好的宏 arc
  *
- *  IMPLEMENT_SYNTHESIZE_SINGLETON_FOR_CLASS(classname) 这个是宏,因为是多行的东西，所以每行后面都有一个"\",最后一行除外，
- * 之所以还要传递一个“name”,是因为有个方法要命名"+ (instancetype)shared##name"
+ *  SingletonImplementation(Class) 这个是宏,因为是多行的东西，所以每行后面都有一个"\",最后一行除外，
+ * 之所以还要传递一个“Class”,是因为有个方法要命名"+ (instancetype)shared##Class"
  *  @return 单利
  */
 
@@ -271,24 +288,24 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 //方法1，快速创建对象
 //方法2.这个方法一定要有，就是alloc] init]方法，一定会调用这个方法
 //此处还应该有一个+ copy方法，因为可能是copy，那么有可能是生成新的方法
-#define IMPLEMENT_SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \
-static classname *instance_ = nil;\
-+ (instancetype)sharedInstance {\
-static dispatch_once_t onceToken;\
-dispatch_once(&onceToken, ^{\
-instance_ = [[self alloc] init];\
-});\
-return instance_;\
-}\
-+ (instancetype)allocWithZone:(struct _NSZone *)zone{\
-static dispatch_once_t onceToken;\
-dispatch_once(&onceToken, ^{\
-instance_ = [super allocWithZone:zone];\
-});\
-return instance_;\
-}\
+#define SingletonImplementation(Class) \
+static Class *instance_ = nil; \
++ (instancetype)shared##Class { \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        instance_ = [[self alloc] init]; \
+    }); \
+    return instance_; \
+} \
++ (instancetype)allocWithZone:(struct _NSZone *)zone{ \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        instance_ = [super allocWithZone:zone]; \
+    }); \
+    return instance_; \
+} \
 - (id)copyWithZone:(NSZone *)zone{\
-return instance_;\
+    return instance_;\
 }
 
 

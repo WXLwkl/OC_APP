@@ -96,7 +96,7 @@
     
     self.dic = self.navigationController.navigationBar.titleTextAttributes;
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage xl_imageWithColor:[THEME_CLOLR colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage xl_imageWithColor:[THEME_color colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
     

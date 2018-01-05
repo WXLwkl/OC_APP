@@ -24,7 +24,7 @@
     [navBar setTintColor:[UIColor whiteColor]];
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
     
-    [navBar setBackgroundImage:[UIImage xl_imageWithColor:THEME_CLOLR] forBarMetrics:UIBarMetricsDefault];
+    [navBar setBackgroundImage:[UIImage xl_imageWithColor:THEME_color] forBarMetrics:UIBarMetricsDefault];
     
     navBar.shadowImage = [[UIImage alloc] init];
     

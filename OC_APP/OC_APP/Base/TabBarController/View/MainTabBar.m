@@ -10,18 +10,12 @@
 
 @interface MainTabBar ()
 
-@property (nonatomic, weak) UIButton *writeButton;
+@property (nonatomic, weak) UIButton *centerBtn;
 
 @end
 
 @implementation MainTabBar
 
-- (NSMutableArray *)tabBarItems {
-    if (!_tabBarItems) {
-        _tabBarItems = [NSMutableArray array];
-    }
-    return _tabBarItems;
-}
 - (instancetype)init
 {
     self = [super init];
@@ -32,55 +26,64 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.writeButton.center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
-    CGFloat btnY = 0;
-    CGFloat btnW = self.frame.size.width / self.subviews.count;
-    CGFloat btnH = self.frame.size.height;
-    
-    for (int nIndex = 0; nIndex < self.tabBarItems.count; nIndex++) {
-        CGFloat btnX = btnW * nIndex;
-        TabBarItem *tabBarBtn = self.tabBarItems[nIndex];
-        if (nIndex > 1) {
-            btnX += btnW;
+
+    CGFloat add = self.items.count;
+
+    CGFloat itemW = self.frame.size.width/(add + 1);
+
+    NSInteger itemCurrent = 0;
+
+    for (UIControl *button in self.subviews) {  // 遍历UITabBar中的所有子控件进行布局
+
+        if (![button isKindOfClass:NSClassFromString(@"UITabBarButton")])
+            continue;
+
+        if (itemCurrent == 2) {
+            itemCurrent = 3;
         }
-        tabBarBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-        tabBarBtn.tag = nIndex;
+        button.xl_x = itemCurrent * itemW;
+        button.xl_width = itemW;
+        itemCurrent ++;
     }
+
+    self.centerBtn.xl_centerX = self.xl_centerX;
+
 }
 - (void)SetupWriteButton {
+
+//    UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, -1, self.bounds.size.width, 1)];
+//    topLine.backgroundColor = [UIColor lightGrayColor];
+//    [self addSubview:topLine];
+
     UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [writeBtn setBackgroundImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:UIControlStateNormal];
     [writeBtn setBackgroundImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:UIControlStateSelected];
     [writeBtn addTarget:self action:@selector(writeButtonClick) forControlEvents:UIControlEventTouchDown];
-    writeBtn.bounds = CGRectMake(0, 0, writeBtn.currentBackgroundImage.size.width, writeBtn.currentBackgroundImage.size.height);
+    writeBtn.xl_size = writeBtn.currentBackgroundImage.size;
     [self addSubview:writeBtn];
-    _writeButton = writeBtn;
+    self.centerBtn = writeBtn;
 }
-//添加按钮
-- (void)addTabBarButtonWithTabBarItem:(UITabBarItem *)tabBarItem {
-    TabBarItem *tabBarBtn = [[TabBarItem alloc] init];
-    tabBarBtn.tabBarItem = tabBarItem;
-    [tabBarBtn addTarget:self action:@selector(tabBarButtonClick:) forControlEvents:UIControlEventTouchDown];
-    [self addSubview:tabBarBtn];
-    [self.tabBarItems addObject:tabBarBtn];
-    //默认第一个输入选中
-    if (self.tabBarItems.count == 1) {
-        [self tabBarButtonClick:tabBarBtn];
-    }
-}
-//按钮点击方法
-- (void)tabBarButtonClick:(TabBarItem *)tabBarBtn {
-    if ([self.delegate respondsToSelector:@selector(tabBar:didSelectedButtonFrom:to:)]) {
-        [self.delegate tabBar:self didSelectedButtonFrom:self.selectedButton.tag to:tabBarBtn.tag];
-    }
-    self.selectedButton.selected = NO;
-    tabBarBtn.selected = YES;
-    self.selectedButton = tabBarBtn;
-}
+
 //特殊按钮点击方法
 - (void)writeButtonClick {
-    if ([self.delegate respondsToSelector:@selector(tabBarClickWriteButton:)]) {
-        [self.delegate tabBarClickWriteButton:self];
+    if ([self.delegateTab respondsToSelector:@selector(tabBarClickWriteButton:)]) {
+
+        [self.delegateTab tabBarClickWriteButton:self];
     }
 }
+
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if (self.isHidden == NO) {
+
+        CGPoint newP = [self convertPoint:point toView:self.centerBtn];
+
+        if ([self.centerBtn pointInside:newP withEvent:event]) {
+            return self.centerBtn;
+        }
+    }
+    return [super hitTest:point withEvent:event];
+}
+
 @end
+

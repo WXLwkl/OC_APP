@@ -23,7 +23,15 @@ static char overlayKey;
 - (void)xl_setBackgroundColor:(UIColor *)backgroundColor {
     if (!self.overlay) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + 20)];
+
+        CGFloat statusHeight = 0;
+        if (iPhoneX) {
+            statusHeight = 44;
+        } else {
+            statusHeight = 20;
+        }
+
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + statusHeight)];
         self.overlay.userInteractionEnabled = NO;
         self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth;// Should not set `UIViewAutoresizingFlexibleHeight`
         [[self.subviews firstObject] insertSubview:self.overlay atIndex:0];
@@ -59,7 +67,7 @@ static char overlayKey;
 - (void)xl_reset {
 //    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    [self  setBackgroundImage:[UIImage xl_imageWithColor:[THEME_CLOLR colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
+    [self  setBackgroundImage:[UIImage xl_imageWithColor:[THEME_color colorWithAlphaComponent:0.99]] forBarMetrics:UIBarMetricsDefault];
     
     [self.overlay removeFromSuperview];
     self.overlay = nil;

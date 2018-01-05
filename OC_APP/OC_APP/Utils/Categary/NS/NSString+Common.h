@@ -79,8 +79,42 @@
 - (NSString *)xl_base64EncodedString;
 - (NSString *)xl_base64DecodedString;
 
+/// url编码
+- (NSString *)xl_URLEncodeString;
+- (NSString *)xl_URLDecodeString;
+- (NSString *)xl_URLGBKEncodedString;
+
 //base64转image
 - (UIImage *)xl_base64DecodedImage;
+
+
+
+
+
+/// 计算字符串的绘制大小
+- (CGSize)xl_sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode;
+
+/// 计算字符串的绘制宽度 (单行)
+- (CGFloat)xl_widthForFont:(UIFont *)font;
+
+/// 计算字符串的绘制高度 (定宽)
+- (CGFloat)xl_heightForFont:(UIFont *)font width:(CGFloat)width;
+
+/// 计算字符串的绘制高度
+/// @param width 最大宽度
+/// @param maxLine 最大行数 (比如传入3，则字超过3行时，会截取3行的高度返回)
+- (CGFloat)xl_heightForFont:(UIFont *)font width:(CGFloat)width line:(NSInteger)maxLine;
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - NSMutableAttributedString
 /**

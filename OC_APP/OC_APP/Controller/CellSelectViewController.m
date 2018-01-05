@@ -49,22 +49,23 @@
 }
 
 - (void)showEitingView:(BOOL)isShow{
+    
     [self.editingView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).offset(isShow?0:45);
     }];
+
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
+
 }
 
 
 
 
-- (void)Adds{
+- (void)Adds {
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.editingView];
-
-
 
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
@@ -83,7 +84,7 @@
     [self.listData addObjectsFromArray:@[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"]];
 }
 #pragma mark - lizyLoad
-- (UIView *)editingView{
+- (UIView *)editingView {
     if (!_editingView) {
         _editingView = [[UIView alloc] init];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -115,6 +116,11 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.dataSource      = self;
         _tableView.delegate        = self;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.tableFooterView = [[UIView alloc] init];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];

@@ -139,6 +139,11 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - HEIGHT_TABBAR) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 //        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.tableFooterView = [UIView new];

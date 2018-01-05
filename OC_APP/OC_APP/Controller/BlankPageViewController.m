@@ -7,6 +7,7 @@
 //
 
 #import "BlankPageViewController.h"
+#import "UITableView+Common.h"
 
 @interface BlankPageViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -22,13 +23,13 @@
     
     self.navigationItem.title = @"空白页展示";
     [self xl_setNavBackItem];
-    
+
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem xl_itemTitle:@"出错了" color:[UIColor whiteColor] target:self sel:@selector(rightAvtion:)];
     
     if (!self.dataArray) {
         self.dataArray = [[NSArray alloc] init];
     }
-    
+
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0.5, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
         _myTableView.delegate = self;
@@ -46,6 +47,8 @@
             [self loadMyTableData];
             
         }];
+
+        self.myTableView.firstReload = YES;
         
         [_myTableView.mj_header beginRefreshing];
     }
@@ -53,27 +56,35 @@
 
 - (void)rightAvtion:(UIBarButtonItem *)sender {
     
-    __weak typeof(self)weakSelf = self;
-    [self.view configBlankPage:EaseBlankPageTypeProject hasData:(self.dataArray.count>0) hasError:YES reloadButtonBlock:^(id sender) {
-        [MBProgressHUD showAutoMessage:@"重新加载的数据" ToView:self.view];
-        [weakSelf.myTableView.mj_header beginRefreshing];
-    }];
+//    __weak typeof(self)weakSelf = self;
+//    [self.view configBlankPage:EaseBlankPageTypeProject hasData:(self.dataArray.count>0) hasError:YES reloadButtonBlock:^(id sender) {
+//        [MBProgressHUD showAutoMessage:@"重新加载的数据" ToView:self.view];
+//        [weakSelf.myTableView.mj_header beginRefreshing];
+//    }];
+
 }
 
 
 - (void)loadMyTableData {
     //请求服务端接口并返回数据
-    WeakSelf(self);
+//    WeakSelf(self);
     //成功时
-    [self.myTableView reloadData];
-    [self.myTableView.mj_header endRefreshing];
-    
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        self.dataArray = @[@"1",@"2"];
+
+        [self.myTableView reloadData];
+        [self.myTableView.mj_header endRefreshing];
+    });
+
+
     //增加无数据展现
     
-    [self.view configBlankPage:EaseBlankPageTypeView hasData:self.dataArray.count hasError:(self.dataArray.count>0) reloadButtonBlock:^(id sender) {
-        [MBProgressHUD showAutoMessage:@"重新加载的数据" ToView:weakself.view];
-        [weakself.myTableView.mj_header beginRefreshing];
-    }];
+//    [self.view configBlankPage:EaseBlankPageTypeView hasData:self.dataArray.count hasError:(self.dataArray.count>0) reloadButtonBlock:^(id sender) {
+//        [MBProgressHUD showAutoMessage:@"重新加载的数据" ToView:weakself.view];
+//        [weakself.myTableView.mj_header beginRefreshing];
+//    }];
 }
 #pragma mark UITableViewDataSource, UITableViewDelegate相关内容
 

@@ -52,7 +52,7 @@
 
     nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     nextBtn.frame = CGRectMake(20, 200, size.width-40, 50);
-    nextBtn.backgroundColor = THEME_CLOLR;
+    nextBtn.backgroundColor = THEME_color;
     nextBtn.layer.cornerRadius = 6.0;
     nextBtn.hidden = YES;
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];

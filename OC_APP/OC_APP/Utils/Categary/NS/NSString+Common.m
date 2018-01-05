@@ -211,6 +211,35 @@
     return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+- (NSString *)xl_URLEncodeString {
+
+    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (CFStringRef)self,
+                                                              NULL,
+                                                              CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                              CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+}
+
+- (NSString *)xl_URLDecodeString {
+
+    NSString *decodedString = (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+                                                                                                                  (__bridge CFStringRef)self,
+                                                                                                                  CFSTR(""), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+
+    return decodedString;
+}
+
+- (NSString *)xl_URLGBKEncodedString {
+
+    CFStringEncoding enc = CFStringConvertNSStringEncodingToEncoding(kCFStringEncodingGB_18030_2000);
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                             (CFStringRef)self,
+                                                                                             NULL,
+                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                             enc));
+    return result;
+}
+
 
 - (UIImage *)xl_base64DecodedImage {
     NSData *decodedImageData = [[NSData alloc]
@@ -218,6 +247,67 @@
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     return decodedImage;
 }
+
+- (CGSize)xl_sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode {
+    CGSize result;
+    if (!font) font = [UIFont systemFontOfSize:12];
+    if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        NSMutableDictionary *attr = @{}.mutableCopy;
+        attr[NSFontAttributeName] = font;
+        if (lineBreakMode != NSLineBreakByWordWrapping) {
+            NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+            paragraphStyle.lineBreakMode = lineBreakMode;
+            attr[NSParagraphStyleAttributeName] = paragraphStyle;
+        }
+        CGRect rect = [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attr context:nil];
+        result = rect.size;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        result = [self sizeWithFont:font constrainedToSize:size lineBreakMode:lineBreakMode];
+#pragma clang diagnostic pop
+    }
+    return CGSizeMake(ceil(result.width), ceil(result.height));
+}
+
+- (CGFloat)xl_widthForFont:(UIFont *)font {
+    CGSize size = [self xl_sizeForFont:font size:CGSizeMake(HUGE, HUGE) mode:NSLineBreakByWordWrapping];
+    return size.width;
+}
+
+- (CGFloat)xl_heightForFont:(UIFont *)font width:(CGFloat)width {
+    CGSize size = [self xl_sizeForFont:font size:CGSizeMake(width, HUGE) mode:NSLineBreakByWordWrapping];
+    return size.height;
+}
+
+- (CGFloat)heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width {
+    CGFloat height;
+    if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        CGRect rect = [str boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
+                                        options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                     attributes:@{ NSFontAttributeName: font } context:nil];
+        height = rect.size.height;
+        height += 1;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CGSize size = [str sizeWithFont:font constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+#pragma clang diagnostic pop
+        height = size.height;
+    }
+    return height;
+}
+- (CGFloat)xl_heightForFont:(UIFont *)font width:(CGFloat)width line:(NSInteger)line {
+    NSMutableString *test = NSMutableString.new;
+    for (int i=0; i<line; i++) {
+        [test appendString:@"字"];
+    }
+    CGFloat maxHeight = [self heightForString:test font:font width:1];
+    CGFloat height = [self heightForString:self font:font width:width];
+    return height > maxHeight ? maxHeight : height;
+}
+
+
 
 
 #pragma mark - NSMutableAttributedString

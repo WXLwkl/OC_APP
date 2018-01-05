@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    self.view.backgroundColor = ColorWithHex(0xefeff4);
     [UIViewController attemptRotationToDeviceOrientation];
     self.statusBarStyle = UIStatusBarStyleLightContent;
     self.edgesForExtendedLayout = UIRectEdgeNone;

@@ -10,10 +10,10 @@
 
 @implementation UIBarButtonItem (Common)
 
-+ (UIBarButtonItem *)xl_item:(NSString *)imageName
-                  highlight:(NSString *)imageNameH
-                     target:(NSObject *)target
-                        sel:(SEL)sel {
++ (UIBarButtonItem *)xl_itemImage:(NSString *)imageName
+                   highlightImage:(NSString *)imageNameH
+                           target:(NSObject *)target
+                              sel:(SEL)sel {
     
     return [UIBarButtonItem xl_itemImage:[UIImage imageNamed:imageName]
                                highlight:imageNameH?[UIImage imageNamed:imageNameH]:nil
@@ -30,7 +30,6 @@
     
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:imageH forState:UIControlStateHighlighted];
-    
     [btn addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     [btn sizeToFit];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
@@ -57,23 +56,18 @@
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
     btn.backgroundColor = [UIColor clearColor];
-    if (font) {
-        
-        btn.titleLabel.font = font;
-    }
+    if (font) btn.titleLabel.font = font;
     
     [btn setTitle:title forState:UIControlStateNormal];
-    if (titleColor) {
+    if (titleColor)
         [btn setTitleColor:titleColor forState:UIControlStateNormal];
-    } else {
-        
+    else
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [btn addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     [btn sizeToFit];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
     return item;
 }
-
 @end
