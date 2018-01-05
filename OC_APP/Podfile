@@ -20,4 +20,8 @@ pod 'pop' #做动画效果
 
 pod 'Masonry' #布局
 
+pod 'TZImagePickerController' #图片选择器
+
+pod 'WebViewJavascriptBridge' #web js交互
+
 end

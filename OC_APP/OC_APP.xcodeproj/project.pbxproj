@@ -123,10 +123,6 @@
 		917617D91F3056EA00A84CAF /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 917617D81F3056EA00A84CAF /* activity.png */; };
 		9177FD751FFE006A0030AFC0 /* WebJSBridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD741FFE006A0030AFC0 /* WebJSBridgeViewController.m */; };
 		9177FD771FFE02E20030AFC0 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = 9177FD761FFE02E20030AFC0 /* ExampleApp.html */; };
-		9177FD811FFE0AE50030AFC0 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD791FFE0AE40030AFC0 /* WebViewJavascriptBridgeBase.m */; };
-		9177FD821FFE0AE50030AFC0 /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD7A1FFE0AE40030AFC0 /* WKWebViewJavascriptBridge.m */; };
-		9177FD831FFE0AE50030AFC0 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD7B1FFE0AE40030AFC0 /* WebViewJavascriptBridge.m */; };
-		9177FD841FFE0AE50030AFC0 /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD7E1FFE0AE40030AFC0 /* WebViewJavascriptBridge_JS.m */; };
 		9177FD871FFE10B10030AFC0 /* DataSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD861FFE10B10030AFC0 /* DataSourceViewController.m */; };
 		9177FD8A1FFE11EF0030AFC0 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD891FFE11EF0030AFC0 /* ArrayDataSource.m */; };
 		9177FD8D1FFE1E490030AFC0 /* BezierPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD8C1FFE1E490030AFC0 /* BezierPathViewController.m */; };
@@ -537,14 +533,6 @@
 		9177FD731FFE006A0030AFC0 /* WebJSBridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebJSBridgeViewController.h; sourceTree = "<group>"; };
 		9177FD741FFE006A0030AFC0 /* WebJSBridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebJSBridgeViewController.m; sourceTree = "<group>"; };
 		9177FD761FFE02E20030AFC0 /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
-		9177FD791FFE0AE40030AFC0 /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
-		9177FD7A1FFE0AE40030AFC0 /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
-		9177FD7B1FFE0AE40030AFC0 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
-		9177FD7C1FFE0AE40030AFC0 /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
-		9177FD7D1FFE0AE40030AFC0 /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
-		9177FD7E1FFE0AE40030AFC0 /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
-		9177FD7F1FFE0AE40030AFC0 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
-		9177FD801FFE0AE40030AFC0 /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		9177FD851FFE10B10030AFC0 /* DataSourceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataSourceViewController.h; sourceTree = "<group>"; };
 		9177FD861FFE10B10030AFC0 /* DataSourceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataSourceViewController.m; sourceTree = "<group>"; };
 		9177FD881FFE11EF0030AFC0 /* ArrayDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
@@ -1364,21 +1352,6 @@
 			path = AddressPickerView;
 			sourceTree = "<group>";
 		};
-		9177FD781FFE0AE40030AFC0 /* WebViewJavascriptBridge */ = {
-			isa = PBXGroup;
-			children = (
-				9177FD791FFE0AE40030AFC0 /* WebViewJavascriptBridgeBase.m */,
-				9177FD7A1FFE0AE40030AFC0 /* WKWebViewJavascriptBridge.m */,
-				9177FD7B1FFE0AE40030AFC0 /* WebViewJavascriptBridge.m */,
-				9177FD7C1FFE0AE40030AFC0 /* WebViewJavascriptBridge_JS.h */,
-				9177FD7D1FFE0AE40030AFC0 /* WebViewJavascriptBridgeBase.h */,
-				9177FD7E1FFE0AE40030AFC0 /* WebViewJavascriptBridge_JS.m */,
-				9177FD7F1FFE0AE40030AFC0 /* WebViewJavascriptBridge.h */,
-				9177FD801FFE0AE40030AFC0 /* WKWebViewJavascriptBridge.h */,
-			);
-			path = WebViewJavascriptBridge;
-			sourceTree = "<group>";
-		};
 		918543951FA30E2A00C776E2 /* LoginViewController(登录) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1950,7 +1923,6 @@
 		91C270C11ED6C8F50064AEBC /* ThridParty(第三方库) */ = {
 			isa = PBXGroup;
 			children = (
-				9177FD781FFE0AE40030AFC0 /* WebViewJavascriptBridge */,
 				912A19981F4AC0BB0014FB05 /* UUInputAccessoryView */,
 				9150C9AB1EE6A84F00B978D9 /* SAMKeychain */,
 			);
@@ -2401,9 +2373,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OC_APP/Pods-OC_APP-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2416,13 +2392,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OC_APP-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2442,7 +2421,6 @@
 				91684A571F4445B5001DE0CB /* RequestManagerCache.m in Sources */,
 				917F6B2A1F3071F50095979D /* UIBarButtonItem+Common.m in Sources */,
 				9196CCED1F5E6E1F003D18E4 /* FaceSubjectModel.m in Sources */,
-				9177FD841FFE0AE50030AFC0 /* WebViewJavascriptBridge_JS.m in Sources */,
 				91FD7BC91F98637200DC54AC /* ScanningView.m in Sources */,
 				9150C9B11EE6A84F00B978D9 /* SAMKeychainQuery.m in Sources */,
 				913C4B311FD9050600C83DAE /* LevalView.m in Sources */,
@@ -2452,7 +2430,6 @@
 				9175230D1F46B275004CE4E0 /* AddressPickViewController.m in Sources */,
 				91571D731FFCD91B00E1BBD2 /* TestWebViewController.m in Sources */,
 				91D97B811EEF81FE000E6CE6 /* StarRateView.m in Sources */,
-				9177FD831FFE0AE50030AFC0 /* WebViewJavascriptBridge.m in Sources */,
 				912A19931F4AB0840014FB05 /* FormViewController.m in Sources */,
 				91F515741FDA83F00082835F /* LinkageViewController.m in Sources */,
 				919842BC1F2074CB00CE773F /* GestureView.m in Sources */,
@@ -2460,7 +2437,6 @@
 				91AC0CD91EF393CA004FDD9E /* UIImage+Common.m in Sources */,
 				9187C4FC1F21D86C000DF0D5 /* QRMainViewController.m in Sources */,
 				912950081EF915E7006AB9AA /* CircleProgressView.m in Sources */,
-				9177FD821FFE0AE50030AFC0 /* WKWebViewJavascriptBridge.m in Sources */,
 				916804FE1EE7EBE200902075 /* WriteViewController.m in Sources */,
 				91555A251F3C277F0082E860 /* QQTableViewController.m in Sources */,
 				916C1D811F395F2700A08B49 /* UIViewController+KeyboardPop.m in Sources */,
@@ -2582,7 +2558,6 @@
 				9122DBEF1EFD058F002A0D7A /* XLAutoRunLabel.m in Sources */,
 				91555A281F3C30410082E860 /* CellModel.m in Sources */,
 				919842C51F20866100CE773F /* SettingViewController.m in Sources */,
-				9177FD811FFE0AE50030AFC0 /* WebViewJavascriptBridgeBase.m in Sources */,
 				91089A991F0DD67300A05B0C /* FirstView.m in Sources */,
 				915A0FF01FD9317200263E15 /* TurntableViewController2.m in Sources */,
 				91ED58061FC51227001521AD /* SurePlaceholderView.m in Sources */,
