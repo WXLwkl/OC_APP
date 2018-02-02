@@ -6,8 +6,9 @@
 //  Copyright © 2018年 兴林. All rights reserved.
 //
 
-#import "RootWebViewController.h"
+#import "RootViewController.h"
 
-@interface WebJSBridgeViewController : RootWebViewController
+
+@interface WebJSBridgeViewController : RootViewController
 
 @end

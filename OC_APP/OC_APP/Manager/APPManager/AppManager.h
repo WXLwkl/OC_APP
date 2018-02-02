@@ -14,7 +14,7 @@
 @interface AppManager : NSObject
 
 #pragma mark - ——————— APP启动接口 ————————
-+ (UIViewController *)appStartWithMainViewController:(UIViewController *)mainVC guideImages:(NSArray *)array;
++ (void)appStartWithMainViewController:(UIViewController *)mainVC guideImages:(NSArray *)array;
 
 /** 沙盒主路径 */
 + (NSString *)homePath;

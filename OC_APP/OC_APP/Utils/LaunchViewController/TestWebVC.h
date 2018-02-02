@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RootWebViewController.h"
 
-@interface TestWebVC : UIViewController
+@interface TestWebVC : RootWebViewController
 
 @property (nonatomic,copy) NSString * url;
 

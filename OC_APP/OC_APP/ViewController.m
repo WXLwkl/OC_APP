@@ -25,10 +25,9 @@
 #import "StarRateView.h"
 
 
-#import "StepProgressView.h"
 
-#import "CircleProgressView.h"
-#import "AmountLabel.h"
+
+
 
 #import "ClipImageView.h"
 #import "GradientView.h"
@@ -55,7 +54,11 @@
 
 #import "LFUIView+Badge.h"
 
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate> {
+
+#import "ShowSignatureView.h"
+
+
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate, ShowSignatureViewDelegate> {
     
     UILabel*label_;
     
@@ -71,9 +74,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
 @property (nonatomic, strong) AVCaptureSession *session;
-
-@property (nonatomic, strong) CircleProgressView *progressView;
-@property (nonatomic, strong) AmountLabel *label;
 
 
 @property(nonatomic,strong)UIImage *rollImage;//滚动图片
@@ -131,7 +131,7 @@
     
 //    [self loadRollImageView];
     //    [self circleProgressView];
-    [self StepProgressView];
+    
     
     
     NSArray *arr = @[@1,@2,@4,@3,@5];
@@ -152,23 +152,13 @@
     btn.xl_hitTestEdgeInsets = UIEdgeInsetsMake(-20, -3, -50, -20);
     btn.xl_badgeValue = @"3";
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //    [btn addTarget:self action:@selector(gotoMainVC) forControlEvents:UIControlEventTouchUpInside];
     
     WeakSelf(btn);
     
-    WeakSelf(self);
     [btn xl_addActionHandler:^{
         StrongSelf(btn);
         
         btn.xl_badgeValue = @"1223";
-        return;
-        
-        
-        WriteViewController *writeVc = [[WriteViewController alloc] init];
-        MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];
-        [weakself presentViewController:nav animated:YES completion:^{
-            writeVc.title = @"写文章";
-        }];
     }];
     [self.view addSubview:btn];
     
@@ -223,16 +213,11 @@
     
     
 //    [self textViewPlaceholder];
-    
-    
-    //    [self StepProgressView];
-    
+
     //    [self gradientLayerView];
     //    [self createAutoRunLabel];
-    
-    //    [self loadGuide];
     //    [self labelScrollView];
-    //    [self loadBanner];
+//        [self loadBanner];
     
     //    [self loadAuthcodeView];
     //    [self slideView];
@@ -263,14 +248,44 @@
     
     
 //    [self testMoney];
-//    [self.view xl_removeAllSubviews];
-//    
+    [self.view xl_removeAllSubviews];
+//
 //    [self testNSMutableAttributedString];
 //    
 //    
 //    [self testPraiseEmitterBtn];
+
     
+    
+    
+    UIButton *btnx = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnx.frame = CGRectMake(100, 100, 100, 50);
+    btnx.backgroundColor = [UIColor orangeColor];
+    [btnx addTarget:self action:@selector(showPopSignatureView:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnx];
+
 }
+#pragma mark - 手写签名
+- (void)showPopSignatureView:(UIButton *)sender {
+    ShowSignatureView *socialSingnatureView = [[ShowSignatureView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    socialSingnatureView.delegate = self;
+    [socialSingnatureView show];
+}
+
+#pragma mark - SocialSignatureViewDelegate
+
+- (void)onSubmitBtn:(UIImage *)signatureImg {
+    
+    // signatureImg 签名的图片
+    
+//    self.showImageView.image = signatureImg;
+}
+
+
+
+
+
+
 - (void)testPraiseEmitterBtn {
     PraiseEmitterBtn *btn = [PraiseEmitterBtn buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(100, 100, 20, 20);
@@ -347,6 +362,22 @@
     [super touchesBegan:touches withEvent:event];
     
     [self.view endEditing:YES];
+
+    [self.view makeToast:@"xxxxxxx" duration:2.0 position:nil title:@"YYY" image:[UIImage imageNamed:@"s"]];
+//
+//
+//    return;
+
+//    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 50, 50)];
+//    lab.text = @"xxx";
+//    lab.backgroundColor = [UIColor redColor];
+//    lab.textAlignment = NSTextAlignmentCenter;
+//
+//    [self.view showToast:lab duration:3 position:ToastPositionCenter tapCallback:^{
+//        NSLog(@"------");
+//    }];
+
+
 }
 //金融产品，对数字是要非常敏感，提高精确度。
 - (void)useNSDecimalNumber {
@@ -371,39 +402,6 @@
     NSDecimalNumber *decimalNumber2 = [NSDecimalNumber decimalNumberWithString:bString];
     NSDecimalNumber *result = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2];
     NSLog(@"%@",result);
-}
-
-
-#pragma mark - 获取设备信息
-- (void)getDeviceMessage {
-    CGFloat all = 0;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSDictionary *attributes = [fileManager attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    NSNumber *num = attributes[NSFileSystemSize];
-    
-    all = [num doubleValue] / (powf(1024, 3));
-    NSLog(@"容量%.2fG",all);
-    
-    NSLog(@"mac地址：%@", [UIDevice xl_macAddress]);
-    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice xl_cpuNumber]);
-    NSLog(@"系统版本：%@",[UIDevice xl_systemVersion]);
-    NSLog(@"摄像头：%d",[UIDevice xl_hasCamera]);
-    
-    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_totalDiskSpaceMBytes],(unsigned long)[UIDevice xl_totalDiskSpaceMBytes] / (powf(1024, 1)));
-    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_freeDiskSpaceMBytes],(unsigned long)[UIDevice xl_freeDiskSpaceMBytes] / (powf(1024, 1)));
-    
-    
-    NSLog(@"设备为：%@",[UIDevice xl_getDeviceName]);
-    NSLog(@"是否越狱：%d", [UIDevice xl_isJailbroken]);
-    
-    
-    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice xl_totalMemoryBytes],(unsigned long)[UIDevice xl_totalMemoryBytes] / (powf(1024, 2)));
-    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice xl_freeMemoryBytes] ,(unsigned long)[UIDevice xl_freeMemoryBytes] / (powf(1024, 2)));
-    
-    NSLog(@"活跃内存：%f",[UIDevice xl_getActiveMemory] / (powf(1024, 2)));
-    NSLog(@"不活跃内存：%f",[UIDevice xl_getInActiveMemory] / (powf(1024, 2)));
-    
-    NSLog(@"其他：%f",[UIDevice xl_getWiredMemory] / (powf(1024, 2)));
 }
 
 #pragma mark - 多按钮节点
@@ -513,185 +511,6 @@
     [self.view addSubview:ccpView];
 }
 
-#pragma mark - 旋转的引导页
-
-#define k_Base_Tag  10000
-#define k_Rotate_Rate 1
-#define K_SCREEN_WIDHT [UIScreen mainScreen].bounds.size.width  //屏幕宽度
-#define K_SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height    //屏幕高
-- (void)loadGuide {
-    
-    NSArray *imageArr = @[@"0.jpg",@"1.jpg",@"2.jpg",@"3.jpg"];
-    NSArray *textImageArr = @[@"0.jpg",@"1.jpg",@"2.jpg",@"3.jpg"];
-    
-    UIScrollView *mainScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT)];
-    mainScrollView.pagingEnabled = YES;
-    mainScrollView.bounces = YES;
-    mainScrollView.contentSize = CGSizeMake(K_SCREEN_WIDHT*imageArr.count, K_SCREEN_HEIGHT);
-    mainScrollView.showsHorizontalScrollIndicator = NO;
-    mainScrollView.delegate = self;
-    [self.view addSubview:mainScrollView];
-    
-    //添加云彩图片
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 330, K_SCREEN_WIDHT, 170*K_SCREEN_WIDHT/1242.0)];
-    imageView.image = [UIImage imageNamed:@"yun.png"];
-    [self.view addSubview:imageView];
-    
-    
-    for (int i=0; i<imageArr.count; i++) {
-        UIView *rotateView = [[UIView alloc]initWithFrame:CGRectMake(K_SCREEN_WIDHT*i, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT*2)];
-        [rotateView setTag:k_Base_Tag+i];
-        [mainScrollView addSubview:rotateView];
-        if (i!=0) {
-            rotateView.alpha = 0;
-        }
-        
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, K_SCREEN_WIDHT, K_SCREEN_HEIGHT)];
-        imageView.image = [UIImage imageNamed:imageArr[i]];
-        [rotateView addSubview:imageView];
-        
-        UIImageView *textImageView = [[UIImageView alloc]initWithFrame:CGRectMake(K_SCREEN_WIDHT*i, 50, K_SCREEN_WIDHT, K_SCREEN_WIDHT *260.0/1242.0)];
-        [textImageView setTag:k_Base_Tag*2+i];
-        textImageView.image = [UIImage imageNamed:textImageArr[i]];
-        [mainScrollView addSubview:textImageView];
-        
-        //最后页面添加按钮
-        if (i == imageArr.count-1) {
-            UIControl *control = [[UIControl alloc]initWithFrame:CGRectMake(0, K_SCREEN_HEIGHT-80, K_SCREEN_WIDHT, 50)];
-            [control addTarget:self action:@selector(ClickToRemove) forControlEvents:UIControlEventTouchUpInside];
-            [rotateView addSubview:control];
-        }
-    }
-    
-    UIView *firstView = [mainScrollView viewWithTag:k_Base_Tag];
-    [mainScrollView bringSubviewToFront:firstView];
-    
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    UIView * view1 = [scrollView viewWithTag:k_Base_Tag];
-    UIView * view2 = [scrollView viewWithTag:k_Base_Tag+1];
-    UIView * view3 = [scrollView viewWithTag:k_Base_Tag+2];
-    UIView * view4 = [scrollView viewWithTag:k_Base_Tag+3];
-    
-    UIImageView * imageView1 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2];
-    UIImageView * imageView2 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+1];
-    UIImageView * imageView3 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+2];
-    UIImageView * imageView4 = (UIImageView *)[scrollView viewWithTag:k_Base_Tag*2+3];
-    
-    CGFloat xOffset = scrollView.contentOffset.x;
-    
-    //根据偏移量旋转
-    CGFloat rotateAngle = -1 * 1.0/K_SCREEN_WIDHT * xOffset * M_PI_2 * k_Rotate_Rate;
-    view1.layer.transform = CATransform3DMakeRotation(rotateAngle, 0, 0, 1);
-    view2.layer.transform = CATransform3DMakeRotation(M_PI_2*1+rotateAngle, 0, 0, 1);
-    view3.layer.transform = CATransform3DMakeRotation(M_PI_2*2+rotateAngle, 0, 0, 1);
-    view4.layer.transform = CATransform3DMakeRotation(M_PI_2*3+rotateAngle, 0, 0, 1);
-    
-    //根据偏移量位移（保证中心点始终都在屏幕下方中间）
-    view1.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
-    view2.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
-    view3.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
-    view4.center = CGPointMake(0.5 * K_SCREEN_WIDHT+xOffset, K_SCREEN_HEIGHT);
-    
-    //当前哪个视图放在最上面
-    if (xOffset<K_SCREEN_WIDHT*0.5) {
-        [scrollView bringSubviewToFront:view1];
-        
-    }else if (xOffset>=K_SCREEN_WIDHT*0.5 && xOffset < K_SCREEN_WIDHT*1.5){
-        [scrollView bringSubviewToFront:view2];
-        
-        
-    }else if (xOffset >=K_SCREEN_WIDHT*1.5 && xOffset < K_SCREEN_WIDHT*2.5){
-        [scrollView bringSubviewToFront:view3];
-        
-    }else if (xOffset >=K_SCREEN_WIDHT*2.5)
-    {
-        [scrollView bringSubviewToFront:view4];
-        
-    }
-    
-    //调节其透明度
-    CGFloat xoffset_More = xOffset*1.5>K_SCREEN_WIDHT?K_SCREEN_WIDHT:xOffset*1.5;
-    if (xOffset < K_SCREEN_WIDHT) {
-        view1.alpha = (K_SCREEN_WIDHT - xoffset_More)/K_SCREEN_WIDHT;
-        imageView1.alpha = (K_SCREEN_WIDHT - xOffset)/K_SCREEN_WIDHT;;
-        
-    }
-    if (xOffset <= K_SCREEN_WIDHT) {
-        view2.alpha = xoffset_More / K_SCREEN_WIDHT;
-        imageView2.alpha = xOffset / K_SCREEN_WIDHT;
-    }
-    if (xOffset >K_SCREEN_WIDHT && xOffset <= K_SCREEN_WIDHT*2) {
-        view2.alpha = (K_SCREEN_WIDHT*2 - xOffset)/K_SCREEN_WIDHT;
-        view3.alpha = (xOffset - K_SCREEN_WIDHT)/ K_SCREEN_WIDHT;
-        
-        imageView2.alpha = (K_SCREEN_WIDHT*2 - xOffset)/K_SCREEN_WIDHT;
-        imageView3.alpha = (xOffset - K_SCREEN_WIDHT)/ K_SCREEN_WIDHT;
-    }
-    if (xOffset >K_SCREEN_WIDHT*2 ) {
-        view3.alpha = (K_SCREEN_WIDHT*3 - xOffset)/K_SCREEN_WIDHT;
-        view4.alpha = (xOffset - K_SCREEN_WIDHT*2)/ K_SCREEN_WIDHT;
-        
-        imageView3.alpha = (K_SCREEN_WIDHT*3 - xOffset)/K_SCREEN_WIDHT;
-        imageView4.alpha = (xOffset - K_SCREEN_WIDHT*2)/ K_SCREEN_WIDHT;
-    }
-    
-    //调节背景色
-    if (xOffset <K_SCREEN_WIDHT && xOffset>0) {
-        self.view.backgroundColor = [UIColor colorWithRed:(140-40.0/K_SCREEN_WIDHT*xOffset)/255.0 green:(255-25.0/K_SCREEN_WIDHT*xOffset)/255.0 blue:(255-100.0/K_SCREEN_WIDHT*xOffset)/255.0 alpha:1];
-        
-    }else if (xOffset>=K_SCREEN_WIDHT &&xOffset<K_SCREEN_WIDHT*2){
-        
-        self.view.backgroundColor = [UIColor colorWithRed:(100+30.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT))/255.0 green:(230-40.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT))/255.0 blue:(155-5.0/320*(xOffset-K_SCREEN_WIDHT))/255.0 alpha:1];
-        
-    }else if (xOffset>=K_SCREEN_WIDHT*2 &&xOffset<K_SCREEN_WIDHT*3){
-        
-        self.view.backgroundColor = [UIColor colorWithRed:(130-50.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 green:(190-40.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 blue:(150+50.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*2))/255.0 alpha:1];
-        
-    }else if (xOffset>=K_SCREEN_WIDHT*3 &&xOffset<K_SCREEN_WIDHT*4){
-        
-        self.view.backgroundColor = [UIColor colorWithRed:(80-10.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 green:(150-25.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 blue:(200-90.0/K_SCREEN_WIDHT*(xOffset-K_SCREEN_WIDHT*3))/255.0 alpha:1];
-    }
-    
-}
-
--(void)ClickToRemove
-{
-    NSLog(@"点击事件");
-    [self.view removeFromSuperview];
-    
-}
-///** 是否支持自动转屏 */
-//-(BOOL)shouldAutorotate {
-//    return YES;
-//}
-///** 支持哪些屏幕方向 */
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait;
-////        return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
-//}
-//
-///** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//
-//    return UIInterfaceOrientationPortrait;
-//}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-/** 支持哪些屏幕方向 */
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscapeRight;
-}
-/** 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法） */
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
-}
-
-
 #pragma mark - 跑马灯
 - (void)createAutoRunLabel {
     XLAutoRunLabel *runLabel = [[XLAutoRunLabel alloc] initWithFrame:CGRectMake(0, 100, 400, 50)];
@@ -712,8 +531,8 @@
 }
 - (void)operateLabel: (XLAutoRunLabel *)autoLabel animationDidStopFinished: (BOOL)finished {
     
-    //    XLAutoRunLabel *runLabel = [self.view viewWithTag:100];
-    //    [runLabel stopAnimation];
+//    XLAutoRunLabel *runLabel = [self.view viewWithTag:100];
+//    [runLabel stopAnimation];
     NSLog(@"-----");
 }
 - (UILabel *)createLabelWithText: (NSString *)text textColor:(UIColor *)textColor labelFont:(UIFont *)font {
@@ -740,26 +559,6 @@
     return arc4random()%255 / 255.0f;
 }
 
-
-#pragma mark - 环形进度条和label
-- (void)circleProgressView {
-    _progressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(50, 30, 100, 100)];
-    //    progressView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_progressView];
-    _progressView.progress = 0.7;
-    
-    _label = [[AmountLabel alloc] initWithFrame:CGRectMake(160, 50, 100, 50)];
-    [self.view addSubview:_label];
-    _label.amount = 204;
-}
-
-#pragma mark - 步骤进度条
-- (void)StepProgressView {
-    NSArray *stepArr=@[@"区宝时尚",@"区宝时尚",@"时尚",@"区宝时尚",@"时尚"];
-    StepProgressView *stepView=[StepProgressView progressViewFrame:CGRectMake(0, self.view.bounds.size.height - 100, self.view.bounds.size.width, 60) withTitleArray:stepArr];
-    stepView.stepIndex=2;
-    [self.view addSubview:stepView];
-}
 #pragma mark - 渐变
 - (void)gradientLayerView {
     UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
@@ -772,29 +571,16 @@
 #pragma mark - 改变输入框占位符
 - (void)changeAttributedPlaceholder {
     UITextField *textF = [[UITextField alloc] initWithFrame:CGRectMake(200, 300, 130, 50)];
-    //    textF.font = [UIFont systemFontOfSize:25];
+//    textF.font = [UIFont systemFontOfSize:25];
     textF.borderStyle = UITextBorderStyleRoundedRect;
     textF.placeholder = @"账号";
     textF.xl_placeholderColor = [UIColor redColor];
     
-    //    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
-    //
-    //    textF.attributedPlaceholder = attributeText;
+//    NSAttributedString *attributeText = [[NSAttributedString alloc] initWithString:@"name" attributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:textF.font}];
+//
+//    textF.attributedPlaceholder = attributeText;
     [self.view addSubview:textF];
-    
-    
-    
-    UITextField *textF1 = [[UITextField alloc] initWithFrame:CGRectMake(200, 400, 130, 50)];
-    //    textF.font = [UIFont systemFontOfSize:25];
-    textF1.borderStyle = UITextBorderStyleRoundedRect;
-    textF1.placeholder = @"姓名";
-    textF1.xl_placeholderColor = [UIColor redColor];
-    [self.view addSubview:textF1];
 }
-
-
-
-
 
 #pragma mark - 计算label的行数
 - (void)numberOfline {
@@ -814,22 +600,7 @@
     NSInteger lineCount = totalHeight / lineHeight;
     NSLog(@"lineCount:%ld",(long)lineCount);
 }
-#pragma mark - 从一个UIViewController跳转到一个UINavigationController
-- (void)gotoMainVC {
-    
-    
-    float value = arc4random()%100/100.0;
-    
-    _label.amount = value*100*100;
-    [_progressView setProgress:value animated:YES];
-    return;
-    
-    WriteViewController *mainVC = [[WriteViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:mainVC];
-    [self presentViewController:mainNavi animated:YES completion:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = mainNavi;
-    }];
-}
+
 #pragma mark - 图片滚动
 - (void)loadRollImageView {
     
@@ -1016,14 +787,13 @@ bool isReverse = NO;//是否反向翻转
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 }
-- (void)timerFireMethod:(NSTimer *)timer
-{
+- (void)timerFireMethod:(NSTimer *)timer {
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     NSDate *now;
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit;
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday;
     now = [NSDate date];
     comps = [calendar components:unitFlags fromDate:now];
     
@@ -1043,7 +813,7 @@ bool isReverse = NO;//是否反向翻转
     NSDate *fireDate = [calendar dateFromComponents:components];//目标时间
     NSDate *today1 = [NSDate date];//当前时间
     
-    unsigned int unitFlags1 = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    unsigned int unitFlags1 = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     
     NSDateComponents *d = [calendar1 components:unitFlags1 fromDate:today1 toDate:fireDate options:0];//计算时间差
     label_.text = [NSString stringWithFormat:@"%zi天%zi小时%zi分%zi秒", [d day], [d hour], [d minute], [d second]];//倒计时显示
@@ -1148,11 +918,11 @@ bool isReverse = NO;//是否反向翻转
     toolbar.barStyle = UIBarStyleBlackTranslucent;
     toolbar.barTintColor = [UIColor redColor];
     
-    UIBarButtonItem *addItem=[[ UIBarButtonItem alloc ] initWithBarButtonSystemItem : UIBarButtonSystemItemAdd target : self action : @selector(add) ];
+    UIBarButtonItem *addItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
     
-    UIBarButtonItem *saveItem=[[ UIBarButtonItem alloc ] initWithBarButtonSystemItem : UIBarButtonSystemItemSave target : self action : @selector(add)];
+    UIBarButtonItem *saveItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(add)];
     
-    UIBarButtonItem *editItem=[[ UIBarButtonItem alloc ] initWithBarButtonSystemItem : UIBarButtonSystemItemEdit target : self action : @selector(add) ];
+    UIBarButtonItem *editItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(add)];
     
     toolbar.items = @[addItem,saveItem,editItem];
     
@@ -1212,4 +982,37 @@ bool isReverse = NO;//是否反向翻转
     NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
     NSLog(@"当前应用版本号码：%@",appCurVersionNum);
 }
+
+#pragma mark - 获取设备信息
+- (void)getDeviceMessage {
+    CGFloat all = 0;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attributes = [fileManager attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
+    NSNumber *num = attributes[NSFileSystemSize];
+    
+    all = [num doubleValue] / (powf(1024, 3));
+    NSLog(@"容量%.2fG",all);
+    
+    NSLog(@"mac地址：%@", [UIDevice xl_macAddress]);
+    NSLog(@"cpu个数：%lu",(unsigned long)[UIDevice xl_cpuNumber]);
+    NSLog(@"系统版本：%@",[UIDevice xl_systemVersion]);
+    NSLog(@"摄像头：%d",[UIDevice xl_hasCamera]);
+    
+    NSLog(@"硬盘总空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_totalDiskSpaceMBytes],(unsigned long)[UIDevice xl_totalDiskSpaceMBytes] / (powf(1024, 1)));
+    NSLog(@"可硬盘空间----%lu  ---->：%.2f",(unsigned long)[UIDevice xl_freeDiskSpaceMBytes],(unsigned long)[UIDevice xl_freeDiskSpaceMBytes] / (powf(1024, 1)));
+    
+    
+    NSLog(@"设备为：%@",[UIDevice xl_getDeviceName]);
+    NSLog(@"是否越狱：%d", [UIDevice xl_isJailbroken]);
+    
+    
+    NSLog(@"总内存----%lu   ---->：%f",(unsigned long)[UIDevice xl_totalMemoryBytes],(unsigned long)[UIDevice xl_totalMemoryBytes] / (powf(1024, 2)));
+    NSLog(@"可用内存----%lu  ---->：%f",(unsigned long)[UIDevice xl_freeMemoryBytes] ,(unsigned long)[UIDevice xl_freeMemoryBytes] / (powf(1024, 2)));
+    
+    NSLog(@"活跃内存：%f",[UIDevice xl_getActiveMemory] / (powf(1024, 2)));
+    NSLog(@"不活跃内存：%f",[UIDevice xl_getInActiveMemory] / (powf(1024, 2)));
+    
+    NSLog(@"其他：%f",[UIDevice xl_getWiredMemory] / (powf(1024, 2)));
+}
+
 @end

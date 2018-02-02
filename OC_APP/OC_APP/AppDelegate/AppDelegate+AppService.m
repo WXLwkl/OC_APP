@@ -20,9 +20,18 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     MainTabBarController *mainTabBar = [MainTabBarController new];
-    UIViewController *vc = [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nav;
+
+    self.window.rootViewController = mainTabBar;
+
+
+    [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
+
+
+
+    //    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
+
+
+
     [self.window makeKeyAndVisible];
 }
 

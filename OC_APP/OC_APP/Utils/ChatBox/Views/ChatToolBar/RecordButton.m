@@ -8,7 +8,6 @@
 
 #import "RecordButton.h"
 
-#define kGetColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
 @implementation RecordButton
 
@@ -17,7 +16,8 @@
     
     if (self) {
         self.hidden = YES;
-        self.backgroundColor = kGetColor(247, 247, 247);
+
+        self.backgroundColor = RGBColor(247, 247, 247);
         
         [self setTitle:@"按住 说话" forState:UIControlStateNormal];
         [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -39,13 +39,13 @@
 
 - (void)setButtonStateWithRecording
 {
-    self.backgroundColor = kGetColor(214, 215, 220); //214,215,220
+    self.backgroundColor = RGBColor(214, 215, 220); //214,215,220
     [self setTitle:@"松开 结束" forState:UIControlStateNormal];
 }
 
 - (void)setButtonStateWithNormal
 {
-    self.backgroundColor = kGetColor(247, 247, 247);
+    self.backgroundColor = RGBColor(247, 247, 247);
     [self setTitle:@"按住 说话" forState:UIControlStateNormal];
 }
 

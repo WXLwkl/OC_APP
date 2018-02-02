@@ -10,7 +10,6 @@
 
 @interface TestWebVC ()
 
-@property (nonatomic,strong) UIWebView * webView;
 
 @end
 
@@ -19,26 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<-" style:UIBarButtonItemStylePlain target:self action:@selector(goBackAction)];
-    
-    
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.webView];
 
-    NSURL * url = [NSURL URLWithString:_url];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
-    
+    [self loadUrlString:self.url];
 }
 
-//返回
-- (void)goBackAction {
-    if ([self.webView canGoBack]) {
-        [self.webView goBack];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 
 
 @end
@@ -46,8 +29,8 @@
 
 
 @implementation UIViewController (Public)
-- (UINavigationController*)xl_navigationController
-{
+- (UINavigationController*)xl_navigationController {
+
     UINavigationController* nav = nil;
     if ([self isKindOfClass:[UINavigationController class]]) {
         nav = (id)self;

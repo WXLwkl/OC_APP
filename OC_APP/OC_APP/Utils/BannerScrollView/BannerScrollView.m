@@ -5,9 +5,6 @@
 //  Created by xingl on 16/7/25.
 //  Copyright © 2016年 yjpal. All rights reserved.
 //
-#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
-#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
-
 
 
 #define HIGHT self.bounds.origin.y //由于_pageControl是添加进父视图的,所以实际位置要参考,滚动视图的y坐标
@@ -17,7 +14,7 @@
 
 #import "BannerScrollView.h"
 
-static CGFloat const chageImageTime = 2.0;
+static CGFloat const chageImageTime = 3.0;
 
 @interface BannerScrollView () <UIScrollViewDelegate>
 {

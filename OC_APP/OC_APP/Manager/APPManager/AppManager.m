@@ -8,16 +8,15 @@
 
 #import "AppManager.h"
 #import <AdSupport/AdSupport.h>
-#import "LaunchViewController.h"
 #import "SAMKeychain.h"
+
+#import "AdvertiseManager.h"
 
 @implementation AppManager
 
-+ (UIViewController *)appStartWithMainViewController:(UIViewController *)mainVC guideImages:(NSArray *)array {
++ (void)appStartWithMainViewController:(UIViewController *)mainVC guideImages:(NSArray *)array {
     
-    UIViewController *vc = [[LaunchViewController alloc] initWithMainViewController:mainVC guideImages:array];
-    
-    return vc;
+    [AdvertiseManager loadAdvertise];
 }
 
 

@@ -22,7 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _strokeColor = [UIColor whiteColor];
-        _fillColor  = RandColor;
+        _fillColor  = RandomColor;
 
         self.backgroundColor   = [UIColor clearColor];
         self.layer.anchorPoint = CGPointMake(0.5, 1);

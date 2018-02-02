@@ -8,8 +8,6 @@
 
 #import "XLAuthcodeView.h"
 
-#define XLRandomColor [UIColor colorWithRed:arc4random() % 256 / 256.0 green:arc4random() % 256 / 256.0 blue:arc4random() % 256 / 256.0 alpha:1.0];
-
 #define XLLineCount 4
 #define XLLineWidth 1.3
 #define XLFontSize [UIFont systemFontOfSize:arc4random()%5 + 20]
@@ -84,7 +82,7 @@
     //绘制干扰线
     for (int i = 0; i < XLLineCount-1; i++)
     {
-        UIColor *color = XLRandomColor;
+        UIColor *color = RandomColor;
         CGContextSetStrokeColorWithColor(context, color.CGColor);//设置线条填充色
         
         //设置线的起点

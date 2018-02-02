@@ -45,12 +45,15 @@
 #import "WebJSBridgeViewController.h"
 #import "DataSourceViewController.h"
 #import "BezierPathViewController.h"
+#import "UploadImagesViewController.h"
+#import "ProgressViewController.h"
+
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
 
 #define NAVBAR_COLORCHANGE_POINT (IMAGE_HEIGHT - NAV_HEIGHT*2)
-#define NAV_HEIGHT 64
+#define NAV_HEIGHT 60
 #define IMAGE_HEIGHT 260
 
 
@@ -238,15 +241,22 @@
                                                           @"滚动的数字(OK)",
                                                           @"交易密码(OK)",
                                                           @"无限滚动的tableView(OK)",
-                                                          @"左右滑动视图(OK)"]];
+                                                          @"左右滑动视图(OK)",
+                                                          @"进度条(OK)"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
+    //创建对象时，使用内联符合表达式
+    FPSLabel *fpsLabel = ({
+        FPSLabel *label = [FPSLabel new];
+        label.frame=CGRectMake(20, 80, 30, 30);
+        [label sizeToFit];
+        label.alpha = 0.6;
+        label;
+    });
     
-    FPSLabel *fpsLabel = [FPSLabel new];
-    fpsLabel.frame=CGRectMake(20, 80, 30, 30);
-    [fpsLabel sizeToFit];
-    fpsLabel.alpha = 0.6;
+    
+    
 //    [self.view addSubview:fpsLabel];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
@@ -358,6 +368,8 @@
         case 2:
         {
             //上传照片
+            UploadImagesViewController *vc = [UploadImagesViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 3:
@@ -520,6 +532,13 @@
         {
             //左右滑动视图
             ShowSlideViewController *vc = [ShowSlideViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 27:
+        {
+            //进度条
+            ProgressViewController *vc = [[ProgressViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

@@ -182,7 +182,7 @@ static void displayStatusChanged(CFNotificationCenterRef center,
 
     //随便写写
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:window.bounds];
-    imageView.image = [UIImage imageNamed:@"adimage.png"];
+    imageView.image = [UIImage imageNamed:@"01.png"];
     imageView.userInteractionEnabled = YES;
 
     //给非UIControl的子类，增加点击事件

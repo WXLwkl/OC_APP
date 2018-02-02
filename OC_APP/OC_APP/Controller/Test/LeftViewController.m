@@ -6,8 +6,6 @@
 //  Copyright © 2017年 chavez. All rights reserved.
 //
 
-#define kSCREENWIDTH [UIScreen mainScreen].bounds.size.width
-
 #import "LeftViewController.h"
 
 #import "UIViewController+LateralSlide.h"
@@ -66,14 +64,14 @@
 - (void)test {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor redColor];
-    view.frame = CGRectMake(kSCREENWIDTH * 0.75 - 10, 0, 8, 200);
+    view.frame = CGRectMake(kScreenWidth * 0.75 - 10, 0, 8, 200);
     [self.view addSubview:view];
     [self.view bringSubviewToFront:view];
 }
 
 - (void)setupTableView {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, kSCREENWIDTH * 0.75, CGRectGetHeight(self.view.bounds)-300) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, kScreenWidth * 0.75, CGRectGetHeight(self.view.bounds)-300) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -85,7 +83,7 @@
 }
 
 - (void)setupHeader {
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREENWIDTH * 0.75, 300)];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth * 0.75, 300)];
     imageV.backgroundColor = [UIColor clearColor];
     imageV.contentMode = UIViewContentModeScaleAspectFill;
     imageV.image = [UIImage imageNamed:@"1.jpg"];

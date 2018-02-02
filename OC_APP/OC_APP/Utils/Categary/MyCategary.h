@@ -19,6 +19,7 @@
 #import "UITextView+Placeholder.h"
 #import "UIView+Frame.h"
 #import "UIView+Common.h"
+#import "UIView+Toast.h"
 
 //#import "UIViewController+KeyboardPop.h"
 #import "UIViewController+Common.h"

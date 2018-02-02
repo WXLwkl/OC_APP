@@ -8,9 +8,6 @@
 
 #import "PopoverMenu.h"
 
-#define kMainWindow  [UIApplication sharedApplication].keyWindow
-
-
 #pragma mark - private cell
 
 @interface PopoverMenuCell : UITableViewCell
@@ -188,7 +185,7 @@
 }
 
 - (void)showRelyOnView:(UIView *)view {
-    CGRect absoluteRect = [view convertRect:view.bounds toView:kMainWindow];
+    CGRect absoluteRect = [view convertRect:view.bounds toView:kKeyWindow];
     CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
     _mainView.layer.mask = [self getMaskLayerWithPoint:relyPoint];
     if (self.xl_y < _anchorPoint.y) {
@@ -342,8 +339,8 @@
 
 
 - (void)show {
-    [kMainWindow addSubview:_bgView];
-    [kMainWindow addSubview:self];
+    [kKeyWindow addSubview:_bgView];
+    [kKeyWindow addSubview:self];
     PopoverMenuCell *cell = [self getLastVisibleCell];
     cell.isShowSeparator = NO;
     self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);

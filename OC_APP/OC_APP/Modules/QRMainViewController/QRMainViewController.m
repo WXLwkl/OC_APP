@@ -7,8 +7,8 @@
 //
 
 #define QRCodeWidth  260.0   //正方形二维码的边长
-#define SCREENWidth  [UIScreen mainScreen].bounds.size.width   //设备屏幕的宽度
-#define SCREENHeight [UIScreen mainScreen].bounds.size.height //设备屏幕的高度
+//#define SCREENWidth  [UIScreen mainScreen].bounds.size.width   //设备屏幕的宽度
+//#define SCREENHeight [UIScreen mainScreen].bounds.size.height //设备屏幕的高度
 
 #import "QRMainViewController.h"
 #import "MyQRViewController.h"

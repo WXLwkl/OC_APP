@@ -24,6 +24,7 @@
     self.navigationItem.leftBarButtonItem = backButton;
     
     self.statusBarStyle = UIStatusBarStyleDefault;
+
     
 }
 - (BOOL)shouldAutorotate {

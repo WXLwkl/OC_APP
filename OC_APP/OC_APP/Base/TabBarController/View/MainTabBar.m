@@ -75,7 +75,9 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     if (self.isHidden == NO) {
-
+//        if (CGRectContainsPoint(self.centerBtn.frame, point)) {
+//            return self.centerBtn;
+//        }
         CGPoint newP = [self convertPoint:point toView:self.centerBtn];
 
         if ([self.centerBtn pointInside:newP withEvent:event]) {

@@ -150,6 +150,7 @@ static NSUInteger const kContainerViewTag = 0x893147;
     [self.webView stopLoading];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    [self.webView removeObserver:self forKeyPath:@"title"];
     self.webView.UIDelegate = nil;
     self.webView.navigationDelegate = nil;
 }

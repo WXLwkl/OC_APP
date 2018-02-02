@@ -9,9 +9,8 @@
 #import "popMenvTopView.h"
 #import "XLPopMenuView.h"
 
-#define RGB(r, g, b)    [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:1]
-#define drakColor RGB(60, 60, 60)
-#define lightColor RGB(249, 247, 234)
+#define drakColor RGBColor(60, 60, 60)
+#define lightColor RGBColor(249, 247, 234)
 
 
 @interface popMenvTopView ()
@@ -31,8 +30,7 @@
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         _idx = 0;
     }
     return self;

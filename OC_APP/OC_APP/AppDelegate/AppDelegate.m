@@ -12,6 +12,7 @@
 #import "MainNavigationController.h"
 #import "HomeViewController.h"
 
+
 @interface AppDelegate () {
     NSInteger count;
 }
@@ -28,11 +29,6 @@
     
     //初始化window
     [self initWindowWithGuideOrAD];
-    
-    
-    
-    
-//    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
     
     count = 0;
     
