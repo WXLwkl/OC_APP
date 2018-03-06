@@ -12,15 +12,17 @@
 
 @property (nonatomic, assign) CGFloat xl_x;
 @property (nonatomic, assign) CGFloat xl_y;
-@property (nonatomic, assign) CGPoint xl_origin;
+@property (nonatomic, assign) CGFloat xl_right;
+@property (nonatomic, assign) CGFloat xl_bottom;
+
+@property (nonatomic, assign) CGFloat xl_width;
+@property (nonatomic, assign) CGFloat xl_height;
 
 @property (nonatomic, assign) CGFloat xl_centerX;
 @property (nonatomic, assign) CGFloat xl_centerY;
 
-@property (nonatomic, assign) CGFloat xl_width;
-@property (nonatomic, assign) CGFloat xl_height;
+@property (nonatomic, assign) CGPoint xl_origin;
 @property (nonatomic, assign) CGSize  xl_size;
-
 
 
 @end

@@ -43,11 +43,14 @@
 #import "InfiniteTabelViewController.h"
 #import "ShowSlideViewController.h"
 #import "WebJSBridgeViewController.h"
+#import "ScriptMessageHandlerViewController.h"
 #import "DataSourceViewController.h"
 #import "BezierPathViewController.h"
 #import "UploadImagesViewController.h"
 #import "ProgressViewController.h"
-
+#import "CustomCollectionViewController.h"
+#import "WaterfallFlowViewController.h"
+#import "DragSortViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -217,10 +220,11 @@
     if (!self.dataArray) {
         self.dataArray = [NSMutableArray arrayWithArray:@[@"省市区三级联动(OK)",
                                                           @"Masonry布局实例(OK)",
-                                                          @"照片上传",
+                                                          @"照片上传(OK)",
                                                           @"照片上传附带进度",
                                                           @"列表倒计时(OK)",
                                                           @"H5交互WebViewJavascriptBridge",
+                                                          @"H5交互ScriptMessageHandler(OK)",
                                                           @"列表空白页展现(OK)",
                                                           @"BezierPath练习(OK)",
                                                           @"常见表单行类型(OK)",
@@ -229,7 +233,6 @@
                                                           @"只加载显示Cell的Image图(OK)",
                                                           @"列表滑动不加载图片",
                                                           @"长按列表行拖动效果(OK)",
-                                                          @"音视频功能集合",
                                                           @"自定义视图(OK)",
                                                           @"获取环境光感(OK)",
                                                           @"卡片效果(OK)",
@@ -242,7 +245,11 @@
                                                           @"交易密码(OK)",
                                                           @"无限滚动的tableView(OK)",
                                                           @"左右滑动视图(OK)",
-                                                          @"进度条(OK)"]];
+                                                          @"进度条(OK)",
+                                                          @"CollectionView自定义布局(OK)",
+                                                          @"瀑布流(OK)",
+                                                          @"CollectionView拖拽排序(OK)",
+                                                          @"音视频功能集合"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -394,61 +401,63 @@
             break;
         case 6:
         {
+            // H5交互ScriptMessageHandler
+            ScriptMessageHandlerViewController *vc = [ScriptMessageHandlerViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 7:
+        {
             //列表空白页展现
             BlankPageViewController *vc = [[BlankPageViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 7:
+        case 8:
         {
             // BezierPath
             BezierPathViewController *vc = [BezierPathViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 8:
+        case 9:
         {
             //常见表单行类型
             FormViewController *vc = [FormViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 9:
+        case 10:
         {
             //TableViewDataSource提取
             DataSourceViewController *vc = [DataSourceViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 10:
+        case 11:
         {
             // QQ/微信 聊天
             ChatViewController *vc = [ChatViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 11:
+        case 12:
         {
             //只加载显示Cell的Image图(OK)
             SDWebImageTableViewController *vc = [SDWebImageTableViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 12:
+        case 13:
         {
             //列表滑动不加载图片
         }
             break;
-        case 13:
+        case 14:
         {
             //长按列表行拖动效果
             DragTableViewController *vc = [DragTableViewController new];
             [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 14:
-        {
-            //音视频功能集合
         }
             break;
         case 15:
@@ -540,6 +549,32 @@
             //进度条
             ProgressViewController *vc = [[ProgressViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 28:
+        {
+            // CollectionView自定义布局
+            CustomCollectionViewController *vc = [[CustomCollectionViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 29:
+        {
+            // 瀑布流
+            WaterfallFlowViewController *vc= [WaterfallFlowViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 30:
+        {
+            // 拖拽排序
+            DragSortViewController *vc = [DragSortViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 31:
+        {
+            //音视频功能集合
         }
             break;
         default:

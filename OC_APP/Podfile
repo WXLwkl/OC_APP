@@ -7,21 +7,24 @@ target 'OC_APP' do
 
   # Pods for OC_APP
 
-pod 'MBProgressHUD'
-pod 'SDWebImage'
+    pod 'MBProgressHUD'
+    pod 'SDWebImage'
 
-pod 'AFNetworking'
-pod 'YYCache' #缓存
+    pod 'AFNetworking'
+    pod 'YYCache' #缓存
 
-pod 'MJRefresh'
-pod 'MJExtension'
+    pod 'MJRefresh'
+    pod 'MJExtension'
 
-pod 'pop' #做动画效果
+    pod 'pop' #做动画效果
 
-pod 'Masonry' #布局
+    pod 'Masonry' #布局
 
-pod 'TZImagePickerController' #图片选择器
+    pod 'TZImagePickerController' #图片选择器
 
-pod 'WebViewJavascriptBridge' #web js交互
+    pod 'WebViewJavascriptBridge' #web js交互
+    
+    pod 'WRNavigationBar' #导航 (可做渐变效果)
+
 
 end

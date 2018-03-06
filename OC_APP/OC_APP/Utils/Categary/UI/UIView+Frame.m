@@ -30,13 +30,43 @@
     self.frame = frame;
 }
 
-- (CGPoint)xl_origin {
-    return self.frame.origin;
+- (CGFloat)xl_right {
+    return self.frame.origin.x + self.frame.size.width;
 }
 
-- (void)setXl_origin:(CGPoint)origin {
+- (void)setXl_right:(CGFloat)right {
     CGRect frame = self.frame;
-    frame.origin = origin;
+    frame.origin.x = right - frame.size.width;
+    self.frame = frame;
+}
+
+- (CGFloat)xl_bottom {
+    return self.frame.origin.y + self.frame.size.height;
+}
+
+- (void)setXl_bottom:(CGFloat)bottom {
+    CGRect frame = self.frame;
+    frame.origin.y = bottom - frame.size.height;
+    self.frame = frame;
+}
+
+- (CGFloat)xl_width {
+    return self.frame.size.width;
+}
+
+- (void)setXl_width:(CGFloat)width {
+    CGRect frame = self.frame;
+    frame.size.width = width;
+    self.frame = frame;
+}
+
+- (CGFloat)xl_height {
+    return self.frame.size.height;
+}
+
+- (void)setXl_height:(CGFloat)height {
+    CGRect frame = self.frame;
+    frame.size.height = height;
     self.frame = frame;
 }
 
@@ -60,23 +90,13 @@
     self.center = center;
 }
 
-- (CGFloat)xl_width {
-    return self.frame.size.width;
+- (CGPoint)xl_origin {
+    return self.frame.origin;
 }
 
-- (void)setXl_width:(CGFloat)width {
+- (void)setXl_origin:(CGPoint)origin {
     CGRect frame = self.frame;
-    frame.size.width = width;
-    self.frame = frame;
-}
-
-- (CGFloat)xl_height {
-    return self.frame.size.height;
-}
-
-- (void)setXl_height:(CGFloat)height {
-    CGRect frame = self.frame;
-    frame.size.height = height;
+    frame.origin = origin;
     self.frame = frame;
 }
 

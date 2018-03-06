@@ -265,4 +265,13 @@
     
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (!newSuperview && self.timer) {
+        // 销毁定时器
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
 @end

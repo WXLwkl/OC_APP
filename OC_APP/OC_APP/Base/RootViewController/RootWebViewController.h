@@ -8,8 +8,10 @@
 
 #import "RootViewController.h"
 #import <WebKit/WebKit.h>
+
 @interface RootWebViewController : RootViewController
 
+@property (nonatomic, strong) WKWebView *webView;
 
 ///// Time out internal.
 //@property(assign, nonatomic) NSTimeInterval timeoutInternal;
@@ -24,8 +26,6 @@
 @property (nonatomic, strong) NSString *rootUrlStrig;
 @property (nonatomic, strong) UIColor *progressTintColor;
 
-
-@property (nonatomic, strong) WKWebView *webView;
 
 /**
  *  根据远端URL地址加载

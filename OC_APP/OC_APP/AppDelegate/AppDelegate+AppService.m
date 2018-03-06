@@ -24,7 +24,7 @@
     self.window.rootViewController = mainTabBar;
 
 
-    [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
+//    [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
 
 
 

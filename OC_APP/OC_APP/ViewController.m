@@ -58,7 +58,9 @@
 #import "ShowSignatureView.h"
 
 
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate, ShowSignatureViewDelegate> {
+#import "MarqueeView.h"
+
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate, ShowSignatureViewDelegate, MarqueeViewDelegate> {
     
     UILabel*label_;
     
@@ -216,7 +218,7 @@
 
     //    [self gradientLayerView];
     //    [self createAutoRunLabel];
-    //    [self labelScrollView];
+    
 //        [self loadBanner];
     
     //    [self loadAuthcodeView];
@@ -255,7 +257,7 @@
 //    
 //    [self testPraiseEmitterBtn];
 
-    
+    [self labelScrollView];
     
     
     UIButton *btnx = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -490,25 +492,39 @@
     [self.view addSubview:v];
 }
 
+
+
 #pragma mark - 文字轮播
 - (void)labelScrollView {
-    MyscrollView *ccpView = [[MyscrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+//    MyscrollView *ccpView = [[MyscrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 50)];
+//
+//    ccpView.titleArray = [NSArray arrayWithObjects:@"iPhone6s上线32G内存手机你怎么看？",@"亲爱的朋友们2016年还有100天就要过去了,2017年您准备好了吗?",@"今年双11您预算了几个月的工资？",@"高德与百度互掐，你更看好哪方？", nil];
+//
+//    ccpView.titleFont = 18;
+//
+//    ccpView.titleColor = [UIColor blackColor];
+//
+//    ccpView.BGColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
+//
+//    [ccpView clickTitleLabel:^(NSInteger index,NSString *titleString) {
+//
+//        NSLog(@"%ld-----%@",(long)index,titleString);
+//
+//    }];
+//
+//    [self.view addSubview:ccpView];
     
-    ccpView.titleArray = [NSArray arrayWithObjects:@"iPhone6s上线32G内存手机你怎么看？",@"亲爱的朋友们2016年还有100天就要过去了,2017年您准备好了吗?",@"今年双11您预算了几个月的工资？",@"高德与百度互掐，你更看好哪方？", nil];
+    MarqueeView *marqueeView = [[MarqueeView alloc] init];
+    marqueeView.delegate = self;
+    marqueeView.frame = CGRectMake(0,10, self.view.frame.size.width, 40);
+    marqueeView.backgroundColor = [UIColor brownColor];
+    [self.view addSubview:marqueeView];
     
-    ccpView.titleFont = 18;
+}
+
+- (void)marqueeViewDidSelectAtIndex:(NSInteger)index {
     
-    ccpView.titleColor = [UIColor blackColor];
-    
-    ccpView.BGColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
-    
-    [ccpView clickTitleLabel:^(NSInteger index,NSString *titleString) {
-        
-        NSLog(@"%ld-----%@",(long)index,titleString);
-        
-    }];
-    
-    [self.view addSubview:ccpView];
+    NSLog(@"%ld", index);
 }
 
 #pragma mark - 跑马灯

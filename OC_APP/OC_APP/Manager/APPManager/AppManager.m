@@ -10,6 +10,8 @@
 #import <AdSupport/AdSupport.h>
 #import "SAMKeychain.h"
 
+#import "XLKeychain.h"
+
 #import "AdvertiseManager.h"
 
 @implementation AppManager
@@ -71,7 +73,8 @@
 + (NSString *)appUUUID {
     
     //从钥匙串读取UUID：
-    NSString *retrieveUUID = [SAMKeychain passwordForService:@"com.yourapp.yourcompany"account:@"user"];
+//    NSString *retrieveUUID = [SAMKeychain passwordForService:@"com.yourapp.yourcompany"account:@"user"];
+    NSString *retrieveUUID = [XLKeychain readKeychainValue:@"UUID.com.xingl.OC-APP"];
     NSLog(@"----->%@", retrieveUUID);
     if (XL_IsEmptyString(retrieveUUID)) {
         
@@ -87,8 +90,9 @@
         
         NSLog(@"%@",retrieveUUID);
         //在钥匙串中写入UUID
-        [SAMKeychain setPassword:retrieveUUID
-                      forService:@"com.yourapp.yourcompany"account:@"user"];
+//        [SAMKeychain setPassword:retrieveUUID
+//                      forService:@"com.yourapp.yourcompany"account:@"user"];
+        [XLKeychain saveKeychainValue:retrieveUUID key:@"UUID.com.xingl.OC-APP"];
     }
     
     return retrieveUUID;
