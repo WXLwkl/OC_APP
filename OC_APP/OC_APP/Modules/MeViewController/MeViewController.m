@@ -60,6 +60,8 @@
 #define IMAGE_HEIGHT 260
 
 
+#import <WRNavigationBar.h>
+
 #import "FPSLabel.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -180,10 +182,10 @@
     
 }
 
-- (void)loadView {
-    [super loadView];
-    [self.navigationController.navigationBar setShadowImage:[UIImage xl_imageWithColor:[UIColor clearColor]]];
-}
+//- (void)loadView {
+//    [super loadView];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage xl_imageWithColor:[UIColor clearColor]]];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -271,6 +273,7 @@
     //弹出提示
     [self showNewStatusesCount:self.dataArray.count];
 
+    [self wr_setNavBarBackgroundAlpha:0];
 }
 
 - (void)refresh {
@@ -310,20 +313,20 @@
 //    [self.tableView reloadData];
 //}
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self scrollViewDidScroll:self.tableView];
-    [self.tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [super viewWillDisappear:animated];
-    //还原导航栏
-    [self.navigationController.navigationBar xl_reset];
-    
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//
+//    [self scrollViewDidScroll:self.tableView];
+//    [self.tableView reloadData];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//
+//    [super viewWillDisappear:animated];
+//    //还原导航栏
+//    [self.navigationController.navigationBar xl_reset];
+//
+//}
 
 - (void)settingBtnClick:(UIBarButtonItem *)item {
     
@@ -594,17 +597,21 @@
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > NAVBAR_COLORCHANGE_POINT) {
         CGFloat alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / NAV_HEIGHT;
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
+//        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:alpha > 0.99 ? 0.99 : alpha]];
 //        [self wr_setNavBarTintColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
 //        [self wr_setNavBarTitleColor:[[UIColor blackColor] colorWithAlphaComponent:alpha]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
+        
+        [self wr_setNavBarBackgroundAlpha:alpha];
+        
         self.navigationItem.title = @"个人中心";
         self.statusBarStyle = UIStatusBarStyleLightContent;
     } else {
-        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:0]];
+//        [self.navigationController.navigationBar xl_setBackgroundColor:[THEME_color colorWithAlphaComponent:0]];
 //        [self wr_setNavBarTintColor:[UIColor whiteColor]];
 //        [self wr_setNavBarTitleColor:[UIColor whiteColor]];
 //        [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
+        [self wr_setNavBarBackgroundAlpha:0];
         self.navigationItem.title = @"";
         self.statusBarStyle = UIStatusBarStyleDefault;
     }

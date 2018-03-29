@@ -182,10 +182,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (tableView.isEditing) {
         return;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;

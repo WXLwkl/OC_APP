@@ -267,6 +267,7 @@
 		91B5A6541F971B150008FB98 /* CusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5A6521F971B150008FB98 /* CusView.m */; };
 		91B5A6551F971B150008FB98 /* CusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5A6531F971B150008FB98 /* CusView.xib */; };
 		91B5F5E41F3DA91000A7AE05 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5F5E31F3DA91000A7AE05 /* GroupModel.m */; };
+		91B64D20206A2655000C40B1 /* UIScrollView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B64D1F206A2655000C40B1 /* UIScrollView+Common.m */; };
 		91B9864D201EBE09004724D0 /* ShowSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B9864C201EBE09004724D0 /* ShowSignatureView.m */; };
 		91B98665201EFE7B004724D0 /* LineProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B98664201EFE7B004724D0 /* LineProgressView.m */; };
 		91B9866E201F15C9004724D0 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B9866D201F15C9004724D0 /* ProgressViewController.m */; };
@@ -811,6 +812,8 @@
 		91B5A6531F971B150008FB98 /* CusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CusView.xib; sourceTree = "<group>"; };
 		91B5F5E21F3DA91000A7AE05 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
 		91B5F5E31F3DA91000A7AE05 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
+		91B64D1E206A2655000C40B1 /* UIScrollView+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Common.h"; sourceTree = "<group>"; };
+		91B64D1F206A2655000C40B1 /* UIScrollView+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Common.m"; sourceTree = "<group>"; };
 		91B9864B201EBE09004724D0 /* ShowSignatureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowSignatureView.h; sourceTree = "<group>"; };
 		91B9864C201EBE09004724D0 /* ShowSignatureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowSignatureView.m; sourceTree = "<group>"; };
 		91B98663201EFE7B004724D0 /* LineProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineProgressView.h; sourceTree = "<group>"; };
@@ -1833,6 +1836,8 @@
 				91ED58081FC512F1001521AD /* UITableView+Common.m */,
 				91ED580F1FC535A3001521AD /* UICollectionView+Common.h */,
 				91ED58101FC535A3001521AD /* UICollectionView+Common.m */,
+				91B64D1E206A2655000C40B1 /* UIScrollView+Common.h */,
+				91B64D1F206A2655000C40B1 /* UIScrollView+Common.m */,
 				91AC0CDE1EF39438004FDD9E /* UIView+Frame.h */,
 				91AC0CDF1EF39438004FDD9E /* UIView+Frame.m */,
 				91A1F27E200706AA00A25282 /* UIView+Toast.h */,
@@ -2604,7 +2609,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2688,6 +2694,7 @@
 				918B55C7200DC1170048C5A1 /* AdvertiseView.m in Sources */,
 				917193C31FDFC97E00D0825E /* TradeKeyboard.m in Sources */,
 				9199AA08203EBE6E00C7DA76 /* FlowCell.m in Sources */,
+				91B64D20206A2655000C40B1 /* UIScrollView+Common.m in Sources */,
 				916C1DBF1F39922300A08B49 /* NSString+Json.m in Sources */,
 				91F806F91FBEB58000B81A8B /* UIControl+Common.m in Sources */,
 				911B12CD1FE23FBE007D9692 /* TableViewInterceptor.m in Sources */,
