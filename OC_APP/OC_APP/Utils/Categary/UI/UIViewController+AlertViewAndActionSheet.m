@@ -9,13 +9,6 @@
 #import "UIViewController+AlertViewAndActionSheet.h"
 
 
-#ifdef IOS_Foundation_Later_8
-
-#else
-static click clickIndex = nil;
-static clickHaveField clickIncludeFields = nil;
-static click clickDestructive = nil;
-#endif
 static NSMutableArray *fields = nil;
 
 @implementation UIViewController (AlertViewAndActionSheet)

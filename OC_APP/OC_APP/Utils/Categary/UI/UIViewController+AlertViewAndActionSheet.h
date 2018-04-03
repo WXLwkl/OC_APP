@@ -16,11 +16,6 @@ typedef void(^clickHaveField)(NSArray<UITextField *> *fields, NSInteger index);
 
 @interface UIViewController (AlertViewAndActionSheet)
 
-#ifdef IOS_Foundation_Later_8
-
-#else
-<UIAlertViewDelegate,UIActionSheetDelegate>
-#endif
 
 - (void)xl_alertWithTitle:(NSString *)title
                message:(NSString *)message

@@ -23,6 +23,7 @@
 
 
 #import "AddressPickViewController.h"
+#import "AlertControllerViewController.h"
 #import "MasonryViewController.h"
 #import "ReduceTimeViewController.h"
 #import "FormViewController.h"
@@ -48,9 +49,7 @@
 #import "BezierPathViewController.h"
 #import "UploadImagesViewController.h"
 #import "ProgressViewController.h"
-#import "CustomCollectionViewController.h"
-#import "WaterfallFlowViewController.h"
-#import "DragSortViewController.h"
+#import "CollectionListViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -223,7 +222,7 @@
         self.dataArray = [NSMutableArray arrayWithArray:@[@"省市区三级联动(OK)",
                                                           @"Masonry布局实例(OK)",
                                                           @"照片上传(OK)",
-                                                          @"照片上传附带进度",
+                                                          @"AlertController(OK)",
                                                           @"列表倒计时(OK)",
                                                           @"H5交互WebViewJavascriptBridge",
                                                           @"H5交互ScriptMessageHandler(OK)",
@@ -248,9 +247,7 @@
                                                           @"无限滚动的tableView(OK)",
                                                           @"左右滑动视图(OK)",
                                                           @"进度条(OK)",
-                                                          @"CollectionView自定义布局(OK)",
-                                                          @"瀑布流(OK)",
-                                                          @"CollectionView拖拽排序(OK)",
+                                                          @"CollectionView相关(OK)",
                                                           @"音视频功能集合"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
@@ -384,7 +381,9 @@
             break;
         case 3:
         {
-            //上传照片带进度
+            //AlertController(OK)
+            AlertControllerViewController *vc = [[AlertControllerViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 4:
@@ -557,25 +556,12 @@
         case 28:
         {
             // CollectionView自定义布局
-            CustomCollectionViewController *vc = [[CustomCollectionViewController alloc] init];
+            CollectionListViewController *vc = [[CollectionListViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
+        
         case 29:
-        {
-            // 瀑布流
-            WaterfallFlowViewController *vc= [WaterfallFlowViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 30:
-        {
-            // 拖拽排序
-            DragSortViewController *vc = [DragSortViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 31:
         {
             //音视频功能集合
         }
@@ -617,7 +603,7 @@
     }
 }
 
-#pragma mark - get
+#pragma mark - getter
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
