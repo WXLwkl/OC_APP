@@ -22,7 +22,7 @@
 #import "ALinRefreshGifHeader.h"
 
 
-#import "AddressPickViewController.h"
+#import "SpeechViewController.h"
 #import "AlertControllerViewController.h"
 #import "MasonryViewController.h"
 #import "ReduceTimeViewController.h"
@@ -219,7 +219,7 @@
 
     
     if (!self.dataArray) {
-        self.dataArray = [NSMutableArray arrayWithArray:@[@"省市区三级联动(OK)",
+        self.dataArray = [NSMutableArray arrayWithArray:@[@"原生语音识别-iOS10后(OK)",
                                                           @"Masonry布局实例(OK)",
                                                           @"照片上传(OK)",
                                                           @"AlertController(OK)",
@@ -228,7 +228,7 @@
                                                           @"H5交互ScriptMessageHandler(OK)",
                                                           @"列表空白页展现(OK)",
                                                           @"BezierPath练习(OK)",
-                                                          @"常见表单行类型(OK)",
+                                                          @"常见表单行类型(OK)(包含省市区三级联动)",
                                                           @"TableViewDataSource提取(OK)",
                                                           @"聊天(待完善)",
                                                           @"只加载显示Cell的Image图(OK)",
@@ -362,7 +362,7 @@
     switch (indexPath.row) {
         case 0:
         {
-            AddressPickViewController *vc = [AddressPickViewController new];
+            SpeechViewController *vc = [SpeechViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

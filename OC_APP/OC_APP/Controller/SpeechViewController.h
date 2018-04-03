@@ -1,5 +1,5 @@
 //
-//  AddressPickViewController.h
+//  SpeechViewController.h
 //  OC_APP
 //
 //  Created by xingl on 2017/8/18.
@@ -8,6 +8,6 @@
 
 #import "RootViewController.h"
 
-@interface AddressPickViewController : RootViewController
+@interface SpeechViewController : RootViewController
 
 @end

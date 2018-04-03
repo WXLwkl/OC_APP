@@ -88,6 +88,29 @@ typedef void (^LongPressActionBlock)(UILongPressGestureRecognizer *gestureRecogi
 - (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
                           cornerRadii:(CGSize)cornerRadii;
 
+
+/**
+ 设置圆角带边框线
+
+ @param corners 圆角方位
+ @param cornerRadii 半径
+ @param borderColor 边框颜色
+ */
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
+                         cornerRadii:(CGSize)cornerRadii
+                         borderColor:(UIColor *)borderColor;
+
+
+/**
+ 设置虚线边框
+
+ @param lineWidth 虚线的宽度
+ @param lineColor 虚线颜色
+ */
+- (void)xl_setBorderWithDashLineWidth:(NSInteger)lineWidth
+                            lineColor:(UIColor *)lineColor;
+
+
 /**
  设置边框
 

@@ -101,8 +101,12 @@
 	<string>请允许访问您的通讯录，以获取更好的体验</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>请允许访问您的位置，以获取更好的体验</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App需要您的同意,才能访问麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许访问您的相册，以获取更好的体验</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>App需要您的同意,才能使用语音识别技术</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

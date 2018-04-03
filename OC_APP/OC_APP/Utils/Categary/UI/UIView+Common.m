@@ -341,20 +341,52 @@ static char kActionHandlerLongPressGestureKey;
     [self xl_setCornerWithRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
 }
 - (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
-                                 radius:(CGFloat)radius{
+                                 radius:(CGFloat)radius {
     [self xl_setCornerWithRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
 }
 - (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners
-                          cornerRadii:(CGSize)cornerRadii {
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:cornerRadii];
-    
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    
-    shapeLayer.frame = self.bounds;
-    shapeLayer.path = bezierPath.CGPath;
-    
-    self.layer.mask = shapeLayer;
+                            cornerRadii:(CGSize)cornerRadii {
+    [self xl_setCornerWithRoundingCorners:corners cornerRadii:cornerRadii borderColor:nil];
 }
+- (void)xl_setCornerWithRoundingCorners:(UIRectCorner)corners cornerRadii:(CGSize)cornerRadii borderColor:(UIColor *)borderColor {
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:cornerRadii];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    [self.layer setMask:maskLayer];
+
+    if (borderColor) {
+        
+        CAShapeLayer *borderLayer = [[CAShapeLayer alloc] init];
+        borderLayer.fillColor = [UIColor clearColor].CGColor;
+        borderLayer.strokeColor = borderColor.CGColor;
+        borderLayer.lineWidth = 2;
+        borderLayer.lineJoin = kCALineJoinRound;
+        borderLayer.lineCap = kCALineCapRound;
+        borderLayer.path = maskPath.CGPath;
+        [self.layer insertSublayer:borderLayer atIndex:0];
+        //    [self.layer addSublayer:borderLayer];
+    }
+}
+
+- (void)xl_setBorderWithDashLineWidth:(NSInteger)lineWidth lineColor:(UIColor *)lineColor {
+    
+    CAShapeLayer *borderLayer = [CAShapeLayer layer];
+    borderLayer.frame = self.bounds;
+    borderLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    
+    borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:borderLayer.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    borderLayer.lineWidth = lineWidth;
+    //虚线边框
+    borderLayer.lineDashPattern = @[@8, @8];
+    //实线边框
+//    borderLayer.lineDashPattern = nil;
+    borderLayer.fillColor = [UIColor clearColor].CGColor;
+    borderLayer.strokeColor = lineColor.CGColor;
+    [self.layer addSublayer:borderLayer];
+}
+
 
 - (void)xl_setBorder:(CGFloat)borderWidth color:(UIColor *)color {
     

@@ -109,9 +109,12 @@
 		917193C01FDFC6B100D0825E /* trade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 917193BF1FDFC6B100D0825E /* trade.bundle */; };
 		917193C31FDFC97E00D0825E /* TradeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 917193C21FDFC97E00D0825E /* TradeKeyboard.m */; };
 		917193DF1FDFD5C800D0825E /* AudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 917193DE1FDFD5C800D0825E /* AudioTool.m */; };
+		9174946A20732B2300443149 /* aa.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9174946920732B2300443149 /* aa.wav */; };
+		9174947020735AAA00443149 /* UIImage+PS.m in Sources */ = {isa = PBXBuildFile; fileRef = 9174946F20735AAA00443149 /* UIImage+PS.m */; };
+		9174947520736BF000443149 /* XLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9174947420736BF000443149 /* XLTools.m */; };
 		9174BA271F31C7DC003ED0D3 /* QQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9174BA261F31C7DC003ED0D3 /* QQViewController.m */; };
 		9174BA291F31CC6F003ED0D3 /* wbBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9174BA281F31CC6F003ED0D3 /* wbBG.png */; };
-		9175230D1F46B275004CE4E0 /* AddressPickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9175230C1F46B275004CE4E0 /* AddressPickViewController.m */; };
+		9175230D1F46B275004CE4E0 /* SpeechViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9175230C1F46B275004CE4E0 /* SpeechViewController.m */; };
 		917523111F46B469004CE4E0 /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917523101F46B469004CE4E0 /* AddressPickerView.m */; };
 		917523131F46B5C7004CE4E0 /* addressData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 917523121F46B5C7004CE4E0 /* addressData.plist */; };
 		9175231C1F46E5DD004CE4E0 /* MasonryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9175231B1F46E5DD004CE4E0 /* MasonryViewController.m */; };
@@ -556,11 +559,16 @@
 		917193C21FDFC97E00D0825E /* TradeKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TradeKeyboard.m; path = PayPasswordView/TradeKeyboard.m; sourceTree = "<group>"; };
 		917193DD1FDFD5C800D0825E /* AudioTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioTool.h; path = PayPasswordView/AudioTool.h; sourceTree = "<group>"; };
 		917193DE1FDFD5C800D0825E /* AudioTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AudioTool.m; path = PayPasswordView/AudioTool.m; sourceTree = "<group>"; };
+		9174946920732B2300443149 /* aa.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aa.wav; sourceTree = "<group>"; };
+		9174946E20735AAA00443149 /* UIImage+PS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+PS.h"; sourceTree = "<group>"; };
+		9174946F20735AAA00443149 /* UIImage+PS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PS.m"; sourceTree = "<group>"; };
+		9174947320736BF000443149 /* XLTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLTools.h; sourceTree = "<group>"; };
+		9174947420736BF000443149 /* XLTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLTools.m; sourceTree = "<group>"; };
 		9174BA251F31C7DC003ED0D3 /* QQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQViewController.h; sourceTree = "<group>"; };
 		9174BA261F31C7DC003ED0D3 /* QQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQViewController.m; sourceTree = "<group>"; };
 		9174BA281F31CC6F003ED0D3 /* wbBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wbBG.png; sourceTree = "<group>"; };
-		9175230B1F46B275004CE4E0 /* AddressPickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickViewController.h; sourceTree = "<group>"; };
-		9175230C1F46B275004CE4E0 /* AddressPickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickViewController.m; sourceTree = "<group>"; };
+		9175230B1F46B275004CE4E0 /* SpeechViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechViewController.h; sourceTree = "<group>"; };
+		9175230C1F46B275004CE4E0 /* SpeechViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechViewController.m; sourceTree = "<group>"; };
 		9175230F1F46B469004CE4E0 /* AddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerView.h; sourceTree = "<group>"; };
 		917523101F46B469004CE4E0 /* AddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
 		917523121F46B5C7004CE4E0 /* addressData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = addressData.plist; sourceTree = "<group>"; };
@@ -1392,8 +1400,9 @@
 			isa = PBXGroup;
 			children = (
 				91D70B461FA18C95009B79DB /* Test */,
-				9175230B1F46B275004CE4E0 /* AddressPickViewController.h */,
-				9175230C1F46B275004CE4E0 /* AddressPickViewController.m */,
+				9175230B1F46B275004CE4E0 /* SpeechViewController.h */,
+				9174946920732B2300443149 /* aa.wav */,
+				9175230C1F46B275004CE4E0 /* SpeechViewController.m */,
 				919BF6D3206D4B5B007B5B14 /* AlertControllerViewController.h */,
 				919BF6D4206D4B5C007B5B14 /* AlertControllerViewController.m */,
 				9175231A1F46E5DD004CE4E0 /* MasonryViewController.h */,
@@ -1670,6 +1679,8 @@
 			children = (
 				91A589631FCBE8C1002B19DF /* XLFileManager.h */,
 				91A589641FCBE8C1002B19DF /* XLFileManager.m */,
+				9174947320736BF000443149 /* XLTools.h */,
+				9174947420736BF000443149 /* XLTools.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1839,6 +1850,8 @@
 				91B0B9491F0394B700267C9A /* UIDevice+Common.m */,
 				91AC0CCD1EF393CA004FDD9E /* UIImage+Common.h */,
 				91AC0CCE1EF393CA004FDD9E /* UIImage+Common.m */,
+				9174946E20735AAA00443149 /* UIImage+PS.h */,
+				9174946F20735AAA00443149 /* UIImage+PS.m */,
 				91A1F2782006FEB400A25282 /* UIImage+GIF.h */,
 				91A1F2792006FEB400A25282 /* UIImage+GIF.m */,
 				91AC0CCF1EF393CA004FDD9E /* UIImage+QRBar.h */,
@@ -2451,7 +2464,7 @@
 					C20783F91DADF12700BB05D4 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9AQVJTZ5M6;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -2548,6 +2561,7 @@
 				91BA82691F25EE4B009A9940 /* success.png in Resources */,
 				9101C8E31F345AF6004B0376 /* Assets.xcassets in Resources */,
 				918B55D7200DFD220048C5A1 /* page_top_2@2x.png in Resources */,
+				9174946A20732B2300443149 /* aa.wav in Resources */,
 				91AC0CFC1EF39540004FDD9E /* cloudy@2x.png in Resources */,
 				91AC0D001EF39540004FDD9E /* lightRain@2x.png in Resources */,
 				91AC0D131EF395E7004FDD9E /* Info.plist in Resources */,
@@ -2684,7 +2698,7 @@
 				915A0FF11FD9317200263E15 /* TurntableViewController3.m in Sources */,
 				916EBA8C1FF1F1BC00386DD2 /* SliderView.m in Sources */,
 				919842D01F20933200CE773F /* SwitchCell.m in Sources */,
-				9175230D1F46B275004CE4E0 /* AddressPickViewController.m in Sources */,
+				9175230D1F46B275004CE4E0 /* SpeechViewController.m in Sources */,
 				91571D731FFCD91B00E1BBD2 /* TestWebViewController.m in Sources */,
 				91D97B811EEF81FE000E6CE6 /* StarRateView.m in Sources */,
 				91F49077204007280002558D /* MarqueeView.m in Sources */,
@@ -2794,6 +2808,7 @@
 				916804F71EE7EB2800902075 /* SubscriptionViewController.m in Sources */,
 				91A7283A207225E000F7C829 /* DargSortCell.m in Sources */,
 				915BC2601FC425AC00C6FB39 /* NSObject+Swizzling.m in Sources */,
+				9174947520736BF000443149 /* XLTools.m in Sources */,
 				91A6192D1F271B5000FCA42C /* CalendarViewController.m in Sources */,
 				91A1F27A2006FEB400A25282 /* UIImage+GIF.m in Sources */,
 				91AC0CE01EF39438004FDD9E /* UIView+Frame.m in Sources */,
@@ -2852,6 +2867,7 @@
 				91D70B521FA18CB4009B79DB /* NextViewController.m in Sources */,
 				913C4B2B1FD904EE00C83DAE /* CardViewController.m in Sources */,
 				91B3C6301F42A52700E4062B /* TestViewController.m in Sources */,
+				9174947020735AAA00443149 /* UIImage+PS.m in Sources */,
 				917523111F46B469004CE4E0 /* AddressPickerView.m in Sources */,
 				91AC0CDD1EF393CA004FDD9E /* NSString+Rex.m in Sources */,
 				9150CDB41EEA9079002B42E2 /* PopoverMenu.m in Sources */,
@@ -3035,16 +3051,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9AQVJTZ5M6;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xingl.OC-APP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "562ea42b-7a15-4915-8b1a-419a38c64a08";
+				PROVISIONING_PROFILE_SPECIFIER = App_Debug;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3056,7 +3072,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";

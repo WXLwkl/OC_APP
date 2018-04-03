@@ -187,6 +187,9 @@
     firstView.backgroundColor = [UIColor redColor];
     firstView.center = self.view.center;
     [self.view addSubview:firstView];
+    
+    [firstView xl_setBorderWithDashLineWidth:2 cornerRadius:0 lineColor:[UIColor grayColor]];
+
 }
 
 - (void)add:(UIButton *)button {
