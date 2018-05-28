@@ -37,8 +37,8 @@
     return self;
 }
 
-- (void)setModel:(FoodModel *)model
-{
+- (void)setModel:(FoodModel *)model {
+    
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.picture]];
     
     self.nameLabel.text = model.name;

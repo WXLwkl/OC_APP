@@ -1,52 +1,85 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no minimal-ui"/>
-        <meta name="format-detection" content="telephone=no"/>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache,no-store, must-revalidate">
-        <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
-        <meta HTTP-EQUIV="expires" CONTENT="0">
-        <title>Webview页面标题</title>
-        <style type="text/css">
-            
-            #span{
-                background: pink;
-            }
-            
-        </style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no minimal-ui"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache,no-store, must-revalidate">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="expires" CONTENT="0">
+    
+    <title>Webview页面标题</title>
+    
+    <script type="text/javascript">
         
-        <script type="text/javascript">
-            function call(text) {
-                var message = {
-                    'method' : 'hello',
-                    'params' : {
-                        'name':'张三',
-                        'age':28
-                    },
-                    'callback': 'callback'
-                };
-                window.webkit.messageHandlers.webViewApp.postMessage(message);
-            }
+        function callJs(text) {
+            alert(text);
+            document.getElementById("returnValue").value = text;
+            return text;
+        }
         
-            function callback(text) {
-                document.getElementById("result").innerText=text;
-                
-                alert("回调成功！");
-                return "JS已经获得Objective-C的返回值";
-            }
-        
-            function callJs(text) {
-                document.getElementById("result").innerText="Objective-C调用了JS："+text;
-                return "你好，Objective-C!";
-            }
-        
-        function pop() {
+        function scanClick() {
             var message = {
-                'method' : 'tobackpage'
+                'method' : 'scanClick',
+                'params' : {
+                    'name':'张三',
+                    'age':28
+                },
             };
             window.webkit.messageHandlers.webViewApp.postMessage(message);
         }
-        
+
+        function shareClick() {
+            var message = {
+                'method' : 'shareClick',
+                'params' : {
+                    'title':'测试分享的标题',
+                    'content':'测试分享的内容',
+                    'url':'http://www.baidu.com'
+                },
+                'callback': 'shareCallback' <!-- 回调 -->
+            };
+            window.webkit.messageHandlers.webViewApp.postMessage(message);
+        }
+    
+        function shareCallback(text) {
+            alert("分享成功！");
+            document.getElementById("returnValue").value = text;
+            return "分享成功了，是不是很6";
+        }
+        function locationClick() {
+            var message = {
+                'method' : 'locationClick',
+                'callback':'setLocation'
+            };
+            window.webkit.messageHandlers.webViewApp.postMessage(message);
+        }
+                            
+        function setLocation(location) {
+            asyncAlert(location);
+            document.getElementById("returnValue").value = location;
+            return "你吊炸天了啊。。。"
+        }
+        function payClick() {
+            var message = {
+                'method' : 'payClick',
+                'params' : {
+                    'order_no': '201511120981234',
+                    'channel':'wx',
+                    'amount':100,
+                    'subject':'粉红外套'
+                },
+                'callback':'payResult'
+            };
+            window.webkit.messageHandlers.webViewApp.postMessage(message);
+        }
+                            
+        function payResult(str) {
+            asyncAlert(str);
+            document.getElementById("returnValue").value = str;
+            return "付款了，这个男人好帅啊！😍";
+        }
+    
         function openUrl(url) {
             var message = {
                 'method' : 'openappurl',
@@ -56,14 +89,60 @@
             };
             window.webkit.messageHandlers.webViewApp.postMessage(message);
         }
-        </script>
-    </head>
-    <body>
-        Hello，World！<br />
-        <span id="result">
-        </span><br />
-        <button onclick="call('Hello World!')">JS调OC</button><br /><br /><br />
-        <button onclick="pop()">返回</button><br /><br /><br />
-         <button onclick="openUrl('http://www.baidu.com/')">打开百度</button><br /><br /><br />
-    </body>
+                            
+        function goBack() {
+            var message = {
+                'method' : 'goBack'
+            };
+            window.webkit.messageHandlers.webViewApp.postMessage(message);
+        }
+                            
+        function playSound() {
+            var message = {
+                'method' : 'playSound',
+                'params' : {
+                    'value' : 'Tock'
+                }
+            };
+            window.webkit.messageHandlers.webViewApp.postMessage(message);
+        }
+                            
+        function asyncAlert(content) {
+            setTimeout(function(){
+                       alert(content);
+                       },1);
+        }
+                            
+    </script>
+</head>
+<body>
+    <h1>这是按钮调用</h1>
+    <input type="button" value="返回" onclick="goBack()" />
+    <input type="button" value="扫一扫" onclick="scanClick()" />
+    <input type="button" value="获取定位" onclick="locationClick()" />
+    <input type="button" value="分享" onclick="shareClick()" />
+    <input type="button" value="支付" onclick="payClick()" />
+    <input type="button" value="打开百度" onclick="openUrl('http://www.baidu.com/')" />
+    <input type="button" value="播放声音" onclick="playSound()" />
+        
+    <h1>这是文件上传</h1>
+    <input type="file" />
+    
+    <h1>这是回调结果展示区</h1>
+    <textarea id ="returnValue" type="value" rows="5" cols="40">
+        
+    </textarea>
+    
+    <h4>竖直方向的表头：</h4>
+    <table border="1" style="width:90%;height:60px">
+        <tr>
+            <th>姓名</th>
+            <td>逍遥郎happy</td>
+        </tr>
+        <tr>
+            <th>qq</th>
+            <td>935858549</td>
+        </tr>
+    </table>
+</body>
 </html>

@@ -42,9 +42,14 @@
 }
 
 - (void)setUpUI {
-    
+//    读取xib中的view的方法一
+//    UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]];
+//    UIView *contentView = [[nib instantiateWithOwner:self options:nil] firstObject];
+//    读取xib中的view的方法二
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([IDCard class]) owner:self options:nil];
     self.bounds = self.contentView.frame;
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
+    [self addSubview:self.contentView];
     [self addSubview:self.contentView];
 }
 

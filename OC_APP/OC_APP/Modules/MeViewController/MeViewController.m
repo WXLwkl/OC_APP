@@ -50,6 +50,8 @@
 #import "UploadImagesViewController.h"
 #import "ProgressViewController.h"
 #import "CollectionListViewController.h"
+#import "TanTanCardViewController.h"
+#import "PieChartViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -248,7 +250,9 @@
                                                           @"左右滑动视图(OK)",
                                                           @"进度条(OK)",
                                                           @"CollectionView相关(OK)",
-                                                          @"音视频功能集合"]];
+                                                          @"音视频功能集合",
+                                                          @"仿探探card(OK)",
+                                                          @"饼图(OK)"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -564,6 +568,19 @@
         case 29:
         {
             //音视频功能集合
+        }
+            break;
+        case 30:
+        {
+            // 仿探探的卡片 (包括代理、数据源、重用)
+            TanTanCardViewController *vc = [TanTanCardViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 31:
+        {   // 饼图
+            PieChartViewController *vc = [PieChartViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:

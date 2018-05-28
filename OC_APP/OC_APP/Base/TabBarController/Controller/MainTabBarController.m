@@ -21,6 +21,7 @@
 
 @interface MainTabBarController ()<MainTabBarDelegate>
 
+@property (nonatomic, strong) NSDate *lastDate;
 @property (nonatomic, weak) MainTabBar *mainTabBar;
 
 @end

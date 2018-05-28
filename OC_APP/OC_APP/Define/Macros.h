@@ -20,12 +20,12 @@
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale) : [UIScreen mainScreen].bounds.size)
 
 
-
-#define kStatusBarHeight        iPhoneX ? 44.f : 20.f
+#define kNavHeight              (kNavBarHeight + kStatusBarHeight)
 #define kNavBarHeight           (44.f)
-#define kTabBarHeight           49.f + kBottomHeight
+#define kStatusBarHeight        (iPhoneX ? 44.f : 20.f)
 
-#define kBottomHeight           iPhoneX ? 34.f : 0.f
+#define kTabBarHeight           (kBottomHeight + 49.f)
+#define kBottomHeight           (iPhoneX ? 34.f : 0.f)
 
 #define kEnglishKeyboardHeight  (216.f)
 #define kChineseKeyboardHeight  (252.f)

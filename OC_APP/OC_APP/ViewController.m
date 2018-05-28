@@ -134,6 +134,13 @@
 //    [self loadRollImageView];
     //    [self circleProgressView];
     
+    NSURL *url = [NSURL URLWithString:@"hhtps://www.xingl.com?taoken=111222&PayerID=666888"];
+    NSURLComponents *components = [[NSURLComponents alloc] initWithString:url.absoluteString];
+    
+    [components.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog(@"%@=%@", obj.name,obj.value);
+    }];
+    
     
     
     NSArray *arr = @[@1,@2,@4,@3,@5];

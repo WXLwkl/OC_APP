@@ -7,10 +7,9 @@
 //
 
 #import "XLWebViewController.h"
-#import "UINavigationController+SGProgress.h"
 
 @interface XLWebViewController ()
-
+@property (strong, nonatomic) UIProgressView *progressView;
 @end
 
 @implementation XLWebViewController
@@ -20,6 +19,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"加载中...";
     [self setupWebView];
+    [self initProgressView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
     if (self.url.length) {
@@ -30,11 +30,6 @@
     [super viewDidAppear:animated];
     
     self.webView.frame = self.view.bounds;
-}
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController hiddenSGProgress];
 }
 
 - (void)setupWebView {
@@ -47,7 +42,14 @@
     
     [self.view addSubview:_webView];
 }
-
+- (void)initProgressView {
+    
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 2)];
+    progressView.tintColor = [UIColor redColor];
+    progressView.trackTintColor = [UIColor lightGrayColor];
+    [self.view addSubview:progressView];
+    self.progressView = progressView;
+}
 - (void)dealloc {
     NSLog(@"dealloc --- %@",NSStringFromClass([self class]));
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -58,10 +60,22 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         
         if (object == self.webView) {
-            [self.navigationController setSGProgressPercentage:self.webView.estimatedProgress*100 andTintColor:[UIColor colorWithRed:24/255.0 green:124/255.0 blue:244/255.0f alpha:1.0]];
+            CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+            if (newprogress == 1) {
+                [self.progressView setProgress:1.0 animated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.progressView.hidden = YES;
+                    [self.progressView setProgress:0 animated:NO];
+                });
+                
+            } else {
+                self.progressView.hidden = NO;
+                [self.progressView setProgress:newprogress animated:YES];
+            }
         }
         else{
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -90,7 +104,7 @@
     NSLog(@"webView method:%@",message.method);
     
     //返回上一页
-    if ([message.method isEqualToString:@"tobackpage"]) {
+    if ([message.method isEqualToString:@"goBack"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     //打开新页面
@@ -105,9 +119,6 @@
         }
     }
 }
-
-
-
 
 
 
@@ -157,7 +168,6 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     
     NSLog(@"%s%@", __FUNCTION__,error);
-    [self.navigationController hiddenSGProgress];
 }
 
 /**

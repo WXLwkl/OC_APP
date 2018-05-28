@@ -11,8 +11,8 @@
 #import "HeaderCell.h"
 
 @interface ReduceTimeCell()
-@property(nonatomic,strong)UIImageView *myImageView;
-@property(nonatomic,strong)UILabel *myNameLabel,*myTimeLabel;
+@property (nonatomic, strong) UIImageView *myImageView;
+@property (nonatomic, strong) UILabel *myNameLabel,*myTimeLabel;
 @end
 
 

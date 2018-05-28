@@ -42,5 +42,43 @@
  */
 + (NSDictionary *)dictionaryOrderByCharacterWithOriginalArray:(NSArray *)array;
 
+#pragma mark - 时间
+/*
+ NSLog(@"\n\nresult: %@", [Utilities timeIntervalFromLastTime:@"2015年12月8日 15:50"
+ lastTimeFormat:@"yyyy年MM月dd日 HH:mm"
+ ToCurrentTime:@"2015/12/08 16:12"
+ currentTimeFormat:@"yyyy/MM/dd HH:mm"]);
+ */
+
+/**
+ *  @brief 计算上次日期距离现在多久
+ *
+ *  @param lastTime    上次日期(需要和格式对应)
+ *  @param format1     上次日期格式
+ *  @param currentTime 最近日期(需要和格式对应)
+ *  @param format2     最近日期格式
+ *
+ *  @return xx分钟前、xx小时前、xx天前
+ */
++ (NSString *)timeIntervalFromLastTime:(NSString *)lastTime
+                        lastTimeFormat:(NSString *)format1
+                         ToCurrentTime:(NSString *)currentTime
+                     currentTimeFormat:(NSString *)format2;
+
+/**
+ *  计算上次日期距离现在多久
+ *
+ *  @param lastTime    上次日期(需要和格式对应)
+ *  @param format1     上次日期格式
+ *
+ *  @return xx分钟前、xx小时前、xx天前
+ */
+//(1)
++ (NSString *)timeIntervalFromLastTime:(NSString *)lastTime
+                        lastTimeFormat:(NSString *)format1;
+//(2)
++ (NSString *)timeIntervalFromLastTime:(NSString *)serverTime
+                            timeFormat:(NSString *)format;
+
 
 @end

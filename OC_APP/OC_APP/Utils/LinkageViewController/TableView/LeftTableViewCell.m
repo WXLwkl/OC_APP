@@ -19,8 +19,8 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
-    {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         self.name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 40)];
@@ -45,7 +45,23 @@
     self.contentView.backgroundColor = selected ? [UIColor whiteColor] : [UIColor colorWithWhite:0 alpha:0.1];
     self.highlighted = selected;
     self.name.highlighted = selected;
-    self.yellowView.hidden = !selected;
+//    self.yellowView.hidden = !selected;
+    
+    
+    if (selected) {
+        self.yellowView.frame = CGRectMake(0, 5, 4, 45);
+        [UIView animateWithDuration:.25f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [self.contentView layoutIfNeeded];
+        } completion:nil];
+    } else {
+        
+        self.yellowView.frame = CGRectMake(0, 5, 0, 0);
+        [UIView animateWithDuration:.25f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [self.contentView layoutIfNeeded];
+        } completion:nil];
+    }
+    
+    
 }
 
 @end

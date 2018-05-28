@@ -7,10 +7,14 @@
 //
 
 #import "SubscriptionViewController.h"
+#import "SubCell.h"
+
 #import "QQTableViewController.h"
 
-@interface SubscriptionViewController ()
+@interface SubscriptionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property (strong, nonatomic) UICollectionView *collectionView;
+@property (nonatomic, strong) NSArray *dataArray;
 @end
 
 @implementation SubscriptionViewController
@@ -20,7 +24,6 @@
     self.navigationItem.title = @"关注";
     
     
-//    kApplication
     
     NSLog(@"%@",AppVersion);
     
@@ -71,27 +74,82 @@
     
     
     
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Subscription" ofType:@"plist"];
+    self.dataArray = [NSArray arrayWithContentsOfFile:plistPath];
+    
+    [self.view addSubview:self.collectionView];
     
     
-    
-    
-    
-    
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(20, 200, 100, 50);
-    btn.backgroundColor = [UIColor grayColor];
-    [btn setTitle:@"开始" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    
-    
-    
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame = CGRectMake(20, 200, 100, 50);
+//    btn.backgroundColor = [UIColor grayColor];
+//    [btn setTitle:@"开始" forState:UIControlStateNormal];
+//    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
     
     
 }
+
+
+- (UICollectionView *)collectionView {
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    layout.itemSize = CGSizeMake(60, 90);
+    
+    layout.sectionInset = UIEdgeInsetsMake(35, 35, 35, 35);
+    
+    layout.minimumLineSpacing = 35;
+    
+    layout.minimumInteritemSpacing = 35;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    if (!_collectionView) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [_collectionView registerClass:[SubCell class] forCellWithReuseIdentifier:@"SubCellID"];
+    }
+    return _collectionView;
+}
+
+#pragma mark - UICollectionViewDelegate & UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataArray.count;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    
+    SubCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SubCellID" forIndexPath:indexPath];
+    cell.backgroundColor = RandomColor;
+    cell.title = dic[@"title"];
+    cell.layer.cornerRadius = 5;
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    NSString *vcString = dic[@"viewController"];
+    
+    Class class = NSClassFromString(vcString);
+    
+    UIViewController *vc = [[class alloc] init];
+    
+    if (!vc) return NSLog(@"没有对应的Controller");
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
+
 
 
 - (void)btnClick {
@@ -170,19 +228,5 @@
     XLLog(@"最终转为字符串时间1 = %@， 时间2 = %@", newTime, newTime2);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -11,7 +11,6 @@
 @interface XLWebView ()
 
 @property (nonatomic, strong) NSURL *baseUrl;
-
 @end
 
 @implementation XLWebView
@@ -21,6 +20,7 @@
     if (self) {
         
         if (configuration) {
+            
             [configuration.userContentController addScriptMessageHandler:self name:@"webViewApp"];
         }
         
@@ -30,6 +30,15 @@
     
     return self;
 }
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    
+    if (newSuperview) return;
+    
+    [self.configuration.userContentController removeScriptMessageHandlerForName:@"webViewApp"];
+    
+}
+
 
 #pragma mark - Load Url
 - (void)loadRequestWithUrl:(NSString *)urlString; {

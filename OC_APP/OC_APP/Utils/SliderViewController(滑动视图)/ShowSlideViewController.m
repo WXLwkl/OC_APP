@@ -8,61 +8,146 @@
 
 #import "ShowSlideViewController.h"
 
-#import "SliderViewController.h"
-#import "ViewController.h"
+#import "SegementViewController.h"
 
-@interface ShowSlideViewController ()<SliderViewControllerDelegate, SliderViewControllerDataSource>
+#import "TXViewController.h"
+#import "WYViewController.h"
+#import "WYViewController.h"
+#import "XiMaViewController.h"
 
-@property (nonatomic, strong) SliderViewController *sliderVC;
+@interface ShowSlideViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
 @implementation ShowSlideViewController
 
-#pragma mark - - lazy load
-- (SliderViewController *)sliderVC{
-    if (!_sliderVC) {
-        _sliderVC = [SliderViewController new];
-        _sliderVC.dataSource = self;
-        _sliderVC.delegate = self;
-        [self addChildViewController:_sliderVC];
-        [self.view addSubview:_sliderVC.view];
-    }
-    return _sliderVC;
-}
-
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    self.navigationItem.title = @"左右滑动视图";
-
-    [self sliderVC];
+    
+    [self initSubviews];
+    [self loadData];
 }
 
-#pragma mark - - BLSliderViewControllerDataSource
-- (NSArray <NSString *> *)titlesArrayInSliderViewController{
-    return @[@"打开",@"温柔",@"权威",@"藕片",@"风格",@"链接",@"电视",@"快乐",@"漂亮",@"配合",@"瓯海",@"提升"];
-}
-
-- (UIViewController *)sliderViewController:(SliderViewController *)sliderVC subViewControllerAtIndxe:(NSInteger)index{
-
-
-    return [ViewController new];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (CGFloat)optionalViewStartYInSliderViewController {
-    return 0;
+#pragma mark - notification
+
+#pragma mark - action
+
+#pragma mark - UITableViewDelegate && UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
 }
 
-- (CGFloat)viewOfChildViewControllerHeightInSliderViewController {
-    return self.view.frame.size.height - 40 - 40;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.dataArray.count;
 }
 
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"id";
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    // cell ...
+    cell.textLabel.text = self.dataArray[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIViewController *vc = nil;
+    //code...
+    switch (indexPath.row) {
+        case 0:
+        {
+            vc = [[TXViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            vc= [WYViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            vc= [WYViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 3:
+        {
+            vc= [XiMaViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+
+
+#pragma mark - UI
+
+- (void)initSubviews {
+    self.navigationItem.title = @"左右滑动视图";
+    [self xl_setNavBackItem];
+    [self.view addSubview:self.tableView];
+}
+
+- (void)loadData {
+    self.dataArray = @[
+                       @"腾讯视频",
+                       @"今日头条",
+                       @"网易新闻",
+                       @"喜马拉雅"
+                       ];
+}
+
+
+
+#pragma mark - setter & getter
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style: UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        if (@available(iOS 11.0, *)) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
+        _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _tableView;
+}
+
+- (NSArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [NSArray array];
+    }
+    return _dataArray;
+}
 
 
 @end

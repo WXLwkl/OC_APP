@@ -7,6 +7,7 @@
 //
 
 #import "ScriptMessageHandlerViewController.h"
+#import "AudioTool.h"
 
 @interface ScriptMessageHandlerViewController ()
 
@@ -34,16 +35,44 @@
 }
 
 - (void)webView:(XLWebView *)webView didReceiveScriptMessage:(ScriptMessage *)message {
-    
-    if ([message.method isEqualToString:@"hello"]) {
-        
+    if ([message.method isEqualToString:@"scanClick"]) {
+        NSLog(@"这是个扫一扫按钮功能内容有%@", message.params);
+    } else if ([message.method isEqualToString:@"locationClick"]) {
         if (message.callback.length) {
-            [self.webView callJS:[NSString stringWithFormat:@"%@('hello-JS')",message.callback] handler:^(id  _Nullable response) {
+            [self.webView callJS:[NSString stringWithFormat:@"%@('女儿国')",message.callback] handler:^(id  _Nullable response) {
                 NSLog(@"调用callback结果：%@",response);
             }];
         }
-    }
-    else {
+    } else if ([message.method isEqualToString:@"shareClick"]) {
+        
+        NSString *title = message.params[@"title"];
+        NSString *content = message.params[@"content"];
+        NSString *url = message.params[@"url"];
+        
+        if (message.callback.length) {
+            [self.webView callJS:[NSString stringWithFormat:@"%@('%@ %@ %@')",message.callback, title, content, url] handler:^(id  _Nullable response) {
+                NSLog(@"调用callback结果：%@",response);
+            }];
+        }
+    } else if ([message.method isEqualToString:@"payClick"]) {
+        
+        NSString *orderNo = [message.params objectForKey:@"order_no"];
+        long long amount = [[message.params objectForKey:@"amount"] longLongValue];
+        NSString *subject = [message.params objectForKey:@"subject"];
+        NSString *channel = [message.params objectForKey:@"channel"];
+        NSLog(@"%@---%lld---%@---%@",orderNo,amount,subject,channel);
+        
+        
+        if (message.callback.length) {
+            [self.webView callJS:[NSString stringWithFormat:@"%@('%@')",message.callback, @"支付成功"] handler:^(id  _Nullable response) {
+                NSLog(@"调用callback结果：%@",response);
+            }];
+        }
+    } else if ([message.method isEqualToString:@"playSound"]) {
+        
+        AudioTool *tool = [[AudioTool alloc] initSystemSoundWithName:message.params[@"value"] SoundType:@"caf"];
+        [tool play];
+    } else {
         [super webView:webView didReceiveScriptMessage:message];
     }
 }

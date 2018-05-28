@@ -138,9 +138,12 @@
     self.view.backgroundColor = [UIColor xl_colorWithHexString:@"0x1FB5EC"];
     
     
+    NSDate *dd = [NSDate dateWithTimeIntervalSince1970:1523240963];
+    NSLog(@"year:%ld",[NSDate xl_year:dd]);
+    NSLog(@"--->>%ld", [NSDate xl_daysInYear:dd]);
     
+    LogBool([dd xl_isToday]);
     
-
     UIButton *rightItem = [UIButton buttonWithType:UIButtonTypeContactAdd];
     [rightItem sizeToFit];
     [rightItem addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
@@ -188,7 +191,7 @@
     firstView.center = self.view.center;
     [self.view addSubview:firstView];
     
-    [firstView xl_setBorderWithDashLineWidth:2 cornerRadius:0 lineColor:[UIColor grayColor]];
+    [firstView xl_setBorderWithDashLineWidth:2 lineColor:[UIColor grayColor]];
 
 }
 

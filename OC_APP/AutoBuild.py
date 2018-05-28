@@ -5,6 +5,14 @@
 __author__ = 'xingl'
 
 
+'''
+该脚本有点问题
+不能用 python3 + 路径  运行
+原因 os.path 获取到的路径有问题。
+可以把该文件变成可执行文件 chmod a+x 文件名.py 这样直接拖到终端 回车
+'''
+
+import os
 import subprocess,requests
 
 #项目信息 -- 可以改动的部分
@@ -28,18 +36,14 @@ SDK           = "iphoneos"
 #注意：如果在项目中用到 pod 请启用此行！！！！！！
 PROJECT = None
 
-
-PGYER_UPLOAD_URL = "http://www.pgyer.com/apiv1/app/upload"
-DOWNLOAD_BASE_URL = "http://www.pgyer.com"
-USER_KEY = "xxxxxx"
-API_KEY = "xxxxx"
-#设置从蒲公英下载应用时的密码
-PYGER_PASSWORD = "xxxxx"
-
 #蒲公英上传
 OPEN_PYUPLOAD = False   #是否开启蒲公英上传功能  True  False
-USER_KEY      = "****************"
-API_KEY       = "****************"
+PGYER_UPLOAD_URL = "http://www.pgyer.com/apiv1/app/upload"
+DOWNLOAD_BASE_URL = "http://www.pgyer.com"
+USER_KEY = "db2c63823682f794f1184cbba312e6c0"
+API_KEY = "b687beef47faf66bb619a7072285b973"
+#设置从蒲公英下载应用时的密码
+PYGER_PASSWORD = "xl"
 
 
 #AppStore上传
@@ -107,6 +111,9 @@ def uploadIpaToAppStore():
 
 
 def parserUploadResult(jsonResult):
+
+    print("jsonResult:" + str(jsonResult))
+
     resultCode = jsonResult['code']
     if resultCode == 0:
         downUrl = DOWNLOAD_BASE_URL + "/" + jsonResult["data"]["appShortcutUrl"]
@@ -122,7 +129,7 @@ def uploadIpaToPgyer(ipaPath):
     ipaPath = unicode(ipaPath,"utf-8")
     files = {'file': open(ipaPath, 'rb')}
     headers = {'enctype': 'multipart/form-data'}
-    payload = {'uKey':USER_KEY,'_api_key':API_KEY,'publishRange':'2','isPublishToPublic':'2', 'password':PYGER_PASSWORD}
+    payload = {'uKey':USER_KEY, '_api_key':API_KEY, 'installType':'2','password':PYGER_PASSWORD, 'updateDescription':''}
     print("uploading....")
     r = requests.post(PGYER_UPLOAD_URL, data=payload, files=files, headers=headers)
     if r.status_code == requests.codes.ok:
@@ -147,16 +154,9 @@ def exportArchive():
 
 
 def buildProject(project):
-    # archiveCmd = 'xcodebuild -project %s -target %s -sdk %s -configuration %s build CODE_SIGN_IDENTITY="%s" PROVISIONING_PROFILE="%s"' % (
-    # project, TARGET, SDK, CONFIGURATION, CODE_SIGN_IDENTITY, PROVISIONING_PROFILE)
     archiveCmd = 'xcodebuild -project %s -scheme %s -configuration %s archive -archivePath %s -destination generic/platform=iOS' %(project, TARGET, CONFIGURATION, ARCHIVEPATH)
     process = subprocess.Popen(archiveCmd, shell=True)
     process.wait()
-
-    # signApp = "./build/%s-iphoneos/%s.app" % (CONFIGURATION, TARGET)
-    # signCmd = "xcrun -sdk %s -v PackageApplication %s -o %s" % (SDK, signApp, EXPORT_MAIN_DIRECTORY)
-    # process = subprocess.Popen(signCmd, shell=True)
-    # (stdoutdata, stderrdata) = process.communicate()
 
     archiveReturnCode = process.returncode
     if archiveReturnCode != 0:
@@ -164,15 +164,13 @@ def buildProject(project):
         cleanArchiveFile()
 
 def buildWorkspace(workspace):
-	archiveCmd = 'xcodebuild -workspace %s -scheme %s -configuration %s archive -archivePath %s -destination generic/platform=iOS' %(workspace, TARGET, CONFIGURATION, ARCHIVEPATH)
-	process = subprocess.Popen(archiveCmd, shell=True)
-	process.wait()
-
-	archiveReturnCode = process.returncode
-	if archiveReturnCode != 0:
-		print("archive workspace %s failed" %(workspace))
-		cleanArchiveFile()
-
+    archiveCmd = 'xcodebuild -workspace %s -scheme %s -configuration %s archive -archivePath %s -destination generic/platform=iOS' %(workspace, TARGET, CONFIGURATION, ARCHIVEPATH)
+    process = subprocess.Popen(archiveCmd, shell=True)
+    process.wait()
+    archiveReturnCode = process.returncode
+    if archiveReturnCode != 0:
+        print("archive workspace %s failed" %(workspace))
+        cleanArchiveFile()
 
 def xcbuild():
 
@@ -183,8 +181,6 @@ def xcbuild():
         buildProject(PROJECT)
     elif WORKSPACE is not None:
         buildWorkspace(WORKSPACE)
-
-
 
     # 导出ipa文件
     exportarchive = exportArchive()

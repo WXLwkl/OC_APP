@@ -106,22 +106,17 @@
         NSString *a = [dictionary objectForKey:substr];
         NSString *b = digits[str.length -i-1];
         NSString *sum = [a stringByAppendingString:b];
-        if ([a isEqualToString:chinese_numerals[9]])
-        {
-            if([b isEqualToString:digits[4]] || [b isEqualToString:digits[8]])
-            {
+        if ([a isEqualToString:chinese_numerals[9]]) {
+            if([b isEqualToString:digits[4]] || [b isEqualToString:digits[8]]) {
                 sum = b;
-                if ([[sums lastObject] isEqualToString:chinese_numerals[9]])
-                {
+                if ([[sums lastObject] isEqualToString:chinese_numerals[9]]) {
                     [sums removeLastObject];
                 }
-            }else
-            {
+            } else {
                 sum = chinese_numerals[9];
             }
             
-            if ([[sums lastObject] isEqualToString:sum])
-            {
+            if ([[sums lastObject] isEqualToString:sum]) {
                 continue;
             }
         }
@@ -138,13 +133,11 @@
 
 
 
-- (NSString *)xl_stringByStrippingHTML
-{
+- (NSString *)xl_stringByStrippingHTML {
     return [self stringByReplacingOccurrencesOfString:@"<[^>]+>" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, self.length)];
 }
 
-- (NSString *)xl_stringByRemovingScriptsAndStrippingHTML
-{
+- (NSString *)xl_stringByRemovingScriptsAndStrippingHTML {
     NSMutableString *mString = [self mutableCopy];
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<script[^>]*>[\\w\\W]*</script>" options:NSRegularExpressionCaseInsensitive error:&error];
@@ -155,13 +148,11 @@
     return [mString xl_stringByStrippingHTML];
 }
 
-- (NSString *)xl_trimmingWhitespace
-{
+- (NSString *)xl_trimmingWhitespace {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
-- (NSString *)xl_trimmingWhitespaceAndNewlines
-{
+- (NSString *)xl_trimmingWhitespaceAndNewlines {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
@@ -169,32 +160,22 @@
 
 - (NSString *)xl_md5 {
     
-    if (self == nil) {
-        return nil;
-    }
+    if (self == nil) return nil;
     
     return [[self xl_MD5] lowercaseString];
 }
 
 - (NSString *)xl_MD5 {
     
-    if (self == nil) {
-        return nil;
-    }
-    const char* str = [self UTF8String];
+    if (self == nil) return nil;
     
+    const char *cStr = [self UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
-    NSNumber *len = @(strlen(str));
-    unsigned int lenU = [len unsignedIntValue];
-    CC_MD5(str, lenU, result);
-    
-    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH];
-    
+    CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
+    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     for(int i = 0; i<CC_MD5_DIGEST_LENGTH; i++) {
-        
         [ret appendFormat:@"%02X",result[i]];
     }
-    
     return ret;
 }
 
@@ -395,16 +376,13 @@
 
 NSString *XL_FilterString(id obj){
     
-    if (obj == nil) {
-        
-        return @"";
-    }
+    if (obj == nil) return @"";
     
     if ([obj isKindOfClass:[NSString class]]) {
         
         return [NSString stringWithFormat:@"%@",obj];
         
-    }else if([obj isKindOfClass:[NSNumber class]]){
+    } else if ([obj isKindOfClass:[NSNumber class]]) {
         
         return [NSString stringWithFormat:@"%@",obj];
     }
@@ -419,8 +397,7 @@ BOOL XL_IsEmptyString(NSObject *obj){
     if (!obj || ![obj isKindOfClass:[NSString class]]) {
         
         isEmpty = YES;
-    }
-    else{
+    } else {
         
         isEmpty = NO;
     }
@@ -433,8 +410,7 @@ BOOL XL_IsEmptyString(NSObject *obj){
             || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
             
             isEmpty = YES;
-        }
-        else{
+        } else {
             
             isEmpty = NO;
         }

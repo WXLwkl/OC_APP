@@ -190,7 +190,7 @@
                 [self.progressView setProgress:0 animated:NO];
             });
 
-        }else {
+        } else {
             self.progressView.hidden = NO;
             [self.progressView setProgress:newprogress animated:YES];
         }

@@ -209,7 +209,7 @@
 // 当拖动右边TableView的时候，处理左边TableView
 - (void)selectRowAtIndexPath:(NSInteger)index
 {
-    [_leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+    [_leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - UISrcollViewDelegate

@@ -90,7 +90,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _captureSessionQueue = dispatch_queue_create("com.HUAJIE.captureSessionQueue", 0);
+        _captureSessionQueue = dispatch_queue_create("com.xl.captureSessionQueue", 0);
     }
     return self;
 }
@@ -111,6 +111,9 @@
 #pragma mark - AVCaptureVideoDataOutputSampleBuffer Delegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     
+    NSLog(@"-----------------------------");
+    NSLog(@"%@", sampleBuffer);
+    NSLog(@"-----------------------------");
     if (self.didOutputSampleBuffer) {
         self.didOutputSampleBuffer(sampleBuffer);
     }
