@@ -10,9 +10,15 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>饼图</string>
+		<string>runtime</string>
 		<key>viewController</key>
-		<string>PieChartViewController</string>
+		<string>RuntimeViewController</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>多线程</string>
+		<key>viewController</key>
+		<string>MultithreadingViewController</string>
 	</dict>
 	<dict/>
 	<dict/>

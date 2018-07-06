@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (Pop)
+@interface UIViewController (Pop) <UIViewControllerTransitioningDelegate>
+
+/** 控制器高度 */
+@property (assign, nonatomic) CGFloat controllerHeight;
+
+- (void)modal:(UIViewController *)vc controllerHeight:(CGFloat)controllerHeight;
 
 @end

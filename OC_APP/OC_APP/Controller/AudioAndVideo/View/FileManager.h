@@ -10,4 +10,12 @@
 
 @interface FileManager : NSObject
 
+
++ (BOOL)removeItemAtPath:(NSString *)path;
+
++ (NSString *)cachesDir;
+// 判断文件路径是否存在
++ (BOOL)isExistsAtPath:(NSString *)path;
+// 创建文件夹
++ (BOOL)createDirectoryAtPath:(NSString *)path;
 @end

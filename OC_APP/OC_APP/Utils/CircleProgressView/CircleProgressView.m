@@ -195,11 +195,10 @@
     _timer.fireDate = [NSDate distantPast];
     
 }
-- (void)dealloc
-{
+- (void)dealloc {
     
 }
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     if (flag) {
         [_shapeLayer removeAllAnimations];
         _shapeLayer.strokeEnd = _progress>1?1:_progress;

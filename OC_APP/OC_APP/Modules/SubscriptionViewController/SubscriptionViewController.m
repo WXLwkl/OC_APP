@@ -23,8 +23,6 @@
     [super viewDidLoad];
     self.navigationItem.title = @"关注";
     
-    
-    
     NSLog(@"%@",AppVersion);
     
     

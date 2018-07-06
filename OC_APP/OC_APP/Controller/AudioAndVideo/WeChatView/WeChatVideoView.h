@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeChatCaptureManager.h"
+@protocol WeChatVideoViewDelegate <NSObject>
+
+@required
+- (void)dismissVC;
+@optional
+- (void)takePhotoWithImage:(UIImage *)finalImage;
+- (void)recordFinishWithvideoUrl:(NSURL *)videoUrl;
+
+@end
 
 @interface WeChatVideoView : UIView
+
+@property (nonatomic, strong, readonly) WeChatCaptureManager *captureManager;
+@property (nonatomic, weak) id<WeChatVideoViewDelegate> delegate;
+
+- (void)reset;
 
 @end

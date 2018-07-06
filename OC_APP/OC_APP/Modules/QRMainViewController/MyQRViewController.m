@@ -49,7 +49,9 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         
-        UIImage *image = [UIImage xl_qrCodeImageWithContent:@"http://weixin.qq.com/r/osx1bTzE12GorXgO95mw" codeImageLenght:400 logo:[UIImage imageNamed:@"weixin.png"] radius:10];
+//        UIImage *image = [UIImage xl_qrCodeImageWithContent:@"http://weixin.qq.com/r/osx1bTzE12GorXgO95mw" codeImageLenght:400 logo:[UIImage imageNamed:@"weixin.png"] radius:10];
+        UIImage *image = [UIImage xl_qrCodeImageWithContent:@"http://weixin.qq.com/r/osx1bTzE12GorXgO95mw" codeImageLenght:200];
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

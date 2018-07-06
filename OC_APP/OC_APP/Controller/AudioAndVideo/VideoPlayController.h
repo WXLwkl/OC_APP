@@ -10,4 +10,6 @@
 
 @interface VideoPlayController : RootViewController
 
+@property (nonatomic, strong) NSURL *videoUrl;
+
 @end

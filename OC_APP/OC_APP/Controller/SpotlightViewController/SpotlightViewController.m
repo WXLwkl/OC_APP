@@ -7,8 +7,9 @@
 //
 
 #import "SpotlightViewController.h"
+#import "SpotlightView.h"
 
-@interface SpotlightViewController ()
+@interface SpotlightViewController ()<SpotlightViewDelegate>
 
 @end
 
@@ -17,6 +18,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.navigationItem.title = @"类似spotlight菜单";
+    [self xl_setNavBackItem];
+    
+    SpotlightView *view = [[SpotlightView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
+    view.delegate = self;
+    view.centerImageName = @"f_static_007";
+    view.sourceArray = @[@{@"title":@"",@"icon":@"f_static_000"},
+                         @{@"title":@"",@"icon":@"f_static_001"},
+                         @{@"title":@"",@"icon":@"f_static_002"},
+                         @{@"title":@"",@"icon":@"f_static_003"},
+                         @{@"title":@"",@"icon":@"f_static_004"},
+                         @{@"title":@"",@"icon":@"f_static_005"},
+                         @{@"title":@"",@"icon":@"f_static_006"}];
+    view.startRadian = -M_PI / 2;
+    view.endRadian = M_PI / 2;
+    view.radius = 20;
+    view.multiple = 5;
+    [view setup];
+    
+    [self.view addSubview:view];
+}
+
+- (void)didClickItem:(SpotlightView *)spotlightView atIndex:(NSInteger)index {
+    NSLog(@"you did click item at -> %ld",(long)index);
 }
 
 - (void)didReceiveMemoryWarning {

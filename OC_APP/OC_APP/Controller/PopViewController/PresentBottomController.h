@@ -10,4 +10,6 @@
 
 @interface PresentBottomController : UIPresentationController
 
+@property (assign, nonatomic) CGFloat controllerHeight;
+
 @end

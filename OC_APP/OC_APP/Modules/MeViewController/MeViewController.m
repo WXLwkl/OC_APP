@@ -50,8 +50,11 @@
 #import "UploadImagesViewController.h"
 #import "ProgressViewController.h"
 #import "CollectionListViewController.h"
+#import "AudioAndVideoViewController.h"
 #import "TanTanCardViewController.h"
 #import "PieChartViewController.h"
+#import "PopViewController.h"
+#import "SpotlightViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -252,7 +255,9 @@
                                                           @"CollectionView相关(OK)",
                                                           @"音视频功能集合",
                                                           @"仿探探card(OK)",
-                                                          @"饼图(OK)"]];
+                                                          @"饼图(OK)",
+                                                          @"PopViewController(OK)",
+                                                          @"类似spotlight菜单"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -568,6 +573,8 @@
         case 29:
         {
             //音视频功能集合
+            AudioAndVideoViewController *vc = [AudioAndVideoViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 30:
@@ -580,6 +587,19 @@
         case 31:
         {   // 饼图
             PieChartViewController *vc = [PieChartViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 32:
+        {
+            PopViewController *vc = [PopViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 33:
+        {
+            // 类似spotlight菜单
+            SpotlightViewController *vc = [SpotlightViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

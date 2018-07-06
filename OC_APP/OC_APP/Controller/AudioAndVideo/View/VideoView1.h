@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XLCaptureManager1.h"
+
+@protocol VideoView1Delegate <NSObject>
+
+- (void)dismissVC;
+- (void)recordFinishWithvideoUrl:(NSURL *)videoUrl;
+
+@end
 
 @interface VideoView1 : UIView
+
+
+@property (nonatomic, strong, readonly) XLCaptureManager1 *manager;
+@property (nonatomic, weak) id<VideoView1Delegate> delegate;
+
+- (void)reset;
 
 @end

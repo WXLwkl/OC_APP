@@ -7,6 +7,8 @@
 //
 
 #import "PopViewController.h"
+#import "Pop2ViewController.h"
+#import "UIViewController+Pop.h"
 
 @interface PopViewController ()
 
@@ -16,7 +18,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(100, 100, 100, 50);
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+}
+
+- (void)clicked {
+    
+    Pop2ViewController *vc = [[Pop2ViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self modal:nav controllerHeight:500];
 }
 
 - (void)didReceiveMemoryWarning {

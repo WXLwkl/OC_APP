@@ -7,31 +7,54 @@
 //
 
 #import "Video1ViewController.h"
+#import "View/VideoView.h"
+#import "VideoPlayController.h"
 
-@interface Video1ViewController ()
+@interface Video1ViewController ()<VideoViewDelegate>
+
+@property (nonatomic, strong) VideoView *videoView;
 
 @end
 
 @implementation Video1ViewController
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    [self.view addSubview:self.videoView];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.videoView.captureManager.recordState == XLRecordStateFinish) {
+        [self.videoView reset];
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dismissVC {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+- (void)recordFinishWithvideoUrl:(NSURL *)videoUrl {
+    
+    VideoPlayController *vc = [[VideoPlayController alloc] init];
+    vc.videoUrl = videoUrl;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (VideoView *)videoView {
+    if (!_videoView) {
+        _videoView = [[VideoView alloc] initWithFrame:self.view.bounds];
+        _videoView.delegate = self;
+    }
+    return _videoView;
+}
 
 @end

@@ -75,7 +75,7 @@
 @property (nonatomic, copy) NSArray<NSString *> *weathers;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
-@property (nonatomic, strong) AVCaptureSession *session;
+
 
 
 @property(nonatomic,strong)UIImage *rollImage;//滚动图片

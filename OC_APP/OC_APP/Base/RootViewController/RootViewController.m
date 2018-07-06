@@ -60,14 +60,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)exitApplication {
+    
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIWindow *window = app.window;
+    
+    [UIView animateWithDuration:1.0f animations:^{
+        
+        window.alpha = 0;
+        window.center = self.view.center;
+        window.bounds = CGRectZero;
+        
+    } completion:^(BOOL finished) {
+        
+        exit(0);
+        
+    }];
 }
-*/
 
 @end

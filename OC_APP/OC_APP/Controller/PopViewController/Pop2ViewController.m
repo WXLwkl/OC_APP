@@ -16,14 +16,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor redColor];
+    self.title = @"弹出视图";
+    
+    NSString *str = NSStringFromCGRect(self.view.bounds);
+    
+    NSLog(@"%@", str);
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, self.view.bounds.size.height - 250, self.view.bounds.size.width, 50);
+    btn.backgroundColor = [UIColor orangeColor];
+    //    [btn addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    //    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 /*
 #pragma mark - Navigation
 

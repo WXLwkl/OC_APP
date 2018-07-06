@@ -140,7 +140,7 @@
     size_t height = CGRectGetHeight(integralRect)*scale;
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceGray();
     CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaNone);
-    //    CIContext *context = [CIContext contextWithOptions:nil];
+//        CIContext *context = [CIContext contextWithOptions:nil];
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}];
     CGImageRef bitmapImage = [context createCGImage:image fromRect:integralRect];
     CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);

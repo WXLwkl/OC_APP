@@ -17,4 +17,6 @@
  */
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
+- (void)exitApplication;
+
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2018年 兴林. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
-@interface MultithreadingViewController : UIPresentationController
+@interface MultithreadingViewController : RootViewController
 
 @end
