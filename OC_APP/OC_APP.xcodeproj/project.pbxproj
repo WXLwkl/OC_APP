@@ -32,6 +32,7 @@
 		910CBE741EE8EF20003C111B /* AppDelegate+AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 910CBE731EE8EF20003C111B /* AppDelegate+AppService.m */; };
 		910CBE9C1EE92077003C111B /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 910CBE9B1EE92077003C111B /* AppManager.m */; };
 		910D4C7020ECB2100082CBC8 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */; };
+		911983C420F4A74C00BA5509 /* XLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 911983C320F4A74C00BA5509 /* XLOperation.m */; };
 		911B12C71FE23F62007D9692 /* InfiniteTabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C61FE23F62007D9692 /* InfiniteTabelViewController.m */; };
 		911B12CA1FE23FA3007D9692 /* InfiniteTabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C91FE23FA3007D9692 /* InfiniteTabelView.m */; };
 		911B12CD1FE23FBE007D9692 /* TableViewInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12CC1FE23FBE007D9692 /* TableViewInterceptor.m */; };
@@ -345,6 +346,7 @@
 		91BF384220455102006A76B2 /* XLKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BF384120455102006A76B2 /* XLKeychain.m */; };
 		91C270C61ED6C97C0064AEBC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C270C51ED6C97C0064AEBC /* AppDelegate.m */; };
 		91C42F571FFF51B80062C533 /* UploadImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C42F561FFF51B80062C533 /* UploadImagesViewController.m */; };
+		91C9273820F4770100693FAE /* OperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9273720F4770100693FAE /* OperationViewController.m */; };
 		91CD5DBD20C69E4B00BDC412 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CD5DBC20C69E4B00BDC412 /* PopViewController.m */; };
 		91CD5DC020C69EEC00BDC412 /* UIViewController+Pop.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CD5DBF20C69EEC00BDC412 /* UIViewController+Pop.m */; };
 		91CD5DC320C6A0A300BDC412 /* Pop2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CD5DC220C6A0A300BDC412 /* Pop2ViewController.m */; };
@@ -487,6 +489,8 @@
 		910CBE9B1EE92077003C111B /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
 		910D4C6E20ECB2100082CBC8 /* ThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
+		911983C220F4A74C00BA5509 /* XLOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLOperation.h; sourceTree = "<group>"; };
+		911983C320F4A74C00BA5509 /* XLOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLOperation.m; sourceTree = "<group>"; };
 		911B12C51FE23F62007D9692 /* InfiniteTabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteTabelViewController.h; sourceTree = "<group>"; };
 		911B12C61FE23F62007D9692 /* InfiniteTabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteTabelViewController.m; sourceTree = "<group>"; };
 		911B12C81FE23FA3007D9692 /* InfiniteTabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteTabelView.h; sourceTree = "<group>"; };
@@ -1021,6 +1025,8 @@
 		91C270C91ED6CC9E0064AEBC /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		91C42F551FFF51B80062C533 /* UploadImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImagesViewController.h; sourceTree = "<group>"; };
 		91C42F561FFF51B80062C533 /* UploadImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImagesViewController.m; sourceTree = "<group>"; };
+		91C9273620F4770100693FAE /* OperationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationViewController.h; sourceTree = "<group>"; };
+		91C9273720F4770100693FAE /* OperationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OperationViewController.m; sourceTree = "<group>"; };
 		91CD5DBB20C69E4B00BDC412 /* PopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
 		91CD5DBC20C69E4B00BDC412 /* PopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
 		91CD5DBE20C69EEC00BDC412 /* UIViewController+Pop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Pop.h"; sourceTree = "<group>"; };
@@ -1820,6 +1826,10 @@
 				910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */,
 				91870EEE20CE4267007CEEB9 /* GCDViewController.h */,
 				91870EEF20CE4267007CEEB9 /* GCDViewController.m */,
+				91C9273620F4770100693FAE /* OperationViewController.h */,
+				91C9273720F4770100693FAE /* OperationViewController.m */,
+				911983C220F4A74C00BA5509 /* XLOperation.h */,
+				911983C320F4A74C00BA5509 /* XLOperation.m */,
 			);
 			path = MultithreadingViewController;
 			sourceTree = "<group>";
@@ -2857,7 +2867,7 @@
 					C20783F91DADF12700BB05D4 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = SEX9UQR699;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -3145,6 +3155,7 @@
 				918B55C7200DC1170048C5A1 /* AdvertiseView.m in Sources */,
 				917193C31FDFC97E00D0825E /* TradeKeyboard.m in Sources */,
 				91B64D20206A2655000C40B1 /* UIScrollView+Common.m in Sources */,
+				911983C420F4A74C00BA5509 /* XLOperation.m in Sources */,
 				916C1DBF1F39922300A08B49 /* NSString+Json.m in Sources */,
 				91F806F91FBEB58000B81A8B /* UIControl+Common.m in Sources */,
 				911B12CD1FE23FBE007D9692 /* TableViewInterceptor.m in Sources */,
@@ -3330,6 +3341,7 @@
 				911B12C71FE23F62007D9692 /* InfiniteTabelViewController.m in Sources */,
 				9122DC0A1EFD121C002A0D7A /* MyscrollView.m in Sources */,
 				9160E4E220B7E572003F6579 /* SegementViewController.m in Sources */,
+				91C9273820F4770100693FAE /* OperationViewController.m in Sources */,
 				910A1AEB1EF76A3A0003DAE4 /* StepProgressView.m in Sources */,
 				917617D71F30532C00A84CAF /* ActivityAlert.m in Sources */,
 				91C270C61ED6C97C0064AEBC /* AppDelegate.m in Sources */,
@@ -3514,16 +3526,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = SEX9UQR699;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xingl.OC-APP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e420e7a1-f477-4f57-8864-3b105583b270";
-				PROVISIONING_PROFILE_SPECIFIER = APP_Debug;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3536,7 +3548,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OC_APP/Supporting Files/OC_APP.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/OC_APP/Supporting Files/Info.plist";

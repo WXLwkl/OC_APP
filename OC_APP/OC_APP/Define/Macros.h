@@ -35,23 +35,17 @@
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
 //DEBUG  模式下打印日志,当前行
 #ifdef DEBUG
-#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#define NSLog(...) nil
-#endif
-
-
-/*******************  重写NSLog, Debug模式下打印日志和当前行数  ***************************/
-
-#ifdef DEBUG
+#define Log(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 //#define XLLog(FORMAT, ...) fprintf(stderr,"%s %s [Line %d] Log:%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #define XLLog(FORMAT, ...) fprintf(stderr,"%s [Line %d] Log:%s \n",__PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#define LogBool(value) NSLog(@"%@",value == YES ? @"YES" : @"NO");
 #else
+#define Log(...) nil
 #define XLLog(...) nil
+#define LogBool(value) nil
 #endif
 
 
-#define LogBool(value) NSLog(@"%@",value == YES ? @"YES" : @"NO");
 /*!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!**!*/
 
 

@@ -155,6 +155,9 @@ void * run(void *param)    // 新线程调用方法，里边为需要执行的�
 
 
 - (void)initTicketStatusSave {
+    
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
     self.ticketSurplusCount = 50;
     //2. 设置北京火车票售票窗口的线程
     self.ticketSaleWindow1 = [[NSThread alloc] initWithTarget:self selector:@selector(saleTicketSafe) object:nil];
@@ -172,7 +175,7 @@ void * run(void *param)    // 新线程调用方法，里边为需要执行的�
         @synchronized (self) {
             if (self.ticketSurplusCount > 0) {
                 self.ticketSurplusCount--;
-                NSLog(@"%@",[NSString stringWithFormat:@"剩余票数： %d 窗口：%@", self.ticketSurplusCount, [NSThread currentThread]]);
+                NSLog(@"%@",[NSString stringWithFormat:@"剩余票数： %ld 窗口：%@", (long)self.ticketSurplusCount, [NSThread currentThread]]);
 //                [NSThread sleepForTimeInterval:1];
             } else {
                 NSLog(@"票已售罄！");

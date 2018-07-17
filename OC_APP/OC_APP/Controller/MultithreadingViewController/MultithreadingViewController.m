@@ -9,6 +9,7 @@
 #import "MultithreadingViewController.h"
 #import "ThreadViewController.h"
 #import "GCDViewController.h"
+#import "OperationViewController.h"
 
 @interface MultithreadingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -65,7 +66,7 @@
             vc = [GCDViewController new];
             break;
         case 2:
-            
+            vc = [OperationViewController new];
             break;
         default:
             break;
@@ -90,7 +91,7 @@
     self.dataArray = @[
                        @"pthread、NSThread",
                        @"GCD",
-                       @"NSOperation"
+                       @"NSOperation、NSOperationQueue"
                        ];
 }
 
