@@ -171,6 +171,7 @@
 		9177FD871FFE10B10030AFC0 /* DataSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD861FFE10B10030AFC0 /* DataSourceViewController.m */; };
 		9177FD8A1FFE11EF0030AFC0 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD891FFE11EF0030AFC0 /* ArrayDataSource.m */; };
 		9177FD8D1FFE1E490030AFC0 /* BezierPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9177FD8C1FFE1E490030AFC0 /* BezierPathViewController.m */; };
+		9178CC6E20FDE5800079B164 /* RunloopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9178CC6D20FDE5800079B164 /* RunloopViewController.m */; };
 		917F6B271F306FBF0095979D /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 917F6B261F306FBF0095979D /* UIViewController+Common.m */; };
 		917F6B2A1F3071F50095979D /* UIBarButtonItem+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 917F6B291F3071F50095979D /* UIBarButtonItem+Common.m */; };
 		918543981FA30E4600C776E2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 918543971FA30E4600C776E2 /* LoginViewController.m */; };
@@ -735,6 +736,8 @@
 		9177FD891FFE11EF0030AFC0 /* ArrayDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
 		9177FD8B1FFE1E490030AFC0 /* BezierPathViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierPathViewController.h; sourceTree = "<group>"; };
 		9177FD8C1FFE1E490030AFC0 /* BezierPathViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierPathViewController.m; sourceTree = "<group>"; };
+		9178CC6C20FDE5800079B164 /* RunloopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RunloopViewController.h; sourceTree = "<group>"; };
+		9178CC6D20FDE5800079B164 /* RunloopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunloopViewController.m; sourceTree = "<group>"; };
 		917F6B251F306FBF0095979D /* UIViewController+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Common.h"; sourceTree = "<group>"; };
 		917F6B261F306FBF0095979D /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Common.m"; sourceTree = "<group>"; };
 		917F6B281F3071F50095979D /* UIBarButtonItem+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Common.h"; sourceTree = "<group>"; };
@@ -1697,6 +1700,7 @@
 		9175230A1F46B25A004CE4E0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9178CC6B20FDE55E0079B164 /* Runloop */,
 				91221D3320DB71D300C4D5A1 /* AudioAndVideo */,
 				91EF61EF20CF670900725529 /* SpotlightViewController */,
 				91870EEA20CE3D46007CEEB9 /* MultithreadingViewController */,
@@ -1790,6 +1794,15 @@
 			);
 			name = "AddressPickerView(地址选择器)";
 			path = AddressPickerView;
+			sourceTree = "<group>";
+		};
+		9178CC6B20FDE55E0079B164 /* Runloop */ = {
+			isa = PBXGroup;
+			children = (
+				9178CC6C20FDE5800079B164 /* RunloopViewController.h */,
+				9178CC6D20FDE5800079B164 /* RunloopViewController.m */,
+			);
+			path = Runloop;
 			sourceTree = "<group>";
 		};
 		918543951FA30E2A00C776E2 /* LoginViewController(登录) */ = {
@@ -3382,6 +3395,7 @@
 				91992B9F1FFF610A00FD6DE4 /* ImageCell.m in Sources */,
 				91CD5DBD20C69E4B00BDC412 /* PopViewController.m in Sources */,
 				915A0FEF1FD9317200263E15 /* TurntableViewController1.m in Sources */,
+				9178CC6E20FDE5800079B164 /* RunloopViewController.m in Sources */,
 				91B5A6411F97008B0008FB98 /* MyView.m in Sources */,
 				918B55CA200DD12E0048C5A1 /* AdvertiseManager.m in Sources */,
 				912A198A1F4A86680014FB05 /* ReduceTimeViewController.m in Sources */,
@@ -3447,7 +3461,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3499,7 +3513,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

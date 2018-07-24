@@ -25,7 +25,7 @@
 @property (nonatomic, copy) NSString *native; //籍贯
 @property (nonatomic, copy) NSString *education;
 
-- (void)eat;
+//- (void)eat;
 - (void)sleep;
 - (void)work:(NSString *)name time:(NSString *)time;
 

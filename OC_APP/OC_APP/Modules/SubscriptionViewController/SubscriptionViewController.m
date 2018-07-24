@@ -134,11 +134,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
     NSString *vcString = dic[@"viewController"];
-    
+    NSString *title = dic[@"title"];
     Class class = NSClassFromString(vcString);
     
     UIViewController *vc = [[class alloc] init];
-    
+    vc.navigationItem.title = title;
     if (!vc) return NSLog(@"没有对应的Controller");
     
     [self.navigationController pushViewController:vc animated:YES];

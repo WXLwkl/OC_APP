@@ -89,9 +89,24 @@ CodingImplementation
     
     return [NSString stringWithFormat:@"<%@: %p> -- %@",[self class], self,dictionary];
 }
+// 当这个类内调用了一个没有实现的类方法
+//+ (BOOL)resolveClassMethod:(SEL)sel
 
+// 当这个类内调用了一个没有实现的实例方法
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    NSLog(@"-->%@", NSStringFromSelector(sel));
+    
+    class_addMethod([Person class], sel, (IMP)func, "v@:@");
+    
+    return [super resolveInstanceMethod:sel];
+}
+void func(id self, SEL _cmd, NSString *str) {
+    NSLog(@"----动态添加的方法实现---%@-", str);
+}
 
-- (void)eat{}
+//- (void)eat {
+//    NSLog(@"-- 吃 --");
+//}
 - (void)sleep{}
 - (void)work:(NSString *)name time:(NSString *)time {}
 

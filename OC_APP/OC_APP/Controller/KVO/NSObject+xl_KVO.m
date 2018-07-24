@@ -54,7 +54,12 @@
     }
 }
 
+/**
+ 动态创建类
 
+ @param className 类型
+ @return 衍生类
+ */
 - (Class)xl_KVOClassWithOriginalClassName:(NSString *)className {
     NSString *kvoClassName = [XLKVOClassPrefix stringByAppendingString:className];
     Class kvoClass = NSClassFromString(kvoClassName);

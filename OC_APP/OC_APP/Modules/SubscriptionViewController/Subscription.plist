@@ -16,6 +16,12 @@
 	</dict>
 	<dict>
 		<key>title</key>
+		<string>runloop</string>
+		<key>viewController</key>
+		<string>RunloopViewController</string>
+	</dict>
+	<dict>
+		<key>title</key>
 		<string>多线程</string>
 		<key>viewController</key>
 		<string>MultithreadingViewController</string>

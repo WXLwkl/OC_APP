@@ -21,12 +21,24 @@
     [self xl_setNavBackItem];
     
     
-    [self test1];
+    
+    [self test];
+//    [self test1];
 //    [self test2];
 //    [self test3];
 //    [self test4];
 //    [self test5];
 }
+/** 消息发送机制 */
+- (void)test {
+    Person *p = [[Person alloc] init];
+    [p performSelector:@selector(eat:) withObject:@"汉堡"];
+    // 需要在配置文件 settings 里面 搜索msg 设置为NO，因为苹果不建议直接这样
+//    Person *p = objc_msgSend([Person class], @selector(alloc));
+//    p = objc_msgSend(p, @selector(init));
+//    objc_msgSend(p, @selector(eat:),"汉堡");
+}
+
 /** 归档/解档 */
 - (void)test1 {
     Person *person = [[Person alloc] init];
@@ -105,21 +117,5 @@
     }
     free(protocols);
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
