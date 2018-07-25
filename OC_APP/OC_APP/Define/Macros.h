@@ -283,7 +283,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 //方法2.这个方法一定要有，就是alloc] init]方法，一定会调用这个方法
 //此处还应该有一个+ copy方法，因为可能是copy，那么有可能是生成新的方法
 #define SingletonImplementation(Class) \
-static Class *instance_ = nil; \
+static id instance_ = nil; \
 + (instancetype)shared##Class { \
     static dispatch_once_t onceToken; \
     dispatch_once(&onceToken, ^{ \

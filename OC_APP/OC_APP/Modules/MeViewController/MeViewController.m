@@ -67,6 +67,7 @@
 #import <WRNavigationBar.h>
 
 #import "FPSLabel.h"
+#import "DebugTool.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -275,7 +276,10 @@
 //    [self.view addSubview:fpsLabel];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
-
+    [[DebugTool sharedDebugTool] autoTypes:DebugToolTypeFPS |  DebugToolTypeCPU | DebugToolTypeMemory];
+    
+//    kScreenWidth
+    
     //弹出提示
     [self showNewStatusesCount:self.dataArray.count];
 

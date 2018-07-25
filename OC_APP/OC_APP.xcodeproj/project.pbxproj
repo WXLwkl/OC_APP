@@ -116,7 +116,6 @@
 		915A0FF11FD9317200263E15 /* TurntableViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 915A0FED1FD9317100263E15 /* TurntableViewController3.m */; };
 		915A100B1FD9319B00263E15 /* TurntableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 915A100A1FD9319B00263E15 /* TurntableViewController.m */; };
 		915A10191FD9376800263E15 /* XLGifView.m in Sources */ = {isa = PBXBuildFile; fileRef = 915A10181FD9376700263E15 /* XLGifView.m */; };
-		915BC2311FC4031D00C6FB39 /* FPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 915BC2301FC4031D00C6FB39 /* FPSLabel.m */; };
 		915BC2341FC40CBD00C6FB39 /* BlankPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 915BC2331FC40CBD00C6FB39 /* BlankPageViewController.m */; };
 		915BC2381FC410C800C6FB39 /* EaseBlankPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 915BC2371FC410C800C6FB39 /* EaseBlankPageView.m */; };
 		915BC2601FC425AC00C6FB39 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 915BC25F1FC425AC00C6FB39 /* NSObject+Swizzling.m */; };
@@ -347,6 +346,7 @@
 		91BF384220455102006A76B2 /* XLKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BF384120455102006A76B2 /* XLKeychain.m */; };
 		91C270C61ED6C97C0064AEBC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C270C51ED6C97C0064AEBC /* AppDelegate.m */; };
 		91C42F571FFF51B80062C533 /* UploadImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C42F561FFF51B80062C533 /* UploadImagesViewController.m */; };
+		91C7561F2108262B00CBE0FC /* DebugConsoleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C7561E2108262B00CBE0FC /* DebugConsoleLabel.m */; };
 		91C9273820F4770100693FAE /* OperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9273720F4770100693FAE /* OperationViewController.m */; };
 		91CD5DBD20C69E4B00BDC412 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CD5DBC20C69E4B00BDC412 /* PopViewController.m */; };
 		91CD5DC020C69EEC00BDC412 /* UIViewController+Pop.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CD5DBF20C69EEC00BDC412 /* UIViewController+Pop.m */; };
@@ -370,6 +370,9 @@
 		91D97B821EEF81FE000E6CE6 /* ClickTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97B801EEF81FE000E6CE6 /* ClickTextView.m */; };
 		91D97C031EEFB11E000E6CE6 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97C021EEFB11E000E6CE6 /* MainNavigationController.m */; };
 		91D9B5BA1F17546B00668093 /* UIViewController+HeadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D9B5B91F17546B00668093 /* UIViewController+HeadImage.m */; };
+		91E196A12107162F00E2D684 /* DebugTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A02107162F00E2D684 /* DebugTool.m */; };
+		91E196A421071C7F00E2D684 /* DebugFPSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A321071C7F00E2D684 /* DebugFPSMonitor.m */; };
+		91E196A72107220300E2D684 /* DebugCPUMemoryMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A62107220300E2D684 /* DebugCPUMemoryMonitor.m */; };
 		91E41ED41F32B92D004BF5BA /* InfunRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41ED31F32B92D004BF5BA /* InfunRefreshHeader.m */; };
 		91E41ED91F32BD70004BF5BA /* ALinRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41ED81F32BD70004BF5BA /* ALinRefreshGifHeader.m */; };
 		91E41EDC1F32BD8E004BF5BA /* XLRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41EDB1F32BD8E004BF5BA /* XLRefreshHeader.m */; };
@@ -633,8 +636,6 @@
 		915A100A1FD9319B00263E15 /* TurntableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TurntableViewController.m; sourceTree = "<group>"; };
 		915A10171FD9376700263E15 /* XLGifView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLGifView.h; sourceTree = "<group>"; };
 		915A10181FD9376700263E15 /* XLGifView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLGifView.m; sourceTree = "<group>"; };
-		915BC22F1FC4031D00C6FB39 /* FPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPSLabel.h; sourceTree = "<group>"; };
-		915BC2301FC4031D00C6FB39 /* FPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPSLabel.m; sourceTree = "<group>"; };
 		915BC2321FC40CBD00C6FB39 /* BlankPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankPageViewController.h; sourceTree = "<group>"; };
 		915BC2331FC40CBD00C6FB39 /* BlankPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlankPageViewController.m; sourceTree = "<group>"; };
 		915BC2361FC410C800C6FB39 /* EaseBlankPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseBlankPageView.h; sourceTree = "<group>"; };
@@ -1028,6 +1029,8 @@
 		91C270C91ED6CC9E0064AEBC /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		91C42F551FFF51B80062C533 /* UploadImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImagesViewController.h; sourceTree = "<group>"; };
 		91C42F561FFF51B80062C533 /* UploadImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImagesViewController.m; sourceTree = "<group>"; };
+		91C7561D2108262B00CBE0FC /* DebugConsoleLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugConsoleLabel.h; sourceTree = "<group>"; };
+		91C7561E2108262B00CBE0FC /* DebugConsoleLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugConsoleLabel.m; sourceTree = "<group>"; };
 		91C9273620F4770100693FAE /* OperationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationViewController.h; sourceTree = "<group>"; };
 		91C9273720F4770100693FAE /* OperationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OperationViewController.m; sourceTree = "<group>"; };
 		91CD5DBB20C69E4B00BDC412 /* PopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
@@ -1071,6 +1074,12 @@
 		91D97C021EEFB11E000E6CE6 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		91D9B5B81F17546B00668093 /* UIViewController+HeadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HeadImage.h"; sourceTree = "<group>"; };
 		91D9B5B91F17546B00668093 /* UIViewController+HeadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HeadImage.m"; sourceTree = "<group>"; };
+		91E1969F2107162F00E2D684 /* DebugTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugTool.h; sourceTree = "<group>"; };
+		91E196A02107162F00E2D684 /* DebugTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugTool.m; sourceTree = "<group>"; };
+		91E196A221071C7F00E2D684 /* DebugFPSMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugFPSMonitor.h; sourceTree = "<group>"; };
+		91E196A321071C7F00E2D684 /* DebugFPSMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugFPSMonitor.m; sourceTree = "<group>"; };
+		91E196A52107220300E2D684 /* DebugCPUMemoryMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugCPUMemoryMonitor.h; sourceTree = "<group>"; };
+		91E196A62107220300E2D684 /* DebugCPUMemoryMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugCPUMemoryMonitor.m; sourceTree = "<group>"; };
 		91E41ED21F32B92D004BF5BA /* InfunRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfunRefreshHeader.h; sourceTree = "<group>"; };
 		91E41ED31F32B92D004BF5BA /* InfunRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfunRefreshHeader.m; sourceTree = "<group>"; };
 		91E41ED71F32BD70004BF5BA /* ALinRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALinRefreshGifHeader.h; sourceTree = "<group>"; };
@@ -1501,14 +1510,19 @@
 			path = XLGifView;
 			sourceTree = "<group>";
 		};
-		915BC22E1FC402F400C6FB39 /* FPSLabel(FPS查看) */ = {
+		915BC22E1FC402F400C6FB39 /* DebugTool */ = {
 			isa = PBXGroup;
 			children = (
-				915BC22F1FC4031D00C6FB39 /* FPSLabel.h */,
-				915BC2301FC4031D00C6FB39 /* FPSLabel.m */,
+				91E1969F2107162F00E2D684 /* DebugTool.h */,
+				91E196A02107162F00E2D684 /* DebugTool.m */,
+				91E196A221071C7F00E2D684 /* DebugFPSMonitor.h */,
+				91E196A321071C7F00E2D684 /* DebugFPSMonitor.m */,
+				91E196A52107220300E2D684 /* DebugCPUMemoryMonitor.h */,
+				91E196A62107220300E2D684 /* DebugCPUMemoryMonitor.m */,
+				91C7561D2108262B00CBE0FC /* DebugConsoleLabel.h */,
+				91C7561E2108262B00CBE0FC /* DebugConsoleLabel.m */,
 			);
-			name = "FPSLabel(FPS查看)";
-			path = FPSLabel;
+			path = DebugTool;
 			sourceTree = "<group>";
 		};
 		915BC2351FC410BA00C6FB39 /* EaseBlankPageView */ = {
@@ -2504,7 +2518,7 @@
 				91A589621FCBE8A6002B19DF /* Tools */,
 				91A589531FCBB595002B19DF /* PraiseEmitterBtn(点赞) */,
 				915BC2351FC410BA00C6FB39 /* EaseBlankPageView */,
-				915BC22E1FC402F400C6FB39 /* FPSLabel(FPS查看) */,
+				915BC22E1FC402F400C6FB39 /* DebugTool */,
 				91FA77411FC2D86E0053D4E2 /* WaterWaveView(水波) */,
 				91D70B361FA189DD009B79DB /* LateralSlide(侧滑) */,
 				91B49F521F4D24830031DA11 /* ChatBox(聊天输入框) */,
@@ -3159,6 +3173,7 @@
 				91F5156C1FDA7E380082835F /* FireworksViewController.m in Sources */,
 				91F5154B1FDA69890082835F /* LoveHeartViewController.m in Sources */,
 				91AC0CDC1EF393CA004FDD9E /* NSString+Common.m in Sources */,
+				91E196A421071C7F00E2D684 /* DebugFPSMonitor.m in Sources */,
 				916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */,
 				91A7285220722D5D00F7C829 /* CircleLayout.m in Sources */,
 				91A619361F271D5100FCA42C /* XLCalendar.m in Sources */,
@@ -3200,6 +3215,7 @@
 				91A1F280200706AA00A25282 /* UIView+Toast.m in Sources */,
 				91221D4520DBA73100C4D5A1 /* VideoView.m in Sources */,
 				91221D3C20DBA03700C4D5A1 /* Video1ViewController.m in Sources */,
+				91E196A12107162F00E2D684 /* DebugTool.m in Sources */,
 				919842BE1F2074CB00CE773F /* SecureManager.m in Sources */,
 				9196CCF81F5E6E1F003D18E4 /* MorePanel.m in Sources */,
 				91B3C6331F42EA5100E4062B /* NSArray+Common.m in Sources */,
@@ -3297,6 +3313,7 @@
 				917193B91FDFBE2100D0825E /* PayPasswordView.m in Sources */,
 				919E71FC1FDE7B3A00CA0019 /* ScrollNumLabelViewController.m in Sources */,
 				91B3C6361F42EC8E00E4062B /* NSObject+Common.m in Sources */,
+				91C7561F2108262B00CBE0FC /* DebugConsoleLabel.m in Sources */,
 				9191387120BBE40800D08B39 /* RuntimeViewController.m in Sources */,
 				91A619421F271E5500FCA42C /* WeeksView.m in Sources */,
 				91E41ED41F32B92D004BF5BA /* InfunRefreshHeader.m in Sources */,
@@ -3338,6 +3355,7 @@
 				9160E4E520B7E690003F6579 /* TitleLabel.m in Sources */,
 				9174947020735AAA00443149 /* UIImage+PS.m in Sources */,
 				917523111F46B469004CE4E0 /* AddressPickerView.m in Sources */,
+				91E196A72107220300E2D684 /* DebugCPUMemoryMonitor.m in Sources */,
 				91B32AD320B7B9E900F595C0 /* PieCenterView.m in Sources */,
 				91AC0CDD1EF393CA004FDD9E /* NSString+Rex.m in Sources */,
 				9150CDB41EEA9079002B42E2 /* PopoverMenu.m in Sources */,
@@ -3409,7 +3427,6 @@
 				915A10191FD9376800263E15 /* XLGifView.m in Sources */,
 				91D70B421FA189DD009B79DB /* InteractiveTransition.m in Sources */,
 				9160E4E820B7E8DB003F6579 /* SegementViewFlowLayout.m in Sources */,
-				915BC2311FC4031D00C6FB39 /* FPSLabel.m in Sources */,
 				91CD5DC320C6A0A300BDC412 /* Pop2ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
