@@ -22,7 +22,7 @@
     
     
     
-    [self test];
+//    [self test];
 //    [self test1];
 //    [self test2];
 //    [self test3];

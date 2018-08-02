@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     
     [self.webView loadLocalHTMLWithFileName:@"main"];
+//    [self.webView loadRequestWithUrl:@"https://www.baidu.com"];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"调用JS" style:UIBarButtonItemStylePlain target:self action:@selector(callJS:)];
     self.navigationItem.rightBarButtonItem = rightItem;

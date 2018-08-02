@@ -10,7 +10,7 @@
 
 @interface LevalView ()<UIScrollViewDelegate>
 @property (nonatomic,strong) UIScrollView * scrollView;
-@property (nonatomic,strong) NSArray * scrollSubViews;
+@property (nonatomic,strong) NSArray *scrollSubViews;
 @end
 
 @implementation LevalView
@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.backgroundColor = [UIColor redColor];
         CGFloat unitW = frame.size.width*0.7;
         CGFloat unitH = frame.size.height;
         NSInteger count = info.count;
@@ -49,7 +49,6 @@
             maskLayer.path = maskPath.CGPath;
             
             bgView.layer.mask = maskLayer;
-            
             
             
             // 设置头像

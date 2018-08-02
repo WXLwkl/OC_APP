@@ -66,7 +66,7 @@
 
 #import <WRNavigationBar.h>
 
-#import "FPSLabel.h"
+//#import "FPSLabel.h"
 #import "DebugTool.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -263,19 +263,19 @@
 //    self.dataArray = [[NSMutableArray alloc]init];
     
     //创建对象时，使用内联符合表达式
-    FPSLabel *fpsLabel = ({
-        FPSLabel *label = [FPSLabel new];
-        label.frame=CGRectMake(20, 80, 30, 30);
-        [label sizeToFit];
-        label.alpha = 0.6;
-        label;
-    });
+//    FPSLabel *fpsLabel = ({
+//        FPSLabel *label = [FPSLabel new];
+//        label.frame=CGRectMake(20, 80, 30, 30);
+//        [label sizeToFit];
+//        label.alpha = 0.6;
+//        label;
+//    });
     
     
     
 //    [self.view addSubview:fpsLabel];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
     [[DebugTool sharedDebugTool] autoTypes:DebugToolTypeFPS |  DebugToolTypeCPU | DebugToolTypeMemory];
     
 //    kScreenWidth

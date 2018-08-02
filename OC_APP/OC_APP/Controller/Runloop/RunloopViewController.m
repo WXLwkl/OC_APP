@@ -25,11 +25,11 @@
     [self permanentThread];
     
     // 子线程runloop默认不开启
-//    NSLog(@"----begin");
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        NSLog(@"----begin");
 //        [self performSelector:@selector(test) withObject:nil afterDelay:0];
+//        NSLog(@"----end");
 //    });
-//    NSLog(@"----end");
 }
 
 - (void)test {
