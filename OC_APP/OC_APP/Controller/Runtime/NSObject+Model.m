@@ -57,6 +57,7 @@
             range = [propertyType rangeOfString:@"\""];
             propertyType = [propertyType substringToIndex:range.location];
             // 字符串截取
+            // Cat
             
             // 获取需要转换类的类对象
             Class modelClass = NSClassFromString(propertyType);
@@ -83,9 +84,9 @@
                 value = mArr;
             }
         }
-        
+        // KVC字典转模型
         if (value) {
-            // kvc 赋值： 不能传空
+            /* 说明属性存在,可以使用 KVC 设置数值 */
             [model setValue:value forKey:key];
         }
     }

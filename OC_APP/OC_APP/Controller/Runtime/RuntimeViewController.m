@@ -142,6 +142,7 @@
     free(protocols);
 }
 
+/** 字典转Model */
 - (void)test6 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"model.json" ofType:nil];
     NSData *jsonData = [NSData dataWithContentsOfFile:path];
