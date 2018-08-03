@@ -1,5 +1,5 @@
 //
-//  NSObject+Runtime.h
+//  NSObject+Coding.h
 //  OC_APP
 //
 //  Created by xingl on 2018/5/28.
@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Runtime)
+@interface NSObject (Coding)
 
+// 忽略的属性名
 - (NSArray *)ignoredNames;
 
 - (void)xl_encode:(NSCoder *)aCoder;

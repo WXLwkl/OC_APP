@@ -9,6 +9,10 @@
 #import "RuntimeViewController.h"
 #import "Person.h"
 
+#import "NSObject+Model.h"
+#import "User.h"
+
+
 @interface RuntimeViewController ()
 
 @end
@@ -28,15 +32,35 @@
 //    [self test3];
 //    [self test4];
 //    [self test5];
+    [self test6];
 }
 /** 消息发送机制 */
 - (void)test {
     Person *p = [[Person alloc] init];
     [p performSelector:@selector(eat:) withObject:@"汉堡"];
+    
     // 需要在配置文件 settings 里面 搜索msg 设置为NO，因为苹果不建议直接这样
+    
 //    Person *p = objc_msgSend([Person class], @selector(alloc));
 //    p = objc_msgSend(p, @selector(init));
 //    objc_msgSend(p, @selector(eat:),"汉堡");
+    
+    // 系统c++
+//    Person *person = ((Person *(*)(id, SEL))(void *)objc_msgSend)((id)((Person *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("Person"), sel_registerName("alloc")), sel_registerName("init"));
+//    ((void (*)(id, SEL))(void *)objc_msgSend)((id)person, sel_registerName("run"));
+    
+    
+    // 通过类名获取类
+//    Class catClass = objc_getClass("Person");
+    //注意Class实际上也是对象，所以同样能够接受消息，向Class发送alloc消息
+//    Person *person = objc_msgSend(catClass, @selector(alloc));
+    //发送init消息给Cat实例cat
+//    person = objc_msgSend(person, @selector(init));
+    //发送eat消息给cat，即调用eat方法
+//    objc_msgSend(person, @selector(eat));
+    //汇总消息传递过程
+//    objc_msgSend(objc_msgSend(objc_msgSend(objc_getClass("Person"), sel_registerName("alloc")), sel_registerName("init")), sel_registerName("eat"));
+    
 }
 
 /** 归档/解档 */
@@ -116,6 +140,21 @@
         NSLog(@"%zd == %@", i, protocolName);
     }
     free(protocols);
+}
+
+- (void)test6 {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"model.json" ofType:nil];
+    NSData *jsonData = [NSData dataWithContentsOfFile:path];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:NULL];
+    
+    User *user = [User xl_modelWithDict:json];
+    Cat *cat = user.cat;
+    
+    Book *book = user.books[0];
+    
+    NSLog(@"fish--%@", cat.fish.name);
+    NSLog(@"book--%@", book.name);
+    NSLog(@"cat---%@", cat.name);
 }
 
 @end

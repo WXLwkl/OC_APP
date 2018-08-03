@@ -93,16 +93,16 @@ CodingImplementation
 //+ (BOOL)resolveClassMethod:(SEL)sel
 
 // 当这个类内调用了一个没有实现的实例方法
-+ (BOOL)resolveInstanceMethod:(SEL)sel {
-    NSLog(@"-->%@", NSStringFromSelector(sel));
-    
-    class_addMethod([Person class], sel, (IMP)func, "v@:@");
-    
-    return [super resolveInstanceMethod:sel];
-}
-void func(id self, SEL _cmd, NSString *str) {
-    NSLog(@"----动态添加的方法实现---%@-", str);
-}
+//+ (BOOL)resolveInstanceMethod:(SEL)sel {
+//    NSLog(@"-->%@", NSStringFromSelector(sel));
+//    
+//    class_addMethod([Person class], sel, (IMP)func, "v@:@");
+//    
+//    return [super resolveInstanceMethod:sel];
+//}
+//void func(id self, SEL _cmd, NSString *str) {
+//    NSLog(@"----动态添加的方法实现---%@-", str);
+//}
 
 //- (void)eat {
 //    NSLog(@"-- 吃 --");

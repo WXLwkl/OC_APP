@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSObject+Runtime.h"
+#import "NSObject+Coding.h"
 
 @protocol PersonDelegate <NSObject>
 

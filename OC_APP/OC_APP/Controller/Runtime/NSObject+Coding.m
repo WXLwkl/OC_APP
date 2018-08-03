@@ -1,14 +1,14 @@
 //
-//  NSObject+Runtime.m
+//  NSObject+Coding.m
 //  OC_APP
 //
 //  Created by xingl on 2018/5/28.
 //  Copyright © 2018年 兴林. All rights reserved.
 //
 
-#import "NSObject+Runtime.h"
+#import "NSObject+Coding.h"
 
-@implementation NSObject (Runtime)
+@implementation NSObject (Coding)
 
 - (void)xl_decode:(NSCoder *)aDecoder {
     Class c = [self class];
