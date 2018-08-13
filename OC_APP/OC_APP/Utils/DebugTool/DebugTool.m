@@ -84,6 +84,7 @@ SingletonImplementation(DebugTool);
     self.debugWindow.windowLevel = UIWindowLevelAlert;
     self.debugWindow.rootViewController = [UIViewController new];
     self.debugWindow.hidden = NO;
+    self.debugWindow.userInteractionEnabled = NO;
 }
 
 #pragma mark - show

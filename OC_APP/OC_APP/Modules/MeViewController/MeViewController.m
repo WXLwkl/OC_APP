@@ -276,7 +276,7 @@
 //    [self.view addSubview:fpsLabel];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:fpsLabel];
-    [[DebugTool sharedDebugTool] autoTypes:DebugToolTypeFPS |  DebugToolTypeCPU | DebugToolTypeMemory];
+//    [[DebugTool sharedDebugTool] autoTypes:DebugToolTypeFPS |  DebugToolTypeCPU | DebugToolTypeMemory];
     
 //    kScreenWidth
     
