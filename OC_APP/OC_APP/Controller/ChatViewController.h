@@ -10,4 +10,6 @@
 
 @interface ChatViewController : RootViewController
 
+@property (nonatomic, copy) NSDictionary *friendInfo;
+
 @end

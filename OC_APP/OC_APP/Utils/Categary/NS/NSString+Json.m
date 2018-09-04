@@ -10,15 +10,10 @@
 
 @implementation NSString (Json)
 
-- (id)xl_jsonObject{
+- (id)xl_jsonObject {
     
-    if (!self) {
-        
-        return nil;
-    }
-    
+    if (!self) return nil;
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    
     return [data xl_jsonObject];
 }
 
@@ -26,19 +21,15 @@
 
 @implementation NSData (Json)
 
-- (id)xl_jsonObject{
+- (id)xl_jsonObject {
     
-    if (!self) {
-        
-        return nil;
-    }
+    if (!self) return nil;
     
     NSError *error = nil;
     id result = [NSJSONSerialization JSONObjectWithData:self
                                                 options:NSJSONReadingMutableContainers
                                                   error:&error];
     if (error) {
-        
         NSLog(@"error==%@",error);
         return nil;
     }
@@ -48,23 +39,18 @@
 
 @implementation NSObject (Json)
 
-- (NSData *)xl_jsonData{
+- (NSData *)xl_jsonData {
     
-    if (!self||![NSJSONSerialization isValidJSONObject:self]) {
-        
-        return nil;
-    }
+    if (!self||![NSJSONSerialization isValidJSONObject:self]) return nil;
     
     NSError *error = nil;
     NSData *result = [NSJSONSerialization dataWithJSONObject:self
                                                      options:kNilOptions error:&error];
     
     if (error) {
-        
         NSLog(@"error==%@",error);
         return nil;
     }
-    
     return result;
 }
 
@@ -74,14 +60,11 @@
 
 @implementation NSDictionary (LTJson)
 
-- (NSString *)xl_jsonString{
+- (NSString *)xl_jsonString {
     
     NSData *result = [self xl_jsonData];
     
-    if (!result) {
-        
-        return nil;
-    }
+    if (!result) return nil;
     
     NSString *resultString = [[NSString alloc]initWithData:result
                                                   encoding:NSUTF8StringEncoding];
@@ -92,14 +75,11 @@
 
 @implementation NSArray (Json)
 
-- (NSString *)xl_jsonString{
+- (NSString *)xl_jsonString {
     
     NSData *result = [self xl_jsonData];
     
-    if (!result) {
-        
-        return nil;
-    }
+    if (!result) return nil;
     
     NSString *resultString = [[NSString alloc]initWithData:result
                                                   encoding:NSUTF8StringEncoding];

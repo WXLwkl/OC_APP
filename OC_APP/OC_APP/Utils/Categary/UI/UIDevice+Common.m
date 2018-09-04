@@ -344,8 +344,6 @@ char *printEnv(void){
 
 
 
-
-
 //总内存
 + (long long)xl_totalMemoryBytes {
     long long totalMemory = [[NSProcessInfo processInfo] physicalMemory];
@@ -353,8 +351,7 @@ char *printEnv(void){
     return totalMemory;
 }
 //空闲内存
-+ (NSUInteger)xl_freeMemoryBytes
-{
++ (NSUInteger)xl_freeMemoryBytes {
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     vm_size_t pagesize;
@@ -417,8 +414,7 @@ char *printEnv(void){
 }
 
 //磁盘总空间
-+ (CGFloat)xl_totalDiskSpaceMBytes
-{
++ (CGFloat)xl_totalDiskSpaceMBytes {
     CGFloat size = 0.0;
     NSError *error;
     
@@ -432,14 +428,13 @@ char *printEnv(void){
     return size;
 }
 //磁盘空闲空间
-+ (CGFloat)xl_freeDiskSpaceMBytes
-{
++ (CGFloat)xl_freeDiskSpaceMBytes {
     CGFloat size = 0.0;
     NSError *error;
     NSDictionary *dic = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
     if (error) {
         NSLog(@"error: %@", error.localizedDescription);
-    }else{
+    } else {
         NSNumber *number = [dic objectForKey:NSFileSystemFreeSize];
         size = [number floatValue] / powf(1024, 2);
     }

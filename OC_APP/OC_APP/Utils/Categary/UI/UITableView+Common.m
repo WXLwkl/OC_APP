@@ -31,7 +31,7 @@
     return objc_getAssociatedObject(self, @selector(reloadBlock));
 }
 
-+ (void)load {
++ (void)load222 {
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -63,7 +63,7 @@
     BOOL isEmpty = YES;//flag标示
     
     id <UITableViewDataSource> dataSource = self.dataSource;
-    NSInteger sections = 1;
+    NSInteger sections = 0;
     if ([dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]) {
         sections = [dataSource numberOfSectionsInTableView:self] - 1; //获取当前tableview组数
     }
@@ -75,7 +75,7 @@
             break;
         }
     }
-    if (isEmpty) { //数据为空，加载占位图
+    if (isEmpty && sections == 0) { //数据为空，加载占位图
         //默认占位图
         if (!self.placeholderView) {
             [self makeDefaultPalceholderView];

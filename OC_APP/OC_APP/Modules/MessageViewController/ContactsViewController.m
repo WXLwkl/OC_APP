@@ -12,8 +12,9 @@
 
 #import "TreeViewController.h"
 
-
 #import "SearchResultsTableViewController.h"
+
+#import "ChatViewController.h"
 
 @interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -64,7 +65,7 @@
         } else {
             self.automaticallyAdjustsScrollViewInsets = NO;
         }
-//        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _tableView;
 }
@@ -347,6 +348,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    GroupModel *model = self.sectionData[indexPath.section];
+    NSDictionary *friendInfoDic = model.groupFriends[indexPath.row];
+    NSLog(@"---->%@", friendInfoDic[@"name"]);
+    
+    ChatViewController *vc = [ChatViewController new];
+    vc.friendInfo = friendInfoDic;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -432,16 +440,13 @@
     [self doTipImageView:tipImageView expand:groupModel.isOpened];
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    
 }
-- (void) doTipImageView:(UIImageView *)imageView expand:(BOOL) expand {
+
+- (void)doTipImageView:(UIImageView *)imageView expand:(BOOL) expand {
     
     [UIView animateWithDuration:0.2f animations:^{
         imageView.transform = (expand) ? CGAffineTransformMakeRotation(DegreesToRadian(90)) : CGAffineTransformIdentity;
     }];
 }
-
-
 
 @end

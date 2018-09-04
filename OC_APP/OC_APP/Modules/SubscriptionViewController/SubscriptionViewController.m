@@ -136,7 +136,7 @@
     NSString *vcString = dic[@"viewController"];
     NSString *title = dic[@"title"];
     Class class = NSClassFromString(vcString);
-    
+    NSLog(@"%@",self.dataArray);
     UIViewController *vc = [[class alloc] init];
     vc.navigationItem.title = title;
     if (!vc) return NSLog(@"没有对应的Controller");

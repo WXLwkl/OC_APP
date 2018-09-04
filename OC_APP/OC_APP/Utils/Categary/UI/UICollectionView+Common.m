@@ -58,7 +58,7 @@
     BOOL isEmpty = YES;
     
     id <UICollectionViewDataSource> dataSource = self.dataSource;
-    NSInteger sections = 1;
+    NSInteger sections = 0;
     if ([dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
         sections = [dataSource numberOfSectionsInCollectionView:self] - 1;
     }
@@ -70,7 +70,7 @@
         }
     }
     
-    if (isEmpty) {//若为空，加载占位图
+    if (isEmpty && sections == 0) {//若为空，加载占位图
         //默认占位图
         if (!self.placeholderView) {
             [self makeDefaultPlaceholderView];

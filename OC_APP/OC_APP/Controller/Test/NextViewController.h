@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface NextViewController : UIViewController
+#import "RootViewController.h"
+@interface NextViewController : RootViewController
 
 
 

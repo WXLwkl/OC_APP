@@ -85,108 +85,6 @@
 @implementation MeViewController
 
 
-- (void)createButton {
-    
-    _window = [UIApplication sharedApplication].windows[0];
-    
-    _button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_button setTitle:@"按钮" forState:UIControlStateNormal];
-    _button.frame = CGRectMake(self.view.bounds.size.width - 70, self.view.bounds.size.height - 150, 60, 60);
-    _button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
-    [_button setBackgroundColor:[UIColor orangeColor]];
-    _button.layer.cornerRadius = 30;
-    _button.layer.masksToBounds = YES;
-    [_button addTarget:self action:@selector(resignButton) forControlEvents:UIControlEventTouchUpInside];
-    [_window addSubview:_button];
-    
-    //放一个拖动手势，用来改变控件的位置
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(changePostion:)];
-    [_button addGestureRecognizer:pan];
-    
-}
-
-- (void)resignButton{
-    NSLog(@"我是悬浮按钮");
-}
-//手势事件 －－ 改变位置
--(void)changePostion:(UIPanGestureRecognizer *)pan {
-    
-    CGPoint point = [pan translationInView:_button];
-    
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    
-    CGRect originalFrame = _button.frame;
-    
-    if (originalFrame.origin.x >= 0 && originalFrame.origin.x+originalFrame.size.width <= width) {
-        
-        originalFrame.origin.x += point.x;
-        
-    }if (originalFrame.origin.y >= 0 && originalFrame.origin.y+originalFrame.size.height <= height) {
-        
-        originalFrame.origin.y += point.y;
-        
-    }
-    
-    _button.frame = originalFrame;
-    
-    [pan setTranslation:CGPointZero inView:_button];
-    
-    if (pan.state == UIGestureRecognizerStateBegan) {
-        
-        _button.enabled = NO;
-        
-    }else if (pan.state == UIGestureRecognizerStateChanged){
-        
-    } else {
-        
-        CGRect frame = _button.frame;
-        
-        //是否越界
-        
-        BOOL isOver = NO;
-        
-        if (frame.origin.x < 0) {
-            
-            frame.origin.x = 0;
-            
-            isOver = YES;
-            
-        } else if (frame.origin.x+frame.size.width > width) {
-            
-            frame.origin.x = width - frame.size.width;
-            
-            isOver = YES;
-            
-        }if (frame.origin.y < 0) {
-            
-            frame.origin.y = 0;
-            
-            isOver = YES;
-            
-        } else if (frame.origin.y+frame.size.height > height) {
-            
-            frame.origin.y = height - frame.size.height;
-            
-            isOver = YES;
-            
-        }if (isOver) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                
-                _button.frame = frame;
-                
-            }];
-            
-        }
-        
-        _button.enabled = YES;
-        
-    }
-    
-}
-
 //- (void)loadView {
 //    [super loadView];
 //    [self.navigationController.navigationBar setShadowImage:[UIImage xl_imageWithColor:[UIColor clearColor]]];
@@ -220,8 +118,6 @@
     
     BOOL isOK = NO;
     LogBool(isOK);
-    
-//    [self createButton];
 
     
     if (!self.dataArray) {
@@ -236,7 +132,7 @@
                                                           @"BezierPath练习(OK)",
                                                           @"常见表单行类型(OK)(包含省市区三级联动)",
                                                           @"TableViewDataSource提取(OK)",
-                                                          @"聊天(待完善)",
+                                                          @"无限滚动的tableView(OK)",
                                                           @"只加载显示Cell的Image图(OK)",
                                                           @"列表滑动不加载图片",
                                                           @"长按列表行拖动效果(OK)",
@@ -250,15 +146,14 @@
                                                           @"联动(OK)",
                                                           @"滚动的数字(OK)",
                                                           @"交易密码(OK)",
-                                                          @"无限滚动的tableView(OK)",
                                                           @"左右滑动视图(OK)",
                                                           @"进度条(OK)",
                                                           @"CollectionView相关(OK)",
-                                                          @"音视频功能集合",
+                                                          @"音视频功能集合(OK)",
                                                           @"仿探探card(OK)",
                                                           @"饼图(OK)",
                                                           @"PopViewController(OK)",
-                                                          @"类似spotlight菜单"]];
+                                                          @"类似spotlight菜单(OK)"]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -451,8 +346,8 @@
             break;
         case 11:
         {
-            // QQ/微信 聊天
-            ChatViewController *vc = [ChatViewController new];
+            //无限的tableview
+            InfiniteTabelViewController *vc = [[InfiniteTabelViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -547,26 +442,19 @@
             break;
         case 25:
         {
-            //无限的tableview
-            InfiniteTabelViewController *vc = [[InfiniteTabelViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 26:
-        {
             //左右滑动视图
             ShowSlideViewController *vc = [ShowSlideViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 27:
+        case 26:
         {
             //进度条
             ProgressViewController *vc = [[ProgressViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 28:
+        case 27:
         {
             // CollectionView自定义布局
             CollectionListViewController *vc = [[CollectionListViewController alloc] init];
@@ -574,33 +462,33 @@
         }
             break;
         
-        case 29:
+        case 28:
         {
             //音视频功能集合
             AudioAndVideoViewController *vc = [AudioAndVideoViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 30:
+        case 29:
         {
             // 仿探探的卡片 (包括代理、数据源、重用)
             TanTanCardViewController *vc = [TanTanCardViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 31:
+        case 30:
         {   // 饼图
             PieChartViewController *vc = [PieChartViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 32:
+        case 31:
         {
             PopViewController *vc = [PopViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 33:
+        case 32:
         {
             // 类似spotlight菜单
             SpotlightViewController *vc = [SpotlightViewController new];

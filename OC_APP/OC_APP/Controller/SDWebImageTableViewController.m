@@ -12,7 +12,7 @@
 
 @interface SDWebImageTableViewController ()
 
-@property(nonatomic,copy)NSArray *imageUrlArr;
+@property (nonatomic,copy)    NSArray *imageUrlArr;
 @property (strong, nonatomic) NSValue *targetRect; //定义一个当前屏幕显示的范围
 
 @end
@@ -33,7 +33,7 @@
 - (void)initSubviews {
     self.navigationItem.title = @"只加载显示Cell的Image图(OK)";
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"xID"];
     [self.tableView setTableFooterView:[UIView new]];
 }
 - (void)didReceiveMemoryWarning {
@@ -55,9 +55,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID" forIndexPath:indexPath];
+    // 这样的写法是可以的 如果崩溃 就看 [self setupCell:cell withIndexPath:indexPath] 里面
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"xID" forIndexPath:indexPath];
     cell.accessoryType    = UITableViewCellAccessoryDisclosureIndicator;
     [self setupCell:cell withIndexPath:indexPath];
+//    cell.textLabel.text = [@(indexPath.row) stringValue];
     return cell;
 }
 
@@ -70,8 +73,13 @@
     if (![[cell.imageView sd_imageURL] isEqual:targetURL]) {
         
         cell.imageView.alpha = 0.0;
+        
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        
         BOOL shouldLoadImage = YES;
+
+#warning Here are some questions.
+        
         CGRect cellFrame = [self.tableView rectForRowAtIndexPath:indexPath];
         
         //判断显示的当前屏幕范围内
@@ -84,6 +92,7 @@
                 shouldLoadImage = NO;
             }
         }
+        
         //执行这个代码 要进入当前屏幕范围，或者以前已经在出现过且缓存过
         if (shouldLoadImage) {
             NSLog(@"我这时加载的图片是%ld",(long)indexPath.row);
@@ -196,7 +205,8 @@
                         @"http://mvimg1.meitudata.com/5517f3b94c1ba116.jpg",
                         @"http://pic24.nipic.com/20121023/5692504_110554234175_2.jpg",
                         @"http://t1.niutuku.com/960/21/21-262743.jpg",
-                        @"http://cdn.duitang.com/uploads/item/201508/14/20150814074658_xRSe5.thumb.700_0.jpeg"];
+                        @"http://cdn.duitang.com/uploads/item/201508/14/20150814074658_xRSe5.thumb.700_0.jpeg"
+                        ];
     }
     return _imageUrlArr;
 }

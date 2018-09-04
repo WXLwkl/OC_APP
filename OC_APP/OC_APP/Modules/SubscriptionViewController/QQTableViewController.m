@@ -37,7 +37,7 @@
 
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];
     
-     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"title"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"title"];
     [self.tableView setTableFooterView:[UIView new]];
     [self initData];
 }

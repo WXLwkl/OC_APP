@@ -48,7 +48,7 @@
 - (void)initSubviews {
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"聊天";
+    self.navigationItem.title = self.friendInfo[@"name"];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem xl_itemTitle:@"评论" color:[UIColor whiteColor] target:self sel:@selector(rightAction:)];
     

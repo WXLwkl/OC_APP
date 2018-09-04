@@ -93,6 +93,7 @@
 		914225DF1FF0E641005B875E /* html.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 914225DE1FF0E641005B875E /* html.bundle */; };
 		914225E11FF0EFFC005B875E /* Swift.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 914225E01FF0EFFC005B875E /* Swift.pdf */; };
 		91466E7A1F0E0A1500DADB6A /* UILabel+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91466E791F0E0A1500DADB6A /* UILabel+Common.m */; };
+		9146FAFA21256EC600560AAB /* NSObject+XLRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */; };
 		914893001FC819C3000DC74B /* LFUIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 914892FF1FC819C3000DC74B /* LFUIView+Badge.m */; };
 		914C3F551ED7C66B00AF279D /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F541ED7C66B00AF279D /* Const.m */; };
 		914C3F5C1ED7EDD600AF279D /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F5B1ED7EDD600AF279D /* UserInfo.m */; };
@@ -396,6 +397,7 @@
 		91E41EF91F32BFFB004BF5BA /* reflesh2_60x55@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E41EF01F32BFFB004BF5BA /* reflesh2_60x55@2x.png */; };
 		91E41EFA1F32BFFB004BF5BA /* reflesh1_60x55@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E41EF11F32BFFB004BF5BA /* reflesh1_60x55@2x.png */; };
 		91E41F001F33035D004BF5BA /* XLPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41EFF1F33035D004BF5BA /* XLPopMenuView.m */; };
+		91E58E602133EC6A00742F0C /* GroupShadowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E58E5F2133EC6A00742F0C /* GroupShadowTableView.m */; };
 		91E6966D20DC9E99002EE06A /* XLCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E6966C20DC9E99002EE06A /* XLCaptureManager.m */; };
 		91E6966F20DCA574002EE06A /* focusImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E6966E20DCA573002EE06A /* focusImg@2x.png */; };
 		91E6967220DCC89D002EE06A /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E6967120DCC89D002EE06A /* FileManager.m */; };
@@ -617,6 +619,8 @@
 		91466E771F0DE1CE00DADB6A /* MyCategary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCategary.h; sourceTree = "<group>"; };
 		91466E781F0E0A1500DADB6A /* UILabel+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Common.h"; sourceTree = "<group>"; };
 		91466E791F0E0A1500DADB6A /* UILabel+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Common.m"; sourceTree = "<group>"; };
+		9146FAF821256EC600560AAB /* NSObject+XLRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+XLRuntime.h"; sourceTree = "<group>"; };
+		9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+XLRuntime.m"; sourceTree = "<group>"; };
 		914892FE1FC819C3000DC74B /* LFUIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LFUIView+Badge.h"; sourceTree = "<group>"; };
 		914892FF1FC819C3000DC74B /* LFUIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LFUIView+Badge.m"; sourceTree = "<group>"; };
 		914C3F531ED7C66B00AF279D /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
@@ -1132,6 +1136,8 @@
 		91E41EF11F32BFFB004BF5BA /* reflesh1_60x55@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reflesh1_60x55@2x.png"; sourceTree = "<group>"; };
 		91E41EFE1F33035D004BF5BA /* XLPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPopMenuView.h; sourceTree = "<group>"; };
 		91E41EFF1F33035D004BF5BA /* XLPopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPopMenuView.m; sourceTree = "<group>"; };
+		91E58E5E2133EC6A00742F0C /* GroupShadowTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupShadowTableView.h; sourceTree = "<group>"; };
+		91E58E5F2133EC6A00742F0C /* GroupShadowTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupShadowTableView.m; sourceTree = "<group>"; };
 		91E6966B20DC9E99002EE06A /* XLCaptureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLCaptureManager.h; sourceTree = "<group>"; };
 		91E6966C20DC9E99002EE06A /* XLCaptureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLCaptureManager.m; sourceTree = "<group>"; };
 		91E6966E20DCA573002EE06A /* focusImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "focusImg@2x.png"; sourceTree = "<group>"; };
@@ -2068,6 +2074,8 @@
 			children = (
 				919842C31F20866100CE773F /* SettingViewController.h */,
 				919842C41F20866100CE773F /* SettingViewController.m */,
+				91E58E5E2133EC6A00742F0C /* GroupShadowTableView.h */,
+				91E58E5F2133EC6A00742F0C /* GroupShadowTableView.m */,
 			);
 			name = "SettingViewController(设置)";
 			path = SettingViewController;
@@ -2398,6 +2406,8 @@
 				9174947A20737B7400443149 /* NSDictionary+Safe.m */,
 				91B3C6341F42EC8E00E4062B /* NSObject+Common.h */,
 				91B3C6351F42EC8E00E4062B /* NSObject+Common.m */,
+				9146FAF821256EC600560AAB /* NSObject+XLRuntime.h */,
+				9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */,
 				915BC25E1FC425AC00C6FB39 /* NSObject+Swizzling.h */,
 				915BC25F1FC425AC00C6FB39 /* NSObject+Swizzling.m */,
 			);
@@ -3303,6 +3313,7 @@
 				91B64D20206A2655000C40B1 /* UIScrollView+Common.m in Sources */,
 				911983C420F4A74C00BA5509 /* XLOperation.m in Sources */,
 				916C1DBF1F39922300A08B49 /* NSString+Json.m in Sources */,
+				91E58E602133EC6A00742F0C /* GroupShadowTableView.m in Sources */,
 				91F806F91FBEB58000B81A8B /* UIControl+Common.m in Sources */,
 				911B12CD1FE23FBE007D9692 /* TableViewInterceptor.m in Sources */,
 				91089A9C1F0DD87900A05B0C /* NSObject+ViewController.m in Sources */,
@@ -3432,6 +3443,7 @@
 				9191F79D1EEE600100F9A691 /* UserManager.m in Sources */,
 				91B3C62D1F429A0000E4062B /* TreeCellModel.m in Sources */,
 				912E06AF20E0D6C300A82C72 /* VideoView1.m in Sources */,
+				9146FAFA21256EC600560AAB /* NSObject+XLRuntime.m in Sources */,
 				91B9866E201F15C9004724D0 /* ProgressViewController.m in Sources */,
 				917193B91FDFBE2100D0825E /* PayPasswordView.m in Sources */,
 				919E71FC1FDE7B3A00CA0019 /* ScrollNumLabelViewController.m in Sources */,
