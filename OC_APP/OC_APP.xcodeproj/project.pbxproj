@@ -95,6 +95,7 @@
 		91466E7A1F0E0A1500DADB6A /* UILabel+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91466E791F0E0A1500DADB6A /* UILabel+Common.m */; };
 		9146FAFA21256EC600560AAB /* NSObject+XLRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */; };
 		914893001FC819C3000DC74B /* LFUIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 914892FF1FC819C3000DC74B /* LFUIView+Badge.m */; };
+		914A4390214F46A200DD19D4 /* CSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 914A438F214F46A200DD19D4 /* CSViewController.m */; };
 		914C3F551ED7C66B00AF279D /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F541ED7C66B00AF279D /* Const.m */; };
 		914C3F5C1ED7EDD600AF279D /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F5B1ED7EDD600AF279D /* UserInfo.m */; };
 		914C3F601ED7FCDC00AF279D /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C3F5F1ED7FCDC00AF279D /* Foundation+Log.m */; };
@@ -333,6 +334,13 @@
 		91B3C6331F42EA5100E4062B /* NSArray+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B3C6321F42EA5100E4062B /* NSArray+Common.m */; };
 		91B3C6361F42EC8E00E4062B /* NSObject+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B3C6351F42EC8E00E4062B /* NSObject+Common.m */; };
 		91B3C6391F42EF2200E4062B /* NSDictionary+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B3C6381F42EF2200E4062B /* NSDictionary+Common.m */; };
+		91B4AB132154CD030020396B /* XLRecordProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4AB122154CD030020396B /* XLRecordProgressView.m */; };
+		91B4AB1C2154E3540020396B /* XLRecordSuccessPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4AB1B2154E3540020396B /* XLRecordSuccessPreview.m */; };
+		91B4E5742153A7BB004705E4 /* XLVideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4E5712153A7BB004705E4 /* XLVideoRecorder.m */; };
+		91B4E5752153A7BB004705E4 /* XLMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4E5722153A7BB004705E4 /* XLMotionManager.m */; };
+		91B4E5762153A7BB004705E4 /* XLVideoWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4E5732153A7BB004705E4 /* XLVideoWriter.m */; };
+		91B4E5792153A872004705E4 /* XLVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4E5782153A872004705E4 /* XLVideoRecorderView.m */; };
+		91B4E57C2153A89C004705E4 /* WXVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4E57B2153A89C004705E4 /* WXVideoViewController.m */; };
 		91B5A63D1F96FE970008FB98 /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5A63C1F96FE970008FB98 /* CustomViewController.m */; };
 		91B5A6411F97008B0008FB98 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5A6401F97008B0008FB98 /* MyView.m */; };
 		91B5A6431F9701720008FB98 /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5A6421F9701720008FB98 /* CustomViewController.xib */; };
@@ -377,6 +385,7 @@
 		91D70B531FA18CB4009B79DB /* NextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D70B501FA18CB4009B79DB /* NextTableViewCell.m */; };
 		91D70B541FA18CB4009B79DB /* NextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91D70B511FA18CB4009B79DB /* NextTableViewCell.xib */; };
 		91D7AD4C207468E700DDF3D5 /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D7AD4B207468E700DDF3D5 /* NSDate+Common.m */; };
+		91D92CB521425F4C00AD1FB9 /* BannerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D92CB421425F4C00AD1FB9 /* BannerImageView.m */; };
 		91D97B811EEF81FE000E6CE6 /* StarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97B7D1EEF81FE000E6CE6 /* StarRateView.m */; };
 		91D97B821EEF81FE000E6CE6 /* ClickTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97B801EEF81FE000E6CE6 /* ClickTextView.m */; };
 		91D97C031EEFB11E000E6CE6 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D97C021EEFB11E000E6CE6 /* MainNavigationController.m */; };
@@ -384,6 +393,8 @@
 		91E196A12107162F00E2D684 /* DebugTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A02107162F00E2D684 /* DebugTool.m */; };
 		91E196A421071C7F00E2D684 /* DebugFPSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A321071C7F00E2D684 /* DebugFPSMonitor.m */; };
 		91E196A72107220300E2D684 /* DebugCPUMemoryMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E196A62107220300E2D684 /* DebugCPUMemoryMonitor.m */; };
+		91E1FC2E213E87DE00B3D866 /* DSLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1FC2D213E87DE00B3D866 /* DSLViewController.m */; };
+		91E1FC31213E882A00B3D866 /* DSLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1FC30213E882A00B3D866 /* DSLView.m */; };
 		91E41ED41F32B92D004BF5BA /* InfunRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41ED31F32B92D004BF5BA /* InfunRefreshHeader.m */; };
 		91E41ED91F32BD70004BF5BA /* ALinRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41ED81F32BD70004BF5BA /* ALinRefreshGifHeader.m */; };
 		91E41EDC1F32BD8E004BF5BA /* XLRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E41EDB1F32BD8E004BF5BA /* XLRefreshHeader.m */; };
@@ -623,6 +634,8 @@
 		9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+XLRuntime.m"; sourceTree = "<group>"; };
 		914892FE1FC819C3000DC74B /* LFUIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LFUIView+Badge.h"; sourceTree = "<group>"; };
 		914892FF1FC819C3000DC74B /* LFUIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LFUIView+Badge.m"; sourceTree = "<group>"; };
+		914A438E214F46A200DD19D4 /* CSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSViewController.h; sourceTree = "<group>"; };
+		914A438F214F46A200DD19D4 /* CSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSViewController.m; sourceTree = "<group>"; };
 		914C3F531ED7C66B00AF279D /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		914C3F541ED7C66B00AF279D /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
 		914C3F5A1ED7EDD600AF279D /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -1029,6 +1042,20 @@
 		91B3C6351F42EC8E00E4062B /* NSObject+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Common.m"; sourceTree = "<group>"; };
 		91B3C6371F42EF2200E4062B /* NSDictionary+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Common.h"; sourceTree = "<group>"; };
 		91B3C6381F42EF2200E4062B /* NSDictionary+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Common.m"; sourceTree = "<group>"; };
+		91B4AB112154CD030020396B /* XLRecordProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLRecordProgressView.h; sourceTree = "<group>"; };
+		91B4AB122154CD030020396B /* XLRecordProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLRecordProgressView.m; sourceTree = "<group>"; };
+		91B4AB1A2154E3540020396B /* XLRecordSuccessPreview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLRecordSuccessPreview.h; sourceTree = "<group>"; };
+		91B4AB1B2154E3540020396B /* XLRecordSuccessPreview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLRecordSuccessPreview.m; sourceTree = "<group>"; };
+		91B4E56E2153A7BB004705E4 /* XLVideoRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLVideoRecorder.h; sourceTree = "<group>"; };
+		91B4E56F2153A7BB004705E4 /* XLVideoWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLVideoWriter.h; sourceTree = "<group>"; };
+		91B4E5702153A7BB004705E4 /* XLMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLMotionManager.h; sourceTree = "<group>"; };
+		91B4E5712153A7BB004705E4 /* XLVideoRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLVideoRecorder.m; sourceTree = "<group>"; };
+		91B4E5722153A7BB004705E4 /* XLMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLMotionManager.m; sourceTree = "<group>"; };
+		91B4E5732153A7BB004705E4 /* XLVideoWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLVideoWriter.m; sourceTree = "<group>"; };
+		91B4E5772153A872004705E4 /* XLVideoRecorderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLVideoRecorderView.h; sourceTree = "<group>"; };
+		91B4E5782153A872004705E4 /* XLVideoRecorderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLVideoRecorderView.m; sourceTree = "<group>"; };
+		91B4E57A2153A89C004705E4 /* WXVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXVideoViewController.h; sourceTree = "<group>"; };
+		91B4E57B2153A89C004705E4 /* WXVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXVideoViewController.m; sourceTree = "<group>"; };
 		91B5A63B1F96FE970008FB98 /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
 		91B5A63C1F96FE970008FB98 /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
 		91B5A63F1F97008B0008FB98 /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
@@ -1106,6 +1133,8 @@
 		91D70B511FA18CB4009B79DB /* NextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextTableViewCell.xib; sourceTree = "<group>"; };
 		91D7AD4A207468E700DDF3D5 /* NSDate+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
 		91D7AD4B207468E700DDF3D5 /* NSDate+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
+		91D92CB321425F4C00AD1FB9 /* BannerImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerImageView.h; sourceTree = "<group>"; };
+		91D92CB421425F4C00AD1FB9 /* BannerImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerImageView.m; sourceTree = "<group>"; };
 		91D97B7C1EEF81FE000E6CE6 /* StarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarRateView.h; sourceTree = "<group>"; };
 		91D97B7D1EEF81FE000E6CE6 /* StarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRateView.m; sourceTree = "<group>"; };
 		91D97B7F1EEF81FE000E6CE6 /* ClickTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickTextView.h; sourceTree = "<group>"; };
@@ -1119,6 +1148,10 @@
 		91E196A321071C7F00E2D684 /* DebugFPSMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugFPSMonitor.m; sourceTree = "<group>"; };
 		91E196A52107220300E2D684 /* DebugCPUMemoryMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugCPUMemoryMonitor.h; sourceTree = "<group>"; };
 		91E196A62107220300E2D684 /* DebugCPUMemoryMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugCPUMemoryMonitor.m; sourceTree = "<group>"; };
+		91E1FC2C213E87DE00B3D866 /* DSLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLViewController.h; sourceTree = "<group>"; };
+		91E1FC2D213E87DE00B3D866 /* DSLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLViewController.m; sourceTree = "<group>"; };
+		91E1FC2F213E882A00B3D866 /* DSLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLView.h; sourceTree = "<group>"; };
+		91E1FC30213E882A00B3D866 /* DSLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLView.m; sourceTree = "<group>"; };
 		91E41ED21F32B92D004BF5BA /* InfunRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfunRefreshHeader.h; sourceTree = "<group>"; };
 		91E41ED31F32B92D004BF5BA /* InfunRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfunRefreshHeader.m; sourceTree = "<group>"; };
 		91E41ED71F32BD70004BF5BA /* ALinRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALinRefreshGifHeader.h; sourceTree = "<group>"; };
@@ -1328,6 +1361,7 @@
 				91221D3E20DBA12900C4D5A1 /* WeChatVideoViewController.m */,
 				912E06A320E0947400A82C72 /* VideoPlayController.h */,
 				912E06A420E0947400A82C72 /* VideoPlayController.m */,
+				91B4E56D2153A7BB004705E4 /* WeChatView2 */,
 				91324C9720E33CB200FD3736 /* WeChatView */,
 				91221D4720DBB08200C4D5A1 /* Image */,
 				91221D4220DBA71200C4D5A1 /* View */,
@@ -1411,6 +1445,8 @@
 			children = (
 				9122DC0C1EFD1322002A0D7A /* BannerScrollView.h */,
 				9122DC0D1EFD1322002A0D7A /* BannerScrollView.m */,
+				91D92CB321425F4C00AD1FB9 /* BannerImageView.h */,
+				91D92CB421425F4C00AD1FB9 /* BannerImageView.m */,
 			);
 			name = "BannerScrollView(banner)";
 			path = BannerScrollView;
@@ -1778,6 +1814,7 @@
 		9175230A1F46B25A004CE4E0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				91E1FC2B213E87C100B3D866 /* DSL */,
 				9178CC6B20FDE55E0079B164 /* Runloop */,
 				91221D3320DB71D300C4D5A1 /* AudioAndVideo */,
 				91EF61EF20CF670900725529 /* SpotlightViewController */,
@@ -2518,6 +2555,27 @@
 			path = ChatBox;
 			sourceTree = "<group>";
 		};
+		91B4E56D2153A7BB004705E4 /* WeChatView2 */ = {
+			isa = PBXGroup;
+			children = (
+				91B4E57A2153A89C004705E4 /* WXVideoViewController.h */,
+				91B4E57B2153A89C004705E4 /* WXVideoViewController.m */,
+				91B4E5772153A872004705E4 /* XLVideoRecorderView.h */,
+				91B4E5782153A872004705E4 /* XLVideoRecorderView.m */,
+				91B4AB112154CD030020396B /* XLRecordProgressView.h */,
+				91B4AB122154CD030020396B /* XLRecordProgressView.m */,
+				91B4AB1A2154E3540020396B /* XLRecordSuccessPreview.h */,
+				91B4AB1B2154E3540020396B /* XLRecordSuccessPreview.m */,
+				91B4E56E2153A7BB004705E4 /* XLVideoRecorder.h */,
+				91B4E5712153A7BB004705E4 /* XLVideoRecorder.m */,
+				91B4E5702153A7BB004705E4 /* XLMotionManager.h */,
+				91B4E5722153A7BB004705E4 /* XLMotionManager.m */,
+				91B4E56F2153A7BB004705E4 /* XLVideoWriter.h */,
+				91B4E5732153A7BB004705E4 /* XLVideoWriter.m */,
+			);
+			path = WeChatView2;
+			sourceTree = "<group>";
+		};
 		91B5A63E1F9700480008FB98 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2790,6 +2848,17 @@
 			path = ClickTextView;
 			sourceTree = "<group>";
 		};
+		91E1FC2B213E87C100B3D866 /* DSL */ = {
+			isa = PBXGroup;
+			children = (
+				91E1FC2C213E87DE00B3D866 /* DSLViewController.h */,
+				91E1FC2D213E87DE00B3D866 /* DSLViewController.m */,
+				91E1FC2F213E882A00B3D866 /* DSLView.h */,
+				91E1FC30213E882A00B3D866 /* DSLView.m */,
+			);
+			path = DSL;
+			sourceTree = "<group>";
+		};
 		91E41EFD1F3302C2004BF5BA /* XLPopMenuView(弹出视图(微博)) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2942,6 +3011,8 @@
 			children = (
 				C20784031DADF12700BB05D4 /* ViewController.h */,
 				C20784041DADF12700BB05D4 /* ViewController.m */,
+				914A438E214F46A200DD19D4 /* CSViewController.h */,
+				914A438F214F46A200DD19D4 /* CSViewController.m */,
 				91BF33C11EFA17DE00334AF0 /* Default_image.png */,
 				9122DC0F1EFD13A5002A0D7A /* image0.png */,
 				9122DC101EFD13A5002A0D7A /* image1.png */,
@@ -3256,6 +3327,7 @@
 				9101C8CF1F340F80004B0376 /* PopMenuButton.m in Sources */,
 				91A7285320722D5D00F7C829 /* WaterfallFlowLayout.m in Sources */,
 				9132A6BB1F04CBA600431270 /* UIButton+Button.m in Sources */,
+				91B4E5792153A872004705E4 /* XLVideoRecorderView.m in Sources */,
 				91F1B0D321130604007F5EA7 /* Cat.m in Sources */,
 				C20784051DADF12700BB05D4 /* ViewController.m in Sources */,
 				91AB488120492FA20089E73F /* ScriptMessage.m in Sources */,
@@ -3300,8 +3372,10 @@
 				9160E4FB20B80DE8003F6579 /* JRViewController.m in Sources */,
 				91F5156C1FDA7E380082835F /* FireworksViewController.m in Sources */,
 				91F5154B1FDA69890082835F /* LoveHeartViewController.m in Sources */,
+				91B4E57C2153A89C004705E4 /* WXVideoViewController.m in Sources */,
 				91AC0CDC1EF393CA004FDD9E /* NSString+Common.m in Sources */,
 				91E196A421071C7F00E2D684 /* DebugFPSMonitor.m in Sources */,
+				914A4390214F46A200DD19D4 /* CSViewController.m in Sources */,
 				916804FA1EE7EB3800902075 /* HomeViewController.m in Sources */,
 				91A7285220722D5D00F7C829 /* CircleLayout.m in Sources */,
 				91A619361F271D5100FCA42C /* XLCalendar.m in Sources */,
@@ -3320,7 +3394,9 @@
 				91F5158F1FDA85DB0082835F /* CollectionViewHeaderView.m in Sources */,
 				916804F41EE7EB1400902075 /* ContactsViewController.m in Sources */,
 				91ED58111FC535A3001521AD /* UICollectionView+Common.m in Sources */,
+				91B4AB1C2154E3540020396B /* XLRecordSuccessPreview.m in Sources */,
 				91AC0D0E1EF39579004FDD9E /* UIViewController+Present.m in Sources */,
+				91B4E5762153A7BB004705E4 /* XLVideoWriter.m in Sources */,
 				91B0B94A1F0394B700267C9A /* UIDevice+Common.m in Sources */,
 				9101C8E11F3447A8004B0376 /* ShareItem.m in Sources */,
 				91A72839207225E000F7C829 /* CustomCollectionViewController.m in Sources */,
@@ -3344,8 +3420,10 @@
 				91A1F280200706AA00A25282 /* UIView+Toast.m in Sources */,
 				91221D4520DBA73100C4D5A1 /* VideoView.m in Sources */,
 				91221D3C20DBA03700C4D5A1 /* Video1ViewController.m in Sources */,
+				91B4AB132154CD030020396B /* XLRecordProgressView.m in Sources */,
 				91E196A12107162F00E2D684 /* DebugTool.m in Sources */,
 				919842BE1F2074CB00CE773F /* SecureManager.m in Sources */,
+				91E1FC31213E882A00B3D866 /* DSLView.m in Sources */,
 				91A8E88921183B7500F605FE /* XLVideoPlayer.m in Sources */,
 				9196CCF81F5E6E1F003D18E4 /* MorePanel.m in Sources */,
 				91B3C6331F42EA5100E4062B /* NSArray+Common.m in Sources */,
@@ -3393,12 +3471,14 @@
 				9174947B20737B7400443149 /* NSDictionary+Safe.m in Sources */,
 				9196CCF01F5E6E1F003D18E4 /* RecordButton.m in Sources */,
 				91D70B4C1FA18CA7009B79DB /* RightViewController.m in Sources */,
+				91E1FC2E213E87DE00B3D866 /* DSLViewController.m in Sources */,
 				9196CCF41F5E6E1F003D18E4 /* FacePanel.m in Sources */,
 				916804DF1EE7DE8900902075 /* MainTabBarController.m in Sources */,
 				91A619451F27265A00FCA42C /* MonthOpeartion.m in Sources */,
 				912A199E1F4ACAC80014FB05 /* MultitextCell.m in Sources */,
 				9191387420BBE78900D08B39 /* Person.m in Sources */,
 				91A72836207225E000F7C829 /* WaterfallFlowViewController.m in Sources */,
+				91B4E5752153A7BB004705E4 /* XLMotionManager.m in Sources */,
 				913C4B281FD8ED8B00C83DAE /* PasswordViewController.m in Sources */,
 				91B32ACD20B7B8EA00F595C0 /* PieChartViewController.m in Sources */,
 				910D4C7020ECB2100082CBC8 /* ThreadViewController.m in Sources */,
@@ -3437,6 +3517,7 @@
 				91AB488720493A730089E73F /* XLWebViewController.m in Sources */,
 				91F515941FDA85DB0082835F /* TableViewController.m in Sources */,
 				91BF33C81EFA360000334AF0 /* GradientView.m in Sources */,
+				91B4E5742153A7BB004705E4 /* XLVideoRecorder.m in Sources */,
 				91A7283C207225E000F7C829 /* FlowCell.m in Sources */,
 				915BC2381FC410C800C6FB39 /* EaseBlankPageView.m in Sources */,
 				91B5A6541F971B150008FB98 /* CusView.m in Sources */,
@@ -3529,6 +3610,7 @@
 				911B12CA1FE23FA3007D9692 /* InfiniteTabelView.m in Sources */,
 				91F1B0D62113063D007F5EA7 /* Fish.m in Sources */,
 				91CD5DC020C69EEC00BDC412 /* UIViewController+Pop.m in Sources */,
+				91D92CB521425F4C00AD1FB9 /* BannerImageView.m in Sources */,
 				9177FD751FFE006A0030AFC0 /* WebJSBridgeViewController.m in Sources */,
 				91AC0D141EF395E7004FDD9E /* main.m in Sources */,
 				91A589561FCBB5A8002B19DF /* PraiseEmitterBtn.m in Sources */,

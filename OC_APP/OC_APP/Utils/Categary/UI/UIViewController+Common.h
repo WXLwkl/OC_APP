@@ -19,6 +19,7 @@
 
 - (void)xl_closeSelfAction;
 
+- (void)xl_closeToRootViewController;
 
 - (UINavigationController *)xl_navigationController;
 

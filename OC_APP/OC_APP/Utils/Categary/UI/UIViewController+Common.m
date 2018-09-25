@@ -35,7 +35,7 @@
 }
 - (void)xl_closeSelfAction {
     
-    NSArray *viewcontrollers=self.navigationController.viewControllers;
+    NSArray *viewcontrollers = self.navigationController.viewControllers;
     
     if (viewcontrollers.count > 1) {
         if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
@@ -48,36 +48,55 @@
     }
 }
 
+- (void)xl_closeToRootViewController {
+    
+    NSArray *viewcontrollers = self.navigationController.viewControllers;
+    if (viewcontrollers.count > 1) {
+        if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
+            //push方式
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } else {
+        //present方式
+        UIViewController *vc = self.presentingViewController;
+        if (!vc.presentingViewController) return;
+        while (vc.presentingViewController)  {
+            vc = vc.presentingViewController;
+        }
+        [vc dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+ 
 #pragma mark - -----
 
-+ (UIViewController *)getVisibleViewControllerFrom:(UIViewController*)vc {
++ (UIViewController *)getVisibleViewControllerFrom:(UIViewController *)vc {
     
     if ([vc isKindOfClass:[UINavigationController class]]) {
-        return [self getVisibleViewControllerFrom:[((UINavigationController*) vc) visibleViewController]];
+        return [self getVisibleViewControllerFrom:[((UINavigationController *)vc) visibleViewController]];
     } else if ([vc isKindOfClass:[UISplitViewController class]]) {
-        return [self getVisibleViewControllerFrom:[((UISplitViewController*) vc) viewControllers].lastObject];
+        return [self getVisibleViewControllerFrom:[((UISplitViewController *)vc) viewControllers].lastObject];
     } else if ([vc isKindOfClass:[UITabBarController class]]){
-        return [self getVisibleViewControllerFrom:[((UITabBarController*) vc) selectedViewController]];
+        return [self getVisibleViewControllerFrom:[((UITabBarController *)vc) selectedViewController]];
     } else if(vc.presentedViewController) {
-        
         return [self getVisibleViewControllerFrom:vc.presentedViewController];
     } else {
-        
+        NSUInteger childViewControllerCount = vc.childViewControllers.count;
+        if (childViewControllerCount > 0) {
+            return [self getVisibleViewControllerFrom:vc.childViewControllers.lastObject];
+        }
         return vc;
     }
 }
 
-- (UINavigationController*)xl_navigationController {
+- (UINavigationController *)xl_navigationController {
 
-    UINavigationController* nav = nil;
+    UINavigationController *nav = nil;
     if ([self isKindOfClass:[UINavigationController class]]) {
         nav = (id)self;
-    }
-    else {
+    } else {
         if ([self isKindOfClass:[UITabBarController class]]) {
-            nav = [((UITabBarController*)self).selectedViewController xl_navigationController];
-        }
-        else {
+            nav = [((UITabBarController *)self).selectedViewController xl_navigationController];
+        } else {
             nav = self.navigationController;
         }
     }
@@ -92,7 +111,7 @@
 }
 + (UINavigationController *)xl_currentNavigatonController {
     
-    UIViewController * currentViewController =  [UIViewController xl_currentViewController];
+    UIViewController *currentViewController =  [UIViewController xl_currentViewController];
     
     return currentViewController.navigationController;
 }

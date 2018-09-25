@@ -26,7 +26,7 @@
 
 
 
-
+#import "CSViewController.h"
 
 
 #import "ClipImageView.h"
@@ -60,7 +60,7 @@
 
 #import "MarqueeView.h"
 
-@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate, ShowSignatureViewDelegate, MarqueeViewDelegate> {
+@interface ViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate, StarRateViewDelegate, XLAutoRunLabelDelegate, UITextFieldDelegate, SlideViewDelegate,UIScrollViewDelegate, ShowSignatureViewDelegate, MarqueeViewDelegate, BannerScrollViewDelegate> {
     
     UILabel*label_;
     
@@ -69,6 +69,7 @@
     UIView *_holeShapeView;
     UILabel *_qiShuLabel;
     
+    NSArray *adListArray;
 }
 
 
@@ -227,12 +228,18 @@
 
     //    [self gradientLayerView];
     //    [self createAutoRunLabel];
+    [self.view xl_removeAllSubviews];
+    adListArray = @[@"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=118add3c6fd0f703f9b293dc38fb5148/faf2b2119313b07e5119db2301d7912397dd8c71.jpg",
+                    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536321964171&di=22cd15162e6220948e0c222f9b522ddf&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fc8177f3e6709c93d038405d2923df8dcd10054a4.jpg",
+                    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536321963416&di=a7e0f059d82f949fbec1a98527fa53b0&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7e3e6709c93d70cfb8b9b028f5dcd100baa12b57.jpg",
+                    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536321963416&di=a7e0f059d82f949fbec1a98527fa53b0&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7e3e6709c93d70cfb8b9b028f5dcd100baa12b57.jpg",
+                    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536321963416&di=a7e0f059d82f949fbec1a98527fa53b0&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F7e3e6709c93d70cfb8b9b028f5dcd100baa12b57.jpg"];
     
-//        [self loadBanner];
+        [self loadBanner];
     
     //    [self loadAuthcodeView];
     //    [self slideView];
-    [self getDeviceMessage];
+//    [self getDeviceMessage];
     
     
     
@@ -259,21 +266,29 @@
     
     
 //    [self testMoney];
-    [self.view xl_removeAllSubviews];
+//    [self.view xl_removeAllSubviews];
 //
 //    [self testNSMutableAttributedString];
 //    
 //    
 //    [self testPraiseEmitterBtn];
 
-    [self labelScrollView];
+//    [self labelScrollView];
     
     
-    UIButton *btnx = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnx.frame = CGRectMake(100, 100, 100, 50);
-    btnx.backgroundColor = [UIColor orangeColor];
-    [btnx addTarget:self action:@selector(showPopSignatureView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnx];
+//    UIButton *btnx = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btnx.frame = CGRectMake(100, 100, 100, 50);
+//    btnx.backgroundColor = [UIColor orangeColor];
+//    [btnx addTarget:self action:@selector(showPopSignatureView:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btnx];
+    
+//    [self.view xl_removeAllSubviews];
+    
+//    CSViewController *vc = [CSViewController new];
+//    vc.view.frame = self.view.bounds;
+//    [self addChildViewController:vc];
+//    [self.view addSubview:vc.view];
+//    [self presentViewController:vc animated:YES completion:nil];
 
 }
 #pragma mark - 手写签名
@@ -493,15 +508,45 @@
 
 #pragma mark - 轮播图
 - (void)loadBanner {
-    BannerScrollView *v = [[BannerScrollView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 150)];
-    v.PageControlShowStyle = UIPageControlShowStyleCenter;
-    v.openURLBlock = ^(NSString *key){
-        NSLog(@"%@",key);
-    };
-    [self.view addSubview:v];
+    BannerScrollView *banner = [[BannerScrollView alloc] initWithFrame:CGRectMake(0, 100, [[UIScreen mainScreen] bounds].size.width, 150)];
+    banner.delegate = self;
+    banner.pullStyle = YES;
+
+    banner.scrollDuration = 5.0;
+    banner.autoScroll = YES;
+    
+    
+    banner.pageControl.currentPageIndicatorTintColor = [UIColor colorWithWhite:0.0 alpha:0.7];
+    banner.pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+    banner.backgroundColor = [UIColor redColor];
+    [self.view addSubview:banner];
 }
 
+- (NSInteger)bannerScrollViewNumbersOfContents:(BannerScrollView *)imageScrollView {
+    return adListArray.count;
+}
 
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+            imageAtIndex:(NSInteger)index
+               imageView:(UIImageView *)imageView {
+    
+    if (index >= adListArray.count) return;
+    
+    [imageView sd_setImageWithURL:[NSURL URLWithString:adListArray[index]]
+                 placeholderImage:nil
+                          options:SDWebImageProgressiveDownload];
+}
+
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+     clickContentAtIndex:(NSInteger)index {
+    
+    NSLog(@"-点击---%ld", index);
+}
+
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+            currentIndex:(NSInteger)currentIndex {
+    NSLog(@"----%ld", currentIndex);
+}
 
 #pragma mark - 文字轮播
 - (void)labelScrollView {

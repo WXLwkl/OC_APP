@@ -26,5 +26,11 @@
 		<key>viewController</key>
 		<string>MultithreadingViewController</string>
 	</dict>
+	<dict>
+		<key>title</key>
+		<string>链式编程</string>
+		<key>viewController</key>
+		<string>DSLViewController</string>
+	</dict>
 </array>
 </plist>

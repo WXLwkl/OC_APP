@@ -7,23 +7,40 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BannerScrollView;
 
-typedef NS_ENUM(NSUInteger, UIPageControlShowStyle) {
-    UIPageControlShowStyleNone,//default
-    UIPageControlShowStyleLeft,
-    UIPageControlShowStyleCenter,
-    UIPageControlShowStyleRight,
-};
+@protocol BannerScrollViewDelegate <NSObject>
 
+- (NSInteger)bannerScrollViewNumbersOfContents:(BannerScrollView *)imageScrollView;
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+            imageAtIndex:(NSInteger)index
+               imageView:(UIImageView *)imageView;
+@optional
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+     clickContentAtIndex:(NSInteger)index;
+
+- (void)bannerScrollView:(BannerScrollView *)imageScrollView
+            currentIndex:(NSInteger)currentIndex;
+@end
 
 //typedef void(^openURLBlock)(NSString *);
 
-@interface BannerScrollView : UIScrollView
+@interface BannerScrollView : UIView
 
-@property (assign,nonatomic,readwrite) UIPageControlShowStyle  PageControlShowStyle;
 //@property (nonatomic, copy) openURLBlock block;
+//@property (nonatomic, copy) void (^openURLBlock)(NSString *keyWord);
 
+@property (nonatomic, assign) id<BannerScrollViewDelegate>delegate;
 
-@property (nonatomic, copy) void (^openURLBlock)(NSString *keyWord);
+@property (nonatomic, assign) NSTimeInterval scrollDuration;
+@property (nonatomic, assign) BOOL autoScroll;
+@property (nonatomic, assign) BOOL pullStyle;
+
+@property (nonatomic, strong, readonly) UIScrollView *scrollView;
+@property (nonatomic, strong, readonly) UIPageControl *pageControl;
+
+- (void)reloadContents;
+- (UIImageView *)currentImageView;
+- (void)clearImageContents;
 
 @end

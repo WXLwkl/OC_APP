@@ -23,9 +23,12 @@
 
 @implementation AppDelegate
 
+extern CFAbsoluteTime startTime;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSLog(@"Launched time = %f 秒", (CFAbsoluteTimeGetCurrent()) - startTime);
     
     //初始化window
     [self initWindowWithGuideOrAD];

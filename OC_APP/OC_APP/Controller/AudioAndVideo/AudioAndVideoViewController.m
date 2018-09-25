@@ -10,7 +10,7 @@
 #import "Video1ViewController.h"
 #import "Video2ViewController.h"
 #import "WeChatVideoViewController.h"
-
+#import "WXVideoViewController.h"
 #import "VideoPlayerViewController.h"
 
 @interface AudioAndVideoViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -29,7 +29,7 @@
     self.navigationItem.title = @"音视频";
     [self xl_setNavBackItem];
     
-    _dataArray = @[@[@"等待开发"],@[@"拍视频1",@"拍视频2",@"微信视频"],@[@"视频播放"]];
+    _dataArray = @[@[@"等待开发"],@[@"拍视频1",@"拍视频2",@"微信视频1",@"微信视频2"],@[@"视频播放"]];
     [self.view addSubview:self.tableView];
 }
 
@@ -87,6 +87,9 @@
             [self presentViewController:nav animated:YES completion:nil];
         } else if (indexPath.row == 2) {
             WeChatVideoViewController *vc = [WeChatVideoViewController new];
+            [self presentViewController:vc animated:YES completion:nil];
+        } else if (indexPath.row == 3) {
+            WXVideoViewController *vc = [WXVideoViewController new];
             [self presentViewController:vc animated:YES completion:nil];
         }
     } else {
