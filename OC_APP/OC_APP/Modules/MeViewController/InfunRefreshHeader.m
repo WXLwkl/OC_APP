@@ -8,13 +8,10 @@
 - (void)prepare{
     [super prepare];
     
-//    self.badgeBGColor = THEME_CLOLR;
-    
-    
     self.backgroundColor = THEME_color;
     
     // 设置控件的高度
-    self.mj_h = 100;
+    self.xl_height = 100;
     
     // 添加label
     UILabel *label = [[UILabel alloc] init];
@@ -45,8 +42,8 @@
 - (void)placeSubviews{
     [super placeSubviews];
     self.label.frame = self.bounds;
-    self.logo.center = CGPointMake(self.mj_w * 0.5, - self.mj_h * 1.3);
-    self.loading.center = CGPointMake(self.center.x - 50, self.mj_h * 0.5);
+    self.logo.center = CGPointMake(self.xl_width * 0.5, - self.xl_height * 1.3);
+    self.loading.center = CGPointMake(self.center.x - 50, self.xl_height * 0.5);
 }
 
 #pragma mark 监听scrollView的contentOffset改变
@@ -59,27 +56,22 @@
     [super scrollViewContentSizeDidChange:change];
 }
 
-#pragma mark 监听scrollView的拖拽状态改变
-- (void)scrollViewPanStateDidChange:(NSDictionary *)change{
-    [super scrollViewPanStateDidChange:change];
-}
-
 #pragma mark 监听控件的刷新状态
-- (void)setState:(MJRefreshState)state
-{
-    MJRefreshCheckState;
-    if (state == MJRefreshStateIdle) {
-        if (oldState == MJRefreshStateRefreshing) {
+- (void)setRefreshState:(XLRefreshState)refreshState {
+    
+    XLRefreshCheckState;
+    if (refreshState == XLRefreshStateIdle) {
+        if (oldState == XLRefreshStateRefreshing) {
             [self.loading stopAnimating];
             self.arrow.hidden = NO;
             self.arrow.transform = CGAffineTransformIdentity;
-            self.arrow.center = CGPointMake(self.center.x - 80, self.mj_h * 0.5);
+            self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
             self.label.text = @"钓吧欢迎您";
-            [UIView animateWithDuration:MJRefreshSlowAnimationDuration animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 self.loading.alpha = 0.0;
             } completion:^(BOOL finished) {
                 // 如果执行完动画发现不是idle状态，就直接返回，进入其他状态
-                if (self.state != MJRefreshStateIdle) return;
+                if (refreshState != XLRefreshStateIdle) return;
                 
                 self.loading.alpha = 1.0;
                 [self.loading stopAnimating];
@@ -88,24 +80,24 @@
         } else {
             [self.loading stopAnimating];
             self.arrow.hidden = NO;
-            self.arrow.center = CGPointMake(self.center.x - 80, self.mj_h * 0.5);
+            self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
             self.label.text = @"钓吧欢迎您";
-            [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 self.arrow.transform = CGAffineTransformIdentity;
             }];
         }
-    } else if (state == MJRefreshStatePulling) {
+    } else if (refreshState == XLRefreshStatePulling) {
         [self.loading stopAnimating];
-        self.arrow.center = CGPointMake(self.center.x - 50, self.mj_h * 0.5);
+        self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
         self.label.text = @"松开即可刷新";
         self.arrow.hidden = NO;
-        [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
+        [UIView animateWithDuration:0.25 animations:^{
             self.arrow.transform = CGAffineTransformMakeRotation(0.000001 - M_PI);
         }];
-    } else if (state == MJRefreshStateRefreshing) {
+    } else if (refreshState == XLRefreshStateRefreshing) {
         self.loading.alpha = 1.0; // 防止refreshing -> idle的动画完毕动作没有被执行
         [self.loading startAnimating];
-        self.arrow.center = CGPointMake(self.center.x - 50, self.mj_h * 0.5);
+        self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
         self.label.text = @"加载数据中";
         self.arrow.hidden = YES;
     }

@@ -9,6 +9,8 @@
 #import "BlankPageViewController.h"
 #import "UITableView+Common.h"
 
+#import "XLRefreshHeader.h"
+#import "XLTestHeader.h"
 @interface BlankPageViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray             *dataArray;
@@ -41,7 +43,7 @@
         [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
         [self.view addSubview:_myTableView];
         WeakSelf(self);
-        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _myTableView.xl_header = [XLTestHeader headerWithRefreshingBlock:^{
             // 模拟加载服务端数据
             StrongSelf(self);
             [self loadMyTableData];
@@ -50,7 +52,7 @@
 
         self.myTableView.firstReload = YES;
         
-        [_myTableView.mj_header beginRefreshing];
+        [_myTableView.xl_header beginRefreshing];
     }
 }
 
@@ -75,7 +77,7 @@
         self.dataArray = @[@"1",@"2"];
 
         [self.myTableView reloadData];
-        [self.myTableView.mj_header endRefreshing];
+        [self.myTableView.xl_header endRefreshing];
     });
 
 

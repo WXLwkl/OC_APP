@@ -50,7 +50,7 @@ TZImagePickerControllerDelegate> {
         _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
         _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
         UIBarButtonItem *tzBarItem, *barItem;
-        if (iOS9Later) {
+        if (IOS_Foundation_Later_9) {
             tzBarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[TZImagePickerController class]]];
             barItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIImagePickerController class]]];
         } else {
@@ -123,16 +123,16 @@ TZImagePickerControllerDelegate> {
                 });
             }
         }];
-    } else if ([TZImageManager authorizationStatus] == 2) { //已被拒绝，没有相册权限，将无法保存拍的照片
-        [self xl_alertWithTitle:@"无法使用相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" andOthers:@[@"取消", @"确定"] animated:YES action:^(NSInteger index) {
-            if (index == 1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-            }
-        }];
-    } else if ([TZImageManager authorizationStatus] == 0) { //未请求过相册权限
-        [[TZImageManager manager] requestAuthorizationWithCompletion:^{
-            [self takePhoto];
-        }];
+//    } else if ([TZImageManager authorizationStatus] == 2) { //已被拒绝，没有相册权限，将无法保存拍的照片
+//        [self xl_alertWithTitle:@"无法使用相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" andOthers:@[@"取消", @"确定"] animated:YES action:^(NSInteger index) {
+//            if (index == 1) {
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//            }
+//        }];
+//    } else if ([TZImageManager authorizationStatus] == 0) { //未请求过相册权限
+//        [[TZImageManager manager] requestAuthorizationWithCompletion:^{
+//            [self takePhoto];
+//        }];
     } else {
         [self pushImagePickerController];
     }
@@ -141,15 +141,15 @@ TZImagePickerControllerDelegate> {
 - (void)pushImagePickerController {
     // 提前定位
     WeakSelf(self);
-    [[TZLocationManager manager] startLocationWithSuccessBlock:^(CLLocation *location, CLLocation *oldLocation) {
+    
+    [[TZLocationManager manager] startLocationWithSuccessBlock:^(NSArray<CLLocation *> *locations) {
         StrongSelf(self);
-        self.location = location;
+        self.location = locations[0];
     } failureBlock:^(NSError *error) {
         StrongSelf(self);
         self.location = nil;
     }];
-
-
+    
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         self.imagePickerVc.sourceType = sourceType;
@@ -222,12 +222,14 @@ TZImagePickerControllerDelegate> {
         [imgPicker showProgressHUD];
 
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [[TZImageManager manager] savePhotoWithImage:image location:self.location completion:^(NSError *error) {
+        
+        [[TZImageManager manager] savePhotoWithImage:image location:self.location completion:^(PHAsset *asset, NSError *error) {
             if (error) {
                 [imgPicker hideProgressHUD];
                 NSLog(@"图片保存失败：%@", error);
             } else {
-                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES completion:^(TZAlbumModel *model) {
+                
+                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES needFetchAssets:YES completion:^(TZAlbumModel *model) {
                     [[TZImageManager manager] getAssetsFromFetchResult:model.result allowPickingVideo:NO allowPickingImage:YES completion:^(NSArray<TZAssetModel *> *models) {
                         [imgPicker hideProgressHUD];
                         TZAssetModel *assetModel = [models firstObject];
@@ -312,7 +314,7 @@ TZImagePickerControllerDelegate> {
             ALAsset *alAsset = asset;
             isVideo = [[alAsset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo];
         }
-        if ([[asset valueForKey:@"filename"] tz_containsString:@"GIF"]) {
+        if ([[asset valueForKey:@"filename"] containsString:@"GIF"]) {
             TZGifPhotoPreviewController *vc = [[TZGifPhotoPreviewController alloc] init];
             TZAssetModel *model = [TZAssetModel modelWithAsset:asset type:TZAssetModelMediaTypePhotoGif timeLength:@""];
             vc.model = model;

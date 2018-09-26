@@ -1,8 +1,9 @@
 
 
-#import "MJRefreshHeader.h"
+//#import "MJRefreshHeader.h"
+#import "XLRefreshHeader.h"
 
-@interface InfunRefreshHeader : MJRefreshHeader
+@interface InfunRefreshHeader : XLRefreshHeader
 @property (weak, nonatomic) UILabel *label;
 @property (weak, nonatomic) UIImageView *arrow;
 @property (weak, nonatomic) UIImageView *logo;

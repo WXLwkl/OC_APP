@@ -19,9 +19,6 @@
 
 #import "InfunRefreshHeader.h"
 
-#import "ALinRefreshGifHeader.h"
-
-
 #import "SpeechViewController.h"
 #import "AlertControllerViewController.h"
 #import "MasonryViewController.h"
@@ -110,7 +107,7 @@
 //        [weakSelf refresh];
 //    }];
     
-    self.tableView.mj_header = [ALinRefreshGifHeader headerWithRefreshingBlock:^{
+    self.tableView.xl_header = [InfunRefreshHeader headerWithRefreshingBlock:^{
         
         [self requestCommentsData];
         
@@ -183,7 +180,7 @@
 
 - (void)refresh {
     //模拟刷新 偶数调用有数据 奇数无数据
-    [self.tableView.mj_header beginRefreshing];
+    [self.tableView.xl_header beginRefreshing];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         static NSUInteger i = 0;
         if (i %2 == 0) {
@@ -197,7 +194,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
+            [self.tableView.xl_header endRefreshing];
         });
     });
 }
@@ -208,7 +205,7 @@
 }
 - (void)aa {
     NSLog(@"刷新！！！！！");
-    [self.tableView.mj_header endRefreshing];
+    [self.tableView.xl_header endRefreshing];
 }
 
 //- (void)viewWillAppear:(BOOL)animated {
