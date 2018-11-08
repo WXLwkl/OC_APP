@@ -584,8 +584,6 @@
         
     } failureBlock:^(NSError *error) {
         NSLog(@"----%@",error);
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        NSLog(@"%lld--%lld", bytesProgress, totalBytesProgress);
     }];
     
     

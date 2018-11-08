@@ -118,6 +118,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     
+    [self clickTextView];
+    
+    return;
+    
 //    objc_msgSend()
     
     
@@ -756,24 +760,25 @@ bool isReverse = NO;//是否反向翻转
 
 #pragma mark - 部分文字可点击的TextView
 - (void)clickTextView {
-    ClickTextView *clickTextView = [[ClickTextView alloc] initWithFrame:CGRectMake(50, 50, 300, 300)];
+    ClickTextView *clickTextView = [[ClickTextView alloc] initWithFrame:CGRectMake(50, 50, 300, 30)];
     [self.view addSubview:clickTextView];
     
     // 方便测试，设置textView的边框已经背景
     //    clickTextView.backgroundColor = [UIColor cyanColor];
     clickTextView.layer.borderWidth = 1;
     clickTextView.layer.borderColor = [UIColor redColor].CGColor;
-    clickTextView.font = [UIFont systemFontOfSize:30];
+    clickTextView.font = [UIFont systemFontOfSize:13];
+    clickTextView.textAlignment = NSTextAlignmentRight;
     //    clickTextView.textColor = [UIColor redColor];
     
     
-    NSString *content = @"1234567890承诺书都差不多岁尺布斗粟CBD死UC收不到催上半场低俗";
+    NSString *content = @"承诺书都差不多";
     // 设置文字
     clickTextView.text = content;
     
     // 设置期中的一段文字有下划线，下划线的颜色为蓝色，点击下划线文字有相关的点击效果
     
-    [clickTextView setUnderlineTextWithUnderlineText:@"承诺书都差不多" withUnderlineColor:[UIColor blueColor] withClickCoverColor:[UIColor greenColor] withBlock:^(NSString *clickText) {
+    [clickTextView setUnderlineTextWithUnderlineText:@"承诺书" withUnderlineColor:[UIColor blueColor] withClickCoverColor:[UIColor greenColor] withBlock:^(NSString *clickText) {
         NSLog(@"clickText = %@",clickText);
     }];
     

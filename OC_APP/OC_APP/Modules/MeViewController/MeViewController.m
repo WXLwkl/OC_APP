@@ -554,7 +554,6 @@
     return _topView;
 }
 
-
 - (void)showNewStatusesCount:(NSInteger)count {
     // 1.创建一个UILabel
     UILabel *label = [[UILabel alloc] init];

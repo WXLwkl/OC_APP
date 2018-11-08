@@ -471,6 +471,7 @@
 		91FD7BD01F986AFB00DC54AC /* ScanQR3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91FD7BCC1F986AFB00DC54AC /* ScanQR3@2x.png */; };
 		91FD7BD11F986AFB00DC54AC /* ScanQR4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91FD7BCD1F986AFB00DC54AC /* ScanQR4@2x.png */; };
 		91FD7BD41F986C4300DC54AC /* CaptureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FD7BD31F986C4300DC54AC /* CaptureHelper.m */; };
+		91FE59D62181C1B400C124E2 /* PictureBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FE59D52181C1B400C124E2 /* PictureBrowserViewController.m */; };
 		C20784051DADF12700BB05D4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20784041DADF12700BB05D4 /* ViewController.m */; };
 		C20784081DADF12700BB05D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C20784061DADF12700BB05D4 /* Main.storyboard */; };
 		C207840D1DADF12700BB05D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C207840B1DADF12700BB05D4 /* LaunchScreen.storyboard */; };
@@ -1275,6 +1276,8 @@
 		91FD7BCD1F986AFB00DC54AC /* ScanQR4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScanQR4@2x.png"; sourceTree = "<group>"; };
 		91FD7BD21F986C4300DC54AC /* CaptureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureHelper.h; sourceTree = "<group>"; };
 		91FD7BD31F986C4300DC54AC /* CaptureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureHelper.m; sourceTree = "<group>"; };
+		91FE59D42181C1B400C124E2 /* PictureBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureBrowserViewController.h; sourceTree = "<group>"; };
+		91FE59D52181C1B400C124E2 /* PictureBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureBrowserViewController.m; sourceTree = "<group>"; };
 		C20783FA1DADF12700BB05D4 /* OC_APP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OC_APP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20784031DADF12700BB05D4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C20784041DADF12700BB05D4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -1799,6 +1802,7 @@
 		9175230A1F46B25A004CE4E0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				91FE59D32181C19A00C124E2 /* PictureBrowser */,
 				91E1FC2B213E87C100B3D866 /* DSL */,
 				9178CC6B20FDE55E0079B164 /* Runloop */,
 				91221D3320DB71D300C4D5A1 /* AudioAndVideo */,
@@ -2985,6 +2989,15 @@
 			path = WaterWaveView;
 			sourceTree = "<group>";
 		};
+		91FE59D32181C19A00C124E2 /* PictureBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				91FE59D42181C1B400C124E2 /* PictureBrowserViewController.h */,
+				91FE59D52181C1B400C124E2 /* PictureBrowserViewController.m */,
+			);
+			path = PictureBrowser;
+			sourceTree = "<group>";
+		};
 		A04A04CA0488D2DF635DF6A6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3333,6 +3346,7 @@
 				9101F953207F34F900F39DAA /* TanTanCardViewController.m in Sources */,
 				919842BC1F2074CB00CE773F /* GestureView.m in Sources */,
 				91F515921FDA85DB0082835F /* CategoryModel.m in Sources */,
+				91FE59D62181C1B400C124E2 /* PictureBrowserViewController.m in Sources */,
 				91F1B0D9211306B8007F5EA7 /* Book.m in Sources */,
 				91AC0CD91EF393CA004FDD9E /* UIImage+Common.m in Sources */,
 				9187C4FC1F21D86C000DF0D5 /* QRMainViewController.m in Sources */,

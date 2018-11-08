@@ -13,21 +13,8 @@ static NSString * const url4 = @"http://www.aomy.com/attach/2012-09/1347583576vg
 static NSString * const url5 = @"http://chanyouji.com/api/users/likes/268717.json";
 
 
-
 #import <Foundation/Foundation.h>
-
-
-/** 使用枚举NS_ENUM:区别可判断编译器是否支持新式枚举,支持就使用新的,否则使用旧的 */
-typedef NS_ENUM(NSUInteger, NetworkStatus) {
-    /* 未知网络 */
-    NetworkStatusUnknown           = 0,
-    /* 没有网络 */
-    NetworkStatusNotReachable,
-    /* 手机 3G/4G 网络 */
-    NetworkStatusReachableViaWWAN,
-    /* wifi 网络 */
-    NetworkStatusReachableViaWiFi
-};
+#import <AFNetworking.h>
 
 typedef NS_ENUM(NSUInteger, HttpRequestSerializer) {
     /** 设置请求数据为JSON格式*/
@@ -42,9 +29,8 @@ typedef NS_ENUM(NSUInteger, HttpResponseSerializer) {
     /** 设置响应数据为HTTP格式*/
     HttpResponseSerializerHTTP,
 };
-
 /*! 实时监测网络状态的 block */
-typedef void(^NetworkStatusBlock)(NetworkStatus status);
+typedef void(^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
 
 /*! 定义请求成功的 block */
 typedef void( ^ResponseSuccess)(id response);
@@ -53,13 +39,17 @@ typedef void( ^ResponseFail)(NSError *error);
 
 /*! 定义上传进度 block */
 typedef void( ^UploadProgress)(int64_t bytesProgress,
-int64_t totalBytesProgress);
+                               int64_t totalBytesProgress);
 /*! 定义下载进度 block */
 typedef void( ^DownloadProgress)(int64_t bytesProgress, int64_t totalBytesProgress);
 
 
-
 @interface RequestManager : NSObject
+
+/**
+ 监听网络状态
+ */
+@property (nonatomic, assign) AFNetworkReachabilityStatus networkStatus;
 
 /**
  创建的请求的超时间隔（以秒为单位），此设置为全局统一设置一次即可，默认超时时间间隔为30秒。
@@ -98,15 +88,13 @@ typedef void( ^DownloadProgress)(int64_t bytesProgress, int64_t totalBytesProgre
  @param parameters 请求的参数
  @param successBlock 请求成功的回调
  @param failureBlock 请求失败的回调
- @param progress 进度
  @return NSURLSessionTask
  */
 + (NSURLSessionTask *)GET:(NSString *)urlString
               isNeedCache:(BOOL)isNeedCache
                parameters:(NSDictionary *)parameters
              successBlock:(ResponseSuccess)successBlock
-             failureBlock:(ResponseFail)failureBlock
-                 progress:(DownloadProgress)progress;
+             failureBlock:(ResponseFail)failureBlock;
 
 /**
  网络请求的实例方法 post
@@ -116,15 +104,13 @@ typedef void( ^DownloadProgress)(int64_t bytesProgress, int64_t totalBytesProgre
  @param parameters 请求的参数
  @param successBlock 请求成功的回调
  @param failureBlock 请求失败的回调
- @param progress 进度
  @return NSURLSessionTask
  */
 + (NSURLSessionTask *)POST:(NSString *)urlString
                isNeedCache:(BOOL)isNeedCache
                 parameters:(NSDictionary *)parameters
               successBlock:(ResponseSuccess)successBlock
-              failureBlock:(ResponseFail)failureBlock
-                  progress:(DownloadProgress)progress;
+              failureBlock:(ResponseFail)failureBlock;
 
 /**
  网络请求的实例方法 put
@@ -133,14 +119,12 @@ typedef void( ^DownloadProgress)(int64_t bytesProgress, int64_t totalBytesProgre
  @param parameters 请求的参数
  @param successBlock 请求成功的回调
  @param failureBlock 请求失败的回调
- @param progress 进度
  @return NSURLSessionTask
  */
 + (NSURLSessionTask *)PUT:(NSString *)urlString
                parameters:(NSDictionary *)parameters
              successBlock:(ResponseSuccess)successBlock
-             failureBlock:(ResponseFail)failureBlock
-                 progress:(DownloadProgress)progress;
+             failureBlock:(ResponseFail)failureBlock;
 
 
 /**
@@ -246,7 +230,7 @@ typedef void( ^DownloadProgress)(int64_t bytesProgress, int64_t totalBytesProgre
 
 #pragma mark - 网络状态监测
 /*!
- *  开启实时网络状态监测，通过Block回调实时获取(此方法可多次调用)
+ *  获取网络状态
  */
 + (void)startNetWorkMonitoringWithBlock:(NetworkStatusBlock)networkStatus;
 

@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
 };
 
 #import "RequestManager.h"
-#import <AFNetworking.h>
 #import <AFNetworkActivityIndicatorManager.h>
 #import "RequestManagerCache.h"
 
@@ -91,12 +90,20 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
     
     // 配置自建证书的Https请求
     [self setupSecurityPolicy];
+    
+    // 网络状态监听
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"网络状态 : %@", @(status));
+        [RequestManager sharedRequestManager].networkStatus = status;
+    }];
+    
 }
 /**
  配置自建证书的Https请求，只需要将CA证书文件放入根目录就行
  */
-+ (void)setupSecurityPolicy
-{
++ (void)setupSecurityPolicy {
     //    NSData *cerData = [NSData dataWithContentsOfFile:cerPath];
     NSSet <NSData *> *cerSet = [AFSecurityPolicy certificatesInBundle:[NSBundle mainBundle]];
     
@@ -138,8 +145,7 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
               isNeedCache:(BOOL)isNeedCache
                parameters:(NSDictionary *)parameters
              successBlock:(ResponseSuccess)successBlock
-             failureBlock:(ResponseFail)failureBlock
-                 progress:(DownloadProgress)progress {
+             failureBlock:(ResponseFail)failureBlock {
     
     return [self request:GET
              isNeedCache:isNeedCache
@@ -147,15 +153,14 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
               parameters:parameters
             successBlock:successBlock
             failureBlock:failureBlock
-                progress:progress];
+                progress:nil];
 }
 
 + (NSURLSessionTask *)POST:(NSString *)urlString
                isNeedCache:(BOOL)isNeedCache
                 parameters:(NSDictionary *)parameters
               successBlock:(ResponseSuccess)successBlock
-              failureBlock:(ResponseFail)failureBlock
-                  progress:(DownloadProgress)progress {
+              failureBlock:(ResponseFail)failureBlock {
     
     return [self request:POST
              isNeedCache:isNeedCache
@@ -163,21 +168,20 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
               parameters:parameters
             successBlock:successBlock
             failureBlock:failureBlock
-                progress:progress];
+                progress:nil];
 }
 
 + (NSURLSessionTask *)PUT:(NSString *)urlString
                parameters:(NSDictionary *)parameters
              successBlock:(ResponseSuccess)successBlock
-             failureBlock:(ResponseFail)failureBlock
-                 progress:(DownloadProgress)progress {
+             failureBlock:(ResponseFail)failureBlock {
     return [self request:PUT
              isNeedCache:NO
                urlString:urlString
               parameters:parameters
             successBlock:successBlock
             failureBlock:failureBlock
-                progress:progress];
+                progress:nil];
 }
 
 + (NSURLSessionTask *)DELETE:(NSString *)urlString
@@ -194,9 +198,7 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
                 progress:progress];
 }
 
-#define XD_ERROR_IMFORMATION @"网络出现错误，请检查网络连接"
-
-#define XD_ERROR [NSError errorWithDomain:@"com.caixindong.XDNetworking.ErrorDomain" code:-999 userInfo:@{ NSLocalizedDescriptionKey:XD_ERROR_IMFORMATION}]
+#define XL_ERROR [NSError errorWithDomain:@"com.xingl.Networking.ErrorDomain" code:-999 userInfo:@{ NSLocalizedDescriptionKey:@"网络出现错误，请检查网络连接"}]
 
 
 
@@ -227,6 +229,14 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
 //            return nil;
 //        }
 //    }];
+    
+    //网络验证
+    if ([RequestManager sharedRequestManager].networkStatus == AFNetworkReachabilityStatusNotReachable) {
+        if (failureBlock) {
+            failureBlock(XL_ERROR);
+        }
+        return nil;
+    }
     
     WeakSelf(self);
    
@@ -390,6 +400,15 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
     
     WeakSelf(self);
     
+    //网络验证
+    if ([RequestManager sharedRequestManager].networkStatus == AFNetworkReachabilityStatusNotReachable) {
+        if (failureBlock) {
+            failureBlock(XL_ERROR);
+        }
+        return nil;
+    }
+    
+    
     urlString = XL_FilterString(urlString);
     
     if ([urlString respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
@@ -538,10 +557,15 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
                     failureBlock:(ResponseFail)failureBlock
              UploadProgressBlock:(UploadProgress)UploadProgressBlock {
     
-    if (urlString == nil)
-    {
+    //网络验证
+    if ([RequestManager sharedRequestManager].networkStatus == AFNetworkReachabilityStatusNotReachable) {
+        if (failureBlock) {
+            failureBlock(XL_ERROR);
+        }
         return nil;
     }
+    
+    if (urlString == nil) return nil;
     
     NSLog(@"******************** 请求参数 ***************************");
     NSLog(@"请求头: %@\n请求方式: %@\n请求URL: %@\n请求param: %@\n\n",[RequestManager sharedRequestManager].sessionManager.requestSerializer.HTTPRequestHeaders, @"uploadFile", urlString, parameters);
@@ -595,9 +619,15 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
                       failureBlock:(ResponseFail)failureBlock
                   downLoadProgress:(DownloadProgress)progress {
     
-    if (urlString == nil) {
+    //网络验证
+    if ([RequestManager sharedRequestManager].networkStatus == AFNetworkReachabilityStatusNotReachable) {
+        if (failureBlock) {
+            failureBlock(XL_ERROR);
+        }
         return nil;
     }
+    
+    if (urlString == nil) return nil;
     
     NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
@@ -661,33 +691,8 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
  *  开启网络监测
  */
 + (void)startNetWorkMonitoringWithBlock:(NetworkStatusBlock)networkStatus {
-    /*! 1.获得网络监控的管理者 */
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    /*! 当使用AF发送网络请求时,只要有网络操作,那么在状态栏(电池条)wifi符号旁边显示  菊花提示 */
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    /*! 2.设置网络状态改变后的处理 */
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        /*! 当网络状态改变了, 就会调用这个block */
-        switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
-                NSLog(@"未知网络");
-                networkStatus ? networkStatus(NetworkStatusUnknown) : nil;
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-                NSLog(@"没有网络");
-                networkStatus ? networkStatus(NetworkStatusNotReachable) : nil;
-                break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                NSLog(@"手机自带网络");
-                networkStatus ? networkStatus(NetworkStatusReachableViaWWAN) : nil;
-                break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                NSLog(@"wifi 网络");
-                networkStatus ? networkStatus(NetworkStatusReachableViaWiFi) : nil;
-                break;
-        }
-    }];
-    [manager startMonitoring];
+    
+    networkStatus ? networkStatus([RequestManager sharedRequestManager].networkStatus) : nil;
 }
 
 #pragma mark - 取消 Http 请求
@@ -696,7 +701,7 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
  */
 + (void)cancelAllRequest {
     
-//    [[RequestManager sharedRequestManager].sessionManager.operationQueue cancelAllOperations];
+    //    [[RequestManager sharedRequestManager].sessionManager.operationQueue cancelAllOperations];
     // 锁操作
     @synchronized(self) {
         [[self tasks] enumerateObjectsUsingBlock:^(NSURLSessionTask  *_Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -735,8 +740,7 @@ static NSMutableArray *tasks;
  
  @return 存储着所有的请求task数组
  */
-+ (NSMutableArray *)tasks
-{
++ (NSMutableArray *)tasks {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         tasks = [[NSMutableArray alloc] init];
@@ -750,8 +754,7 @@ static NSMutableArray *tasks;
     [RequestManager sharedRequestManager].sessionManager.requestSerializer.timeoutInterval = timeoutInterval;
 }
 
-- (void)setRequestSerializer:(HttpRequestSerializer)requestSerializer
-{
+- (void)setRequestSerializer:(HttpRequestSerializer)requestSerializer {
     _requestSerializer = requestSerializer;
     switch (requestSerializer) {
         case HttpRequestSerializerJSON:
@@ -770,21 +773,17 @@ static NSMutableArray *tasks;
     }
 }
 
-- (void)setResponseSerializer:(HttpResponseSerializer)responseSerializer
-{
+- (void)setResponseSerializer:(HttpResponseSerializer)responseSerializer {
     _responseSerializer = responseSerializer;
     switch (responseSerializer) {
-        case HttpResponseSerializerJSON:
-        {
+        case HttpResponseSerializerJSON: {
             [RequestManager sharedRequestManager].sessionManager.responseSerializer = [AFJSONResponseSerializer serializer] ;
         }
             break;
-        case HttpResponseSerializerHTTP:
-        {
+        case HttpResponseSerializerHTTP: {
             [RequestManager sharedRequestManager].sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer] ;
         }
             break;
-            
         default:
             break;
     }
@@ -832,11 +831,11 @@ static NSMutableArray *tasks;
 
 
 + (void)uploadImageWithFormData:(id<AFMultipartFormData>  _Nonnull )formData
-                      resizedImage:(UIImage *)resizedImage
-                         imageType:(NSString *)imageType
-                        imageScale:(CGFloat)imageScale
-                         fileNames:(NSArray <NSString *> *)fileNames
-                             index:(NSUInteger)index {
+                   resizedImage:(UIImage *)resizedImage
+                      imageType:(NSString *)imageType
+                     imageScale:(CGFloat)imageScale
+                      fileNames:(NSArray <NSString *> *)fileNames
+                          index:(NSUInteger)index {
     /*! 此处压缩方法是jpeg格式是原图大小的0.8倍，要调整大小的话，就在这里调整就行了还是原图等比压缩 */
     if (imageScale == 0) {
         imageScale = 0.8;
@@ -862,6 +861,5 @@ static NSMutableArray *tasks;
         NSLog(@"上传图片 %lu 成功", (unsigned long)index);
     }
 }
-
 
 @end

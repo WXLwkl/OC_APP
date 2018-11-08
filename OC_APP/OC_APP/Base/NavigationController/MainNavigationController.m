@@ -75,6 +75,13 @@ static CGFloat kNavigationBackgroundAlpha = 0.8f;
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
+    if (self.childViewControllers.count > 0) {
+        // 防止界面卡顿时，vc被push多次
+        if ([self.childViewControllers.lastObject isKindOfClass:[viewController class]]) {
+            return;
+        }
+    }
+    
     if (self.viewControllers.count >= 1) {
         viewController.hidesBottomBarWhenPushed = YES;
     }

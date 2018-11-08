@@ -13,7 +13,7 @@ target 'OC_APP' do
     pod 'AFNetworking'
     pod 'YYCache' #缓存
 
-#    pod 'MJRefresh' #刷新库
+    pod 'MJRefresh' #刷新库
     pod 'MJExtension'
 
     pod 'pop' #做动画效果
