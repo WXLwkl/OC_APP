@@ -20,12 +20,14 @@
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale) : [UIScreen mainScreen].bounds.size)
 
 
+//状态栏、导航栏、标签栏高度
 #define kNavHeight              (kNavBarHeight + kStatusBarHeight)
 #define kNavBarHeight           (44.f)
-#define kStatusBarHeight        (iPhoneX ? 44.f : 20.f)
+#define kStatusBarHeight        ([[UIApplication sharedApplication] statusBarFrame].size.height)
 
 #define kTabBarHeight           (kBottomHeight + 49.f)
-#define kBottomHeight           (iPhoneX ? 34.f : 0.f)
+#define kBottomHeight           (IS_IPhoneX_All ? 34.f : 0.f)
+
 
 #define kEnglishKeyboardHeight  (216.f)
 #define kChineseKeyboardHeight  (252.f)
@@ -129,22 +131,33 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 // 判断是否为ipod
 #define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])
-
 // 判断是否为 iPhone 4
 #define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
-
 // 判断是否为 iPhone 5/SE
 #define iPhone5SE ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
-
 // 判断是否为iPhone 6/6s
 #define iPhone6_6s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
-
 // 判断是否为iPhone 6Plus/6sPlus
 #define iPhone6Plus_6sPlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
 
 // 判断是否为iPhoneX
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+//判断iPHoneXR
+#define SCREENSIZE_IS_XR ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !IS_IPAD : NO)
+//判断iPHoneX、iPHoneXs
+#define SCREENSIZE_IS_X ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !IS_IPAD : NO)
+#define SCREENSIZE_IS_XS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !IS_IPAD : NO)
+//判断iPhoneXs Max
+#define SCREENSIZE_IS_XS_MAX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !IS_IPAD : NO)
+// 判断所有 X 系列
+#define IS_IPhoneX_All ([UIScreen mainScreen].bounds.size.height == 812 || [UIScreen mainScreen].bounds.size.height == 896)
 
+
+
+#define SCREENSIZE_IS_35  (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height < 568.0)
+#define SCREENSIZE_IS_40  (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
+#define SCREENSIZE_IS_47  (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0)
+#define SCREENSIZE_IS_55  (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0 || [[UIScreen mainScreen] bounds].size.width == 736.0)
 
 
 
@@ -315,11 +328,3 @@ static id instance_ = nil; \
 #else
 // MRC
 #endif
-
-
-
-
-
-
-
-
