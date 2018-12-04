@@ -32,6 +32,7 @@
 		910CBE741EE8EF20003C111B /* AppDelegate+AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 910CBE731EE8EF20003C111B /* AppDelegate+AppService.m */; };
 		910CBE9C1EE92077003C111B /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 910CBE9B1EE92077003C111B /* AppManager.m */; };
 		910D4C7020ECB2100082CBC8 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */; };
+		9116DA0921AFCC2F00176E63 /* XLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116DA0821AFCC2F00176E63 /* XLRouter.m */; };
 		911983C420F4A74C00BA5509 /* XLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 911983C320F4A74C00BA5509 /* XLOperation.m */; };
 		911B12C71FE23F62007D9692 /* InfiniteTabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C61FE23F62007D9692 /* InfiniteTabelViewController.m */; };
 		911B12CA1FE23FA3007D9692 /* InfiniteTabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C91FE23FA3007D9692 /* InfiniteTabelView.m */; };
@@ -92,6 +93,7 @@
 		913C4B311FD9050600C83DAE /* LevalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 913C4B2F1FD9050500C83DAE /* LevalView.m */; };
 		914225DF1FF0E641005B875E /* html.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 914225DE1FF0E641005B875E /* html.bundle */; };
 		914225E11FF0EFFC005B875E /* Swift.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 914225E01FF0EFFC005B875E /* Swift.pdf */; };
+		9142523221B6607000BA4833 /* UIViewController+Router.m in Sources */ = {isa = PBXBuildFile; fileRef = 9142523121B6607000BA4833 /* UIViewController+Router.m */; };
 		91466E7A1F0E0A1500DADB6A /* UILabel+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 91466E791F0E0A1500DADB6A /* UILabel+Common.m */; };
 		9146FAFA21256EC600560AAB /* NSObject+XLRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 9146FAF921256EC600560AAB /* NSObject+XLRuntime.m */; };
 		914893001FC819C3000DC74B /* LFUIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 914892FF1FC819C3000DC74B /* LFUIView+Badge.m */; };
@@ -524,6 +526,8 @@
 		910CBE9B1EE92077003C111B /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
 		910D4C6E20ECB2100082CBC8 /* ThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
+		9116DA0721AFCC2F00176E63 /* XLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLRouter.h; sourceTree = "<group>"; };
+		9116DA0821AFCC2F00176E63 /* XLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLRouter.m; sourceTree = "<group>"; };
 		911983C220F4A74C00BA5509 /* XLOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLOperation.h; sourceTree = "<group>"; };
 		911983C320F4A74C00BA5509 /* XLOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLOperation.m; sourceTree = "<group>"; };
 		911B12C51FE23F62007D9692 /* InfiniteTabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteTabelViewController.h; sourceTree = "<group>"; };
@@ -624,6 +628,8 @@
 		913C4B2F1FD9050500C83DAE /* LevalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevalView.m; sourceTree = "<group>"; };
 		914225DE1FF0E641005B875E /* html.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = html.bundle; sourceTree = "<group>"; };
 		914225E01FF0EFFC005B875E /* Swift.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Swift.pdf; sourceTree = "<group>"; };
+		9142523021B6607000BA4833 /* UIViewController+Router.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Router.h"; sourceTree = "<group>"; };
+		9142523121B6607000BA4833 /* UIViewController+Router.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Router.m"; sourceTree = "<group>"; };
 		91466E771F0DE1CE00DADB6A /* MyCategary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCategary.h; sourceTree = "<group>"; };
 		91466E781F0E0A1500DADB6A /* UILabel+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Common.h"; sourceTree = "<group>"; };
 		91466E791F0E0A1500DADB6A /* UILabel+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Common.m"; sourceTree = "<group>"; };
@@ -1330,6 +1336,17 @@
 			);
 			name = "StepProgressView(步骤进度条)";
 			path = StepProgressView;
+			sourceTree = "<group>";
+		};
+		9116DA0621AFCC0A00176E63 /* XLRouter */ = {
+			isa = PBXGroup;
+			children = (
+				9116DA0721AFCC2F00176E63 /* XLRouter.h */,
+				9116DA0821AFCC2F00176E63 /* XLRouter.m */,
+				9142523021B6607000BA4833 /* UIViewController+Router.h */,
+				9142523121B6607000BA4833 /* UIViewController+Router.m */,
+			);
+			path = XLRouter;
 			sourceTree = "<group>";
 		};
 		911B12C41FE23F1A007D9692 /* InfiniteTabelView(无限的tableview) */ = {
@@ -2685,6 +2702,7 @@
 		91C270BF1ED6C7010064AEBC /* Utils(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				9116DA0621AFCC0A00176E63 /* XLRouter */,
 				9195BEC8215B3ECB008E5F97 /* XLRefresh */,
 				9101F94A207F028300F39DAA /* CardView2 */,
 				91AB487B20492E780089E73F /* WebView */,
@@ -3408,6 +3426,7 @@
 				919842C91F20927A00CE773F /* SecureViewController.m in Sources */,
 				9177FD8A1FFE11EF0030AFC0 /* ArrayDataSource.m in Sources */,
 				91749478207375D800443149 /* NSArray+Safe.m in Sources */,
+				9116DA0921AFCC2F00176E63 /* XLRouter.m in Sources */,
 				9186BA6D20A964CB004FF896 /* NSObject+xl_KVO.m in Sources */,
 				91F515651FDA6EAA0082835F /* LoveHeartView.m in Sources */,
 				9196CCF51F5E6E1F003D18E4 /* FaceView.m in Sources */,
@@ -3460,6 +3479,7 @@
 				91A7284B20722D5D00F7C829 /* LineLayout.m in Sources */,
 				9186BA7020A96512004FF896 /* XLObserverInfo.m in Sources */,
 				91B5A63D1F96FE970008FB98 /* CustomViewController.m in Sources */,
+				9142523221B6607000BA4833 /* UIViewController+Router.m in Sources */,
 				913071361F0CF31E003C01B0 /* UINavigationBar+Alpha.m in Sources */,
 				91A7283B207225E000F7C829 /* DragSortViewController.m in Sources */,
 				91B3C6391F42EF2200E4062B /* NSDictionary+Common.m in Sources */,

@@ -10,6 +10,8 @@
 #import "AppManager.h"
 #import <WRNavigationBar.h>
 
+#import "XLRouter.h"
+
 @implementation AppDelegate (AppService)
 
 + (AppDelegate *)shareAppDelegate {
@@ -20,18 +22,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    MainTabBarController *mainTabBar = [MainTabBarController new];
-
-    self.window.rootViewController = mainTabBar;
-
+    self.window.rootViewController = [XLRouter getControllerFromClassName:@"MainTabBarController"];
 
 //    [AppManager appStartWithMainViewController:mainTabBar guideImages:@[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"]];
 
-
-
-    //    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
-
-
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
 
     [self.window makeKeyAndVisible];
     [self setNavBarAppearence];

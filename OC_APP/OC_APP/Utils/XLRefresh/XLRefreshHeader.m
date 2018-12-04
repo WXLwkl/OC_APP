@@ -61,7 +61,7 @@
     
     // 跳转到下一个控制器时，contentInset可能会变
     self.scrollViewOriginalInset = self.scrollView.xl_inset;
-    NSLog(@"-->[%@]", NSStringFromUIEdgeInsets(self.scrollViewOriginalInset));
+//    NSLog(@"-->[%@]", NSStringFromUIEdgeInsets(self.scrollViewOriginalInset));
     // 当前的contentOffset
     CGFloat offsetY = self.scrollView.xl_offsetY;
     // 头部控件刚好出现的offsetY

@@ -19,39 +19,39 @@
 
 #import "InfunRefreshHeader.h"
 
-#import "SpeechViewController.h"
-#import "AlertControllerViewController.h"
-#import "MasonryViewController.h"
-#import "ReduceTimeViewController.h"
-#import "FormViewController.h"
-#import "SDWebImageTableViewController.h"
-#import "ChatViewController.h"
-#import "CustomViewController.h"
-#import "BlankPageViewController.h"
-#import "DragTableViewController.h"
-#import "LightSensitiveViewController.h"
-#import "CardViewController.h"
-#import "CellSelectViewController.h"
-#import "TurntableViewController.h"
-#import "LoveHeartViewController.h"
-#import "FireworksViewController.h"
-#import "LinkageViewController.h"
-#import "ScrollNumLabelViewController.h"
-#import "PayPasswordViewController.h"
-#import "InfiniteTabelViewController.h"
-#import "ShowSlideViewController.h"
-#import "WebJSBridgeViewController.h"
-#import "ScriptMessageHandlerViewController.h"
-#import "DataSourceViewController.h"
-#import "BezierPathViewController.h"
-#import "UploadImagesViewController.h"
-#import "ProgressViewController.h"
-#import "CollectionListViewController.h"
-#import "AudioAndVideoViewController.h"
-#import "TanTanCardViewController.h"
-#import "PieChartViewController.h"
-#import "PopViewController.h"
-#import "SpotlightViewController.h"
+//#import "SpeechViewController.h"
+//#import "AlertControllerViewController.h"
+//#import "MasonryViewController.h"
+//#import "ReduceTimeViewController.h"
+//#import "FormViewController.h"
+//#import "SDWebImageTableViewController.h"
+//#import "ChatViewController.h"
+//#import "CustomViewController.h"
+//#import "BlankPageViewController.h"
+//#import "DragTableViewController.h"
+//#import "LightSensitiveViewController.h"
+//#import "CardViewController.h"
+//#import "CellSelectViewController.h"
+//#import "TurntableViewController.h"
+//#import "LoveHeartViewController.h"
+//#import "FireworksViewController.h"
+//#import "LinkageViewController.h"
+//#import "ScrollNumLabelViewController.h"
+//#import "PayPasswordViewController.h"
+//#import "InfiniteTabelViewController.h"
+//#import "ShowSlideViewController.h"
+//#import "WebJSBridgeViewController.h"
+//#import "ScriptMessageHandlerViewController.h"
+//#import "DataSourceViewController.h"
+//#import "BezierPathViewController.h"
+//#import "UploadImagesViewController.h"
+//#import "ProgressViewController.h"
+//#import "CollectionListViewController.h"
+//#import "AudioAndVideoViewController.h"
+//#import "TanTanCardViewController.h"
+//#import "PieChartViewController.h"
+//#import "PopViewController.h"
+//#import "SpotlightViewController.h"
 //#import "UITableView+Common.h"
 
 #import "NSString+Common.h"
@@ -65,6 +65,8 @@
 
 //#import "FPSLabel.h"
 #import "DebugTool.h"
+
+#import "XLRouter.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -118,39 +120,40 @@
 
     
     if (!self.dataArray) {
-        self.dataArray = [NSMutableArray arrayWithArray:@[@"原生语音识别-iOS10后(OK)",
-                                                          @"Masonry布局实例(OK)",
-                                                          @"照片上传(OK)",
-                                                          @"AlertController(OK)",
-                                                          @"列表倒计时(OK)",
-                                                          @"H5交互WebViewJavascriptBridge",
-                                                          @"H5交互ScriptMessageHandler(OK)",
-                                                          @"列表空白页展现(OK)",
-                                                          @"BezierPath练习(OK)",
-                                                          @"常见表单行类型(OK)(包含省市区三级联动)",
-                                                          @"TableViewDataSource提取(OK)",
-                                                          @"无限滚动的tableView(OK)",
-                                                          @"只加载显示Cell的Image图(OK)",
-                                                          @"列表滑动不加载图片",
-                                                          @"长按列表行拖动效果(OK)",
-                                                          @"自定义视图(OK)",
-                                                          @"获取环境光感(OK)",
-                                                          @"卡片效果(OK)",
-                                                          @"Cell的多选(OK)",
-                                                          @"抽奖(OK)",
-                                                          @"直播❤️形点赞(OK)",
-                                                          @"烟花(OK)",
-                                                          @"联动(OK)",
-                                                          @"滚动的数字(OK)",
-                                                          @"交易密码(OK)",
-                                                          @"左右滑动视图(OK)",
-                                                          @"进度条(OK)",
-                                                          @"CollectionView相关(OK)",
-                                                          @"音视频功能集合(OK)",
-                                                          @"仿探探card(OK)",
-                                                          @"饼图(OK)",
-                                                          @"PopViewController(OK)",
-                                                          @"类似spotlight菜单(OK)"]];
+        self.dataArray = [NSMutableArray arrayWithArray:@[
+  @{@"title" : @"原生语音识别-iOS10后(OK)", @"url" : @"kRouterSchemePush://SpeechViewController?name=xingl&age=28"},
+  @{@"title" : @"Masonry布局实例(OK)",     @"url" : @"kRouterSchemePush://MasonryViewController?name=xingl&age=28"},
+  @{@"title" : @"照片上传(OK)",            @"url" : @"kRouterSchemePush://UploadImagesViewController"},
+  @{@"title" : @"AlertController(OK)",    @"url" : @"kRouterSchemePush://AlertControllerViewController?name=xingl&age=28"},
+  @{@"title" : @"列表倒计时(OK)",           @"url" : @"kRouterSchemePush://ReduceTimeViewController?name=xingl&age=28"},
+  @{@"title" : @"H5交互WebViewJavascriptBridge", @"url" : @"kRouterSchemePush://WebJSBridgeViewController"},
+  @{@"title" : @"H5交互ScriptMessageHandler(OK)", @"url" : @"kRouterSchemePush://ScriptMessageHandlerViewController?name=xingl&age=28"},
+  @{@"title" : @"列表空白页展现(OK)",              @"url" : @"kRouterSchemePush://BlankPageViewController"},
+  @{@"title" : @"BezierPath练习(OK)",              @"url" : @"kRouterSchemePush://BezierPathViewController?name=xingl&age=28"},
+  @{@"title" : @"常见表单行类型(OK)(包含省市区三级联动)", @"url" : @"kRouterSchemePush://FormViewController"},
+  @{@"title" : @"TableViewDataSource提取(OK)", @"url" : @"kRouterSchemePush://DataSourceViewController"},
+  @{@"title" : @"无限滚动的tableView(OK)", @"url" : @"kRouterSchemePush://InfiniteTabelViewController"},
+  @{@"title" : @"只加载显示Cell的Image图(OK)", @"url" : @"kRouterSchemePush://SDWebImageTableViewController"},
+  @{@"title" : @"列表滑动不加载图片", @"url" : @"kRouterSchemePush://xxx"},
+  @{@"title" : @"长按列表行拖动效果(OK)", @"url" : @"kRouterSchemePush://DragTableViewController"},
+  @{@"title" : @"自定义视图(OK)", @"url" : @"kRouterSchemePush://CustomViewController"},
+  @{@"title" : @"获取环境光感(OK)", @"url" : @"kRouterSchemePush://LightSensitiveViewController"},
+  @{@"title" : @"卡片效果(OK)", @"url" : @"kRouterSchemePush://CardViewController"},
+  @{@"title" : @"Cell的多选(OK)", @"url" : @"kRouterSchemePush://CellSelectViewController"},
+  @{@"title" : @"抽奖(OK)", @"url" : @"kRouterSchemePush://TurntableViewController"},
+  @{@"title" : @"直播❤️形点赞(OK)", @"url" : @"kRouterSchemePush://LoveHeartViewController"},
+  @{@"title" : @"烟花(OK)", @"url" : @"kRouterSchemePush://FireworksViewController"},
+  @{@"title" : @"联动(OK)", @"url" : @"kRouterSchemePush://LinkageViewController"},
+  @{@"title" : @"滚动的数字(OK)", @"url" : @"kRouterSchemePush://ScrollNumLabelViewController"},
+  @{@"title" : @"交易密码(OK)", @"url" : @"kRouterSchemePush://PayPasswordViewController"},
+  @{@"title" : @"左右滑动视图(OK)", @"url" : @"kRouterSchemePush://ShowSlideViewController"},
+  @{@"title" : @"进度条(OK)", @"url" : @"kRouterSchemePush://ProgressViewController"},
+  @{@"title" : @"CollectionView相关(OK)", @"url" : @"kRouterSchemePush://CollectionListViewController"},
+  @{@"title" : @"音视频功能集合(OK)", @"url" : @"kRouterSchemePush://AudioAndVideoViewController"},
+  @{@"title" : @"仿探探card(OK)", @"url" : @"kRouterSchemePush://TanTanCardViewController"},
+  @{@"title" : @"饼图(OK)", @"url" : @"kRouterSchemePush://PieChartViewController"},
+  @{@"title" : @"PopViewController(OK)", @"url" : @"kRouterSchemePush://PopViewController"},
+  @{@"title" : @"类似spotlight菜单(OK)", @"url" : @"kRouterSchemePush://SpotlightViewController"}]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     
@@ -254,7 +257,8 @@
     }
     // cell ...
 //    cell.textLabel.text = [@(indexPath.row) stringValue];
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    cell.textLabel.text = dic[@"title"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -264,239 +268,8 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch (indexPath.row) {
-        case 0:
-        {
-            SpeechViewController *vc = [SpeechViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 1:
-        {
-            MasonryViewController *vc = [[MasonryViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 2:
-        {
-            //上传照片
-            UploadImagesViewController *vc = [UploadImagesViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 3:
-        {
-            //AlertController(OK)
-            AlertControllerViewController *vc = [[AlertControllerViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 4:
-        {
-            //列表倒计时
-            ReduceTimeViewController *vc = [[ReduceTimeViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 5:
-        {
-            //H5交互WebViewJavascriptBridge
-            WebJSBridgeViewController *vc = [[WebJSBridgeViewController alloc] init];
-//            WebJSBridgeViewController *vc = [[WebJSBridgeViewController alloc] initWithFile:[[NSBundle mainBundle] pathForResource:@"ExampleApp" ofType:@"html"]];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 6:
-        {
-            // H5交互ScriptMessageHandler
-            ScriptMessageHandlerViewController *vc = [ScriptMessageHandlerViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 7:
-        {
-            //列表空白页展现
-            BlankPageViewController *vc = [[BlankPageViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 8:
-        {
-            // BezierPath
-            BezierPathViewController *vc = [BezierPathViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 9:
-        {
-            //常见表单行类型
-            FormViewController *vc = [FormViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 10:
-        {
-            //TableViewDataSource提取
-            DataSourceViewController *vc = [DataSourceViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 11:
-        {
-            //无限的tableview
-            InfiniteTabelViewController *vc = [[InfiniteTabelViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 12:
-        {
-            //只加载显示Cell的Image图(OK)
-            SDWebImageTableViewController *vc = [SDWebImageTableViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 13:
-        {
-            //列表滑动不加载图片
-        }
-            break;
-        case 14:
-        {
-            //长按列表行拖动效果
-            DragTableViewController *vc = [DragTableViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 15:
-        {
-            //自定义视图
-            CustomViewController *vc = [[CustomViewController alloc] initWithNibName:NSStringFromClass([CustomViewController class]) bundle:nil];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 16:
-        {
-            //iOS利用摄像头获取环境光感参数
-            LightSensitiveViewController *vc = [[LightSensitiveViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 17:
-        {
-            //卡片切换
-            CardViewController *vc = [CardViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 18:
-        {
-            //cell的多选
-            CellSelectViewController *vc = [CellSelectViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 19:
-        {
-            //转盘抽奖
-            TurntableViewController *vc = [TurntableViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 20:
-        {
-            //心形点赞
-            LoveHeartViewController *vc = [LoveHeartViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 21:
-        {
-            //烟花
-            FireworksViewController *vc = [FireworksViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 22:
-        {
-            //联动
-            LinkageViewController *vc = [LinkageViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 23:
-        {
-            //滚动的label
-            ScrollNumLabelViewController *vc = [ScrollNumLabelViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 24:
-        {
-            //支付密码
-            PayPasswordViewController *vc = [PayPasswordViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 25:
-        {
-            //左右滑动视图
-            ShowSlideViewController *vc = [ShowSlideViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 26:
-        {
-            //进度条
-            ProgressViewController *vc = [[ProgressViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 27:
-        {
-            // CollectionView自定义布局
-            CollectionListViewController *vc = [[CollectionListViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        
-        case 28:
-        {
-            //音视频功能集合
-            AudioAndVideoViewController *vc = [AudioAndVideoViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 29:
-        {
-            // 仿探探的卡片 (包括代理、数据源、重用)
-            TanTanCardViewController *vc = [TanTanCardViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 30:
-        {   // 饼图
-            PieChartViewController *vc = [PieChartViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 31:
-        {
-            PopViewController *vc = [PopViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 32:
-        {
-            // 类似spotlight菜单
-            SpotlightViewController *vc = [SpotlightViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        default:
-            break;
-    }
-    
-    
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    [XLRouter openUrl:dic[@"url"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

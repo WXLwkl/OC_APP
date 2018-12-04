@@ -8,6 +8,7 @@
 
 #import "AlertControllerViewController.h"
 #import "UIViewController+AlertViewController.h"
+#import "XLRouter.h"
 
 @interface AlertControllerViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -22,6 +23,8 @@ static NSString *const cellId = @"CELLID";
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"---->>>>>%@", self.params);
     
     self.navigationItem.title = @"AlertController-iOS8";
     
