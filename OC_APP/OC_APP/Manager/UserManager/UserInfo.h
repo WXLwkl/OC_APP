@@ -17,4 +17,9 @@
 //DECLARE_SYNTHESIZE_SINGLETON_FOR_CLASS
 + (instancetype)sharedInstance;
 - (void)archive;
+
+// 请使用sharedInstance初始化
+//- (instancetype)init NS_UNAVAILABLE;
+//+ (instancetype)new NS_UNAVAILABLE;
+
 @end

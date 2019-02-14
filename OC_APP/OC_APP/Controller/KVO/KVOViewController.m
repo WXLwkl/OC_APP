@@ -124,7 +124,10 @@
 
 
 - (void)changeColor {
-    self.colorView.backgroundColor = RandomColor;
+//    self.colorView.backgroundColor = RandomColor;
+    [self.colorView setValue:RandomColor forKey:@"backgroundColor"]; // kvc会触发kvo
+    
+//    [self.person1 setValue:@20 forKey:@"age"];
 }
 
 

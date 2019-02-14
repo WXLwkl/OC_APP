@@ -14,6 +14,11 @@ NSString *const XLRefreshKeyPathContentSize = @"contentSize";
 
 @implementation XLRefreshComponent
 
+-(void)dealloc {
+    
+    NSLog(@"------->>>>");
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

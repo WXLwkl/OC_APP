@@ -8,7 +8,7 @@
 
 #import "NSObject+xl_KVO.h"
 #import <objc/message.h>
-
+// 原生子类前缀 "NSKVONotifying_"
 #define XLKVOClassPrefix @"XLKVO_"
 #define XLAssociateArrayKey @"XLAssociateArrayKey"
 

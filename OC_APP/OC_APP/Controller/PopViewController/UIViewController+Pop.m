@@ -13,7 +13,7 @@
 
 static const char ControllerHeight = '\0';
 - (void)setControllerHeight:(CGFloat)controllerHeight {
-    objc_setAssociatedObject(self, &ControllerHeight, @(controllerHeight), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &ControllerHeight, @(controllerHeight), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 - (CGFloat)controllerHeight {
     return [objc_getAssociatedObject(self, &ControllerHeight) floatValue];

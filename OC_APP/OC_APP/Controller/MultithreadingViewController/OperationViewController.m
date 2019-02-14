@@ -220,14 +220,14 @@
 /**
  maxConcurrentOperationCount，叫做最大并发操作数
  maxConcurrentOperationCount 控制的不是并发线程的数量，而是一个队列中同时能并发执行的最大操作数。
- 而且一个操作也并非只能在一个线程中运行。
+ 而且一个操作也并非只能在一个线程中运行。开辟新线程。
  */
 /** 设置 MaxConcurrentOperationCount（最大并发操作数） */
 - (void)setMaxConcurrentOperationCount {
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     // 设置最大并发操作数
-    queue.maxConcurrentOperationCount = 1;
-    
+    queue.maxConcurrentOperationCount = 2;
+    NSLog(@"--1--%@---%d", [NSThread currentThread], [NSThread isMainThread]);
     [queue addOperationWithBlock:^{
         for (int i = 0; i < 2; i++) {
             [NSThread sleepForTimeInterval:1];

@@ -120,7 +120,7 @@
     
     [self clickTextView];
     
-    return;
+//    return;
     
 //    objc_msgSend()
     
@@ -177,7 +177,7 @@
         btn.xl_badgeValue = @"1223";
     }];
     [self.view addSubview:btn];
-    
+    return;
     [self changeAttributedPlaceholder];
     //    [self starView];
     
