@@ -4,14 +4,6 @@
 #  Created by xingl on 2018/1/25.
 __author__ = 'xingl'
 
-
-'''
-该脚本有点问题
-不能用 python3 + 路径  运行
-原因 os.path 获取到的路径有问题。
-可以把该文件变成可执行文件 chmod a+x 文件名.py 这样直接拖到终端 回车
-'''
-
 import time, os, sys,subprocess, shutil
 
 from pbxproj import XcodeProject
@@ -20,26 +12,24 @@ from PIL import Image
 import Config
 import requests
 
-
+# 操作主地址
+def _work_dir():
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 项目名称
 def project_name():
-    return os.path.basename(os.path.abspath(os.path.join(os.path.dirname("__file__"), os.path.pardir)))
+    return os.path.basename(_work_dir())
 
 # 输出ipa文件的路径
 def export_ipa_path(timeStr):
-    return "./Packge" + "/" + Config.configuration + "/" + "%s-%s" % (Config.target,timeStr)
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Packge", Config.configuration, "%s-%s"%(Config.target,timeStr))
+    return path
 
 # archive文件的路径
 def archive_path():
-    # xcarchive文件路径（含有dsym），后续查找BUG用途  export_main_directory
-    return "./Packge" + "/" + Config.configuration + "/%s.xcarchive" % (Config.target)
-
-
-# 操作主地址
-def _work_dir():
-    return os.path.abspath(os.path.join(os.path.dirname("__file__"), os.path.pardir))
-
+    # xcarchive文件路径（含有dsym），后续查找BUG用途
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Packge", Config.configuration, "%s.xcarchive"%(Config.target))
+    return path
 
 # 过滤非图片文件
 def _find_images(path):
@@ -62,7 +52,7 @@ def replace_images():
         des_images = _find_images(des_path_dir)
 
         if len(src_images) != len(des_images):
-            print('不对！！！')
+            print('图片的数量不对！！！')
             sys.exit()
 
         for image in src_images:
@@ -127,7 +117,6 @@ def uploadIpaToAppStore(path):
 
 
 def uploadIpaToPgyer(ipaPath):
-    print("ipaPath:"+ipaPath)
     ipaPath = os.path.expanduser(ipaPath)
     # ipaPath = unicode(ipaPath,"utf-8")
     files = {'file': open(ipaPath, 'rb')}
@@ -143,9 +132,6 @@ def uploadIpaToPgyer(ipaPath):
 
 
 def parserUploadResult(jsonResult):
-
-    print("jsonResult:" + str(jsonResult))
-
     resultCode = jsonResult['code']
     if resultCode == 0:
         downUrl = "http://www.pgyer.com" + "/" + jsonResult["data"]["appShortcutUrl"]
@@ -157,7 +143,7 @@ def parserUploadResult(jsonResult):
 
 def archiveProject(project):
 
-    print("\n\n===========开始clean && archive操作===========")
+    print("\n===========开始clean && archive操作===========")
     start = time.time()
 
     if Config.isPod:
@@ -187,7 +173,9 @@ def exportArchive(exportPath):
     print("\n==========请你耐心等待一会~===========")
     start = time.time()
 
-    exportCmd = "xcodebuild -exportArchive -archivePath %s -exportPath %s -exportOptionsPlist ./plist/%s.plist" %(archive_path(), exportPath, Config.profile)
+    plist_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plist", "%s.plist"%(Config.profile))
+
+    exportCmd = "xcodebuild -exportArchive -archivePath %s -exportPath %s -exportOptionsPlist %s" %(archive_path(), exportPath, plist_path)
     process = subprocess.Popen(exportCmd, shell=True)
     process.wait()
 
@@ -206,10 +194,7 @@ def exportArchive(exportPath):
 def configProject():
     """编译打包"""
     print("============================ 编译打包 ===============================")
-
     path = os.path.join(_work_dir(), "%s.xcodeproj/project.pbxproj"%(project_name()))
-    print(path)
-
     project = XcodeProject.load(path)
 
     rootObject = project["rootObject"]
@@ -228,7 +213,6 @@ def configProject():
         for buildConfig in buildConfigurationsObject:
 
             buildSettings = projects[buildConfig]["buildSettings"]
-
             # 修改签名类型
             buildSettings["CODE_SIGN_IDENTITY[sdk=iphoneos*]"] = Config.targets[target]["CODE_SIGN_IDENTITY"]
 
@@ -249,6 +233,7 @@ def xcbuild():
     """" 输出路径 """
     timeStr = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
     export_path = export_ipa_path(timeStr)
+
     """ 导出ipa文件 """
     ipa_dir = exportArchive(export_path)
     ipa = os.path.join(ipa_dir, "%s.ipa" % (Config.target))
@@ -256,7 +241,6 @@ def xcbuild():
     # 蒲公英上传
     if Config.OPEN_PYUPLOAD == True and ipa_dir != "" :
         uploadIpaToPgyer(ipa)
-
     #AppStore上传
     if Config.OPEN_APPSTORE_UPLOAD == True:
         uploadIpaToAppStore(ipa)
@@ -264,6 +248,8 @@ def xcbuild():
         cleanArchiveFile(archive_path())
 
     End()
+    time.sleep(8)
+
 
 if __name__ == '__main__':
 

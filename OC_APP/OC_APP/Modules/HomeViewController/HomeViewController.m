@@ -48,6 +48,7 @@
 
 
 #import "LoginViewController.h"
+#import "NetworkSpeedViewController.h"
 
 
 
@@ -688,6 +689,10 @@ didSelectItemAtIndex:(NSUInteger)index {
     }
     if (index == 1) {
         QRMainViewController *vc = [[QRMainViewController alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (index == 2) {
+        NetworkSpeedViewController *vc = [[NetworkSpeedViewController alloc] init];
         
         [self.navigationController pushViewController:vc animated:YES];
     }

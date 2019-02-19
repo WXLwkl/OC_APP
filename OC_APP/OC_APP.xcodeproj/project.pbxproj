@@ -33,6 +33,15 @@
 		910CBE9C1EE92077003C111B /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 910CBE9B1EE92077003C111B /* AppManager.m */; };
 		910D4C7020ECB2100082CBC8 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */; };
 		9116DA0921AFCC2F00176E63 /* XLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116DA0821AFCC2F00176E63 /* XLRouter.m */; };
+		9117BE5A221AA04E00172EE5 /* NetworkSpeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE59221AA04D00172EE5 /* NetworkSpeedViewController.m */; };
+		9117BE5D221AA0B900172EE5 /* NetworkSpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE5C221AA0B900172EE5 /* NetworkSpeedView.m */; };
+		9117BE60221AA1D500172EE5 /* cesuzhi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE5E221AA1D500172EE5 /* cesuzhi@2x.png */; };
+		9117BE61221AA1D500172EE5 /* cesuzhi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE5F221AA1D500172EE5 /* cesuzhi@3x.png */; };
+		9117BE64221AA1DF00172EE5 /* cwszhizhen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE62221AA1DF00172EE5 /* cwszhizhen@3x.png */; };
+		9117BE65221AA1DF00172EE5 /* cwszhizhen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE63221AA1DF00172EE5 /* cwszhizhen@2x.png */; };
+		9117BE68221AA54200172EE5 /* cwsanniubg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE66221AA54200172EE5 /* cwsanniubg@2x.png */; };
+		9117BE69221AA54200172EE5 /* cwsanniubg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE67221AA54200172EE5 /* cwsanniubg@3x.png */; };
+		9117BE6C221AAA9300172EE5 /* MeasurNetTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE6B221AAA9300172EE5 /* MeasurNetTools.m */; };
 		911983C420F4A74C00BA5509 /* XLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 911983C320F4A74C00BA5509 /* XLOperation.m */; };
 		911B12C71FE23F62007D9692 /* InfiniteTabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C61FE23F62007D9692 /* InfiniteTabelViewController.m */; };
 		911B12CA1FE23FA3007D9692 /* InfiniteTabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 911B12C91FE23FA3007D9692 /* InfiniteTabelView.m */; };
@@ -528,6 +537,18 @@
 		910D4C6F20ECB2100082CBC8 /* ThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		9116DA0721AFCC2F00176E63 /* XLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLRouter.h; sourceTree = "<group>"; };
 		9116DA0821AFCC2F00176E63 /* XLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLRouter.m; sourceTree = "<group>"; };
+		9117BE58221AA04D00172EE5 /* NetworkSpeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkSpeedViewController.h; sourceTree = "<group>"; };
+		9117BE59221AA04D00172EE5 /* NetworkSpeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkSpeedViewController.m; sourceTree = "<group>"; };
+		9117BE5B221AA0B900172EE5 /* NetworkSpeedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkSpeedView.h; sourceTree = "<group>"; };
+		9117BE5C221AA0B900172EE5 /* NetworkSpeedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkSpeedView.m; sourceTree = "<group>"; };
+		9117BE5E221AA1D500172EE5 /* cesuzhi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cesuzhi@2x.png"; sourceTree = "<group>"; };
+		9117BE5F221AA1D500172EE5 /* cesuzhi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cesuzhi@3x.png"; sourceTree = "<group>"; };
+		9117BE62221AA1DF00172EE5 /* cwszhizhen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cwszhizhen@3x.png"; sourceTree = "<group>"; };
+		9117BE63221AA1DF00172EE5 /* cwszhizhen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cwszhizhen@2x.png"; sourceTree = "<group>"; };
+		9117BE66221AA54200172EE5 /* cwsanniubg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cwsanniubg@2x.png"; sourceTree = "<group>"; };
+		9117BE67221AA54200172EE5 /* cwsanniubg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cwsanniubg@3x.png"; sourceTree = "<group>"; };
+		9117BE6A221AAA9300172EE5 /* MeasurNetTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasurNetTools.h; sourceTree = "<group>"; };
+		9117BE6B221AAA9300172EE5 /* MeasurNetTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasurNetTools.m; sourceTree = "<group>"; };
 		911983C220F4A74C00BA5509 /* XLOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLOperation.h; sourceTree = "<group>"; };
 		911983C320F4A74C00BA5509 /* XLOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLOperation.m; sourceTree = "<group>"; };
 		911B12C51FE23F62007D9692 /* InfiniteTabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteTabelViewController.h; sourceTree = "<group>"; };
@@ -1349,6 +1370,25 @@
 			path = XLRouter;
 			sourceTree = "<group>";
 		};
+		9117BE57221A9FFA00172EE5 /* NetworkSpeed */ = {
+			isa = PBXGroup;
+			children = (
+				9117BE58221AA04D00172EE5 /* NetworkSpeedViewController.h */,
+				9117BE59221AA04D00172EE5 /* NetworkSpeedViewController.m */,
+				9117BE5B221AA0B900172EE5 /* NetworkSpeedView.h */,
+				9117BE5C221AA0B900172EE5 /* NetworkSpeedView.m */,
+				9117BE6A221AAA9300172EE5 /* MeasurNetTools.h */,
+				9117BE6B221AAA9300172EE5 /* MeasurNetTools.m */,
+				9117BE66221AA54200172EE5 /* cwsanniubg@2x.png */,
+				9117BE67221AA54200172EE5 /* cwsanniubg@3x.png */,
+				9117BE63221AA1DF00172EE5 /* cwszhizhen@2x.png */,
+				9117BE62221AA1DF00172EE5 /* cwszhizhen@3x.png */,
+				9117BE5E221AA1D500172EE5 /* cesuzhi@2x.png */,
+				9117BE5F221AA1D500172EE5 /* cesuzhi@3x.png */,
+			);
+			path = NetworkSpeed;
+			sourceTree = "<group>";
+		};
 		911B12C41FE23F1A007D9692 /* InfiniteTabelView(无限的tableview) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1819,6 +1859,7 @@
 		9175230A1F46B25A004CE4E0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9117BE57221A9FFA00172EE5 /* NetworkSpeed */,
 				91FE59D32181C19A00C124E2 /* PictureBrowser */,
 				91E1FC2B213E87C100B3D866 /* DSL */,
 				9178CC6B20FDE55E0079B164 /* Runloop */,
@@ -3152,6 +3193,8 @@
 				914225DF1FF0E641005B875E /* html.bundle in Resources */,
 				91A7284D20722D5D00F7C829 /* 003.jpg in Resources */,
 				9160E4F520B80C42003F6579 /* RequesCover.xib in Resources */,
+				9117BE60221AA1D500172EE5 /* cesuzhi@2x.png in Resources */,
+				9117BE65221AA1DF00172EE5 /* cwszhizhen@2x.png in Resources */,
 				91B5A6551F971B150008FB98 /* CusView.xib in Resources */,
 				91AC0CFE1EF39540004FDD9E /* heavyRain@2x.png in Resources */,
 				91992BA11FFF623B00FD6DE4 /* AlbumAddBtn@2x.png in Resources */,
@@ -3159,6 +3202,7 @@
 				91F5156E1FDA7E530082835F /* FFTspark.png in Resources */,
 				9195BEDC215B3ECB008E5F97 /* logo@2x.png in Resources */,
 				C207840D1DADF12700BB05D4 /* LaunchScreen.storyboard in Resources */,
+				9117BE68221AA54200172EE5 /* cwsanniubg@2x.png in Resources */,
 				91BA826A1F25EE4B009A9940 /* success@2x.png in Resources */,
 				91D0971720AADABE00C72227 /* Subscription.plist in Resources */,
 				915A0FE71FD930FC00263E15 /* weixuanzhong_icon@3x.png in Resources */,
@@ -3188,6 +3232,7 @@
 				91324CA220E3662B00FD3736 /* listing_flash_on@2x.png in Resources */,
 				91AC0D071EF39540004FDD9E /* sunny29x29@3x.png in Resources */,
 				91FA759920E6347700B6D0FA /* icon_return_n@3x.png in Resources */,
+				9117BE69221AA54200172EE5 /* cwsanniubg@3x.png in Resources */,
 				91AB488920493C550089E73F /* main.html in Resources */,
 				91F5155E1FDA6E0F0082835F /* qiandao_0001_001.png in Resources */,
 				91F515701FDA7E5A0082835F /* FFRing.png in Resources */,
@@ -3198,6 +3243,7 @@
 				918B55D1200DFCD00048C5A1 /* guider_qiu_35@2x.png in Resources */,
 				91F5155C1FDA6E0F0082835F /* qiandao_0004_02.png in Resources */,
 				91D70B541FA18CB4009B79DB /* NextTableViewCell.xib in Resources */,
+				9117BE61221AA1D500172EE5 /* cesuzhi@3x.png in Resources */,
 				91AC0D051EF39540004FDD9E /* sunny20x20@3x.png in Resources */,
 				91A7284F20722D5D00F7C829 /* 001.jpg in Resources */,
 				9196CCFD1F5E7944003D18E4 /* ChatTwoViewController.xib in Resources */,
@@ -3250,6 +3296,7 @@
 				91221D4A20DBB0B000C4D5A1 /* cancel@2x.png in Resources */,
 				91AC0D041EF39540004FDD9E /* sunny20x20@2x.png in Resources */,
 				91221D5320DBB0CE00C4D5A1 /* listing_flash_auto@2x.png in Resources */,
+				9117BE64221AA1DF00172EE5 /* cwszhizhen@3x.png in Resources */,
 				91AC0CF81EF39540004FDD9E /* 1.jpg in Resources */,
 				91221D5E20DBB0F500C4D5A1 /* video_play_nav_bg@2x.png in Resources */,
 				914225E11FF0EFFC005B875E /* Swift.pdf in Resources */,
@@ -3474,6 +3521,7 @@
 				916EBA951FF2141700386DD2 /* ShowSlideViewController.m in Sources */,
 				9101F950207F04A500F39DAA /* CardView2Cell.m in Sources */,
 				91D97B821EEF81FE000E6CE6 /* ClickTextView.m in Sources */,
+				9117BE6C221AAA9300172EE5 /* MeasurNetTools.m in Sources */,
 				9101C8D41F343605004B0376 /* popMenvTopView.m in Sources */,
 				91B5F5E41F3DA91000A7AE05 /* GroupModel.m in Sources */,
 				91A7284B20722D5D00F7C829 /* LineLayout.m in Sources */,
@@ -3601,6 +3649,7 @@
 				9196CCF71F5E6E1F003D18E4 /* SmallSizePageFaceViewCell.m in Sources */,
 				9122DBEE1EFD058F002A0D7A /* TextFlowView.m in Sources */,
 				9101C8CE1F340F80004B0376 /* PopMenuModel.m in Sources */,
+				9117BE5D221AA0B900172EE5 /* NetworkSpeedView.m in Sources */,
 				91AB488C20493D640089E73F /* ScriptMessageHandlerViewController.m in Sources */,
 				91870EF020CE4267007CEEB9 /* GCDViewController.m in Sources */,
 				91EF61F520CF6AA200725529 /* SpotlightView.m in Sources */,
@@ -3627,6 +3676,7 @@
 				919330A8201B195D003BBF37 /* SignatureView.m in Sources */,
 				911B12CA1FE23FA3007D9692 /* InfiniteTabelView.m in Sources */,
 				91F1B0D62113063D007F5EA7 /* Fish.m in Sources */,
+				9117BE5A221AA04E00172EE5 /* NetworkSpeedViewController.m in Sources */,
 				91CD5DC020C69EEC00BDC412 /* UIViewController+Pop.m in Sources */,
 				91D92CB521425F4C00AD1FB9 /* BannerImageView.m in Sources */,
 				9177FD751FFE006A0030AFC0 /* WebJSBridgeViewController.m in Sources */,
