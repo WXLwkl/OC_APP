@@ -99,6 +99,7 @@ typedef NS_ENUM(NSUInteger, HttpRequestType) {
         [RequestManager sharedRequestManager].networkStatus = status;
     }];
     
+    [RequestManager sharedRequestManager].networkStatus = AFNetworkReachabilityStatusReachableViaWWAN;
 }
 /**
  配置自建证书的Https请求，只需要将CA证书文件放入根目录就行

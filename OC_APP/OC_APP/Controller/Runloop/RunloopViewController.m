@@ -28,6 +28,7 @@
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        NSLog(@"----begin");
 //        [self performSelector:@selector(test) withObject:nil afterDelay:0];
+//        [self performSelector:@selector(test) withObject:nil];
 //        NSLog(@"----end");
 //    });
 }

@@ -153,7 +153,8 @@
   @{@"title" : @"仿探探card(OK)", @"url" : @"kRouterSchemePush://TanTanCardViewController"},
   @{@"title" : @"饼图(OK)", @"url" : @"kRouterSchemePush://PieChartViewController"},
   @{@"title" : @"PopViewController(OK)", @"url" : @"kRouterSchemePush://PopViewController"},
-  @{@"title" : @"类似spotlight菜单(OK)", @"url" : @"kRouterSchemePush://SpotlightViewController"}]];
+  @{@"title" : @"类似spotlight菜单(OK)", @"url" : @"kRouterSchemePush://SpotlightViewController"},
+  @{@"title" : @"转场动画(ok)", @"url" : @"kRouterSchemePush://TrasitionViewController"}]];
     }
 //    self.dataArray = [[NSMutableArray alloc]init];
     

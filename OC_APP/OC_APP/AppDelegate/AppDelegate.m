@@ -12,13 +12,14 @@
 #import "MainNavigationController.h"
 #import "HomeViewController.h"
 
+#import "RequestManager.h"
 
 @interface AppDelegate () {
     NSInteger count;
 }
 @property(strong, nonatomic)NSTimer *mTimer;
 @property(assign, nonatomic)UIBackgroundTaskIdentifier backIden;
-
+@property (nonatomic, strong, nullable) UIVisualEffectView *visualEffectView;
 @end
 
 @implementation AppDelegate
@@ -35,6 +36,7 @@ extern CFAbsoluteTime startTime;
     
     count = 0;
     
+    NSLog(@"----------");
     return YES;
 }
 
@@ -45,6 +47,16 @@ extern CFAbsoluteTime startTime;
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    self.visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    self.visualEffectView.alpha = 0;
+    self.visualEffectView.frame = self.window.frame;
+    [self.window addSubview:self.visualEffectView];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.visualEffectView.alpha = 1;
+    }];
+    
+
 }
 
 
@@ -88,11 +100,19 @@ extern CFAbsoluteTime startTime;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UIView animateWithDuration:0.25 animations:^{
+        self.visualEffectView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.visualEffectView removeFromSuperview];
+    }];
+    
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    NSLog(@"applicationWillTerminate");
 }
 
 

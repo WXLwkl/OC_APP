@@ -19,7 +19,12 @@
 #import "WriteViewController.h"
 
 
-@interface MainTabBarController ()<MainTabBarDelegate>
+#import "TBInteractiveModel.h"
+#import "TBTransitionAnimator.h"
+
+@interface MainTabBarController ()<MainTabBarDelegate, UITabBarControllerDelegate>
+
+@property (nonatomic,strong) TBInteractiveModel *model;
 
 @property (nonatomic, strong) NSDate *lastDate;
 @property (nonatomic, weak) MainTabBar *mainTabBar;
@@ -47,7 +52,9 @@
 
     [self SetupMainTabBar];
     [self SetupAllControllers];
-
+    
+//    self.delegate = self;
+//    _model = [[TBInteractiveModel alloc] initWithGesture:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,5 +128,22 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return [self.selectedViewController preferredInterfaceOrientationForPresentation];
+}
+
+
+#pragma mark - UITabBarControllerDelegate Transition
+- (nullable id <UIViewControllerAnimatedTransitioning>)tabBarController:(UITabBarController *)tabBarController animationControllerForTransitionFromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    
+    NSArray *viewControllers = self.viewControllers;
+    if ([viewControllers indexOfObject:fromVC] > [viewControllers indexOfObject:toVC]) {
+        return [[TBTransitionAnimator alloc] initWithEdge:UIRectEdgeLeft];
+    } else {
+        return [[TBTransitionAnimator alloc] initWithEdge:UIRectEdgeRight];
+    }
+}
+
+- (nullable id <UIViewControllerInteractiveTransitioning>)tabBarController:(UITabBarController *)tabBarController interactionControllerForAnimationController: (id <UIViewControllerAnimatedTransitioning>)animationController{
+    
+    return _model.interation ? _model: nil;
 }
 @end

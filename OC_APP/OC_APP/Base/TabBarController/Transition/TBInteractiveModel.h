@@ -1,0 +1,21 @@
+//
+//  TBInteractiveModel.h
+//  OC_APP
+//
+//  Created by xingl on 2019/3/4.
+//  Copyright © 2019 兴林. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TBInteractiveModel : UIPercentDrivenInteractiveTransition
+
+@property (nonatomic, assign) BOOL interation;
+
+- (instancetype)initWithGesture:(UITabBarController *)tarBar;
+
+@end
+
+NS_ASSUME_NONNULL_END

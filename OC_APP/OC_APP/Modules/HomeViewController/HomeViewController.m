@@ -49,12 +49,13 @@
 
 #import "LoginViewController.h"
 #import "NetworkSpeedViewController.h"
+#import "ProxyManagerViewController.h"
+
+#import "TableViewOptimizationViewController.h"
 
 
 
-
-
-#define TITLES @[@"日历", @"扫一扫", @"删除",@"付款",@"加好友",@"查找好友"]
+#define TITLES @[@"日历", @"扫一扫", @"测速",@"方法转发",@"tableView优化",@"查找好友"]
 #define ICONS  @[@"calendar",@"saoyisao",@"delete",@"pay",@"delete",@"delete"]
 
 @interface HomeViewController ()<PopoverMenuDelegate>
@@ -686,13 +687,20 @@ didSelectItemAtIndex:(NSUInteger)index {
         CalendarViewController *vc = [[CalendarViewController alloc] init];
         
         [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (index == 1) {
+    } else if (index == 1) {
         QRMainViewController *vc = [[QRMainViewController alloc] init];
         
         [self.navigationController pushViewController:vc animated:YES];
     } else if (index == 2) {
         NetworkSpeedViewController *vc = [[NetworkSpeedViewController alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (index == 3) {
+        ProxyManagerViewController *vc = [[ProxyManagerViewController alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (index == 4) {
+        TableViewOptimizationViewController *vc = [[TableViewOptimizationViewController alloc] init];
         
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -703,14 +711,6 @@ didSelectItemAtIndex:(NSUInteger)index {
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -11,9 +11,7 @@
 @implementation TableViewInterceptor
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
-    if ([self.middleMan respondsToSelector:aSelector]) {
-        return self.middleMan;
-    }
+    if ([self.middleMan respondsToSelector:aSelector]) return self.middleMan;
     if ([self.receiver respondsToSelector:aSelector]) return self.receiver;
     return [super forwardingTargetForSelector:aSelector];
 }

@@ -47,12 +47,12 @@
     self.view.backgroundColor = ColorWithHex(0xefeff4);
     [UIViewController attemptRotationToDeviceOrientation];
     self.statusBarStyle = UIStatusBarStyleLightContent;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 
 - (void) dealloc {
-    XLLog(@"[🔥%@🔥 will dealloc 💥💥💥]",NSStringFromClass([self class]));
+    XLLog(@"[%@ will dealloc 💥💥💥]",NSStringFromClass([self class]));
 }
 
 - (void)didReceiveMemoryWarning {

@@ -32,5 +32,11 @@
 		<key>viewController</key>
 		<string>DSLViewController</string>
 	</dict>
+	<dict>
+		<key>title</key>
+		<string>消息转发</string>
+		<key>viewController</key>
+		<string>MsgSendViewController</string>
+	</dict>
 </array>
 </plist>
