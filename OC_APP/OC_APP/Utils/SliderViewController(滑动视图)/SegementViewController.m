@@ -163,7 +163,7 @@ static NSString * const ID = @"CONTENTCELL";
 
 - (void)initial {
     _titleHeight = TitleScrollViewH;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 #pragma mark - 控制器view生命周期方法

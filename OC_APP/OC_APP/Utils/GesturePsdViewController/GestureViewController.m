@@ -56,7 +56,7 @@ NSString * const promptPasswordErrorMessage =    @"手势密码错误";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setupNav];
     [self setupSubViews];
 

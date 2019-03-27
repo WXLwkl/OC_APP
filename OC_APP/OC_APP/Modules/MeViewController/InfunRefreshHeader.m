@@ -66,7 +66,7 @@
             self.arrow.hidden = NO;
             self.arrow.transform = CGAffineTransformIdentity;
             self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
-            self.label.text = @"钓吧欢迎您";
+            self.label.text = @"林哥欢迎您";
             [UIView animateWithDuration:0.25 animations:^{
                 self.loading.alpha = 0.0;
             } completion:^(BOOL finished) {
@@ -81,7 +81,7 @@
             [self.loading stopAnimating];
             self.arrow.hidden = NO;
             self.arrow.center = CGPointMake(self.center.x - 80, self.xl_height * 0.5);
-            self.label.text = @"钓吧欢迎您";
+            self.label.text = @"林哥欢迎您";
             [UIView animateWithDuration:0.25 animations:^{
                 self.arrow.transform = CGAffineTransformIdentity;
             }];

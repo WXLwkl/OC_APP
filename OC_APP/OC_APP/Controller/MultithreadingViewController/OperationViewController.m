@@ -51,7 +51,7 @@
 - (void)test_masonry_vertical_fixSpace {
     
     // 实现masonry垂直固定控件高度方法
-    [self.masonryViewArray mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:20 leadSpacing:30 tailSpacing:30];
+    [self.masonryViewArray mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:20 leadSpacing:30+kNavHeight tailSpacing:30];
     
     // 设置array的水平方向的约束
     [self.masonryViewArray mas_makeConstraints:^(MASConstraintMaker *make) {

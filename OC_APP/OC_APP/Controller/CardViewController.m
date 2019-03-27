@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"卡片切换效果";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self xl_setNavBackItem];
     [self setupUI];
 }

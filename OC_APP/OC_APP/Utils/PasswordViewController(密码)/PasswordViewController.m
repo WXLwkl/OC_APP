@@ -37,7 +37,7 @@
     CGSize size = self.view.bounds.size;
 
     lab = [[UILabel alloc] init];
-    lab.frame = CGRectMake(0, 20, size.width, 30);
+    lab.frame = CGRectMake(0, 20 + kNavHeight, size.width, 30);
     lab.text = @"请输入6位数字支付密码";
     lab.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     lab.textAlignment = NSTextAlignmentCenter;
@@ -51,7 +51,7 @@
 
 
     nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    nextBtn.frame = CGRectMake(20, 200, size.width-40, 50);
+    nextBtn.frame = CGRectMake(20, 200 + kNavHeight, size.width-40, 50);
     nextBtn.backgroundColor = THEME_color;
     nextBtn.layer.cornerRadius = 6.0;
     nextBtn.hidden = YES;
@@ -63,7 +63,7 @@
     [topTX becomeFirstResponder];
 
     for (int i = 0; i < 6; i++) {
-        UITextField *pwdLabel = [[UITextField alloc] initWithFrame:CGRectMake((size.width-5-50*6)/2.0+i*49, 60, 50, 50)];
+        UITextField *pwdLabel = [[UITextField alloc] initWithFrame:CGRectMake((size.width-5-50*6)/2.0+i*49, 60 + kNavHeight, 50, 50)];
         pwdLabel.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor;
         pwdLabel.enabled = NO;
         pwdLabel.textAlignment = NSTextAlignmentCenter;//居中

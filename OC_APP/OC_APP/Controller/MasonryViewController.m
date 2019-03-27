@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Masonry实例运用";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self xl_setNavBackItem];
     
 //    [self masonryArrayButtonLayout];

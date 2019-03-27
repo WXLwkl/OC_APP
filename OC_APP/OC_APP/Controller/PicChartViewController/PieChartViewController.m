@@ -24,7 +24,7 @@
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
-    PieChartView *chart = [[PieChartView alloc] initWithFrame:CGRectMake(0, 30, width, 320)];
+    PieChartView *chart = [[PieChartView alloc] initWithFrame:CGRectMake(0, 30 + kNavHeight, width, 320)];
     
     [self.view addSubview:chart];
     

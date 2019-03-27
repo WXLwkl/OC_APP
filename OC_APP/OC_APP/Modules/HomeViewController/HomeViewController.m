@@ -69,11 +69,8 @@
     [super viewDidLoad];
     
     [self initSubViews];
-    
-    if (IOS_Foundation_Later_8) {
-        [self loadLateralSlide];
-    }
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self loadLateralSlide];
 }
 
 /****    侧滑  start       ******/
@@ -138,8 +135,8 @@
 - (void)initSubViews {
     self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor xl_colorWithHexString:@"0x1FB5EC"];
-    
-    
+
+
     NSDate *dd = [NSDate dateWithTimeIntervalSince1970:1523240963];
     NSLog(@"year:%ld",[NSDate xl_year:dd]);
     NSLog(@"--->>%ld", [NSDate xl_daysInYear:dd]);

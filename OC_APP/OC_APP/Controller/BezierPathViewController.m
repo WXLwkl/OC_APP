@@ -18,7 +18,8 @@
     [super viewDidLoad];
 
     self.navigationItem.title = @"BezierPathViewController";
-
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self drawLine];
 
     [self drawRounded];

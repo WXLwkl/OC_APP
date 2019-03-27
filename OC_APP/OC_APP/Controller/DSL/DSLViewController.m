@@ -20,7 +20,7 @@
     
     self.navigationItem.title = @"链式编程";
     
-    DSLView *view = DSLView.make.xl_frame(CGRectMake(10, 10, 100, 50)).xl_backgroundColor([UIColor redColor]);
+    DSLView *view = DSLView.make.xl_frame(CGRectMake(10, 100, 100, 50)).xl_backgroundColor([UIColor redColor]);
     
     [self.view addSubview:view];
 }

@@ -179,12 +179,7 @@
 //        _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.dataSource                     = self;
         _tableView.delegate                       = self;
-        if (@available(iOS 11.0, *)) {
-            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
-            [_tableView registerClass:[ReduceTimeCell class] forCellReuseIdentifier:NSStringFromClass([ReduceTimeCell class])];
+        [_tableView registerClass:[ReduceTimeCell class] forCellReuseIdentifier:NSStringFromClass([ReduceTimeCell class])];
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     return _tableView;

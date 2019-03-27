@@ -22,11 +22,6 @@
         _tableView = [[InfiniteTabelView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        if (@available(iOS 11.0, *)) {
-            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.rowHeight = 150.0;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];

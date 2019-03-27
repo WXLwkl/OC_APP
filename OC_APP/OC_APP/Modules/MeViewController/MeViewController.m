@@ -95,10 +95,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:(UIBarButtonItemStylePlain) target:self action:@selector(settingBtnClick:)];
     
     self.edgesForExtendedLayout = UIRectEdgeLeft|UIRectEdgeRight|UIRectEdgeTop;
-    
     [self setExtendedLayoutIncludesOpaqueBars:YES];
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.topView;

@@ -25,14 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"省市区三级联动";
+    self.navigationItem.title = @"原生语音识别";
     [self initSubviews];
 }
 
 - (void)initSubviews {
     
     UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(20, 20, kScreenWidth - 40, 200);
+    label.frame = CGRectMake(20, 20 + kNavHeight, kScreenWidth - 40, 200);
     label.numberOfLines = 0;
     label.textColor = [UIColor blackColor];
     label.backgroundColor = [UIColor whiteColor];

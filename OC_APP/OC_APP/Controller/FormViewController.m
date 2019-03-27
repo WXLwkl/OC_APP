@@ -142,11 +142,7 @@
         _tableView.dataSource                     = self;
         _tableView.delegate                       = self;
         _tableView.tableFooterView = [UIView new];
-        if (@available(iOS 11.0, *)) {
-            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
+     
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
         [_tableView registerClass:[TitleAndPromptCell class] forCellReuseIdentifier:NSStringFromClass([TitleAndPromptCell class])];
         [_tableView registerClass:[MultitextCell class] forCellReuseIdentifier:NSStringFromClass([MultitextCell class])];

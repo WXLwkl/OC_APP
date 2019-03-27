@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"滚动的数字";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self xl_setNavBackItem];
     [self initSubviews];
 }
